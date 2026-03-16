@@ -17,10 +17,11 @@ input,select{font-family:inherit}
 a{text-decoration:none;color:inherit}
 :root{
   --r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;
-  --page-px:20px;--nav-h:70px;--ease:cubic-bezier(.4,0,.2,1);
+  --page-px:20px;--nav-h:85px;--ease:cubic-bezier(.4,0,.2,1);
   --ok:#2f9e7a;--ok-tint:rgba(47,158,122,0.09);
   --warn:#c4782a;--warn-tint:rgba(196,120,42,0.09);
 }
+/* THEMES */
 body,body.theme-rose{
   --bg-app:#f8f5fb;--bg-shell:linear-gradient(135deg,#ede5f5,#e2e9f7);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--surface-accent:linear-gradient(150deg,rgba(200,92,135,0.04),rgba(107,130,204,0.02));
@@ -28,1842 +29,276 @@ body,body.theme-rose{
   --accent-primary:#a8406e;--accent-mid:#c85c87;--accent-light:#df85a8;--accent-pale:#f2c0d4;
   --accent-tint:rgba(200,92,135,0.07);--accent-tint2:rgba(200,92,135,0.13);
   --support-primary:#6b82cc;--support-light:#97a9dc;--support-pale:#c8d2f0;--support-tint:rgba(107,130,204,0.08);
-  --lav:#b8a8e8;
-  --border-soft:rgba(220,200,230,0.6);--border-mid:rgba(220,200,230,0.4);--border-accent:rgba(200,92,135,0.18);
-  --shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18);--shadow-nav:inset 0 1px 0 rgba(255,255,255,0.07);
-  --cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);
-  --lesson-gradient:linear-gradient(135deg,#a8406e 0%,#7a6cc8 100%);
-  --hero-gradient:linear-gradient(150deg,rgba(200,92,135,0.04),rgba(107,130,204,0.02));
-  --coach-gradient:linear-gradient(135deg,rgba(200,92,135,0.05),rgba(107,130,204,0.04));
-  --inject-gradient:linear-gradient(135deg,rgba(184,168,232,0.14),rgba(107,130,204,0.10));
-  --inject-icon-gradient:linear-gradient(135deg,#b8a8e8,#6b82cc);
-  --avatar-gradient:linear-gradient(135deg,#f2c0d4,#c8d2f0);
-  --med-icon-gradient:linear-gradient(135deg,rgba(184,168,232,0.16),rgba(107,130,204,0.12));
-  --nav-bg:rgba(18,10,28,0.93);
-  --nav-active-gradient:linear-gradient(135deg,#c85c87,#6b82cc);--nav-active-shadow:0 4px 16px rgba(180,80,140,0.38);
-  --nav-active-label:linear-gradient(90deg,#df85a8,#97a9dc);
-  --chart-line-start:#d4638a;--chart-line-end:#7b8fd4;--chart-fill-color:#c85c87;--chart-fill-opacity:.14;--chart-goal-stroke:#a0aee0;
-  --water-fill-top:rgba(150,170,228,0.7);--water-fill-bottom:rgba(90,120,200,0.82);--water-full-border:rgba(107,130,204,.28);
-  --prog-fill:linear-gradient(90deg,#a8406e,#6b82cc);--page-ring:rgba(200,92,135,0.10);
-}
-body.theme-sage{
-  --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
-  --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);--surface-accent:linear-gradient(150deg,rgba(80,140,100,0.05),rgba(60,120,120,0.03));
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
-  --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
-  --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
-  --support-primary:#4a8a80;--support-light:#72aaa2;--support-pale:#b4d0cc;--support-tint:rgba(74,138,128,0.08);
-  --lav:#8ab4a8;
-  --border-soft:rgba(160,200,170,0.55);--border-mid:rgba(160,200,170,0.35);--border-accent:rgba(80,148,104,0.18);
-  --shadow-card:0 2px 12px rgba(60,120,80,0.07);--shadow-elevated:0 8px 28px rgba(60,120,80,0.16);--shadow-nav:inset 0 1px 0 rgba(255,255,255,0.06);
-  --cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);
-  --lesson-gradient:linear-gradient(135deg,#3d7a5a 0%,#4a8a80 100%);
-  --hero-gradient:linear-gradient(150deg,rgba(80,148,104,0.05),rgba(74,138,128,0.03));
-  --coach-gradient:linear-gradient(135deg,rgba(80,148,104,0.06),rgba(74,138,128,0.04));
-  --inject-gradient:linear-gradient(135deg,rgba(138,180,168,0.14),rgba(74,138,128,0.10));
-  --inject-icon-gradient:linear-gradient(135deg,#8ab4a8,#4a8a80);
-  --avatar-gradient:linear-gradient(135deg,#c4e0cc,#b4d0cc);
-  --med-icon-gradient:linear-gradient(135deg,rgba(138,180,168,0.18),rgba(74,138,128,0.12));
-  --nav-bg:rgba(10,22,14,0.93);
-  --nav-active-gradient:linear-gradient(135deg,#5a9a72,#4a8a80);--nav-active-shadow:0 4px 16px rgba(60,140,90,0.36);
-  --nav-active-label:linear-gradient(90deg,#84ba96,#72aaa2);
-  --chart-line-start:#5a9a72;--chart-line-end:#4a8a80;--chart-fill-color:#5a9a72;--chart-fill-opacity:.14;--chart-goal-stroke:#72aaa2;
-  --water-fill-top:rgba(100,170,148,0.72);--water-fill-bottom:rgba(60,130,110,0.82);--water-full-border:rgba(74,138,128,.28);
-  --prog-fill:linear-gradient(90deg,#3d7a5a,#4a8a80);--page-ring:rgba(80,148,104,0.10);
-}
-body.theme-sand{
-  --bg-app:#f9f6f1;--bg-shell:linear-gradient(135deg,#ede6da,#e8e0d4);--bg-modal:#fdfaf6;
-  --surface-1:#fdfaf6;--surface-2:rgba(249,246,241,0.9);--surface-accent:linear-gradient(150deg,rgba(180,130,80,0.05),rgba(160,110,70,0.03));
-  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44);--text-faint:rgba(37,28,16,0.28);
-  --accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-light:#cc9a6e;--accent-pale:#e8cdb0;
-  --accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);
-  --support-primary:#7a6050;--support-light:#9a8070;--support-pale:#ccc0b4;--support-tint:rgba(122,96,80,0.08);
-  --lav:#b8a898;
-  --border-soft:rgba(200,175,145,0.55);--border-mid:rgba(200,175,145,0.35);--border-accent:rgba(170,110,60,0.18);
-  --shadow-card:0 2px 12px rgba(120,80,40,0.07);--shadow-elevated:0 8px 28px rgba(120,80,40,0.14);--shadow-nav:inset 0 1px 0 rgba(255,255,255,0.05);
-  --cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);
-  --lesson-gradient:linear-gradient(135deg,#8a5e3a 0%,#7a6050 100%);
-  --hero-gradient:linear-gradient(150deg,rgba(170,110,60,0.05),rgba(122,96,80,0.03));
-  --coach-gradient:linear-gradient(135deg,rgba(170,110,60,0.06),rgba(122,96,80,0.04));
-  --inject-gradient:linear-gradient(135deg,rgba(184,168,152,0.16),rgba(122,96,80,0.10));
-  --inject-icon-gradient:linear-gradient(135deg,#b8a898,#7a6050);
-  --avatar-gradient:linear-gradient(135deg,#e8cdb0,#ccc0b4);
-  --med-icon-gradient:linear-gradient(135deg,rgba(184,168,152,0.18),rgba(122,96,80,0.12));
-  --nav-bg:rgba(22,14,8,0.94);
-  --nav-active-gradient:linear-gradient(135deg,#b07848,#7a6050);--nav-active-shadow:0 4px 16px rgba(140,90,40,0.34);
-  --nav-active-label:linear-gradient(90deg,#cc9a6e,#9a8070);
-  --chart-line-start:#b07848;--chart-line-end:#7a6050;--chart-fill-color:#b07848;--chart-fill-opacity:.13;--chart-goal-stroke:#9a8070;
-  --water-fill-top:rgba(140,160,170,0.70);--water-fill-bottom:rgba(90,110,120,0.82);--water-full-border:rgba(122,96,80,.28);
-  --prog-fill:linear-gradient(90deg,#8a5e3a,#7a6050);--page-ring:rgba(170,110,60,0.10);
+  --lav:#b8a8e8;--border-soft:rgba(220,200,230,0.6);--border-mid:rgba(220,200,230,0.4);--border-accent:rgba(200,92,135,0.18);
+  --shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18);
+  --nav-bg:rgba(18,10,28,0.93);--cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);
+  --prog-fill:linear-gradient(90deg,#a8406e,#6b82cc);
 }
 body.theme-midnight{
-  --bg-app:#1a1424;--bg-shell:linear-gradient(135deg,#12101e,#1c1830);--bg-modal:#221c32;
-  --surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95);--surface-accent:linear-gradient(150deg,rgba(180,140,220,0.07),rgba(120,100,200,0.05));
-  --text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--text-faint:rgba(180,170,210,0.28);
-  --accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-light:#d0aaee;--accent-pale:rgba(200,160,240,0.18);
-  --accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);
-  --support-primary:#8899cc;--support-light:#a0b0d8;--support-pale:rgba(136,153,204,0.18);--support-tint:rgba(100,120,190,0.10);
-  --lav:#9088c0;
-  --border-soft:rgba(120,100,180,0.28);--border-mid:rgba(120,100,180,0.18);--border-accent:rgba(180,140,220,0.26);
-  --shadow-card:0 2px 16px rgba(0,0,0,0.28);--shadow-elevated:0 8px 32px rgba(0,0,0,0.38);--shadow-nav:inset 0 1px 0 rgba(255,255,255,0.05);
-  --cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);
-  --lesson-gradient:linear-gradient(135deg,#7050b0 0%,#6060a8 100%);
-  --hero-gradient:linear-gradient(150deg,rgba(180,140,220,0.08),rgba(100,120,190,0.05));
-  --coach-gradient:linear-gradient(135deg,rgba(180,140,220,0.08),rgba(100,120,190,0.05));
-  --inject-gradient:linear-gradient(135deg,rgba(140,120,200,0.18),rgba(100,120,190,0.12));
-  --inject-icon-gradient:linear-gradient(135deg,#9088c0,#8899cc);
-  --avatar-gradient:linear-gradient(135deg,rgba(200,160,240,0.22),rgba(136,153,204,0.18));
-  --med-icon-gradient:linear-gradient(135deg,rgba(144,136,192,0.22),rgba(136,153,204,0.14));
-  --nav-bg:rgba(10,8,20,0.96);
-  --nav-active-gradient:linear-gradient(135deg,#b888d8,#8899cc);--nav-active-shadow:0 4px 16px rgba(140,100,200,0.38);
-  --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
-  --chart-line-start:#c09ae0;--chart-line-end:#8899cc;--chart-fill-color:#b888d8;--chart-fill-opacity:.12;--chart-goal-stroke:#8899cc;
-  --water-fill-top:rgba(120,140,210,0.68);--water-fill-bottom:rgba(80,100,180,0.78);--water-full-border:rgba(136,153,204,.30);
-  --prog-fill:linear-gradient(90deg,#9060c0,#8899cc);--page-ring:rgba(180,140,220,0.14);
+  --bg-app:#0f0a1a;--bg-shell:linear-gradient(135deg,#0a0814,#141125);--bg-modal:#1a1528;
+  --surface-1:#1a1528;--surface-2:rgba(30,25,45,0.95);--surface-accent:linear-gradient(150deg,rgba(160,100,255,0.08),rgba(80,60,180,0.05));
+  --text-primary:#f0ebff;--text-secondary:rgba(220,210,255,0.7);--text-tertiary:rgba(200,190,240,0.5);--text-faint:rgba(180,170,220,0.3);
+  --accent-primary:#b080ff;--accent-mid:#9d66ff;--accent-light:#c0a0ff;--accent-pale:rgba(160,100,255,0.2);
+  --accent-tint:rgba(160,100,255,0.12);--accent-tint2:rgba(160,100,255,0.2);
+  --support-primary:#7a86ff;--support-light:#9da6ff;--support-pale:rgba(122,134,255,0.2);--support-tint:rgba(122,134,255,0.1);
+  --lav:#9088c0;--border-soft:rgba(140,120,220,0.25);--border-mid:rgba(140,120,220,0.15);--border-accent:rgba(160,100,255,0.3);
+  --shadow-card:0 4px 20px rgba(0,0,0,0.4);--shadow-elevated:0 12px 40px rgba(0,0,0,0.6);
+  --nav-bg:rgba(10,8,20,0.98);--cta-gradient:linear-gradient(135deg,#8040ff,#b080ff);
+  --prog-fill:linear-gradient(90deg,#8040ff,#7a86ff);
 }
-body{background:var(--bg-app);}
-.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
-@media(min-width:431px){
-  body{background:var(--bg-app);padding:0}
-  .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
-  .bnav,.glpb-topbar{max-width:none;width:100%;left:0;transform:none}
-}
-.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
-.bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
-.bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
-.bnav-label{font-size:.5rem;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,0.28);transition:color .22s;text-align:center;line-height:1.1;}
-.bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
-.bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
-.card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 12px;overflow:hidden;box-shadow:var(--shadow-card);}
-.card-header{padding:16px 20px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-mid);}
-.card-title{font-family:'Clash Display',sans-serif;font-size:.96rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;}
-.card-body{padding:16px 20px;}
-.card-footer{padding:12px 20px 16px;border-top:1px solid var(--border-mid);}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:var(--r-pill);font-family:'Satoshi',sans-serif;font-weight:700;cursor:pointer;transition:all .2s var(--ease);}
-.btn:active{transform:scale(.96);}
-.btn-primary{background:var(--cta-gradient);color:#fff;padding:14px 28px;font-size:.88rem;border:none;box-shadow:var(--shadow-elevated);}
-.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.btn-ghost{background:none;color:var(--accent-primary);padding:10px 0;font-size:.82rem;font-weight:700;border:none;}
-.btn-ghost:hover{color:var(--accent-mid);}
-.btn-pill{background:var(--accent-tint);color:var(--accent-primary);padding:7px 16px;font-size:.76rem;border:none;border-radius:var(--r-pill);}
+body{background:var(--bg-app);color:var(--text-primary)}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;}
+.scroll-area{padding-bottom:120px;padding-top:var(--nav-h);}
+
+/* UI COMPONENTS */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);display:flex;align-items:center;padding:0 6px 15px;z-index:1000;backdrop-filter:blur(10px);border-top:1px solid var(--border-soft);}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-faint);}
+.bnav-item.active{color:var(--accent-primary)}
+.bnav-label{font-size:.65rem;font-weight:700;}
+
+.card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 16px;overflow:hidden;box-shadow:var(--shadow-card);}
+.card-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-mid);}
+.card-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:var(--r-pill);font-weight:700;transition:all .2s;}
+.btn-primary{background:var(--cta-gradient);color:#fff;padding:14px 28px;font-size:.88rem;box-shadow:var(--shadow-elevated);}
+.btn-ghost{color:var(--accent-primary);padding:10px 0;font-size:.82rem;}
 .btn-full{width:100%;}
-.btn-sm{padding:7px 14px;font-size:.74rem;}
-.chip{display:inline-flex;align-items:center;gap:4px;border-radius:var(--r-pill);padding:3px 10px;font-size:.64rem;font-weight:700;}
-.chip-ok{background:var(--ok-tint);color:var(--ok);}
-.chip-accent{background:var(--accent-tint);color:var(--accent-primary);}
-.chip-support{background:var(--support-tint);color:var(--support-primary);}
-.chip-warn{background:var(--warn-tint);color:var(--warn);}
-.prog-track{height:5px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
-.prog-fill{height:100%;border-radius:var(--r-pill);background:var(--prog-fill);transition:width 1.2s var(--ease);}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.btn-pill{background:var(--accent-tint);color:var(--accent-primary);padding:7px 16px;font-size:.76rem;border-radius:var(--r-pill);}
+
+/* TASK & FX GRID */
+.task-row{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border-mid);cursor:pointer;}
+.task-check{width:24px;height:24px;border-radius:8px;border:2px solid var(--border-soft);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.task-check.done{background:var(--cta-gradient);border-color:transparent;color:#fff;}
+.fx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 20px;}
+.fx-item{border-radius:var(--r-md);border:1.5px solid var(--border-soft);background:var(--surface-1);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;}
+.fx-item.selected{border-color:var(--accent-primary);background:var(--accent-tint);}
+.fx-icon{margin-bottom:6px;color:var(--accent-primary)}
+.fx-label{font-size:.65rem;font-weight:700;color:var(--text-secondary)}
+.fx-sev{font-size:.6rem;font-weight:800;margin-top:4px;height:12px;color:var(--accent-mid)}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .3s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal-sheet{background:var(--bg-modal);border-radius:34px 34px 0 0;width:100%;max-width:430px;padding:0 0 46px;transform:translateY(100%);transition:transform .36s var(--ease);border:1px solid var(--border-soft);border-bottom:none;box-shadow:var(--shadow-elevated);}
+.modal-sheet{background:var(--bg-modal);border-radius:30px 30px 0 0;width:100%;padding:20px 20px 50px;transform:translateY(100%);transition:transform .3s var(--ease);}
 .modal-overlay.open .modal-sheet{transform:translateY(0);}
-.modal-handle{width:32px;height:4px;border-radius:2px;background:var(--border-soft);margin:14px auto 0;}
-.modal-title{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;padding:20px 26px 0;}
-.modal-body{padding:16px 26px 0;}
-.modal-input{width:100%;background:var(--surface-2);border:1.5px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 16px;font-family:'Clash Display',sans-serif;font-size:1.8rem;font-weight:700;color:var(--text-primary);letter-spacing:-1px;outline:none;text-align:center;transition:border-color .2s;}
-.modal-input:focus{border-color:var(--accent-mid);}
-.graph-svg{width:100%;height:90px;overflow:visible;display:block;}
-.graph-legend{display:flex;gap:14px;padding:4px 0 0;}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:.6rem;font-weight:600;color:var(--text-tertiary);}
-.legend-line{width:12px;height:2px;border-radius:2px;}
-.legend-dash{width:12px;height:0;border-top:2px dashed;}
-.slider-track{position:relative;height:5px;background:var(--accent-tint);border-radius:var(--r-pill);cursor:pointer;}
-.slider-fill{height:100%;background:linear-gradient(90deg,var(--accent-light),var(--support-primary));border-radius:var(--r-pill);}
-.slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:var(--surface-1);border:2px solid var(--accent-mid);box-shadow:var(--shadow-card);cursor:grab;}
-.water-cup{width:26px;height:32px;border-radius:8px;border:1.5px solid var(--border-soft);background:var(--surface-2);cursor:pointer;overflow:hidden;display:flex;align-items:flex-end;transition:border-color .2s,transform .15s;}
-.water-cup:hover{transform:scale(1.08);}
-.water-cup .wfill{width:100%;background:linear-gradient(180deg,var(--water-fill-top),var(--water-fill-bottom));border-radius:4px;transition:height .4s var(--ease);height:0;}
-.water-cup.full{border-color:var(--water-full-border);}
-.water-cup.full .wfill{height:100%;}
-.task-row{display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--border-mid);cursor:pointer;}
-.task-row:last-child{border-bottom:none;}
-.task-check{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--border-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s var(--ease);}
-.task-check.done{background:var(--cta-gradient);border-color:transparent;}
-.task-check svg{display:none;color:#fff;}
-.task-check.done svg{display:block;}
-.task-label{font-size:.84rem;font-weight:600;color:var(--text-primary);}
-.task-label.done{color:var(--text-tertiary);text-decoration:line-through;}
-.task-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
-.habit-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border-mid);}
-.habit-row:last-child{border-bottom:none;}
-.habit-check{width:36px;height:36px;border-radius:12px;border:1.5px solid var(--border-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .22s var(--ease);color:var(--text-faint);}
-.habit-check.done{background:var(--cta-gradient);border-color:transparent;color:#fff;box-shadow:var(--shadow-elevated);}
-.habit-title{font-size:.84rem;font-weight:700;color:var(--text-primary);}
-.habit-sub{font-size:.68rem;color:var(--text-tertiary);margin-top:1px;}
-.fx-item{border-radius:var(--r-md);border:1.5px solid var(--border-soft);background:var(--surface-1);padding:12px 8px 10px;text-align:center;cursor:pointer;transition:all .18s;}
-.fx-item.selected{border-color:var(--accent-pale);background:var(--accent-tint);}
-.fx-icon{width:28px;height:28px;border-radius:8px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;margin:0 auto 5px;color:var(--accent-primary);}
-.fx-label{font-size:.62rem;font-weight:700;color:var(--text-tertiary);}
-.fx-sev{margin-top:5px;font-size:.60rem;font-weight:700;color:var(--text-faint);min-height:12px;}
-.fx-item[data-sev="1"] .fx-sev{color:var(--ok);}
-.fx-item[data-sev="2"] .fx-sev{color:var(--warn);}
-.fx-item[data-sev="3"] .fx-sev{color:#c84040;}
-.fx-item.selected{border-color:var(--border-accent);}
-.fx-item[data-sev="3"]{border-color:rgba(200,64,64,0.28);background:rgba(200,64,64,0.04);}
-.header-wrap{padding:20px var(--page-px) 18px;display:flex;justify-content:space-between;align-items:flex-start;}
-.header-greeting{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-mid);margin-bottom:4px;}
-.header-name{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.4px;line-height:1;}
-.header-week{font-size:.74rem;color:var(--text-tertiary);margin-top:5px;font-weight:500;}
-.header-avatar{width:44px;height:44px;border-radius:14px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);flex-shrink:0;cursor:pointer;}
-.streak-chip{display:inline-flex;align-items:center;gap:5px;background:var(--warn-tint);border-radius:var(--r-pill);padding:4px 10px;border:1px solid rgba(196,120,42,.14);}
-.hero-card{margin:0 var(--page-px) 12px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-card);}
-.hero-top{padding:18px 20px 14px;border-bottom:1px solid var(--border-mid);background:var(--hero-gradient);}
-.hero-eyebrow{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-mid);margin-bottom:6px;}
-.hero-status{font-family:'Clash Display',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;line-height:1.2;margin-bottom:3px;}
-.hero-sub{font-size:.74rem;color:var(--text-tertiary);}
-.hero-actions{padding:14px 20px 16px;display:flex;align-items:center;gap:12px;}
-.stat-row{display:flex;gap:10px;padding:0 var(--page-px);margin-bottom:12px;}
-.stat-cell{flex:1;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 14px 12px;box-shadow:var(--shadow-card);}
-.stat-cell.accent{border-color:var(--border-accent);background:var(--surface-accent);}
-.stat-lbl{font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-faint);margin-bottom:5px;}
-.stat-val{font-family:'Clash Display',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;line-height:1;}
-.stat-unit{font-size:.62rem;font-weight:500;color:var(--text-tertiary);}
-.stat-note{font-size:.6rem;color:var(--text-tertiary);margin-top:3px;}
-.stat-ok{display:inline-flex;align-items:center;gap:3px;background:var(--ok-tint);color:var(--ok);border-radius:var(--r-pill);padding:2px 7px;font-size:.54rem;font-weight:700;margin-top:4px;}
-.weight-big{font-family:'Clash Display',sans-serif;font-size:2.2rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.5px;line-height:1;}
-.weight-unit{font-size:.9rem;font-weight:500;color:var(--text-tertiary);}
-.prog-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.prog-label{font-size:.7rem;font-weight:600;color:var(--text-tertiary);}
-.prog-val{font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--accent-primary);}
-.prog-note{font-size:.62rem;color:var(--text-faint);margin-top:6px;}
-.slider-row{margin-bottom:16px;}
-.slider-row:last-child{margin-bottom:0;}
-.slider-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.slider-name{font-size:.78rem;font-weight:700;color:var(--text-primary);}
-.slider-val-disp{font-family:'Clash Display',sans-serif;font-size:.9rem;font-weight:700;color:var(--accent-primary);}
-.lesson-banner{margin:0 var(--page-px) 12px;padding:14px 16px;display:flex;align-items:center;gap:12px;border-radius:var(--r-xl);background:var(--lesson-gradient);box-shadow:var(--shadow-elevated);}
-.lesson-icon{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
-.lesson-title{font-family:'Clash Display',sans-serif;font-size:.9rem;font-weight:700;color:#fff;letter-spacing:-.1px;margin-bottom:1px;}
-.lesson-sub{font-size:.68rem;color:rgba(255,255,255,.72);}
-.inject-banner{margin:0 var(--page-px) 12px;padding:12px 16px;display:flex;align-items:center;gap:12px;border-radius:var(--r-xl);background:var(--inject-gradient);border:1px solid var(--border-accent);}
-.inject-icon{width:32px;height:32px;border-radius:10px;background:var(--inject-icon-gradient);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
-.inject-title{font-size:.80rem;font-weight:700;color:var(--text-primary);}
-.inject-sub{font-size:.66rem;color:var(--text-tertiary);margin-top:1px;}
-.med-row{display:flex;align-items:center;gap:14px;padding:16px 20px;}
-.med-icon-wrap{width:38px;height:38px;border-radius:11px;background:var(--med-icon-gradient);border:1px solid var(--border-accent);display:flex;align-items:center;justify-content:center;color:var(--support-primary);flex-shrink:0;}
-.med-title{font-size:.82rem;font-weight:700;color:var(--text-primary);}
-.med-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
-.med-countdown{font-family:'Clash Display',sans-serif;font-size:.86rem;font-weight:700;color:var(--support-primary);}
-.coach-card{margin:8px var(--page-px) 12px;background:var(--coach-gradient);border:1px solid var(--border-accent);border-radius:var(--r-xl);padding:16px 20px;display:flex;align-items:center;gap:14px;}
-.coach-avatar{width:38px;height:38px;border-radius:12px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary);}
-.coach-title{font-size:.82rem;font-weight:700;color:var(--text-primary);}
-.coach-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
-/* ── MOTIVATION STRIP ──────────────────────────────── */
-.motivation-strip{background:var(--nav-bg);border-color:rgba(255,255,255,.08);box-shadow:var(--shadow-elevated);display:flex;align-items:center;gap:10px;margin:0 var(--page-px) 14px;padding:11px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:var(--shadow-card);}
-.motivation-dot{box-shadow:0 0 0 4px rgba(255,255,255,.08);width:6px;height:6px;border-radius:50%;background:var(--accent-light);flex-shrink:0;opacity:.7;}
+.modal-input{width:100%;background:var(--surface-2);border:2px solid var(--border-soft);border-radius:var(--r-lg);padding:15px;font-size:2rem;font-weight:700;color:var(--text-primary);text-align:center;outline:none;}
 
-/* ── LESSON CARD ───────────────────────────────────── */
-.lesson-card{margin:0 var(--page-px) 12px;}
-.lc-wrap{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-card);}
-.lc-header{padding:14px 18px 12px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
-.lc-num{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--accent-mid);flex-shrink:0;}
-.lc-icon{width:34px;height:34px;border-radius:10px;background:var(--accent-tint2);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);flex-shrink:0;}
-.lc-title{font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;flex:1;}
-.lc-meta{font-size:.60rem;color:var(--text-faint);margin-top:2px;font-weight:600;}
-.lc-chevron{transition:transform .22s var(--ease);color:var(--text-faint);flex-shrink:0;}
-.lc-chevron.open{transform:rotate(180deg);}
-.lc-progress{display:flex;gap:4px;padding:0 18px 12px;}
-.lc-pip{height:3px;flex:1;border-radius:var(--r-pill);background:var(--border-soft);transition:background .3s;}
-.lc-pip.done{background:var(--accent-light);}
-.lc-pip.active{background:var(--accent-mid);}
-.lc-summary{padding:0 18px 14px;font-size:.78rem;color:var(--text-secondary);line-height:1.55;border-bottom:1px solid var(--border-mid);}
-.lc-body{padding:16px 18px;font-size:.80rem;color:var(--text-secondary);line-height:1.65;display:none;}
-.lc-body.open{display:block;}
-.lc-body p{margin-bottom:10px;}
-.lc-body p:last-child{margin-bottom:0;}
-.lc-actions{padding:12px 18px 16px;display:flex;gap:10px;align-items:center;border-top:1px solid var(--border-mid);}
-.lc-done-state{padding:16px 18px;display:flex;align-items:center;gap:12px;}
-.lc-done-icon{width:34px;height:34px;border-radius:10px;background:var(--ok-tint);display:flex;align-items:center;justify-content:center;color:var(--ok);flex-shrink:0;}
-.lc-done-title{font-size:.84rem;font-weight:700;color:var(--ok);}
-.lc-done-sub{font-size:.68rem;color:var(--text-tertiary);margin-top:2px;}
-.lc-locked{padding:16px 18px;display:flex;align-items:center;gap:12px;}
-.lc-locked-icon{width:34px;height:34px;border-radius:10px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;color:var(--accent-light);flex-shrink:0;}
-.lc-locked-title{font-size:.84rem;font-weight:600;color:var(--text-tertiary);}
-.lc-locked-sub{font-size:.68rem;color:var(--text-faint);margin-top:2px;}
-.lc-series-done{padding:16px 18px;display:flex;align-items:center;gap:12px;}
+/* TOP BAR */
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:900;background:var(--nav-bg);display:flex;align-items:center;padding:0 22px;height:var(--nav-h);border-bottom:1px solid var(--border-soft);}
+.glpb-topbar-name{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#fff;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.a1{animation:fadeUp .32s var(--ease) .02s both}
-.a2{animation:fadeUp .32s var(--ease) .07s both}
-.a3{animation:fadeUp .32s var(--ease) .12s both}
-.a4{animation:fadeUp .32s var(--ease) .17s both}
-.a5{animation:fadeUp .32s var(--ease) .22s both}
-.a6{animation:fadeUp .32s var(--ease) .27s both}
-.a7{animation:fadeUp .32s var(--ease) .32s both}
+/* HELPERS */
+.header-wrap{padding:25px var(--page-px) 20px;display:flex;justify-content:space-between;align-items:center;}
+.header-name{font-family:'Clash Display',sans-serif;font-size:2.2rem;font-weight:700;line-height:1;}
+.header-avatar{width:48px;height:48px;border-radius:15px;background:var(--accent-mid);display:flex;align-items:center;justify-content:center;color:#fff;}
+.stat-row{display:flex;gap:12px;padding:0 var(--page-px);margin-bottom:16px;}
+.stat-cell{flex:1;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow-card);}
+.stat-lbl{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-tertiary);margin-bottom:6px;}
+.stat-val{font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;}
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
-/* ── GLP BUDDY TOP BAR ── */
-.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
-.glpb-topbar::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
-}
-.glpb-topbar-name{
-  font-family:'Clash Display',sans-serif;
-  font-size:1.05rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:3px;
-  color:rgba(255,255,255,0.85);line-height:1;
-}
-.glpb-topbar-face{
-  width:18px;height:18px;flex-shrink:0;
-  color:rgba(255,255,255,0.72);
-}
-
-.motivation-strip{background:var(--nav-bg)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:var(--shadow-elevated)!important;}
-.motivation-dot{background:linear-gradient(135deg,var(--accent-light),#fff)!important;box-shadow:0 0 0 4px rgba(255,255,255,.08)!important;}
 </style>
-<script>
-(function(){
-  var page = 'index.html';
-  var canReveal = true;
-  var params = new URLSearchParams(location.search);
-  var queryCompleted = params.get('ob') === '1';
-
-  if(queryCompleted){
-    try{
-      localStorage.setItem('glp_onboarding', JSON.stringify({complete:true, completedAt:new Date().toISOString()}));
-    }catch(e){}
-    try{
-      sessionStorage.setItem('glp_onboarding_complete', '1');
-    }catch(e){}
-    try{
-      params.delete('ob');
-      var cleanQuery = params.toString();
-      var cleanUrl = location.pathname + (cleanQuery ? ('?' + cleanQuery) : '') + location.hash;
-      history.replaceState(null, '', cleanUrl);
-    }catch(e){}
-    window.__glpCanReveal = true;
-    return;
-  }
-
-  try{
-    var ob = JSON.parse(localStorage.getItem('glp_onboarding') || '{}');
-    var sessionComplete = false;
-    try{
-      sessionComplete = sessionStorage.getItem('glp_onboarding_complete') === '1';
-    }catch(e){}
-
-    if(!((ob && ob.complete) || sessionComplete)){
-      canReveal = false;
-      window.__glpCanReveal = false;
-      location.replace('onboarding.html?next=' + encodeURIComponent(page));
-      return;
-    }
-  }catch(e){
-    canReveal = false;
-    window.__glpCanReveal = false;
-    location.replace('onboarding.html?next=' + encodeURIComponent(page));
-    return;
-  }
-  window.__glpCanReveal = canReveal;
-})();
-</script>
-<script>document.fonts.ready.then(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}});setTimeout(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}},400);</script>
 </head>
 <body class="theme-rose">
-<script>
-(function(){
-  var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
-  try{
-    var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');
-    var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';
-    S.forEach(function(x){document.body.classList.remove(x);});
-    document.body.classList.add(sk);
-  }catch(e){}
-})();
-</script>
 
-<!-- ACHIEVEMENT TOAST -->
-<div id="achieveToast" style="position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-120px);max-width:340px;width:calc(100% - 32px);z-index:500;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none">
-  <div style="background:var(--surface-1);border:1px solid var(--border-soft);border-radius:18px;padding:13px 15px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-elevated)">
-    <div id="toastIcon" style="width:42px;height:42px;border-radius:12px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;"></div>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--accent-mid);margin-bottom:2px">Achievement</div>
-      <div id="toastName" style="font-family:'Clash Display',sans-serif;font-size:.94rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.2"></div>
-      <div id="toastDesc" style="font-size:.67rem;color:var(--text-tertiary);margin-top:2px"></div>
-    </div>
-  </div>
-</div>
-
-<!-- WEIGHT LOG MODAL -->
 <div class="modal-overlay" id="weightModal">
   <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title">Daily Weigh-In</div>
-    <div class="modal-body">
-      <div style="display:flex;align-items:flex-start;gap:10px;background:var(--support-tint);border-radius:var(--r-md);padding:10px 12px;margin-bottom:14px">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--support-primary)" stroke-width="2.2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10" x2="12" y2="16"/><circle cx="12" cy="7.2" r="1"/></svg>
-        <div style="font-size:.70rem;color:var(--support-primary);font-weight:600;line-height:1.45">Weigh yourself first thing in the morning, before eating or drinking.</div>
-      </div>
-      <div id="weighinAlreadyDone" style="display:none;text-align:center;padding:6px 0 12px">
-        <div style="font-size:.76rem;font-weight:700;color:var(--ok)">You've already weighed in today</div>
-        <div style="font-size:.70rem;color:var(--text-tertiary);margin-top:2px">Update below if needed.</div>
-      </div>
-      <div style="font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-tertiary);margin-bottom:8px">Current weight</div>
-      <input class="modal-input" type="number" step="0.1" id="weightInput" inputmode="decimal" placeholder="0.0">
-      <div style="text-align:center;font-size:.76rem;color:var(--text-tertiary);margin-top:6px" id="weightUnitLabel">kilograms (kg)</div>
-      <div id="streakInfo" style="text-align:center;margin-top:10px;font-size:.72rem;color:var(--text-tertiary);font-weight:500;min-height:18px"></div>
-      <div style="margin-top:18px"><button class="btn btn-primary btn-full" onclick="saveWeight()">Save weight</button></div>
-      <div style="margin-top:8px;text-align:center"><button class="btn btn-ghost" onclick="closeModal('weightModal')">Cancel</button></div>
-    </div>
+    <div style="width:40px;height:4px;background:var(--border-soft);margin:0 auto 20px;border-radius:2px"></div>
+    <h2 style="font-family:'Clash Display';margin-bottom:10px">Daily Weigh-In</h2>
+    <p style="font-size:.8rem;color:var(--text-secondary);margin-bottom:20px">Step on the scale before your first meal.</p>
+    <input class="modal-input" type="number" step="0.1" id="weightInput" inputmode="decimal" placeholder="0.0">
+    <button class="btn btn-primary btn-full" style="margin-top:20px" onclick="saveWeight()">Save Weight</button>
+    <button class="btn btn-ghost btn-full" onclick="closeModal('weightModal')">Cancel</button>
   </div>
 </div>
 
 <div class="page-wrap">
-<div class="scroll-area">
-  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg class="glpb-topbar-face" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14s1.2 1.8 3.5 1.8 3.5-1.8 3.5-1.8"></path><line x1="9" y1="10" x2="9.01" y2="10"></line><line x1="15" y1="10" x2="15.01" y2="10"></line></svg></div>
-<!-- ① HEADER -->
-  <div class="header-wrap a1">
-    <div>
-      <div class="header-greeting" id="timeGreeting">Good morning</div>
-      <div class="header-name" id="headerName">Sarah</div>
-      <div class="header-week" id="weekSubtitle">Week 1 of your journey</div>
-    </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-top:2px">
-      <div class="header-avatar" onclick="location='settings.html'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </div>
-      <div id="headerStreakChip" style="display:none" class="streak-chip">
-        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span style="font-family:'Clash Display',sans-serif;font-size:.84rem;font-weight:700;color:var(--warn)" id="headerStreakNum">0</span>
-        <span style="font-size:.56rem;font-weight:700;color:var(--warn)">day streak</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAILY MOTIVATION STRIP -->
-  <div id="motivationStrip" class="motivation-strip a1">
-    <div class="motivation-dot"></div>
-    <div id="motivationText" style="flex:1;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.88);line-height:1.45;letter-spacing:.01em"></div>
-  </div>
-
-  <!-- LESSON CARD -->
-  <div id="lessonCard" class="lesson-card a1"></div>
-
-  <!-- INJECTION DAY BANNER (shown only on injection day) -->
-  <div class="inject-banner a2" id="medReminderBanner" style="display:none">
-    <div class="inject-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
-    <div>
-      <div class="inject-title">Injection day — <span id="bannerMedName">your medication</span></div>
-      <div class="inject-sub">Don't forget your dose today</div>
-    </div>
-  </div>
-
-  <!-- ② HERO TODAY CARD -->
-  <div class="hero-card a2">
-    <div class="hero-top">
-      <div class="hero-eyebrow">Today</div>
-      <div class="hero-status" id="heroStatus">Log your weight to get started</div>
-      <div class="hero-sub" id="heroSub">Your journey begins with one number</div>
-    </div>
-    <!-- Task 1: Weigh in -->
-    <div class="task-row" onclick="openWeighIn()">
-      <div class="task-check" id="taskWeighCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div style="flex:1">
-        <div class="task-label" id="taskWeighLabel">Daily Weigh-In</div>
-        <div class="task-sub">First thing in the morning, before eating</div>
-      </div>
-    </div>
-    <!-- Task 2: Check-in -->
-    <div class="task-row" onclick="scrollToCheckin()">
-      <div class="task-check" id="taskCheckinCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div style="flex:1">
-        <div class="task-label" id="taskCheckinLabel">Daily check-in</div>
-        <div class="task-sub">Energy · mood · hunger</div>
-      </div>
-    </div>
-    <!-- Task 3: Walk OR Log dose (switches on injection day) -->
-    <div class="task-row" id="task3Row" onclick="task3Action()">
-      <div class="task-check" id="task3Check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div style="flex:1">
-        <div class="task-label" id="task3Label">Daily walk</div>
-        <div class="task-sub" id="task3Sub">20–30 min · enhances GLP-1 effectiveness</div>
-      </div>
-    </div>
-    <div class="task-row" id="taskPhotoRow" onclick="openWeeklyPhotoTask()" style="display:none">
-      <div class="task-check" id="taskPhotoCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div style="flex:1">
-        <div class="task-label" id="taskPhotoLabel">Take a progress photo</div>
-        <div class="task-sub" id="taskPhotoSub">Weekly reminder · due by Monday evening</div>
-      </div>
-    </div>
-    <div class="hero-actions">
-      <button class="btn btn-primary" style="flex:1" id="heroCtaBtn" onclick="heroCtaAction()">Log weight</button>
-      <button class="btn btn-ghost" onclick="location='progress.html'">Full progress</button>
-    </div>
-  </div>
-
-  <!-- ③ STAT ROW -->
-  <div class="stat-row a3">
-    <div class="stat-cell" style="flex:1.4">
-      <div class="stat-lbl">Current weight</div>
-      <div class="stat-val" id="statCurrent">— <span class="stat-unit">kg</span></div>
-      <div class="stat-ok" id="statLostBadge" style="display:none">
-        <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-        <span id="statLostText">—</span>
-      </div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-lbl">Next dose</div>
-      <div class="stat-val" style="color:var(--support-primary)" id="statNextDose">—</div>
-      <div class="stat-note" id="statMedName">—</div>
-    </div>
-  </div>
-
-  <!-- ④ WEIGHT CARD — compact -->
-  <div class="card a3" id="weightCard">
-    <div class="card-header">
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
+  
+  <div class="scroll-area">
+    <div class="header-wrap">
       <div>
-        <div class="card-title" style="display:flex;align-items:baseline;gap:8px">
-          <span id="currentWeightDisplay" class="weight-big" style="font-size:1.6rem;letter-spacing:-1px">—</span>
-          <span class="weight-unit" id="currentWeightUnit">kg</span>
-          <div id="lostPill" hidden><span class="chip chip-ok" style="font-size:.6rem" id="lostPillText">—</span></div>
-        </div>
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--accent-mid)" id="timeGreeting">Good morning</div>
+        <div class="header-name" id="headerName">User</div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <button class="btn btn-pill btn-sm" onclick="openWeighIn()">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span id="logWeightBtnLabel">Log</span>
-        </button>
+      <div class="header-avatar" onclick="location='settings.html'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
     </div>
-    <div style="padding:10px 20px 14px">
-      <!-- Sparkline: 14-day mini trend -->
-      <svg id="sparkSvg" style="width:100%;height:40px;overflow:visible;display:block" viewBox="0 0 300 36" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="spkG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" id="spkStop1" stop-opacity=".18"/>
-            <stop offset="100%" id="spkStop2" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="spkL" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" id="spkLS"/>
-            <stop offset="100%" id="spkLE"/>
-          </linearGradient>
-        </defs>
-        <g id="sparkContent">
-          <text x="50%" y="22" text-anchor="middle" font-size="8" fill="rgba(26,16,40,.18)" font-family="Satoshi,sans-serif" font-weight="600">No data yet</text>
-        </g>
-      </svg>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-        <div style="font-size:.64rem;color:var(--text-faint);font-weight:600">Last 14 days</div>
-        <a href="progress.html" style="display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--accent-primary);text-decoration:none">
-          Full progress
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <!-- ⑤ DAILY CHECK-IN -->
-  <div class="card a4" id="checkinCard">
-    <div class="card-header">
-      <div class="card-title">Daily Check-In</div>
-      <div class="chip chip-accent" id="checkinChip">Not done</div>
+    <div class="stat-row">
+      <div class="stat-cell">
+        <div class="stat-lbl">Current Weight</div>
+        <div class="stat-val" id="statCurrent">--</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-lbl">Total Lost</div>
+        <div class="stat-val" id="statLost" style="color:var(--ok)">--</div>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="slider-row">
-        <div class="slider-meta"><div class="slider-name">Energy</div><div class="slider-val-disp" id="energyVal">5</div></div>
-        <div class="slider-track" id="energyTrack" onmousedown="startDrag(event,'energy')" ontouchstart="startDrag(event,'energy')"><div class="slider-fill" id="energyFill" style="width:50%"></div><div class="slider-thumb" id="energyThumb" style="left:50%"></div></div>
-      </div>
-      <div class="slider-row">
-        <div class="slider-meta"><div class="slider-name">Mood</div><div class="slider-val-disp" id="moodVal">5</div></div>
-        <div class="slider-track" id="moodTrack" onmousedown="startDrag(event,'mood')" ontouchstart="startDrag(event,'mood')"><div class="slider-fill" id="moodFill" style="width:50%"></div><div class="slider-thumb" id="moodThumb" style="left:50%"></div></div>
-      </div>
-      <div class="slider-row">
-        <div class="slider-meta"><div class="slider-name">Hunger</div><div class="slider-val-disp" id="hungerVal">5</div></div>
-        <div class="slider-track" id="hungerTrack" onmousedown="startDrag(event,'hunger')" ontouchstart="startDrag(event,'hunger')"><div class="slider-fill" id="hungerFill" style="width:50%"></div><div class="slider-thumb" id="hungerThumb" style="left:50%"></div></div>
-      </div>
-      <button class="btn btn-primary btn-full" id="checkinBtn" onclick="saveCheckin()" style="margin-top:16px">Save check-in</button>
-    </div>
-  </div>
 
-  <!-- ⑥ HABITS CARD -->
-  <div class="card a5">
-    <div class="card-header"><div class="card-title">Daily Habits</div></div>
-    <div class="habit-row">
-      <div class="habit-check" id="walkCheck" onclick="toggleWalk()">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div style="flex:1">
-        <div class="habit-title">Daily walk</div>
-        <div class="habit-sub">20–30 min recommended</div>
-      </div>
-      <button class="btn btn-pill btn-sm" onclick="location='exercise.html'" style="font-size:.7rem">Workouts</button>
-    </div>
-    <div class="habit-row" style="flex-direction:column;align-items:flex-start;gap:10px">
-      <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Today's Focus</div></div>
+      <div class="task-row" onclick="openWeighIn()">
+        <div class="task-check" id="taskWeightCheck"></div>
         <div>
-          <div class="habit-title">Water intake</div>
-          <div class="habit-sub">8 glasses · 2–3L daily</div>
+          <div style="font-weight:700;font-size:.9rem">Daily Weigh-In</div>
+          <div style="font-size:.7rem;color:var(--text-tertiary)">Track your consistency</div>
         </div>
-        <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px" id="waterCount">0 <span style="font-size:.72rem;font-weight:500;color:var(--text-tertiary)">/ 8</span></div>
       </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap" id="waterCups">
-        <div class="water-cup" onclick="toggleCup(0)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(1)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(2)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(3)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(4)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(5)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(6)"><div class="wfill"></div></div>
-        <div class="water-cup" onclick="toggleCup(7)"><div class="wfill"></div></div>
+      <div class="task-row" onclick="location='exercise.html'">
+        <div class="task-check" id="taskWalkCheck"></div>
+        <div>
+          <div style="font-weight:700;font-size:.9rem">Movement Goal</div>
+          <div style="font-size:.7rem;color:var(--text-tertiary)">30 min walk or workout</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Daily Symptoms</div>
+        <div id="symptomStatus" style="font-size:.65rem;font-weight:700;color:var(--ok);opacity:0">Auto-saving...</div>
+      </div>
+      <div class="fx-grid" id="fxGrid">
+        <div class="fx-item" data-fx="Nausea" onclick="tapFx(this)">
+          <div class="fx-icon">🤢</div>
+          <div class="fx-label">Nausea</div>
+          <div class="fx-sev"></div>
+        </div>
+        <div class="fx-item" data-fx="Fatigue" onclick="tapFx(this)">
+          <div class="fx-icon">😴</div>
+          <div class="fx-label">Fatigue</div>
+          <div class="fx-sev"></div>
+        </div>
+        <div class="fx-item" data-fx="Headache" onclick="tapFx(this)">
+          <div class="fx-icon">🤯</div>
+          <div class="fx-label">Headache</div>
+          <div class="fx-sev"></div>
+        </div>
+        <div class="fx-item" data-fx="Bloating" onclick="tapFx(this)">
+          <div class="fx-icon">🎈</div>
+          <div class="fx-label">Bloating</div>
+          <div class="fx-sev"></div>
+        </div>
+        <div class="fx-item" data-fx="Appetite" onclick="tapFx(this)">
+          <div class="fx-icon">🍽️</div>
+          <div class="fx-label">Appetite</div>
+          <div class="fx-sev"></div>
+        </div>
+        <div class="fx-item" data-fx="Mood" onclick="tapFx(this)">
+          <div class="fx-icon">🎭</div>
+          <div class="fx-label">Mood</div>
+          <div class="fx-sev"></div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- ⑦ TREATMENT CARD -->
-  <div class="card a6">
-    <div class="card-header"><div class="card-title">Treatment</div></div>
-    <div class="med-row">
-      <div class="med-icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
-      <div style="flex:1">
-        <div class="med-title" id="medNextLabel">Next dose</div>
-        <div class="med-sub" id="medNameDisplay">—</div>
-        <div class="med-countdown" id="medCountdown">—</div>
-      </div>
-      <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Log dose</button>
-    </div>
-    <div style="border-top:1px solid var(--border-mid);padding:8px 20px 4px">
-      <div style="font-size:.66rem;color:var(--text-faint);padding:4px 0 8px">How's your body today? Tap any that apply.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-bottom:14px" id="fxGrid">
-        <div class="fx-item" data-fx="Nausea" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1 1 4 1 4-1 4-1"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">Nausea</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="Fatigue" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="fx-label">Fatigue</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="Headache" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a10 10 0 0 0-6.88 17.25L6 21h12l.88-1.75A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="fx-label">Headache</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="Bloating" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="13" rx="8" ry="6"/><path d="M12 7V5"/></svg></div><div class="fx-label">Bloating</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="Appetite" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="fx-label">Appetite</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="How do you feel?" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">How do you feel?</div><div class="fx-sev"></div></div>
-      </div>
-      <button class="btn btn-ghost btn-sm" id="saveSymptomsBtn" onclick="saveSymptoms()" style="padding:0 0 12px;width:100%">Save symptoms</button>
-    </div>
-  </div>
-
-  <!-- ACHIEVEMENT NUDGE -->
-  <div id="achieveNudge" style="margin:8px var(--page-px) 10px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);display:flex;align-items:center;gap:12px;cursor:pointer" onclick="location='settings.html'">
-    <div id="achieveNudgeIcon" style="width:36px;height:36px;border-radius:11px;background:var(--warn-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    </div>
-    <div style="flex:1;min-width:0">
-      <div id="achieveNudgeTitle" style="font-size:.82rem;font-weight:700;color:var(--text-primary)">Next badge available</div>
-      <div id="achieveNudgeSub" style="font-size:.67rem;color:var(--text-tertiary);margin-top:1px">Keep going to earn it</div>
-    </div>
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-
-  <!-- PROGRESS PHOTO SHORTCUT -->
-  <div style="margin:0 var(--page-px) 12px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);display:flex;align-items:center;gap:12px;cursor:pointer" onclick="location='progress.html#photos'">
-    <div style="width:36px;height:36px;border-radius:11px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary)">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-    </div>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:.82rem;font-weight:700;color:var(--text-primary)">Add a progress photo</div>
-      <div style="font-size:.67rem;color:var(--text-tertiary);margin-top:1px">Track your visual transformation</div>
-    </div>
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-
-</div>
 </div>
 
 <nav class="bnav">
-  <a href="index.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
-  <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
-  <a href="progress.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
-  <a href="community.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="bnav-label">Community</div></a>
-  <a href="meals.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="bnav-label">Meals</div></a>
-  <a href="settings.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
+  <a href="index.html" class="bnav-item active"><div class="bnav-label">Home</div></a>
+  <a href="exercise.html" class="bnav-item"><div class="bnav-label">Exercise</div></a>
+  <a href="progress.html" class="bnav-item"><div class="bnav-label">Progress</div></a>
+  <a href="community.html" class="bnav-item"><div class="bnav-label">Buddies</div></a>
+  <a href="meals.html" class="bnav-item"><div class="bnav-label">Meals</div></a>
+  <a href="settings.html" class="bnav-item"><div class="bnav-label">Settings</div></a>
 </nav>
 
-<script src="glp-common.js"></script>
-<script>GLPApp.boot('home');</script>
 <script>
-'use strict';
-
-// ═══════════════════════════════════════════════════════
-//  LESSONS
-// ═══════════════════════════════════════════════════════
-const LESSONS = [
-  {
-    num: 1, title: 'How GLP-1 medicines help', read: '2 min',
-    summary: 'GLP-1 medicines work with your body\'s own signals to reduce hunger and slow digestion. Understanding the basics helps you trust the process.',
-    body: `<p>GLP-1 medicines mimic a hormone your gut releases after eating. That hormone tells your brain you\'ve had enough, slows the movement of food through your stomach, and helps your body manage blood sugar more evenly.</p><p>The result is that hunger feels less urgent, meals feel satisfying with less food, and cravings tend to quieten over time. This isn\'t willpower — it\'s your biology working with the medicine.</p><p>Progress can feel subtle at first. That\'s normal. The medicine is building a foundation, not delivering instant results.</p>`
-  },
-  {
-    num: 2, title: 'Smaller meals often feel better', read: '2 min',
-    summary: 'As GLP-1 slows digestion, large meals can become uncomfortable. Smaller portions more often tends to work better for most people.',
-    body: `<p>Because GLP-1 medicine slows how quickly food leaves your stomach, eating a large meal can lead to fullness, bloating, or nausea — especially in the early weeks.</p><p>Many people find that shifting to smaller, more frequent meals helps significantly. You don\'t need to count every calorie. Just pay attention to how your body feels and pause before reaching for a second portion.</p><p>Eating slowly also helps. It gives the signals time to reach your brain before you\'ve eaten past the point of comfort.</p>`
-  },
-  {
-    num: 3, title: 'Hydration matters more than you think', read: '2 min',
-    summary: 'Staying well hydrated supports your energy, digestion, and how you feel on this medicine. It\'s one of the simplest things you can do.',
-    body: `<p>GLP-1 medicines can reduce appetite, which sometimes means people forget to drink enough water too. Mild dehydration can cause headaches, fatigue, and low mood — things that are easy to blame on the medicine when water is actually the issue.</p><p>Aim for around 2 litres of water per day as a starting point. More if the weather is warm or you\'ve been active.</p><p>If plain water feels difficult, herbal teas and water-rich foods like cucumber or melon count. The goal is steady hydration through the day, not drinking large amounts at once.</p>`
-  },
-  {
-    num: 4, title: 'Protein helps protect progress', read: '2 min',
-    summary: 'Eating enough protein while on GLP-1 medicine helps preserve muscle mass, which matters for your long-term health and metabolism.',
-    body: `<p>When you eat less, there\'s a risk of losing muscle alongside fat. Muscle matters — it supports your metabolism, your energy, and your physical capability over time.</p><p>Getting enough protein helps your body hold onto muscle even when your overall food intake is lower. Good sources include eggs, fish, chicken, legumes, yoghurt, and tofu.</p><p>You don\'t need to track grams obsessively. A simple approach is to make sure there\'s a decent source of protein at each meal. If your appetite is low, a small protein-rich snack can help fill the gap.</p>`
-  },
-  {
-    num: 5, title: 'Common side effects are usually digestive', read: '2 min',
-    summary: 'Nausea, constipation, and reflux are the most common early side effects. Most people find they ease over the first few weeks.',
-    body: `<p>The most common side effects of GLP-1 medicines are digestive — nausea, constipation, reflux, and sometimes loose stools. They tend to be most noticeable in the early weeks and usually settle as your body adjusts.</p><p>A few things that help: eating slowly, avoiding very fatty or heavily spiced meals, not lying down right after eating, and staying well hydrated.</p><p>If side effects are significantly affecting your daily life, it\'s worth speaking to your prescribing clinician. There are ways to manage them, and sometimes adjusting the dose or timing helps.</p>`
-  },
-  {
-    num: 6, title: 'Know the red flags', read: '2 min',
-    summary: 'Most side effects are mild and temporary. But a few symptoms need prompt medical attention. It\'s worth knowing what to look out for.',
-    body: `<p>The vast majority of people tolerate GLP-1 medicines well. But some symptoms should prompt you to contact your clinician or seek medical advice promptly.</p><p>These include: severe abdominal pain that radiates to your back (which can indicate pancreatitis), persistent vomiting that prevents you from keeping fluids down, signs of an allergic reaction such as facial swelling or difficulty breathing, or vision changes.</p><p>This isn\'t a reason to worry — these events are uncommon. It\'s simply good to know what warrants a call to your clinician versus what can be managed at home with rest and hydration.</p>`
-  },
-  {
-    num: 7, title: 'Consistency beats perfect days', read: '2 min',
-    summary: 'Progress on this medicine comes from showing up consistently, not from being perfect. One difficult day doesn\'t change the bigger picture.',
-    body: `<p>GLP-1 medicine works over time. The day-to-day variation in how you feel, what you eat, or how active you are matters less than the long-term pattern you\'re building.</p><p>It\'s easy to feel like a bad day undoes progress. It doesn\'t. Your body is making changes gradually, and one meal or one difficult week rarely sets you back significantly.</p><p>Focus on what you\'re doing most of the time, not on optimising every moment. Steady is more powerful than perfect.</p>`
-  },
-  {
-    num: 8, title: 'Build a calm injection routine', read: '2 min',
-    summary: 'A simple, consistent injection routine reduces anxiety and makes it easier to stay on track. Small rituals make a real difference.',
-    body: `<p>For weekly injectables, having a consistent day and time removes the mental load of remembering. Many people pick a day that\'s naturally low-stress — a Sunday evening, for example.</p><p>A simple routine might look like: keep your pen in a visible, temperature-appropriate place; rotate injection sites to avoid skin changes; inject at room temperature for comfort; note it in your log immediately after.</p><p>If you feel anxious about injections, you\'re not alone. It often eases quickly with repetition. The injection itself is typically far less uncomfortable than people expect beforehand.</p>`
-  },
-  {
-    num: 9, title: 'Look at trends, not one weigh-in', read: '2 min',
-    summary: 'Weight naturally fluctuates day to day. What matters is the direction of your trend over weeks — not any single number on the scale.',
-    body: `<p>Body weight can vary by one to two kilograms on the same day depending on hydration, what you\'ve eaten, hormonal cycles, and how much you\'ve moved. This is completely normal.</p><p>One higher reading on the scale doesn\'t mean you\'ve gained fat. It almost certainly doesn\'t. Weekly or fortnightly averages give a much clearer picture of what\'s actually happening.</p><p>The most useful question to ask isn\'t "what did I weigh today?" but "where is my average heading over the last month?" That\'s the number that reflects real progress.</p>`
-  },
-  {
-    num: 10, title: 'Stay in contact with your clinician', read: '2 min',
-    summary: 'Your prescribing clinician is your partner in this. Regular check-ins help them support you well and adjust your plan when needed.',
-    body: `<p>GLP-1 medicines are prescription treatments, and your prescribing clinician is there to support you — not just to issue renewals. Regular check-ins help them understand how you\'re responding, what side effects you\'re managing, and whether your dose is right.</p><p>Don't feel like you need to save up concerns for a formal appointment. A quick message or call about a side effect, a question about timing, or a change in how you\'re feeling is exactly what they\'re there for.</p><p>Staying in contact also means your clinician can spot things early — whether that\'s an adjustment that could help, or a sign that something needs attention. This is a partnership, not a one-off prescription.</p>`
-  }
-];
-
-const MOTIVATION = [
-  'Small steps still count.','Progress is built quietly.','You do not need a perfect day to move forward.',
-  'Consistency feels small while it is working.','A calm choice still changes your future.',
-  'Patience is part of the process.','Your body is doing more than you can see.',
-  'Every good day adds to the one before it.','Slow and steady is not a consolation prize.',
-  'Trust the direction, not just the pace.','Rest is not stopping. It is part of going.',
-  'One steady week is worth more than one perfect day.','Progress happens between the dramatic moments.',
-  'You are already further than you were.','Show up gently. That still counts.',
-  'The quiet choices are the ones that last.','A small improvement held consistently becomes significant.',
-  'You do not need to earn rest.','Being kind to yourself is not weakness.',
-  'Imperfect progress is still progress.','Your effort is real even when results are slow.',
-  'This week does not need to be your best. It just needs to happen.',
-  'Taking care of yourself is a long game.','You are building something durable.',
-  'One good decision today is enough.','Each injection is an act of self-care.',
-  'It is not about speed. It is about not stopping.',
-  'How you treat yourself day-to-day shapes everything.','Calm consistency wins.',
-  'The hard days count too.','Progress does not always feel like progress.',
-  'You do not need motivation every day. You just need to keep going.',
-  'A gentle week is still a working week.','What you do most of the time matters most.',
-  'Your future self will thank today\'s version of you.',
-  'Small consistent actions compound quietly.','The trend is the truth, not the single day.',
-  'Being here is already part of it.','You are practising, not performing.',
-  'Effort that no one sees still works.','This is a season, not a sprint.',
-  'Good enough, done consistently, is excellent.','Rest without guilt. Move without shame.',
-  'What feels slow to you may look like strength from outside.',
-  'You have more momentum than you realise.','Stay steady. That is the whole strategy.',
-  'Today does not need to be impressive. It just needs to be real.',
-  'You are adjusting. That takes time and it is working.',
-  'Health built slowly holds.','A kind routine is a powerful one.',
-  'There is real courage in showing up on average days.',
-  'Let the medicine do its work. You just need to support it.',
-  'One glass of water more is a good choice. All good choices add up.',
-  'You are not behind. You are on your own timeline.',
-  'Gentleness toward yourself is not an obstacle. It is the path.',
-  'Difficult weeks are still part of the journey.',
-  'You have changed more than you think since you started.',
-  'Steady is underrated.','A quiet day is still a day moving forward.',
-  'You are building a relationship with your body. That takes time.',
-  'Three good choices today beats one perfect day this month.',
-  'Your health is worth this patience.','Lean into the process.',
-  'Some days the win is just keeping things stable.','Stable is good.',
-  'This does not need to be all or nothing.','Progress tolerates imperfection.',
-  'The version of you who started is not the version reading this.',
-  'Not every day needs a milestone. Some just need to happen.',
-  'You are further along than you were when you started reading this series.',
-  'A week of showing up quietly is worth celebrating.',
-  'Your commitment does not need to be loud to be real.',
-  'There is no perfect moment to begin again. This is fine.',
-  'The medicine, the movement, the meals. All of it is working together.',
-  'You do not have to be motivated. You just have to do the next thing.',
-  'What changes your health is what you do most often.',
-  'One steady month changes the numbers more than one intense week.',
-  'You are building a new pattern. Patterns take time.',
-  'The work you do on ordinary days is the real work.',
-  'Your progress is not defined by your fastest week.',
-  'Comfort and progress are not opposites.','You can move slowly and still arrive.',
-  'The best plan is the one you can actually follow.',
-  'You are doing something real.','A calm approach is a sustainable one.',
-  'Wherever you are in this, you are not wrong to keep going.',
-  'Your future is being shaped by how you treat yourself today.',
-  'Being consistent is the most underrated form of discipline.',
-  'You do not owe anyone a dramatic transformation.',
-  'This is about how you feel. That matters.',
-  'Some progress is invisible from the outside and very real on the inside.',
-  'Trust what the data shows over time, not how you feel on a single morning.',
-  'You are adapting. Adaptation is not always comfortable.',
-  'The pause before the second portion is the habit you are building.',
-  'One good sleep supports everything else.','Drink the water. It helps more than you think.',
-  'The day after a difficult day is a fresh opportunity.',
-  'You are not starting over. You are continuing.',
-  'Every time you show up, you are reinforcing a better pattern.',
-  'Not every week will show results. Every week still counts.',
-  'You are not competing with anyone else on this journey.',
-  'The version of health you are building is yours. No one else\'s.',
-  'Less pressure, more consistency. That is the formula.',
-  'You have made it to today. That is the work.',
-  'Long-term results come from short-term repetition.',
-  'Progress is not always visible. It is often happening beneath the surface.',
-  'Every choice that supports your health adds to the account.',
-  'You can be gentle with yourself and still be committed.',
-  'Your body is not against you. It is working with you.',
-  'This is a process you are part of, not a test you are passing or failing.',
-  'The fact that you are paying attention already matters.',
-  'Keep going at whatever pace is sustainable for you.',
-  'You do not need to earn your meals.','Nourishment is not a reward.',
-  'Your relationship with food is allowed to be calm.',
-  'This medicine is a tool. You are the one doing the work.',
-  'Slow progress on a long road is still moving forward.',
-  'You are not the same person who first started this. That is progress.',
-  'Protein, water, movement, rest. Simple things done often.',
-  'Perfection is not the standard. Showing up is.',
-  'You are more capable of consistency than you realise.',
-  'Let today be enough.','Tomorrow you can build on it.',
-  'Health is not a destination. It is what you practise.',
-  'There is dignity in doing ordinary things well.',
-  'You are learning what works for your body. That takes time.',
-  'One less heavily processed meal is a win.','Increments matter.',
-  'Progress is most visible when you look back further.',
-  'A week from now you will be glad you stayed the course today.',
-  'You are not expected to have this all figured out.',
-  'Consistency over months will surprise you.',
-  'The number on the scale is one signal, not the whole story.',
-  'Your energy and how you feel are also progress.',
-  'You are building new defaults. Defaults take repetition.',
-  'The quieter habits are often the most lasting ones.',
-  'What you are doing is harder than it looks from outside.',
-  'Let yourself feel good about the small wins.',
-  'You are the only person who knows how much effort this takes.',
-  'Progress is rarely linear. That does not make it less real.',
-  'You are not broken. You are adjusting.',
-  'A gentle week is still pointing in the right direction.',
-  'You are doing the work in a real and meaningful way.',
-  'Trust the compound effect of small good choices.',
-  'You are allowed to be proud of ordinary progress.',
-  'The consistency you are building now is valuable.',
-  'This is what looking after yourself actually looks like.',
-  'You are not behind. You are on your path.',
-  'Small improvements, day after day, become something significant.',
-  'You do not need to see the whole picture today.',
-  'The decision to continue on hard days is a powerful one.',
-  'You are learning to listen to your body. That is a skill.',
-  'Eating when you are genuinely hungry is good practice.',
-  'Stopping when you are full is a habit worth building.',
-  'Every injection you remember and do is a form of self-discipline.',
-  'You are building a version of health that fits your actual life.',
-  'Boring consistency produces remarkable results.',
-  'You are not doing this perfectly and that is fine.',
-  'Progress tolerates rest, setbacks, and quiet weeks.',
-  'The next right thing is enough. Just do that.',
-  'Your effort today does not expire overnight.',
-  'The changes you are making are more significant than they appear day-to-day.',
-  'You are not just losing weight. You are building new habits.',
-  'Good patterns take three weeks to form and much longer to fully hold. Keep going.',
-  'Your clinician is on your side. Let them support you.',
-  'You are doing something that future you will benefit from.',
-  'Routine is not boring. Routine is the foundation.',
-  'The best version of this journey is the one you actually do.',
-  'You are allowed to rest without guilt.',
-  'Taking this one day at a time is wisdom, not weakness.',
-  'Your health is not a project with a deadline.',
-  'The middle of the journey is where most of the real work happens.',
-  'You have made choices today that your future self will thank you for.',
-  'Every step forward is valid, regardless of the size.',
-  'You are building something real. Keep going.',
-  'Progress is quiet most of the time. That is how it works.',
-  'You are not expected to feel inspired every day. Just keep moving.',
-  'This is your pace. It is the right pace.',
-  'You are doing better than you think.',
-  'Today is enough. Tomorrow you can do a little more.',
-  'The work is ordinary. The result is extraordinary.',
-  'Small habits, held long enough, change everything.',
-  'You are here. That is the first and most important part.',
-  'Let patience be your strategy today.',
-  'You are not a before photo. You are a whole person, today.',
-  'Ease into it. You have time.',
-  'Something is always better than nothing.',
-  'Show up however you can. That is the standard.',
-  'You are exactly where you need to be for today.',
-  'Progress does not care about the speed, only the direction.',
-  'Keep your eyes on your own journey.',
-  'You know more about what works for your body than you did when you started.',
-  'A consistent effort, however small, is better than a perfect effort you cannot sustain.',
-  'You are building. Not just maintaining.',
-  'The hardest days you showed up anyway are the ones that shaped you most.',
-  'Today\'s choices are tomorrow\'s foundation.',
-  'You are further along the path than you were when you took the first step.',
-  'Being here, doing this work, is already success.',
-  'Let the process work. It is working.',
-  'You are supported. By the medicine, by this app, and by your own commitment.',
-];
-
-// ── LESSON STORAGE ─────────────────────────────────────
-function loadLessonData() {
-  try { return JSON.parse(localStorage.getItem('glp_lessons') || '{}'); } catch { return {}; }
-}
-function saveLessonData(d) { localStorage.setItem('glp_lessons', JSON.stringify(d)); }
-
-function getActiveLesson() {
-  // Returns the 0-based index of today's lesson.
-  // Rules:
-  //   - Lesson 0 is always available on first open
-  //   - A completed lesson unlocks the NEXT lesson only on the NEXT calendar day
-  //   - If today's lesson is already complete, stay on it (show done state)
-  //   - Never skip ahead more than one lesson per day
-  const data = loadLessonData();
-  const today = new Date().toISOString().slice(0, 10);
-  let idx = 0;
-  for (let i = 0; i < LESSONS.length; i++) {
-    const entry = data[i];
-    if (!entry || !entry.completed) {
-      // This lesson not yet done — it's the active one
-      idx = i;
-      break;
-    }
-    // This lesson is done. Can we advance past it?
-    // Only if it was completed on a PREVIOUS calendar day (not today)
-    if (entry.completedDate < today) {
-      // Advance to next
-      idx = i + 1;
-    } else {
-      // Completed today — stay on this lesson (show done state)
-      idx = i;
-      break;
-    }
-  }
-  return Math.min(idx, LESSONS.length);
-}
-
-function isLessonCompletedToday(lessonIdx) {
-  const data = loadLessonData();
-  const today = new Date().toISOString().slice(0, 10);
-  return data[lessonIdx] && data[lessonIdx].completedDate === today;
-}
-
-function isNextLessonUnlocked(completedIdx) {
-  // Next lesson unlocks the calendar day AFTER completion
-  const data = loadLessonData();
-  if (!data[completedIdx] || !data[completedIdx].completedDate) return false;
-  const today = new Date().toISOString().slice(0, 10);
-  return data[completedIdx].completedDate < today;
-}
-
-let _lessonExpanded = false;
-
-function renderLessonCard() {
-  const card = document.getElementById('lessonCard');
-  if (!card) return;
-  const data = loadLessonData();
-  const today = new Date().toISOString().slice(0,10);
-
-  // Build series pip bar
-  const activeIdx = getActiveLesson();
-  const pips = LESSONS.map((_, i) => {
-    const cls = i < activeIdx ? 'lc-pip done'
-              : i === activeIdx ? 'lc-pip active' : 'lc-pip';
-    return `<div class="${cls}"></div>`;
-  }).join('');
-  const pipBar = `<div class="lc-progress">${pips}</div>`;
-
-  // All 10 done
-  if (activeIdx >= LESSONS.length) {
-    card.innerHTML = `<div class="lc-wrap">
-      <div class="lc-done-state">
-        <div class="lc-done-icon">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div>
-          <div class="lc-done-title">GLP-1 basics complete</div>
-          <div class="lc-done-sub">You\'ve finished all 10 lessons in this series.</div>
-        </div>
-      </div>
-    </div>`;
-    return;
-  }
-
-  const lesson = LESSONS[activeIdx];
-  const isCompletedToday = data[activeIdx] && data[activeIdx].completed && data[activeIdx].completedDate === today;
-  const isCompleted      = data[activeIdx] && data[activeIdx].completed;
-
-  // Completed today — done state, next unlocks tomorrow
-  if (isCompleted && !isNextLessonUnlocked(activeIdx)) {
-    card.innerHTML = `<div class="lc-wrap">
-      ${pipBar}
-      <div class="lc-done-state">
-        <div class="lc-done-icon">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div>
-          <div class="lc-done-title">Today\'s lesson complete</div>
-          <div class="lc-done-sub">Lesson ${lesson.num} · Next lesson unlocks tomorrow</div>
-        </div>
-      </div>
-    </div>`;
-    return;
-  }
-
-  // Active lesson — always show full card open, highlighted
-  // Collapsed shows summary + pulsing "Read lesson" CTA
-  card.innerHTML = `<div class="lc-wrap lc-active-highlight">
-    <div class="lc-header" onclick="toggleLesson()" style="cursor:pointer">
-      <div class="lc-icon">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      </div>
-      <div style="flex:1;min-width:0">
-        <div class="lc-num">Lesson ${lesson.num} of ${LESSONS.length} · ${lesson.read}</div>
-        <div class="lc-title">${lesson.title}</div>
-      </div>
-      <svg class="lc-chevron${_lessonExpanded ? ' open' : ''}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    ${pipBar}
-    <div class="lc-summary">${lesson.summary}</div>
-    <div class="lc-body${_lessonExpanded ? ' open' : ''}">${lesson.body}</div>
-    <div class="lc-actions">
-      ${_lessonExpanded
-        ? `<button class="btn btn-primary btn-sm" onclick="markLessonComplete(${activeIdx})">Mark complete</button>
-           <button class="btn btn-ghost" onclick="toggleLesson()" style="font-size:.76rem">Close</button>`
-        : `<button class="btn btn-primary btn-sm" onclick="toggleLesson()">
-             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-             Read today\'s lesson
-           </button>`
-      }
-    </div>
-  </div>`;
-}
-
-function toggleLesson() {
-  _lessonExpanded = !_lessonExpanded;
-  renderLessonCard();
-}
-
-function markLessonComplete(idx) {
-  const data = loadLessonData();
-  data[idx] = { completed: true, completedDate: new Date().toISOString().slice(0, 10) };
-  saveLessonData(data);
-  _lessonExpanded = false;
-  renderLessonCard();
-}
-
-// ── MOTIVATION ─────────────────────────────────────────
-function renderMotivation() {
-  const el = document.getElementById('motivationText');
-  if (!el) return;
-  // Deterministic: use day-of-year to pick from 200
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const dayOfYear = Math.floor((now - start) / 86400000);
-  const idx = dayOfYear % MOTIVATION.length;
-  el.textContent = MOTIVATION[idx];
-}
-
-// ═══════════════════════════════════════════════════════
-const SKINS = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
-
-function applySkin(skin, persist) {
-  if (!SKINS.includes(skin)) skin = 'theme-rose';
-  // use classList to avoid wiping other classes
-  SKINS.forEach(s => document.body.classList.remove(s));
-  document.body.classList.add(skin);
-  updateGraphColors();
-  if (persist) {
-    try {
-      const s = JSON.parse(localStorage.getItem('glp_settings') || '{}');
-      s.skin = skin;
-      localStorage.setItem('glp_settings', JSON.stringify(s));
-    } catch(e) {}
-  }
-}
-
-function updateGraphColors() {
-  // Refresh sparkline gradient colours when skin changes
-  drawSparkline(loadWeightLog());
-}
-
-// ═══════════════════════════════════════════════════════
-//  STORAGE HELPERS
-// ═══════════════════════════════════════════════════════
-function loadSettings() {
-  try { return JSON.parse(localStorage.getItem('glp_settings') || '{}'); } catch { return {}; }
-}
-function saveSettings(s) {
-  localStorage.setItem('glp_settings', JSON.stringify(s));
-}
-function loadWeightLog() {
-  try { return JSON.parse(localStorage.getItem('glp_weight_log') || '[]'); } catch { return []; }
-}
-function saveWeightLog(log) {
-  localStorage.setItem('glp_weight_log', JSON.stringify(log));
-}
-function loadPhotos() {
-  try { return JSON.parse(localStorage.getItem('glp_photos') || '[]'); } catch { return []; }
-}
-function loadHomeLog() {
-  try { return JSON.parse(localStorage.getItem('glp_home_log') || '{}'); } catch { return {}; }
-}
-function saveHomeLog(log) {
-  localStorage.setItem('glp_home_log', JSON.stringify(log));
-}
-function getTodayState() {
-  const log = loadHomeLog();
-  const today = todayKey();
-  return log[today] || {};
-}
-function saveTodayState(patch) {
-  const log = loadHomeLog();
-  const today = todayKey();
-  log[today] = Object.assign(log[today] || {}, patch);
-  saveHomeLog(log);
-}
-
-// ═══════════════════════════════════════════════════════
-//  DATE HELPERS
-// ═══════════════════════════════════════════════════════
-function todayKey() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-// ═══════════════════════════════════════════════════════
-//  MEDICATION HELPERS
-// ═══════════════════════════════════════════════════════
-function getDisplayMedicationName(s) {
-  if (!s.medName) return 'your medication';
-  if (s.medName === 'Other') return s.medOther || 'your medication';
-  return s.medName;
-}
-
-function getNextDoseInfo(s) {
-  // Returns { daysUntil: number, isToday: bool, label: string }
-  if (!s.medDay) return { daysUntil: null, isToday: false, label: '—' };
-  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const todayIdx  = new Date().getDay(); // 0=Sun
-  const injIdx    = DAY_NAMES.findIndex(d => (s.medDay || 'Mon').startsWith(d));
-  if (injIdx < 0) return { daysUntil: null, isToday: false, label: '—' };
-  let diff = injIdx - todayIdx;
-  if (diff < 0) diff += 7;
-  // diff === 0 means today
-  const isToday = diff === 0;
-  const label   = isToday ? 'Today' : `${diff}d`;
-  return { daysUntil: diff, isToday, label };
-}
-
-// ═══════════════════════════════════════════════════════
-//  STREAK (weight log only)
-// ═══════════════════════════════════════════════════════
-function calcStreak(log) {
-  if (!log.length) return 0;
-  const byDate = {};
-  log.forEach(e => byDate[e.date] = true);
-  let streak = 0;
-  const d = new Date(todayKey());
-  // If not logged today, start checking from yesterday
-  if (!byDate[todayKey()]) d.setDate(d.getDate() - 1);
-  for (let i = 0; i < 365; i++) {
-    const k = d.toISOString().slice(0, 10);
-    if (byDate[k]) { streak++; }
-    else break;
-    d.setDate(d.getDate() - 1);
-  }
-  return streak;
-}
-
-// ═══════════════════════════════════════════════════════
-//  HERO STATUS DERIVATION
-// ═══════════════════════════════════════════════════════
-function deriveHomeStatus(ts) {
-  // ts = today state from getTodayState()
-  const log       = loadWeightLog();
-  const weightOk  = !!(log.length && log[log.length - 1].date === todayKey());
-  const checkinOk = !!(ts.checkin && ts.checkin.savedAt);
-  // On injection day only doseLogged counts; on normal days only walkDone counts
-  const task3Ok   = _isInjectionDay ? !!ts.doseLogged : !!ts.walkDone;
-  const done      = [weightOk, checkinOk, task3Ok].filter(Boolean).length;
-  const MSGS = [
-    ['Log your weight to get started', 'Your journey begins with one number'],
-    ['Good start',                     'Keep going — 2 more tasks today'],
-    ['Making progress',                'One more task to complete your day'],
-    ['Day complete',                   'All three tasks done — well done'],
-  ];
-  return { weightOk, checkinOk, task3Ok, done, msg: MSGS[Math.min(done, 3)] };
-}
-
-// ═══════════════════════════════════════════════════════
-//  TASK 3 — walk on normal days, log dose on injection day
-// ═══════════════════════════════════════════════════════
-let _isInjectionDay = false;
-
-function setupTask3(s, ts) {
-  const info = getNextDoseInfo(s);
-  _isInjectionDay = info.isToday && !!s.medName;
-  const label3 = document.getElementById('task3Label');
-  const sub3   = document.getElementById('task3Sub');
-  if (_isInjectionDay) {
-    label3.textContent = 'Log today\'s dose';
-    sub3.textContent   = getDisplayMedicationName(s) + (s.medDose ? ' · ' + s.medDose : '');
-    // task3 done if dose logged
-    markTask('task3Check', 'task3Label', !!ts.doseLogged);
-  } else {
-    label3.textContent = 'Daily walk';
-    sub3.textContent   = '20–30 min · enhances GLP-1 effectiveness';
-    markTask('task3Check', 'task3Label', !!ts.walkDone);
-  }
-}
-
-function task3Action() {
-  if (_isInjectionDay) {
-    logDose();
-  } else {
-    toggleWalk();
-  }
-}
-
-// ═══════════════════════════════════════════════════════
-//  WEEKLY PROGRESS PHOTO TASK
-// ═══════════════════════════════════════════════════════
-function getSundayKey(dateObj) {
-  const d = new Date(dateObj);
-  d.setHours(12, 0, 0, 0);
-  d.setDate(d.getDate() - d.getDay());
-  return d.toISOString().slice(0, 10);
-}
-
-function getWeeklyPhotoTaskInfo() {
-  const now = new Date();
-  const day = now.getDay();
-  const hour = now.getHours();
-  const visible = day === 0 || (day === 1 && hour < 18);
-  const weekStartKey = getSundayKey(now);
-  const done = loadPhotos().some(p => p.date >= weekStartKey);
-  return { visible, done };
-}
-
-function openWeeklyPhotoTask() {
-  location.href = 'progress.html?openPhoto=1';
-}
-
-function setupWeeklyPhotoTask() {
-  const row = document.getElementById('taskPhotoRow');
-  const label = document.getElementById('taskPhotoLabel');
-  const sub = document.getElementById('taskPhotoSub');
-  if (!row || !label || !sub) return;
-  const info = getWeeklyPhotoTaskInfo();
-  row.style.display = info.visible ? 'flex' : 'none';
-  if (!info.visible) return;
-  label.textContent = info.done ? 'Progress photo done' : 'Take a progress photo';
-  sub.textContent = info.done ? 'This week is logged' : 'Weekly reminder · due by Monday evening';
-  markTask('taskPhotoCheck', 'taskPhotoLabel', info.done);
-}
-
-// ═══════════════════════════════════════════════════════
-//  HERO CTA — always points to the first incomplete task
-// ═══════════════════════════════════════════════════════
-function updateHeroCta(status) {
-  const btn = document.getElementById('heroCtaBtn');
-  if (!btn) return;
-  if (!status.weightOk) {
-    btn.textContent = 'Log weight';
-    btn.onclick = openWeighIn;
-  } else if (!status.checkinOk) {
-    btn.textContent = 'Do check-in';
-    btn.onclick = scrollToCheckin;
-  } else if (!status.task3Ok) {
-    btn.textContent = _isInjectionDay ? 'Log dose' : 'Log walk';
-    btn.onclick = task3Action;
-  } else {
-    btn.textContent = 'Update weight';
-    btn.onclick = openWeighIn;
-  }
-}
-
-function heroCtaAction() {
-  // actual action is set dynamically — this is just a fallback
-  openWeighIn();
-}
-
-// ═══════════════════════════════════════════════════════
-//  MARK TASK DONE/UNDONE
-// ═══════════════════════════════════════════════════════
-function markTask(checkId, labelId, done) {
-  const c = document.getElementById(checkId);
-  const l = document.getElementById(labelId);
-  if (c) c.classList.toggle('done', done);
-  if (l) l.classList.toggle('done', done);
-}
-
-// ═══════════════════════════════════════════════════════
-//  FULL UI REFRESH
-// ═══════════════════════════════════════════════════════
-function refreshAll() {
-  const S   = loadSettings();
-  const log = loadWeightLog();
-  const ts  = getTodayState();
-  const settingsUnit = S.units || 'kg';
-  // Display unit comes from the latest log entry's stored unit (if present),
-  // falling back to settings. This preserves historical entries if user changes units.
-  const latest      = log.length ? log[log.length - 1] : null;
-  const unitLabel   = (latest && latest.units) ? latest.units : settingsUnit;
-  const goalW  = S.goalWeight  || null;
-  const startW = S.startWeight || null;
-
-  // Skin
-  applySkin(S.skin || 'theme-rose', false);
-
-  // Header name
-  const nameEl = document.getElementById('headerName');
-  if (nameEl) nameEl.textContent = S.name || 'Sarah';
-
-  // Greeting
-  const h = new Date().getHours();
-  const greet = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
-  const greetEl = document.getElementById('timeGreeting');
-  if (greetEl) greetEl.textContent = greet;
-
-  // Week label
-  if (S.startDate) {
-    const weeks = Math.max(1, Math.floor((new Date() - new Date(S.startDate)) / (7 * 24 * 60 * 60 * 1000)) + 1);
-    const sublabels = ['Just getting started', 'Building momentum', 'Finding your rhythm', 'In the zone', 'Going strong'];
-    const subEl = document.getElementById('weekSubtitle');
-    if (subEl) subEl.textContent = `Week ${weeks} · ${sublabels[Math.min(Math.floor((weeks - 1) / 4), sublabels.length - 1)]}`;
-  }
-
-  // Streak chip
-  const streak = calcStreak(log);
-  const hsc = document.getElementById('headerStreakChip');
-  const hsn = document.getElementById('headerStreakNum');
-  if (hsc) { hsc.style.display = streak > 0 ? 'inline-flex' : 'none'; if (hsn) hsn.textContent = streak; }
-
-  // Injection day banner
-  const doseInfo = getNextDoseInfo(S);
-  if (doseInfo.isToday && S.notifMeds && S.medName) {
-    const banner = document.getElementById('medReminderBanner');
-    const bannerName = document.getElementById('bannerMedName');
-    if (banner) banner.style.display = 'flex';
-    if (bannerName) bannerName.textContent = getDisplayMedicationName(S);
-  }
-
-  // Weight — use latest log entry, fall back to settings curWeight
-  const currentW    = latest ? latest.weight : (S.curWeight || null);
-  const loggedToday = !!(latest && latest.date === todayKey());
-
-  const dispEl = document.getElementById('currentWeightDisplay');
-  const unitEl = document.getElementById('currentWeightUnit');
-  if (dispEl) dispEl.textContent = currentW != null ? currentW.toFixed(1) : '—';
-  if (unitEl) unitEl.textContent = unitLabel;
-
-  // Stat: current
-  const scEl = document.getElementById('statCurrent');
-  if (scEl) scEl.innerHTML = currentW != null
-    ? `${currentW.toFixed(1)} <span class="stat-unit">${unitLabel}</span>`
-    : `— <span class="stat-unit">${unitLabel}</span>`;
-
-  // Stat: lost badge
-  const slb = document.getElementById('statLostBadge');
-  const slt = document.getElementById('statLostText');
-  if (slb) {
-    if (currentW != null && startW != null && startW - currentW > 0.05) {
-      slb.style.display = 'inline-flex';
-      if (slt) slt.textContent = `${(startW - currentW).toFixed(1)}${unitLabel} lost`;
-    } else {
-      slb.style.display = 'none';
-    }
-  }
-
-  // Lost pill (weight card header)
-  const lpEl  = document.getElementById('lostPill');
-  const lptEl = document.getElementById('lostPillText');
-  if (lpEl) {
-    if (currentW != null && startW != null && startW - currentW > 0.05) {
-      lpEl.hidden = false;
-      if (lptEl) lptEl.textContent = `${(startW - currentW).toFixed(1)}${unitLabel} lost`;
-    } else {
-      lpEl.hidden = true;
-    }
-  }
-
-  // Stat: next dose
-  const sndEl  = document.getElementById('statNextDose');
-  const smnEl  = document.getElementById('statMedName');
-  if (sndEl) sndEl.textContent = doseInfo.label;
-  if (smnEl) smnEl.textContent = getDisplayMedicationName(S);
-
-  // Weight log button label
-  const lwbl = document.getElementById('logWeightBtnLabel');
-  if (lwbl) lwbl.textContent = loggedToday ? 'Update' : 'Log weight';
-
-  // Weight unit in modal — show what the new entry will be saved as
-  const wul = document.getElementById('weightUnitLabel');
-  if (wul) wul.textContent = settingsUnit === 'lbs' ? 'pounds (lbs)' : 'kilograms (kg)';
-
-  // Treatment card
-  const mnEl  = document.getElementById('medNameDisplay');
-  const mcEl  = document.getElementById('medCountdown');
-  const mnLbl = document.getElementById('medNextLabel');
-  if (S.medName) {
-    const dispName = getDisplayMedicationName(S);
-    if (mnEl) mnEl.textContent = `${dispName}${S.medDose ? ' · ' + S.medDose : ''} · ${S.medFreq === 'daily' ? 'Daily' : 'Weekly'}`;
-    if (mcEl) mcEl.textContent = doseInfo.isToday ? 'Today — log your dose' : `${doseInfo.label} until next dose`;
-    if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Injection today' : 'Next injection';
-  }
-
-  // Log dose button state
-  const ldb = document.getElementById('logDoseBtn');
-  if (ldb) {
-    ldb.textContent = ts.doseLogged ? 'Dose logged' : 'Log dose';
-    ldb.style.opacity = ts.doseLogged ? '.55' : '1';
-  }
-
-  // Task 3 setup (walk vs dose)
-  setupTask3(S, ts);
-  setupWeeklyPhotoTask();
-
-  // Restore check-in sliders
-  if (ts.checkin) {
-    setSlider('energy',  ts.checkin.energy  || 5);
-    setSlider('mood',    ts.checkin.mood    || 5);
-    setSlider('hunger',  ts.checkin.hunger  || 5);
-    if (ts.checkin.savedAt) markCheckinDone();
-  }
-
-  // Restore walk (only if not injection day — task3 handles it)
-  const walkCheck = document.getElementById('walkCheck');
-  if (walkCheck) walkCheck.classList.toggle('done', !!ts.walkDone);
-  markTask('taskWeighCheck', 'taskWeighLabel', loggedToday);
-  markTask('taskCheckinCheck', 'taskCheckinLabel', !!(ts.checkin && ts.checkin.savedAt));
-
-  // Restore water cups
-  const cups = ts.waterCups || [];
-  document.querySelectorAll('.water-cup').forEach((cup, i) => {
-    cup.classList.toggle('full', !!cups[i]);
-  });
-  updateWaterCount(cups);
-
-  // Restore symptoms — always clear first so deselections are respected
-  restoreSymptoms(ts.symptoms || []);
-
-  // Hero status + CTA
-  const status = deriveHomeStatus(ts);
-  const statusEl = document.getElementById('heroStatus');
-  const subEl    = document.getElementById('heroSub');
-  if (statusEl) statusEl.textContent = status.msg[0];
-  if (subEl)    subEl.textContent    = status.msg[1];
-  updateHeroCta(status);
-
-  // Sparkline
-  drawSparkline(log);
-
-  // Lessons + Motivation
-  renderMotivation();
-  renderLessonCard();
-
-  // Achievement nudge — show next badge to earn
-  renderAchieveNudge();
-}
-
-// ═══════════════════════════════════════════════════════
-//  GRAPH
-// ═══════════════════════════════════════════════════════
-function drawSparkline(log) {
-  const gc = document.getElementById('sparkContent');
-  if (!gc) return;
-  const isDark  = document.body.classList.contains('theme-midnight');
-  const textFill = isDark ? 'rgba(220,210,240,.20)' : 'rgba(26,16,40,.18)';
-
-  // Last 14 days only
-  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 13);
-  const cutoffStr = cutoff.toISOString().slice(0, 10);
-  const recent = log.filter(e => e.date >= cutoffStr).sort((a, b) => a.date.localeCompare(b.date));
-
-  if (!recent.length) {
-    gc.innerHTML = `<text x="50%" y="22" text-anchor="middle" font-size="8" fill="${textFill}" font-family="Satoshi,sans-serif" font-weight="600">No data yet</text>`;
-    return;
-  }
-
-  const st   = getComputedStyle(document.body);
-  const ls   = st.getPropertyValue('--chart-line-start').trim() || '#d4638a';
-  const le   = st.getPropertyValue('--chart-line-end').trim()   || '#7b8fd4';
-  const fill = st.getPropertyValue('--chart-fill-color').trim() || '#c85c87';
-
-  // Update gradient stops
-  const s1 = document.getElementById('spkStop1'), s2 = document.getElementById('spkStop2');
-  const ls_el = document.getElementById('spkLS'),  le_el = document.getElementById('spkLE');
-  if (s1) s1.setAttribute('stop-color', fill);
-  if (s2) s2.setAttribute('stop-color', fill);
-  if (ls_el) ls_el.setAttribute('stop-color', ls);
-  if (le_el) le_el.setAttribute('stop-color', le);
-
-  const W = 300, H = 30, PAD = 3;
-  const weights = recent.map(e => e.weight);
-  const minW = Math.min(...weights) - 0.5;
-  const maxW = Math.max(...weights) + 0.5;
-  const range = maxW - minW || 1;
-  const n = recent.length;
-  const px = i => PAD + (i / Math.max(n - 1, 1)) * (W - PAD * 2);
-  const py = w => H - ((w - minW) / range) * (H - PAD * 2) - PAD;
-
-  let svg = '';
-  if (n >= 2) {
-    const path   = recent.map((e, i) => `${i === 0 ? 'M' : 'L'}${px(i).toFixed(1)},${py(e.weight).toFixed(1)}`).join(' ');
-    const lastX  = px(n - 1).toFixed(1);
-    const firstX = px(0).toFixed(1);
-    svg += `<path d="${path} L${lastX},${H+3} L${firstX},${H+3} Z" fill="url(#spkG)"/>`;
-    svg += `<path d="${path}" fill="none" stroke="url(#spkL)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`;
-  }
-  // Latest dot only
-  const dotStroke = isDark ? '#2a2240' : 'white';
-  const lastPt = recent[n - 1];
-  const lx = px(n - 1).toFixed(1), ly = py(lastPt.weight).toFixed(1);
-  svg += `<circle cx="${lx}" cy="${ly}" r="3.5" fill="${ls}" stroke="${dotStroke}" stroke-width="1.5"/>`;
-
-  gc.innerHTML = svg;
-}
-
-// ═══════════════════════════════════════════════════════
-//  WEIGHT MODAL
-// ═══════════════════════════════════════════════════════
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-document.getElementById('weightModal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal('weightModal');
-});
-
-function openWeighIn() {
-  const log = loadWeightLog();
-  const latest = log.length ? log[log.length - 1] : null;
-  const inp = document.getElementById('weightInput');
-  inp.value = latest ? latest.weight.toFixed(1) : '';
-  const ad = document.getElementById('weighinAlreadyDone');
-  if (ad) ad.style.display = (latest && latest.date === todayKey()) ? 'block' : 'none';
-  const streak = calcStreak(log);
-  const si = document.getElementById('streakInfo');
-  if (si) si.textContent = streak > 1 ? `${streak}-day streak — keep going!` : streak === 1 ? 'Day 1 — great start!' : 'Log daily to build your streak';
-  openModal('weightModal');
-  setTimeout(() => inp.focus(), 200);
-}
-
-function saveWeight() {
-  const inp = document.getElementById('weightInput');
-  const val = parseFloat(inp.value);
-  if (!val || val < 20 || val > 500) {
-    inp.style.borderColor = 'var(--accent-mid)';
-    setTimeout(() => inp.style.borderColor = '', 800);
-    return;
-  }
-  const log = loadWeightLog();
-  const idx = log.findIndex(e => e.date === todayKey());
-  const S   = loadSettings();
-  const entryUnits = S.units || 'kg';
-  if (idx >= 0) { log[idx].weight = val; log[idx].units = entryUnits; }
-  else log.push({ date: todayKey(), weight: val, units: entryUnits });
-  saveWeightLog(log);
-  if (window.GLPApp) GLPApp.track('weight_logged', { value: val, units: entryUnits });
-  // Mark weight as logged in home log
-  saveTodayState({ weightLogged: true });
-  closeModal('weightModal');
-  refreshAll();
-}
-
-// ═══════════════════════════════════════════════════════
-//  SLIDERS
-// ═══════════════════════════════════════════════════════
-let _dragging = null;
-
-function setSlider(name, val) {
-  const pct = (val - 1) / 9 * 100;
-  const f = document.getElementById(name + 'Fill');
-  const t = document.getElementById(name + 'Thumb');
-  const v = document.getElementById(name + 'Val');
-  if (f) f.style.width  = pct + '%';
-  if (t) t.style.left   = pct + '%';
-  if (v) v.textContent  = val;
-}
-
-function startDrag(e, name) {
-  _dragging = name;
-  updateSlider(e, name);
-  e.preventDefault();
-}
-
-function updateSlider(e, name) {
-  const t = document.getElementById(name + 'Track');
-  const r = t.getBoundingClientRect();
-  const x = e.touches ? e.touches[0].clientX : e.clientX;
-  const p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-  const v = Math.round(p * 9) + 1;
-  setSlider(name, v);
-}
-
-document.addEventListener('mousemove', e => { if (_dragging) updateSlider(e, _dragging); });
-document.addEventListener('touchmove', e => { if (_dragging) updateSlider(e, _dragging); }, { passive: false });
-document.addEventListener('mouseup',   () => _dragging = null);
-document.addEventListener('touchend',  () => _dragging = null);
-
-// ═══════════════════════════════════════════════════════
-//  CHECK-IN
-// ═══════════════════════════════════════════════════════
-function getSliderVal(name) {
-  return parseInt(document.getElementById(name + 'Val').textContent) || 5;
-}
-
-function markCheckinDone() {
-  const chip = document.getElementById('checkinChip');
-  const btn  = document.getElementById('checkinBtn');
-  if (chip) { chip.textContent = 'Done'; chip.className = 'chip chip-ok'; }
-  if (btn)  { btn.textContent = 'Check-in saved'; btn.style.background = ''; btn.style.boxShadow = 'var(--shadow-elevated)'; }
-  markTask('taskCheckinCheck', 'taskCheckinLabel', true);
-}
-
-function saveCheckin() {
-  const checkin = {
-    energy:  getSliderVal('energy'),
-    mood:    getSliderVal('mood'),
-    hunger:  getSliderVal('hunger'),
-    savedAt: new Date().toISOString(),
-  };
-  saveTodayState({ checkin });
-  markCheckinDone();
-  if (window.GLPApp) GLPApp.track('checkin_saved', { energy: checkin.energy, mood: checkin.mood, hunger: checkin.hunger });
-  // Update hero
-  const ts = getTodayState();
-  const status = deriveHomeStatus(ts);
-  const statusEl = document.getElementById('heroStatus');
-  const subEl    = document.getElementById('heroSub');
-  if (statusEl) statusEl.textContent = status.msg[0];
-  if (subEl)    subEl.textContent    = status.msg[1];
-  updateHeroCta(status);
-  if (window.GLPApp) GLPApp.track('dose_logged', {});
-}
-
-
-function scrollToCheckin() {
-  document.getElementById('checkinCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ═══════════════════════════════════════════════════════
-//  WALK
-// ═══════════════════════════════════════════════════════
-function toggleWalk() {
-  const ts      = getTodayState();
-  const newVal  = !ts.walkDone;
-  saveTodayState({ walkDone: newVal });
-  const walkCheck = document.getElementById('walkCheck');
-  if (walkCheck) walkCheck.classList.toggle('done', newVal);
-  // Only update task3 row if this is not an injection day
-  if (!_isInjectionDay) markTask('task3Check', 'task3Label', newVal);
-  const updatedTs = getTodayState();
-  const status    = deriveHomeStatus(updatedTs);
-  const statusEl  = document.getElementById('heroStatus');
-  const subEl     = document.getElementById('heroSub');
-  if (statusEl) statusEl.textContent = status.msg[0];
-  if (subEl)    subEl.textContent    = status.msg[1];
-  updateHeroCta(status);
-}
-
-// ═══════════════════════════════════════════════════════
-//  WATER
-// ═══════════════════════════════════════════════════════
-function toggleCup(i) {
-  const ts   = getTodayState();
-  const cups = ts.waterCups ? [...ts.waterCups] : Array(8).fill(false);
-  cups[i]    = !cups[i];
-  saveTodayState({ waterCups: cups });
-  document.querySelectorAll('.water-cup')[i].classList.toggle('full', cups[i]);
-  updateWaterCount(cups);
-  checkAchievements();
-}
-
-function updateWaterCount(cups) {
-  const n = (cups || []).filter(Boolean).length;
-  const el = document.getElementById('waterCount');
-  if (el) el.innerHTML = n + ' <span style="font-size:.72rem;font-weight:500;color:var(--text-tertiary)">/ 8</span>';
-}
-
-// ═══════════════════════════════════════════════════════
-//  SYMPTOMS
-// ═══════════════════════════════════════════════════════
-const FX_LABELS = ['', 'Mild', 'Moderate', 'Severe'];
-const FX_CUSTOM = {
-  'Appetite': ['', 'Not hungry', 'Hungry', 'Very hungry'],
-  'How do you feel?': ['', 'Great', 'OK', 'Not well']
+// BASIC APP LOGIC
+const GLP = {
+  getSettings: () => JSON.parse(localStorage.getItem('glp_settings') || '{}'),
+  getLogs: () => JSON.parse(localStorage.getItem('glp_weight_log') || '[]'),
+  today: () => new Date().toISOString().slice(0,10)
 };
-function fxLabelFor(name, sev){ const labels = FX_CUSTOM[name] || FX_LABELS; return labels[sev] || ''; }
+
+function refreshUI() {
+  const s = GLP.getSettings();
+  const logs = GLP.getLogs();
+  const today = GLP.today();
+  
+  // Theme
+  document.body.className = s.skin || 'theme-rose';
+  document.body.classList.add('f-ready');
+  
+  // Name
+  document.getElementById('headerName').textContent = s.name || 'Friend';
+  
+  // Weights
+  const latest = logs.length ? logs[logs.length-1].weight : (s.curWeight || 0);
+  const start = s.startWeight || latest;
+  
+  document.getElementById('statCurrent').textContent = latest + (s.units || 'kg');
+  document.getElementById('statLost').textContent = (start - latest).toFixed(1) + (s.units || 'kg');
+  
+  // Task Checks
+  const loggedToday = logs.some(l => l.date === today);
+  document.getElementById('taskWeightCheck').classList.toggle('done', loggedToday);
+  
+  // Restore Symptoms
+  const dayLog = JSON.parse(localStorage.getItem('glp_home_log') || '{}')[today] || {};
+  if(dayLog.symptoms) {
+    dayLog.symptoms.forEach(sym => {
+      const item = document.querySelector(`[data-fx="${sym.name}"]`);
+      if(item) {
+        item.dataset.sev = sym.level;
+        item.classList.add('selected');
+        item.querySelector('.fx-sev').textContent = ['','Mild','Med','High'][sym.level];
+      }
+    });
+  }
+}
+
+// WEIGHT MODAL
+function openWeighIn() { document.getElementById('weightModal').classList.add('open'); }
+function closeModal() { document.getElementById('weightModal').classList.remove('open'); }
+function saveWeight() {
+  const val = parseFloat(document.getElementById('weightInput').value);
+  if(!val) return;
+  let logs = GLP.getLogs();
+  const today = GLP.today();
+  const existing = logs.findIndex(l => l.date === today);
+  if(existing > -1) logs[existing].weight = val;
+  else logs.push({date: today, weight: val});
+  localStorage.setItem('glp_weight_log', JSON.stringify(logs));
+  closeModal();
+  refreshUI();
+}
+
+// SYMPTOMS AUTO-SAVE
+let saveTimer;
 function tapFx(el) {
-  const sev = parseInt(el.dataset.sev || '0');
-  const next = sev >= 3 ? 0 : sev + 1;
-  el.dataset.sev = next;
-  el.classList.toggle('selected', next > 0);
-  const sevEl = el.querySelector('.fx-sev');
-  if (sevEl) sevEl.textContent = next > 0 ? fxLabelFor(el.dataset.fx, next) : '';
-}
-
-
-function clearAllSymptomUI() {
-  document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
-    item.classList.remove('selected');
-    item.dataset.sev = '0';
-    const sevEl = item.querySelector('.fx-sev');
-    if (sevEl) sevEl.textContent = '';
-  });
-}
-
-function restoreSymptoms(symptoms) {
-  clearAllSymptomUI();
-  (symptoms || []).forEach(({ name, level }) => {
-    const item = document.querySelector(`#fxGrid .fx-item[data-fx="${name}"]`);
-    if (!item) return;
-    const sev = Math.min(3, level||1);
-    item.dataset.sev = sev;
-    item.classList.add('selected');
-    const sevEl = item.querySelector('.fx-sev');
-    if (sevEl) sevEl.textContent = fxLabelFor(item.dataset.fx, sev) || '';
-  });
+  let sev = parseInt(el.dataset.sev || 0);
+  sev = sev >= 3 ? 0 : sev + 1;
+  el.dataset.sev = sev;
+  el.classList.toggle('selected', sev > 0);
+  el.querySelector('.fx-sev').textContent = ['','Mild','Med','High'][sev];
+  
+  // Auto-save logic
+  document.getElementById('symptomStatus').style.opacity = 1;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveSymptoms, 1000);
 }
 
 function saveSymptoms() {
   const symptoms = [];
-  document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
-    const sev = parseInt(item.dataset.sev||'0');
-    if (sev > 0) symptoms.push({ name: item.dataset.fx, level: sev });
+  document.querySelectorAll('.fx-item.selected').forEach(item => {
+    symptoms.push({name: item.dataset.fx, level: parseInt(item.dataset.sev)});
   });
-  saveTodayState({ symptoms });
-  const btn = document.getElementById('saveSymptomsBtn');
-  if (btn) { btn.textContent = 'Saved'; setTimeout(() => { btn.textContent = 'Save symptoms'; }, 1800); }
-  if (window.GLPApp) GLPApp.track('symptoms_saved', { count: symptoms.length });
+  
+  const today = GLP.today();
+  let homeLog = JSON.parse(localStorage.getItem('glp_home_log') || '{}');
+  homeLog[today] = homeLog[today] || {};
+  homeLog[today].symptoms = symptoms;
+  localStorage.setItem('glp_home_log', JSON.stringify(homeLog));
+  
+  document.getElementById('symptomStatus').style.opacity = 0;
 }
 
-// ═══════════════════════════════════════════════════════
-//  LOG DOSE
-// ═══════════════════════════════════════════════════════
-function logDose() {
-  const ts = getTodayState();
-  if (ts.doseLogged) return; // already logged today
-  saveTodayState({ doseLogged: true });
-  // Update button
-  const btn = document.getElementById('logDoseBtn');
-  if (btn) { btn.textContent = 'Dose logged'; btn.style.opacity = '.55'; }
-  // Mark task 3
-  markTask('task3Check', 'task3Label', true);
-  // Update countdown label
-  const mcEl  = document.getElementById('medCountdown');
-  const mnLbl = document.getElementById('medNextLabel');
-  if (mcEl)  mcEl.textContent  = 'Logged today';
-  if (mnLbl) mnLbl.textContent = 'Dose logged';
-  // Update hero
-  const updatedTs = getTodayState();
-  const status    = deriveHomeStatus(updatedTs);
-  const statusEl  = document.getElementById('heroStatus');
-  const subEl     = document.getElementById('heroSub');
-  if (statusEl) statusEl.textContent = status.msg[0];
-  if (subEl)    subEl.textContent    = status.msg[1];
-  updateHeroCta(status);
-}
-
-// ═══════════════════════════════════════════════════════
-//  ACHIEVEMENTS
-// ═══════════════════════════════════════════════════════
-const ACHIEVEMENTS = [
-  { id:'first_step',  name:'First Step',   desc:'Log your first weight entry',   icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>` },
-  { id:'week_warrior',name:'Week Warrior', desc:'Log weight 7 days in a row',    icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>` },
-  { id:'hydrated',    name:'Hydrated',     desc:'Log 8 glasses of water',        icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--support-primary)" stroke-width="2" stroke-linecap="round"><path d="M12 22a8 8 0 0 1-8-8c0-4 8-14 8-14s8 10 8 14a8 8 0 0 1-8 8z"/></svg>` },
-  { id:'five_kg',     name:'5kg Down',     desc:'Lose 5 kg from starting weight', icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>` },
-  { id:'champion',    name:'Champion',     desc:'Reach your goal weight',        icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>` },
-];
-
-function loadEarned()      { try { return JSON.parse(localStorage.getItem('glp_achievements') || '[]'); } catch { return []; } }
-function saveEarned(arr)   { localStorage.setItem('glp_achievements', JSON.stringify(arr)); }
-
-let _toastQueue = [], _toastRunning = false;
-
-function showAchieveToast(a) { _toastQueue.push(a); if (!_toastRunning) runToastQueue(); }
-
-function runToastQueue() {
-  if (!_toastQueue.length) { _toastRunning = false; return; }
-  _toastRunning = true;
-  const a     = _toastQueue.shift();
-  const toast = document.getElementById('achieveToast');
-  document.getElementById('toastIcon').innerHTML = a.icon;
-  document.getElementById('toastName').textContent = a.name;
-  document.getElementById('toastDesc').textContent = a.desc;
-  toast.style.transform = 'translateX(-50%) translateY(-120px)';
-  toast.style.opacity   = '0';
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    toast.style.transform    = 'translateX(-50%) translateY(0)';
-    toast.style.opacity      = '1';
-    toast.style.pointerEvents = 'all';
-  }));
-  setTimeout(() => {
-    toast.style.transform    = 'translateX(-50%) translateY(-120px)';
-    toast.style.opacity      = '0';
-    toast.style.pointerEvents = 'none';
-    setTimeout(runToastQueue, 500);
-  }, 3200);
-}
-
-function unlockAchievement(id) {
-  const earned = loadEarned();
-  if (earned.includes(id)) return;
-  earned.push(id);
-  saveEarned(earned);
-  const a = ACHIEVEMENTS.find(x => x.id === id);
-  if (a) showAchieveToast(a);
-}
-
-function checkAchievements() {
-  const S   = loadSettings();
-  const log = loadWeightLog();
-  const ts  = getTodayState();
-  if (log.length >= 1) unlockAchievement('first_step');
-  if (calcStreak(log) >= 7) unlockAchievement('week_warrior');
-  const cups = ts.waterCups || [];
-  if (cups.length === 8 && cups.every(Boolean)) unlockAchievement('hydrated');
-  if (log.length && S.startWeight) {
-    const cur = log[log.length - 1].weight;
-    if (S.startWeight - cur >= 5) unlockAchievement('five_kg');
-    if (S.goalWeight && cur <= S.goalWeight) unlockAchievement('champion');
-  }
-}
-
-function renderAchieveNudge() {
-  checkAchievements();
-  const earned  = loadEarned();
-  const nudge   = document.getElementById('achieveNudge');
-  const titleEl = document.getElementById('achieveNudgeTitle');
-  const subEl   = document.getElementById('achieveNudgeSub');
-  const iconEl  = document.getElementById('achieveNudgeIcon');
-  if (!nudge) return;
-
-  // Find first unearned achievement
-  const next = ACHIEVEMENTS.find(a => !earned.includes(a.id));
-  if (!next) {
-    // All earned — show celebration
-    titleEl.textContent = 'All badges earned!';
-    subEl.textContent   = 'Amazing — you\'ve completed every milestone.';
-    iconEl.innerHTML    = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>';
-    iconEl.style.background = 'var(--ok-tint)';
-    return;
-  }
-
-  titleEl.textContent = next.name + ' badge';
-  subEl.textContent   = next.desc;
-  iconEl.innerHTML    = next.icon;
-}
-
-// ═══════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════
-refreshAll();
+window.onload = refreshUI;
 </script>
+
 </body>
 </html>
