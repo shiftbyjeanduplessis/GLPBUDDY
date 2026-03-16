@@ -632,7 +632,14 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 
 <script src="glp-common.js"></script>
-<script>GLPApp.boot('home');</script>
+<script>
+  const onboardingState = JSON.parse(localStorage.getItem('glp_onboarding') || '{}');
+  if (!onboardingState.complete) {
+    window.location.replace('onboarding.html?next=index.html');
+  } else {
+    GLPApp.boot('home');
+  }
+</script>
 <script>
 'use strict';
 
