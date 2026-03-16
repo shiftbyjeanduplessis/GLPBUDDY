@@ -13,8 +13,9 @@ body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:
 :root{--r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;--page-px:20px;--nav-h:70px;--accent-primary:#a8406e;--accent-mid:#c85c87;--accent-tint:rgba(200,92,135,0.08);--accent-tint2:rgba(200,92,135,0.14);--support-primary:#6b82cc;--text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--border-soft:rgba(220,200,230,0.6);--border-accent:rgba(200,92,135,0.22);--surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--nav-bg:rgba(18,10,28,0.93);--cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);--shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18)}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;position:relative;background:transparent}
 .scroll-area{padding-top:var(--nav-h);padding-bottom:32px}
-.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h)}
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);border-bottom:1px solid rgba(255,255,255,0.08)}
 .glpb-topbar-name{font-family:'Clash Display',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.85)}
+.glpb-topbar-face{width:18px;height:18px;color:rgba(255,255,255,0.85);flex-shrink:0}
 .header{padding:26px var(--page-px) 14px}
 .title{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-1.2px;color:var(--text-primary);line-height:1}
 .sub{font-size:.78rem;color:var(--text-tertiary);margin-top:8px}
@@ -23,9 +24,9 @@ body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:
 .card-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px}
 .card-sub{font-size:.76rem;color:var(--text-tertiary);margin-bottom:14px}
 .field{margin-bottom:14px}.field:last-child{margin-bottom:0}.field-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-tertiary);margin-bottom:6px}
-.field-input,.field-select{width:100%;background:var(--surface-2);border:1.5px solid var(--border-soft);border-radius:16px;padding:12px 14px;font-size:.9rem;color:var(--text-primary);outline:none}
-.toggle-pair,.chip-grid{display:flex;gap:8px;flex-wrap:wrap}.toggle-opt,.chip{padding:10px 14px;border-radius:999px;border:1.5px solid var(--border-soft);background:#fff;font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer}.toggle-opt.sel,.chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
-.actions{display:flex;gap:10px;padding:4px var(--page-px) 0}.btn{flex:1;border:none;border-radius:999px;padding:14px 18px;font-size:.88rem;font-weight:700;cursor:pointer}.btn-primary{background:var(--cta-gradient);color:#fff;box-shadow:var(--shadow-elevated)}.btn-secondary{background:#fff;color:var(--text-primary);border:1.5px solid var(--border-soft)}
+.field-input,.field-select{width:100%;background:var(--surface-2);border:1.5px solid var(--border-soft);border-radius:16px;padding:12px 14px;font-size:.9rem;color:var(--text-primary);outline:none;position:relative;z-index:2;pointer-events:auto}
+.toggle-pair,.chip-grid{display:flex;gap:8px;flex-wrap:wrap}.toggle-opt,.chip{padding:10px 14px;border-radius:999px;border:1.5px solid var(--border-soft);background:#fff;font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer;appearance:none;-webkit-appearance:none;touch-action:manipulation;user-select:none;pointer-events:auto;position:relative;z-index:2}.toggle-opt.sel,.chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
+.actions{display:flex;gap:10px;padding:4px var(--page-px) 0}.btn{flex:1;border:none;border-radius:999px;padding:14px 18px;font-size:.88rem;font-weight:700;cursor:pointer;appearance:none;-webkit-appearance:none;touch-action:manipulation;pointer-events:auto;position:relative;z-index:2}.btn-primary{background:var(--cta-gradient);color:#fff;box-shadow:var(--shadow-elevated)}.btn-secondary{background:#fff;color:var(--text-primary);border:1.5px solid var(--border-soft)}
 .callout{margin:0 var(--page-px) 14px;padding:16px 18px;border-radius:20px;background:linear-gradient(135deg,rgba(200,92,135,0.08),rgba(107,130,204,0.07));border:1px solid var(--border-soft)}
 .callout-title{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--accent-mid);margin-bottom:6px}.callout-text{font-size:.78rem;color:var(--text-secondary)}
 body.theme-rose{background:#f8f5fb;--accent-primary:#a8406e;--accent-mid:#c85c87;--accent-tint:rgba(200,92,135,0.08);--accent-tint2:rgba(200,92,135,0.14);--support-primary:#6b82cc;--text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--border-soft:rgba(220,200,230,0.6);--border-accent:rgba(200,92,135,0.22);--surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--nav-bg:rgba(18,10,28,0.93);--cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);--shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18)}
@@ -33,297 +34,159 @@ body.theme-sage{background:#f5f8f5;--accent-primary:#3d7a5a;--accent-mid:#5a9a72
 body.theme-sand{background:#f9f6f1;--accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);--support-primary:#7a6050;--nav-bg:rgba(22,14,8,0.94);--cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);--border-soft:rgba(200,175,145,0.55);--border-accent:rgba(170,110,60,0.18);--text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44)}
 body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);--support-primary:#8899cc;--nav-bg:rgba(10,8,20,0.96);--cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);--border-soft:rgba(120,100,180,0.28);--border-accent:rgba(180,140,220,0.26);--text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95)}
 
-body.preboot .page-wrap{opacity:0;pointer-events:none}
-.splash-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#1a1028;z-index:9999;opacity:0;pointer-events:none;transition:opacity .28s ease}
-.splash-screen.show{opacity:1;pointer-events:auto}
-.splash-inner{text-align:center;padding:24px}
-.splash-logo{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:1.6px;color:#fff;text-transform:uppercase}
-.splash-logo span{display:block;font-size:1.05rem;letter-spacing:4px;opacity:.96;margin-top:8px}
+.splash-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#1a1028;color:#fff;opacity:1;visibility:visible;pointer-events:all;transition: opacity 0.5s ease;}
+.splash-screen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.splash-logo{font-family:'Clash Display',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center}
 
 </style>
 <script src="glp-common.js"></script>
 </head>
 <body class="theme-rose">
-<div class="splash-screen" id="firstLoginSplash" aria-hidden="true"><div class="splash-inner"><div class="splash-logo">GLP 1<span>BUDDY</span></div></div></div>
+<div id="splashScreen" class="splash-screen"><div class="splash-logo">GLP 1 BUDDY</div></div>
 <div class="page-wrap"><div class="scroll-area">
-  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg class="glpb-topbar-face" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14s1.2 1.8 3.5 1.8 3.5-1.8 3.5-1.8"></path><line x1="9" y1="10" x2="9.01" y2="10"></line><line x1="15" y1="10" x2="15.01" y2="10"></line></svg></div>
   <div class="header"><div class="title">Let’s set you up</div><div class="sub">A quick setup so the app feels personal from day one.</div></div>
   <div class="progress"><div class="dot active" id="dot0"></div><div class="dot" id="dot1"></div><div class="dot" id="dot2"></div><div class="dot" id="dot3"></div></div>
   <div class="callout"><div class="callout-title">What this does</div><div class="callout-text">We’ll save your basics, medication schedule, and weight targets. You can edit everything later in Settings.</div></div>
+  
   <div class="card step" id="step0">
     <div class="card-title">Basics</div><div class="card-sub">A few simple details to personalise the app.</div>
     <div class="field"><div class="field-label">Your name</div><input class="field-input" id="onbName" type="text" placeholder="e.g. Sarah"></div>
     <div class="field"><div class="field-label">Age</div><input class="field-input" id="onbAge" type="number" placeholder="e.g. 38"></div>
-    <div class="field"><div class="field-label">Gender</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="gM">Male</button><button type="button" class="toggle-opt" id="gF">Female</button></div></div>
-    <div class="field"><div class="field-label">Skin</div><div class="chip-grid"><button type="button" class="chip sel" data-skin="theme-rose">Rose</button><button type="button" class="chip" data-skin="theme-sage">Sage</button><button type="button" class="chip" data-skin="theme-sand">Sand</button><button type="button" class="chip" data-skin="theme-midnight">Midnight</button></div></div>
+    <div class="field"><div class="field-label">Gender</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="gM" onclick="setGender('M'); return false;">Male</button><button type="button" class="toggle-opt" id="gF" onclick="setGender('F'); return false;">Female</button></div></div>
+    <div class="field"><div class="field-label">Skin</div><div class="chip-grid"><button type="button" class="chip sel" data-skin="theme-rose" onclick="applySkin('theme-rose'); return false;">Rose</button><button type="button" class="chip" data-skin="theme-sage" onclick="applySkin('theme-sage'); return false;">Sage</button><button type="button" class="chip" data-skin="theme-sand" onclick="applySkin('theme-sand'); return false;">Sand</button><button type="button" class="chip" data-skin="theme-midnight" onclick="applySkin('theme-midnight'); return false;">Midnight</button></div></div>
   </div>
+
   <div class="card step" id="step1" style="display:none">
     <div class="card-title">Weight goals</div><div class="card-sub">These drive your progress page and personal goal banner.</div>
     <div class="field"><div class="field-label">Program start date</div><input class="field-input" id="onbStartDate" type="date"></div>
     <div class="field"><div class="field-label">Starting weight</div><input class="field-input" id="onbStartWeight" type="number" step="0.1" placeholder="e.g. 90"></div>
-    <div class="field"><div class="field-label">Current weight</div><input class="field-input" id="onbCurWeight" type="number" step="0.1" placeholder="e.g. 85"></div>
     <div class="field"><div class="field-label">Target weight</div><input class="field-input" id="onbGoalWeight" type="number" step="0.1" placeholder="e.g. 72"><div style="font-size:.67rem;color:var(--text-tertiary);margin-top:6px">Your target weight should be provided by your doctor.</div></div>
   </div>
+
   <div class="card step" id="step2" style="display:none">
     <div class="card-title">Medication</div><div class="card-sub">This powers your injection-day reminders and medication card.</div>
     <div class="field"><div class="field-label">Medication</div><select class="field-select" id="onbMed"><option value="">Select your medication…</option><option>Ozempic</option><option>Wegovy</option><option>Mounjaro</option><option>Zepbound</option><option>Saxenda</option><option>Other</option></select></div>
     <div class="field"><div class="field-label">Current dose</div><input class="field-input" id="onbDose" type="text" placeholder="e.g. 0.5mg"></div>
-    <div class="field"><div class="field-label">Frequency</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="freqWeekly">Weekly</button><button type="button" class="toggle-opt" id="freqDaily">Daily</button></div></div>
-    <div class="field"><div class="field-label">Injection day</div><div class="chip-grid" id="dayGroup"><button type="button" class="chip sel" data-day="Mon">Mon</button><button type="button" class="chip" data-day="Tue">Tue</button><button type="button" class="chip" data-day="Wed">Wed</button><button type="button" class="chip" data-day="Thu">Thu</button><button type="button" class="chip" data-day="Fri">Fri</button><button type="button" class="chip" data-day="Sat">Sat</button><button type="button" class="chip" data-day="Sun">Sun</button></div></div>
+    <div class="field"><div class="field-label">Frequency</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="freqWeekly" onclick="setFrequency('weekly'); return false;">Weekly</button><button type="button" class="toggle-opt" id="freqDaily" onclick="setFrequency('daily'); return false;">Daily</button></div></div>
+    <div class="field"><div class="field-label">Injection day</div><div class="chip-grid" id="dayGroup"><button type="button" class="chip sel" data-day="Mon" onclick="setMedDay('Mon'); return false;">Mon</button><button type="button" class="chip" data-day="Tue" onclick="setMedDay('Tue'); return false;">Tue</button><button type="button" class="chip" data-day="Wed" onclick="setMedDay('Wed'); return false;">Wed</button><button type="button" class="chip" data-day="Thu" onclick="setMedDay('Thu'); return false;">Thu</button><button type="button" class="chip" data-day="Fri" onclick="setMedDay('Fri'); return false;">Fri</button><button type="button" class="chip" data-day="Sat" onclick="setMedDay('Sat'); return false;">Sat</button><button type="button" class="chip" data-day="Sun" onclick="setMedDay('Sun'); return false;">Sun</button></div></div>
   </div>
+
   <div class="card step" id="step3" style="display:none">
     <div class="card-title">Final touches</div><div class="card-sub">A few defaults so the app feels helpful immediately.</div>
-    <div class="field"><div class="field-label">Units</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="uKg">Metric (kg)</button><button type="button" class="toggle-opt" id="uLbs">Imperial (lbs)</button></div></div>
-    <div class="field"><div class="field-label">Water glass size</div><div class="chip-grid" id="waterGroup"><button type="button" class="chip" data-water="200">200ml</button><button type="button" class="chip sel" data-water="250">250ml</button><button type="button" class="chip" data-water="300">300ml</button><button type="button" class="chip" data-water="500">500ml</button></div></div>
-    <div class="field"><div class="field-label">Home reminders</div><div style="font-size:.78rem;color:var(--text-secondary);line-height:1.55">Medication reminder, workout reminder, and weekly photo reminder are switched on by default. You can change these later in Settings.</div></div>
+    <div class="field"><div class="field-label">Units</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="uKg" onclick="setUnits('kg'); return false;">Metric (kg)</button><button type="button" class="toggle-opt" id="uLbs" onclick="setUnits('lbs'); return false;">Imperial (lbs)</button></div></div>
   </div>
-  <div class="actions"><button type="button" class="btn btn-secondary" id="backBtn">Back</button><button type="button" class="btn btn-primary" id="nextBtn">Continue</button></div>
-</div></div>
-<script>
-GLPApp.boot('onboarding', { requireOnboarding: false });
 
+  <div class="actions">
+    <button type="button" class="btn btn-secondary" id="backBtn" style="display:none" onclick="goBack(); return false;">Back</button>
+    <button type="button" class="btn btn-primary" id="nextBtn" onclick="goNext(); return false;">Continue</button>
+  </div>
+</div></div>
+
+<script>
 const steps = [...document.querySelectorAll('.step')];
 let step = 0;
 const byId = id => document.getElementById(id);
-const params = new URLSearchParams(location.search);
-const nextTarget = params.get('next') || 'index.html';
-const skinClasses = ['theme-rose', 'theme-sage', 'theme-sand', 'theme-midnight'];
+const skinClasses = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
+
 const state = {
   gender: 'M',
   skin: 'theme-rose',
   medFreq: 'weekly',
-  medDay: 'Mon',
   units: 'kg',
-  waterSize: '250'
+  medDay: 'Mon',
+  waterSize: '200'
 };
 
-function selectOne(group, target) {
-  group.filter(Boolean).forEach(el => el.classList.toggle('sel', el === target));
+function selectOne(group, target){
+  group.forEach(el => {
+    if(!el) return;
+    el.classList.toggle('sel', el === target);
+  });
 }
-
-function syncGenderUI() {
-  selectOne([byId('gM'), byId('gF')], state.gender === 'F' ? byId('gF') : byId('gM'));
-}
-
-function syncSkinUI() {
+function applySkin(skin){
+  state.skin = skin || 'theme-rose';
   skinClasses.forEach(s => document.body.classList.remove(s));
-  document.body.classList.add(state.skin || 'theme-rose');
-  const chip = document.querySelector(`[data-skin="${state.skin}"]`) || document.querySelector('[data-skin="theme-rose"]');
-  if (chip) selectOne([...document.querySelectorAll('[data-skin]')], chip);
+  document.body.classList.add(state.skin);
+  const chip = document.querySelector(`[data-skin="${state.skin}"]`);
+  if(chip) selectOne([...document.querySelectorAll('[data-skin]')], chip);
 }
-
-function syncFreqUI() {
-  selectOne([byId('freqWeekly'), byId('freqDaily')], state.medFreq === 'daily' ? byId('freqDaily') : byId('freqWeekly'));
+function setGender(gender){
+  state.gender = gender;
+  selectOne([byId('gM'), byId('gF')], gender === 'F' ? byId('gF') : byId('gM'));
 }
-
-function syncDayUI() {
-  const chip = document.querySelector(`#dayGroup .chip[data-day="${state.medDay}"]`) || document.querySelector('#dayGroup .chip[data-day="Mon"]');
-  if (chip) selectOne([...document.querySelectorAll('#dayGroup .chip')], chip);
+function setFrequency(freq){
+  state.medFreq = freq;
+  selectOne([byId('freqWeekly'), byId('freqDaily')], freq === 'daily' ? byId('freqDaily') : byId('freqWeekly'));
 }
-
-function syncUnitsUI() {
-  selectOne([byId('uKg'), byId('uLbs')], state.units === 'lbs' ? byId('uLbs') : byId('uKg'));
+function setUnits(units){
+  state.units = units;
+  selectOne([byId('uKg'), byId('uLbs')], units === 'lbs' ? byId('uLbs') : byId('uKg'));
 }
-
-function syncWaterUI() {
-  const chip = document.querySelector(`#waterGroup .chip[data-water="${state.waterSize}"]`) || document.querySelector('#waterGroup .chip[data-water="250"]');
-  if (chip) selectOne([...document.querySelectorAll('#waterGroup .chip')], chip);
+function setMedDay(day){
+  state.medDay = day;
+  const target = document.querySelector(`#dayGroup .chip[data-day="${day}"]`);
+  if(target) selectOne([...document.querySelectorAll('#dayGroup .chip')], target);
 }
-
-function renderStep() {
+function renderStep(){
   steps.forEach((el, i) => { el.style.display = i === step ? 'block' : 'none'; });
-  [0, 1, 2, 3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
-  const backBtn = byId('backBtn');
-  if (backBtn) backBtn.style.display = step === 0 ? 'none' : 'block';
-  const nextBtn = byId('nextBtn');
-  if (nextBtn) nextBtn.textContent = step === steps.length - 1 ? 'Finish setup' : 'Continue';
+  [0,1,2,3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
+  byId('nextBtn').textContent = step === steps.length - 1 ? 'Finish setup' : 'Continue';
+  byId('backBtn').style.display = step > 0 ? 'block' : 'none';
 }
-
-function goNext() {
-  if (step < steps.length - 1) {
+function goBack(){
+  if(step > 0){ step -= 1; renderStep(); }
+}
+function goNext(){
+  if(step < steps.length - 1){
     step += 1;
     renderStep();
-    GLPApp.track('onboarding_step_advanced', { step });
     return;
   }
   finish();
 }
 
-function goBack() {
-  if (step > 0) {
-    step -= 1;
-    renderStep();
-  }
-}
-
-async function persistOnboarding(settings) {
-  localStorage.setItem('glp_settings', JSON.stringify(settings));
-  localStorage.setItem('glp_onboarding', JSON.stringify({ complete: true, completedAt: new Date().toISOString() }));
-
-  if (window.supabase && settings.profile_id) {
-    const payload = {
-      id: settings.profile_id,
-      name: settings.name,
-      age: settings.age || null,
-      gender: settings.gender,
-      skin: settings.skin,
-      start_date: settings.startDate || null,
-      start_weight: settings.startWeight,
-      current_weight: settings.curWeight,
-      goal_weight: settings.goalWeight,
-      medication_name: settings.medName || null,
-      medication_dose: settings.medDose || null,
-      medication_frequency: settings.medFreq,
-      medication_day: settings.medDay,
-      units: settings.units,
-      water_size: Number(settings.waterSize),
-      onboarding_complete: true,
-      onboarding_completed_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    };
-
-    const { error } = await window.supabase.from('profiles').upsert(payload);
-    if (error) {
-      console.error('Supabase onboarding save failed:', error);
-    }
-  }
-}
-
-async function finish() {
-  const prev = JSON.parse(localStorage.getItem('glp_settings') || '{}');
+async function finish(){
   const s = {
-    ...prev,
-    name: byId('onbName')?.value.trim() || prev.name || 'Friend',
-    age: byId('onbAge')?.value || prev.age || '',
+    name: byId('onbName')?.value.trim() || 'Friend',
+    age: byId('onbAge')?.value || '',
     gender: state.gender,
     skin: state.skin,
-    startDate: byId('onbStartDate')?.value || prev.startDate || '',
-    startWeight: parseFloat(byId('onbStartWeight')?.value) || prev.startWeight || null,
-    curWeight: parseFloat(byId('onbCurWeight')?.value) || prev.curWeight || null,
-    goalWeight: parseFloat(byId('onbGoalWeight')?.value) || prev.goalWeight || null,
-    medName: byId('onbMed')?.value || prev.medName || '',
-    medDose: byId('onbDose')?.value || prev.medDose || '',
+    startDate: byId('onbStartDate')?.value || '',
+    startWeight: parseFloat(byId('onbStartWeight')?.value) || null,
+    goalWeight: parseFloat(byId('onbGoalWeight')?.value) || null,
+    medName: byId('onbMed')?.value || '',
+    medDose: byId('onbDose')?.value || '',
     medFreq: state.medFreq,
     medDay: state.medDay,
     units: state.units,
-    waterSize: state.waterSize,
-    notifMeds: true,
-    notifWater: true,
-    notifWorkout: true,
-    notifPhoto: true,
-    profile_id: prev.profile_id || null
+    waterSize: '200',
+    notifMeds: true, notifWater: true, notifWorkout: true, notifPhoto: true
   };
 
-  await persistOnboarding(s);
-  GLPApp.track('onboarding_completed', { skin: s.skin, medName: s.medName || '', units: s.units });
-  location.replace(nextTarget);
+  // IMMEDIATE SAVE
+  localStorage.setItem('glp_settings', JSON.stringify(s));
+  localStorage.setItem('glp_onboarding', JSON.stringify({complete:true, completedAt:new Date().toISOString()}));
+  sessionStorage.setItem('glp_onboarding_complete', '1');
+
+  byId('nextBtn').disabled = true;
+  byId('nextBtn').textContent = 'Opening app...';
+
+  // BACKGROUND SYNC (Don't 'await' it)
+  if(window.syncOnboardingToSupabase) syncOnboardingToSupabase(s).catch(() => {});
+
+  // IMMEDIATE REDIRECT
+  window.location.replace('index.html?ob=1');
 }
 
-function bindEvents() {
-  document.addEventListener('click', function (e) {
-    const genderBtn = e.target.closest('#gM, #gF');
-    if (genderBtn) {
-      e.preventDefault();
-      state.gender = genderBtn.id === 'gF' ? 'F' : 'M';
-      syncGenderUI();
-      return;
-    }
-
-    const skinChip = e.target.closest('[data-skin]');
-    if (skinChip) {
-      e.preventDefault();
-      state.skin = skinChip.dataset.skin || 'theme-rose';
-      syncSkinUI();
-      return;
-    }
-
-    const freqBtn = e.target.closest('#freqWeekly, #freqDaily');
-    if (freqBtn) {
-      e.preventDefault();
-      state.medFreq = freqBtn.id === 'freqDaily' ? 'daily' : 'weekly';
-      syncFreqUI();
-      return;
-    }
-
-    const dayChip = e.target.closest('#dayGroup .chip');
-    if (dayChip) {
-      e.preventDefault();
-      state.medDay = dayChip.dataset.day || 'Mon';
-      syncDayUI();
-      return;
-    }
-
-    const unitBtn = e.target.closest('#uKg, #uLbs');
-    if (unitBtn) {
-      e.preventDefault();
-      state.units = unitBtn.id === 'uLbs' ? 'lbs' : 'kg';
-      syncUnitsUI();
-      return;
-    }
-
-    const waterChip = e.target.closest('#waterGroup .chip');
-    if (waterChip) {
-      e.preventDefault();
-      state.waterSize = waterChip.dataset.water || '250';
-      syncWaterUI();
-      return;
-    }
+(function init(){
+  const splash = byId('splashScreen');
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if(splash) splash.classList.add('hidden');
+    }, 1000);
   });
-
-  byId('backBtn')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    goBack();
-  });
-
-  byId('nextBtn')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    goNext();
-  });
-}
-
-function maybeShowSplash() {
-  const splash = byId('firstLoginSplash');
-  const seen = localStorage.getItem('glp_seen_first_login_splash');
-  if (!splash || seen) return Promise.resolve();
-
-  localStorage.setItem('glp_seen_first_login_splash', 'true');
-  splash.classList.add('show');
-  return new Promise(resolve => {
-    window.setTimeout(() => {
-      splash.classList.remove('show');
-      window.setTimeout(resolve, 280);
-    }, 1200);
-  });
-}
-
-(async function init() {
-  const s = JSON.parse(localStorage.getItem('glp_settings') || '{}');
-  state.gender = s.gender || 'M';
-  state.skin = s.skin || 'theme-rose';
-  state.medFreq = s.medFreq || 'weekly';
-  state.medDay = s.medDay || 'Mon';
-  state.units = s.units || 'kg';
-  state.waterSize = String(s.waterSize || '250');
-
-  if (s.name) byId('onbName').value = s.name;
-  if (s.age) byId('onbAge').value = s.age;
-  if (s.startDate) byId('onbStartDate').value = s.startDate;
-  if (s.startWeight) byId('onbStartWeight').value = s.startWeight;
-  if (s.curWeight) byId('onbCurWeight').value = s.curWeight;
-  if (s.goalWeight) byId('onbGoalWeight').value = s.goalWeight;
-  if (s.medName) byId('onbMed').value = s.medName;
-  if (s.medDose) byId('onbDose').value = s.medDose;
-
-  syncGenderUI();
-  syncSkinUI();
-  syncFreqUI();
-  syncDayUI();
-  syncUnitsUI();
-  syncWaterUI();
   renderStep();
-  bindEvents();
-
-    maybeShowSplash();
 })();
 </script>
 </body>
