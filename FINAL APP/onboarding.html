@@ -43,7 +43,7 @@ body.preboot .page-wrap{opacity:0;pointer-events:none}
 </style>
 <script src="glp-common.js"></script>
 </head>
-<body class="theme-rose preboot">
+<body class="theme-rose">
 <div class="splash-screen" id="firstLoginSplash" aria-hidden="true"><div class="splash-inner"><div class="splash-logo">GLP 1<span>BUDDY</span></div></div></div>
 <div class="page-wrap"><div class="scroll-area">
   <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
@@ -323,8 +323,7 @@ function maybeShowSplash() {
   renderStep();
   bindEvents();
 
-  await maybeShowSplash();
-  document.body.classList.remove('preboot');
+    maybeShowSplash();
 })();
 </script>
 </body>
