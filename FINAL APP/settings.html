@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>GLP Buddy — Settings</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input,textarea,select{font-family:inherit}
+a{text-decoration:none;color:inherit}
+:root{
+  --r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;
+  --page-px:20px;--nav-h:70px;--ease:cubic-bezier(.4,0,.2,1);
+  --ok:#2f9e7a;--ok-tint:rgba(47,158,122,0.09);
+  --warn:#c4782a;--warn-tint:rgba(196,120,42,0.09);
+}
+body,body.theme-rose{
+  --bg-app:#f8f5fb;--bg-shell:linear-gradient(135deg,#ede5f5,#e2e9f7);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);
+  --text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--text-faint:rgba(26,16,40,0.26);
+  --accent-primary:#a8406e;--accent-mid:#c85c87;--accent-light:#df85a8;--accent-pale:#f2c0d4;
+  --accent-tint:rgba(200,92,135,0.07);--accent-tint2:rgba(200,92,135,0.13);
+  --support-primary:#6b82cc;--support-light:#97a9dc;--support-tint:rgba(107,130,204,0.08);
+  --lav:#b8a8e8;
+  --border-soft:rgba(220,200,230,0.6);--border-mid:rgba(220,200,230,0.4);--border-accent:rgba(200,92,135,0.18);
+  --shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18);
+  --cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);
+  --nav-bg:rgba(18,10,28,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#c85c87,#6b82cc);--nav-active-shadow:0 4px 16px rgba(180,80,140,0.38);
+  --nav-active-label:linear-gradient(90deg,#df85a8,#97a9dc);
+  --page-ring:rgba(200,92,135,0.10);
+}
+body.theme-sage{
+  --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
+  --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
+  --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
+  --lav:#8ab4a8;
+  --border-soft:rgba(160,200,170,0.55);--border-mid:rgba(160,200,170,0.35);--border-accent:rgba(80,148,104,0.18);
+  --shadow-card:0 2px 12px rgba(60,120,80,0.07);--shadow-elevated:0 8px 28px rgba(60,120,80,0.16);
+  --cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);
+  --nav-bg:rgba(10,22,14,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#5a9a72,#4a8a80);--nav-active-shadow:0 4px 16px rgba(60,140,90,0.36);
+  --nav-active-label:linear-gradient(90deg,#84ba96,#72aaa2);
+  --page-ring:rgba(80,148,104,0.10);
+}
+body.theme-sand{
+  --bg-app:#f9f6f1;--bg-shell:linear-gradient(135deg,#ede6da,#e8e0d4);--bg-modal:#fdfaf6;
+  --surface-1:#fdfaf6;--surface-2:rgba(249,246,241,0.9);
+  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44);--text-faint:rgba(37,28,16,0.28);
+  --accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-light:#cc9a6e;--accent-pale:#e8cdb0;
+  --accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);
+  --support-primary:#7a6050;--support-light:#9a8070;--support-tint:rgba(122,96,80,0.08);
+  --lav:#b8a898;
+  --border-soft:rgba(200,175,145,0.55);--border-mid:rgba(200,175,145,0.35);--border-accent:rgba(170,110,60,0.18);
+  --shadow-card:0 2px 12px rgba(120,80,40,0.07);--shadow-elevated:0 8px 28px rgba(120,80,40,0.14);
+  --cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);
+  --nav-bg:rgba(22,14,8,0.94);
+  --nav-active-gradient:linear-gradient(135deg,#b07848,#7a6050);--nav-active-shadow:0 4px 16px rgba(140,90,40,0.34);
+  --nav-active-label:linear-gradient(90deg,#cc9a6e,#9a8070);
+  --page-ring:rgba(170,110,60,0.10);
+}
+body.theme-midnight{
+  --bg-app:#1a1424;--bg-shell:linear-gradient(135deg,#12101e,#1c1830);--bg-modal:#221c32;
+  --surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95);
+  --text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--text-faint:rgba(180,170,210,0.28);
+  --accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-light:#d0aaee;--accent-pale:rgba(200,160,240,0.18);
+  --accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);
+  --support-primary:#8899cc;--support-light:#a0b0d8;--support-tint:rgba(100,120,190,0.10);
+  --lav:#9088c0;
+  --border-soft:rgba(120,100,180,0.28);--border-mid:rgba(120,100,180,0.18);--border-accent:rgba(180,140,220,0.26);
+  --shadow-card:0 2px 16px rgba(0,0,0,0.28);--shadow-elevated:0 8px 32px rgba(0,0,0,0.38);
+  --cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);
+  --nav-bg:rgba(10,8,20,0.96);
+  --nav-active-gradient:linear-gradient(135deg,#b888d8,#8899cc);--nav-active-shadow:0 4px 16px rgba(140,100,200,0.38);
+  --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
+  --page-ring:rgba(180,140,220,0.14);
+}
+/* ── LAYOUT ─────────────────────────────────── */
+body{background:var(--bg-app);}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
+.scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
+@media(min-width:431px){
+  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
+  .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
+}
+/* ── NAV ────────────────────────────────────── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
+.bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
+.bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
+.bnav-label{font-size:.5rem;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,0.28);text-align:center;line-height:1.1;}
+.bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
+.bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
+/* ── BRAND ──────────────────────────────────── */
+
+/* ── FONTS ──────────────────────────────────── */
+
+
+/* topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:20px var(--page-px) 20px;}
+.topbar-icon{width:44px;height:44px;border-radius:14px;background:var(--cta-gradient);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 18px rgba(168,64,110,0.30);}
+/* cards */
+.s-card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 12px;padding:20px;box-shadow:var(--shadow-card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);position:relative;overflow:hidden;animation:fadeUp .45s var(--ease) both;}
+.s-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.96),transparent);}
+.s-card-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border-mid);}
+.s-card-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent-tint2),var(--support-tint));border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);flex-shrink:0;}
+.s-card-title{font-family:'Clash Display',sans-serif;font-size:.96rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;}
+.s-card-sub{font-size:.68rem;color:var(--text-faint);margin-top:1px;}
+/* fields */
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.field-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-faint);margin-bottom:6px;}
+.field-hint{font-size:.64rem;color:var(--text-faint);margin-top:5px;}
+.field-input,.field-select{width:100%;background:rgba(255,255,255,0.72);border:1.5px solid var(--border-soft);border-radius:var(--r-lg);padding:11px 14px;font-size:.86rem;color:var(--text-primary);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;}
+.field-input:focus,.field-select:focus{border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-tint);}
+.field-input::placeholder{color:var(--text-faint);}
+/* toggle pair */
+.toggle-pair{display:flex;gap:8px;}
+.toggle-opt{flex:1;padding:10px;border-radius:var(--r-lg);border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.82rem;font-weight:700;color:var(--text-tertiary);cursor:pointer;transition:all .18s;text-align:center;}
+.toggle-opt.sel{background:linear-gradient(135deg,var(--accent-tint2),var(--support-tint));border-color:rgba(200,92,135,0.25);color:var(--accent-primary);}
+/* multi toggle */
+.multi-toggle{display:flex;gap:5px;flex-wrap:wrap;}
+.multi-opt{padding:8px 10px;border-radius:var(--r-md);border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.76rem;font-weight:700;color:var(--text-tertiary);cursor:pointer;transition:all .18s;}
+.multi-opt.sel{background:linear-gradient(135deg,var(--accent-tint2),var(--support-tint));border-color:rgba(200,92,135,0.25);color:var(--accent-primary);}
+/* notification rows */
+.notif-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border-mid);}
+.notif-row:last-child{border-bottom:none;padding-bottom:0;}
+.notif-label{font-size:.84rem;font-weight:600;color:var(--text-primary);}
+.notif-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:2px;}
+.tog{position:relative;width:44px;height:26px;flex-shrink:0;cursor:pointer;}
+.tog-track{position:absolute;inset:0;border-radius:13px;background:rgba(180,120,160,0.18);transition:background .25s;}
+.tog.on .tog-track{background:var(--cta-gradient);}
+.tog-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.18);transition:transform .25s var(--ease);}
+.tog.on .tog-thumb{transform:translateX(18px);}
+/* skin picker */
+.skin-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:2px 0;}
+.skin-tile{border-radius:14px;border:2px solid transparent;padding:10px 6px 9px;cursor:pointer;text-align:center;transition:all .2s var(--ease);position:relative;overflow:hidden;background:rgba(255,255,255,0.55);}
+.skin-tile:hover{transform:translateY(-2px);background:rgba(255,255,255,0.80);}
+.skin-tile.active{border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-tint);}
+.skin-tile-swatch{width:38px;height:38px;border-radius:11px;margin:0 auto 8px;}
+.skin-tile-name{font-size:.64rem;font-weight:700;color:var(--text-primary);}
+.skin-tile-check{position:absolute;top:5px;right:5px;width:16px;height:16px;border-radius:50%;background:var(--cta-gradient);display:none;align-items:center;justify-content:center;}
+.skin-tile.active .skin-tile-check{display:flex;}
+.swatch-rose{background:linear-gradient(135deg,#f2c0d4,#c8d2f0);}
+.swatch-sage{background:linear-gradient(135deg,#c4e0cc,#b4d0cc);}
+.swatch-sand{background:linear-gradient(135deg,#e8cdb0,#ccc0b4);}
+.swatch-midnight{background:linear-gradient(135deg,#3a2d54,#2a3060);}
+/* achievements */
+.achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.ach-item{border-radius:var(--r-lg);border:1.5px solid var(--border-soft);background:var(--surface-1);padding:14px 10px 12px;text-align:center;opacity:.38;transition:opacity .3s,border-color .3s;}
+.ach-item.earned{opacity:1;border-color:rgba(200,92,135,0.28);}
+.ach-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent-tint2),var(--support-tint));display:flex;align-items:center;justify-content:center;color:var(--accent-primary);margin:0 auto 8px;}
+.ach-name{font-family:'Clash Display',sans-serif;font-size:.72rem;font-weight:700;color:var(--text-primary);letter-spacing:-.1px;}
+.ach-desc{font-size:.60rem;color:var(--text-faint);margin-top:2px;}
+/* buttons */
+.save-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 36px);margin:4px var(--page-px) 20px;background:var(--cta-gradient);color:#fff;border-radius:var(--r-pill);padding:14px 20px;font-size:.88rem;font-weight:700;box-shadow:var(--shadow-elevated);border:none;position:relative;overflow:hidden;transition:all .22s var(--ease);}
+.save-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.15),transparent);pointer-events:none;}
+.save-btn:hover{transform:translateY(-1px);}
+.save-btn.saved{background:linear-gradient(135deg,var(--ok),var(--ok));}
+.logout-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 36px);margin:0 var(--page-px) 20px;background:none;border:1.5px solid var(--border-soft);border-radius:var(--r-pill);padding:12px 20px;font-size:.82rem;font-weight:700;color:var(--text-tertiary);transition:all .2s;}
+.logout-btn:hover{border-color:rgba(200,92,135,0.30);color:var(--accent-primary);}
+/* appear row */
+.appear-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border-mid);margin-top:14px;cursor:pointer;}
+.appear-row-label{font-size:.84rem;font-weight:600;color:var(--text-primary);}
+.appear-row-val{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-tertiary);}
+/* toast */
+.toast{position:fixed;bottom:calc(var(--nav-h) + 16px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--ok);color:#fff;font-size:.78rem;font-weight:700;padding:10px 22px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;z-index:300;}
+.toast.vis{opacity:1;transform:translateX(-50%) translateY(0);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:.04s}.d2{animation-delay:.09s}.d3{animation-delay:.14s}
+.d4{animation-delay:.19s}.d5{animation-delay:.24s}.d6{animation-delay:.29s}
+.d7{animation-delay:.32s}.d8{animation-delay:.36s}
+
+body{visibility:hidden;}body.f-ready{visibility:visible;}
+/* ── GLP BUDDY TOP BAR ── */
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
+.glpb-topbar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
+}
+.glpb-topbar-name{
+  font-family:'Clash Display',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:3px;
+  color:rgba(255,255,255,0.85);line-height:1;
+}
+.glpb-topbar-face{
+  font-size:1.05rem;line-height:1;
+  color:rgba(255,255,255,0.45);
+}
+
+</style>
+<script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+</head>
+<body class="theme-rose">
+<script>
+(function(){
+  var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
+  try{
+    var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');
+    var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';
+    S.forEach(function(x){document.body.classList.remove(x);});
+    document.body.classList.add(sk);
+  }catch(e){}
+})();
+</script>
+<div class="page-wrap">
+<div class="scroll-area">
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:rgba(255,255,255,0.85);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="10" x2="9.01" y2="10" stroke-width="3"/><line x1="15" y1="10" x2="15.01" y2="10" stroke-width="3"/></svg></div>
+<div class="topbar d1">
+  <div>
+    <div style="font-family:'Clash Display',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.2px;line-height:1;">Settings</div>
+    <div style="font-size:.74rem;color:var(--text-tertiary);margin-top:4px;font-weight:500;">Profile &amp; preferences</div>
+  </div>
+  <div class="topbar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+</div>
+
+<div class="s-card d2">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="s-card-title">Profile</div></div></div>
+  <div class="field"><div class="field-label">Your name</div><input class="field-input" id="profileName" type="text" placeholder="e.g. Sarah"></div>
+  <div class="field"><div class="field-label">Age</div><input class="field-input" id="profileAge" type="number" placeholder="e.g. 38" min="18" max="99"></div>
+  <div class="field" style="margin-bottom:0;">
+    <div class="field-label" style="margin-bottom:8px;">Gender <span style="font-weight:400;color:var(--text-faint);">Used for meal portioning</span></div>
+    <div class="toggle-pair"><button class="toggle-opt sel" id="genderM" onclick="selTwo('genderM','genderF')">Male</button><button class="toggle-opt" id="genderF" onclick="selTwo('genderF','genderM')">Female</button></div>
+  </div>
+</div>
+
+<div class="s-card d3">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div><div><div class="s-card-title">Units</div></div></div>
+  <div class="toggle-pair"><button class="toggle-opt sel" id="unitKg" onclick="selTwo('unitKg','unitLbs');updWt()">Metric (kg)</button><button class="toggle-opt" id="unitLbs" onclick="selTwo('unitLbs','unitKg');updWt()">Imperial (lbs)</button></div>
+</div>
+
+<div class="s-card d3">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h18v4l-9 9-9-9V3z"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div><div><div class="s-card-title" id="wtTitle">Weight Goals (kg)</div></div></div>
+  <div class="field"><div class="field-label">Program start date</div><input class="field-input" id="startDate" type="date"><div class="field-hint">When you started your GLP-1 journey.</div></div>
+  <div class="field"><div class="field-label" id="startWtLbl">Starting Weight (kg)</div><input class="field-input" id="startWeight" type="number" placeholder="e.g. 90" min="30" max="300"></div>
+  <div class="field"><div class="field-label" id="curWtLbl">Current Weight (kg)</div><input class="field-input" id="curWeight" type="number" placeholder="e.g. 85" min="30" max="300"></div>
+  <div class="field" style="margin-bottom:0;"><div class="field-label" id="tgtWtLbl">Target Weight (kg)</div><input class="field-input" id="tgtWeight" type="number" placeholder="e.g. 72" min="30" max="300"><div class="field-hint">Your target weight should be provided by your doctor.</div></div>
+</div>
+
+<div class="s-card d4">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div><div><div class="s-card-title">Medication</div></div></div>
+  <div class="field"><div class="field-label">GLP-1 Medication</div>
+    <select class="field-select" id="medName">
+      <option value="">Select your medication…</option>
+      <option value="Ozempic">Ozempic (semaglutide)</option>
+      <option value="Wegovy">Wegovy (semaglutide)</option>
+      <option value="Mounjaro">Mounjaro (tirzepatide)</option>
+      <option value="Zepbound">Zepbound (tirzepatide)</option>
+      <option value="Saxenda">Saxenda (liraglutide)</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+  <div class="field" id="medOtherWrap" style="display:none;"><div class="field-label">Medication name</div><input class="field-input" id="medOther" type="text" placeholder="Type your medication name…"></div>
+  <div class="field"><div class="field-label">Current dose</div><input class="field-input" id="medDose" type="text" placeholder="e.g. 0.5mg, 1mg, 2.4mg"></div>
+  <div class="field"><div class="field-label">Injection frequency</div><div class="toggle-pair"><button class="toggle-opt sel" id="freqWeekly" onclick="selTwo('freqWeekly','freqDaily')">Weekly</button><button class="toggle-opt" id="freqDaily" onclick="selTwo('freqDaily','freqWeekly')">Daily</button></div></div>
+  <div class="field" style="margin-bottom:0;"><div class="field-label">Injection day</div>
+    <div class="multi-toggle" id="injDayGroup">
+      <button class="multi-opt sel" data-day="Mon" onclick="selDay(this)">Mon</button>
+      <button class="multi-opt" data-day="Tue" onclick="selDay(this)">Tue</button>
+      <button class="multi-opt" data-day="Wed" onclick="selDay(this)">Wed</button>
+      <button class="multi-opt" data-day="Thu" onclick="selDay(this)">Thu</button>
+      <button class="multi-opt" data-day="Fri" onclick="selDay(this)">Fri</button>
+      <button class="multi-opt" data-day="Sat" onclick="selDay(this)">Sat</button>
+      <button class="multi-opt" data-day="Sun" onclick="selDay(this)">Sun</button>
+    </div>
+  </div>
+</div>
+
+<div class="s-card d5">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="s-card-title">Water Glass Size</div><div class="s-card-sub">Used to calculate your 8-glass daily goal</div></div></div>
+  <div class="multi-toggle">
+    <button class="multi-opt" id="w200" onclick="selWater('w200')">200ml</button>
+    <button class="multi-opt sel" id="w250" onclick="selWater('w250')">250ml</button>
+    <button class="multi-opt" id="w300" onclick="selWater('w300')">300ml</button>
+    <button class="multi-opt" id="w500" onclick="selWater('w500')">500ml</button>
+  </div>
+</div>
+
+<div class="s-card d5">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div><div class="s-card-title">In-App Reminders</div><div class="s-card-sub">Shown on your home screen when you open the app</div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Medication reminder</div><div class="notif-sub">Show banner on injection day</div></div><div class="tog on" id="togMeds" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Water goal reminder</div><div class="notif-sub">Show nudge if goal not hit by 6pm</div></div><div class="tog on" id="togWater" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Workout reminder</div><div class="notif-sub">Show banner on workout days</div></div><div class="tog" id="togWorkout" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Weekly photo reminder</div><div class="notif-sub">Show prompt on your chosen photo day</div></div><div class="tog on" id="togPhoto" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+</div>
+
+<div class="s-card d6">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><div><div class="s-card-title">Appearance</div></div></div>
+  <div style="font-size:.70rem;color:var(--text-tertiary);margin-bottom:12px;">Choose your skin — applied instantly across the app.</div>
+  <div class="skin-picker" id="skinPicker">
+    <div class="skin-tile active" data-skin="theme-rose" onclick="applySkin('theme-rose',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-rose"></div><div class="skin-tile-name">Rose</div></div>
+    <div class="skin-tile" data-skin="theme-sage" onclick="applySkin('theme-sage',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-sage"></div><div class="skin-tile-name">Sage</div></div>
+    <div class="skin-tile" data-skin="theme-sand" onclick="applySkin('theme-sand',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-sand"></div><div class="skin-tile-name">Sand</div></div>
+    <div class="skin-tile" data-skin="theme-midnight" onclick="applySkin('theme-midnight',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-midnight"></div><div class="skin-tile-name">Midnight</div></div>
+  </div>
+  <div class="appear-row" onclick="viewTour()"><div class="appear-row-label">View App Tour</div><div class="appear-row-val"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+</div>
+
+<button class="save-btn d7" id="saveBtn" onclick="saveSettings()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Save Settings</button>
+
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><div class="s-card-title">Your Achievements</div></div></div>
+  <div class="achievements-grid">
+    <div class="ach-item" id="ach-first-step"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ach-name">First Step</div><div class="ach-desc">Logged your first weight</div></div>
+    <div class="ach-item" id="ach-week-warrior"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="ach-name">Week Warrior</div><div class="ach-desc">7-day streak</div></div>
+    <div class="ach-item" id="ach-student"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="ach-name">Student</div><div class="ach-desc">Completed first lesson</div></div>
+    <div class="ach-item" id="ach-scholar"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="ach-name">Scholar</div><div class="ach-desc">All lessons done</div></div>
+    <div class="ach-item" id="ach-5kg"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="ach-name">5kg Down</div><div class="ach-desc">Lost 5kg</div></div>
+    <div class="ach-item" id="ach-champion"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div><div class="ach-name">Champion</div><div class="ach-desc">Lost 10kg</div></div>
+  </div>
+</div>
+
+
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M12 4h9"/><path d="M4 9h16"/><path d="M4 15h16"/></svg></div><div><div class="s-card-title">Onboarding</div><div class="s-card-sub">Re-run the welcome setup for a fresh handoff.</div></div></div>
+  <button class="save-btn" style="margin:0;width:100%" onclick="restartOnboardingFlow()">Run onboarding again</button>
+</div>
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 13l3-3 3 2 4-5"/></svg></div><div><div class="s-card-title">Usage Tracking</div><div class="s-card-sub">Lightweight app analytics you can export for pitch decks later.</div></div></div>
+  <div class="field" style="margin-bottom:10px"><div class="field-hint" id="usageSummaryText">No usage data yet.</div></div>
+  <div class="toggle-pair"><button class="toggle-opt sel" onclick="exportUsageJson()">Export JSON</button><button class="toggle-opt" onclick="exportUsageCsv()">Export CSV</button></div>
+</div>
+
+<button class="logout-btn d8" onclick="logout()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout</button>
+<div style="height:8px;"></div>
+
+</div></div>
+
+<div class="toast" id="saveToast">Settings saved</div>
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
+  <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
+  <a href="progress.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
+  <a href="community.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="bnav-label">Community</div></a>
+  <a href="meals.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="bnav-label">Meals</div></a>
+  <a href="settings.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
+</nav>
+
+<script src="glp-common.js"></script>
+<script>
+GLPApp.boot('settings');
+const SKINS=['theme-rose','theme-sage','theme-sand','theme-midnight'];
+function applySkin(skin,persist){
+  if(!SKINS.includes(skin))skin='theme-rose';
+  SKINS.forEach(s=>document.body.classList.remove(s));document.body.classList.add(skin);
+  document.querySelectorAll('.skin-tile').forEach(t=>t.classList.toggle('active',t.dataset.skin===skin));
+  if(persist){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');s.skin=skin;localStorage.setItem('glp_settings',JSON.stringify(s));}catch(e){}}
+}
+(function(){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');if(s.skin)applySkin(s.skin,false);}catch(e){}})();
+
+function selTwo(a,b){document.getElementById(a).classList.add('sel');document.getElementById(b).classList.remove('sel');}
+function selDay(btn){document.querySelectorAll('#injDayGroup .multi-opt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+function selWater(id){['w200','w250','w300','w500'].forEach(w=>document.getElementById(w).classList.remove('sel'));document.getElementById(id).classList.add('sel');}
+function updWt(){const u=document.getElementById('unitKg').classList.contains('sel')?'kg':'lbs';document.getElementById('wtTitle').textContent=`Weight Goals (${u})`;document.getElementById('startWtLbl').textContent=`Starting Weight (${u})`;document.getElementById('curWtLbl').textContent=`Current Weight (${u})`;document.getElementById('tgtWtLbl').textContent=`Target Weight (${u})`;}
+document.getElementById('medName').addEventListener('change',function(){document.getElementById('medOtherWrap').style.display=this.value==='Other'?'block':'none';if(this.value==='Saxenda')selTwo('freqDaily','freqWeekly');else if(this.value!=='')selTwo('freqWeekly','freqDaily');});
+
+function saveSettings(){
+  const s={
+    name:document.getElementById('profileName').value.trim()||'Friend',
+    age:document.getElementById('profileAge').value,
+    gender:document.getElementById('genderF').classList.contains('sel')?'F':'M',
+    units:document.getElementById('unitLbs').classList.contains('sel')?'lbs':'kg',
+    startDate:document.getElementById('startDate').value,
+    startWeight:parseFloat(document.getElementById('startWeight').value)||null,
+    curWeight:parseFloat(document.getElementById('curWeight').value)||null,
+    goalWeight:parseFloat(document.getElementById('tgtWeight').value)||null,
+    medName:document.getElementById('medName').value,
+    medOther:document.getElementById('medOther').value,
+    medDose:document.getElementById('medDose').value,
+    medFreq:document.getElementById('freqDaily').classList.contains('sel')?'daily':'weekly',
+    medDay:(()=>{const el=document.querySelector('#injDayGroup .multi-opt.sel');return el?el.dataset.day:'Mon';})(),
+    waterSize:(()=>{const el=document.querySelector('.multi-opt.sel[id^="w"]');return el?el.id.replace('w',''):'250';})(),
+    notifMeds:document.getElementById('togMeds').classList.contains('on'),
+    notifWater:document.getElementById('togWater').classList.contains('on'),
+    notifWorkout:document.getElementById('togWorkout').classList.contains('on'),
+    notifPhoto:document.getElementById('togPhoto').classList.contains('on'),
+    skin:SKINS.find(s=>document.body.classList.contains(s))||'theme-rose',
+  };
+  localStorage.setItem('glp_settings',JSON.stringify(s));
+  if (window.GLPApp) GLPApp.track('settings_saved', { skin:s.skin, units:s.units, medName:s.medName||'' });
+  const btn=document.getElementById('saveBtn');btn.classList.add('saved');
+  btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Saved!';
+  const toast=document.getElementById('saveToast');toast.classList.add('vis');
+  setTimeout(()=>{toast.classList.remove('vis');btn.classList.remove('saved');btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Save Settings';},2500);
+  checkAchievements();
+refreshUsageSummary();
+}
+
+function loadSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem('glp_settings')||'null');
+    if(!s)return;
+    if(s.name)document.getElementById('profileName').value=s.name;
+    if(s.age)document.getElementById('profileAge').value=s.age;
+    if(s.gender==='F')selTwo('genderF','genderM');
+    if(s.units==='lbs'){selTwo('unitLbs','unitKg');updWt();}
+    if(s.startDate)document.getElementById('startDate').value=s.startDate;
+    if(s.startWeight)document.getElementById('startWeight').value=s.startWeight;
+    if(s.curWeight)document.getElementById('curWeight').value=s.curWeight;
+    if(s.goalWeight)document.getElementById('tgtWeight').value=s.goalWeight;
+    if(s.medName){document.getElementById('medName').value=s.medName;if(s.medName==='Other')document.getElementById('medOtherWrap').style.display='block';}
+    if(s.medOther)document.getElementById('medOther').value=s.medOther;
+    if(s.medDose)document.getElementById('medDose').value=s.medDose;
+    if(s.medFreq==='daily')selTwo('freqDaily','freqWeekly');
+    if(s.medDay)document.querySelectorAll('#injDayGroup .multi-opt').forEach(b=>b.classList.toggle('sel',b.dataset.day===s.medDay));
+    if(s.waterSize)['200','250','300','500'].forEach(v=>{const el=document.getElementById('w'+v);if(el)el.classList.toggle('sel',v===s.waterSize);});
+    const tog=(id,val)=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!!val);};
+    tog('togMeds',s.notifMeds!==false);tog('togWater',s.notifWater!==false);
+    tog('togWorkout',!!s.notifWorkout);tog('togPhoto',s.notifPhoto!==false);
+    if(s.skin)applySkin(s.skin,false);
+  }catch(e){}
+}
+
+function checkAchievements(){
+  const start=parseFloat(document.getElementById('startWeight').value);
+  const cur=parseFloat(document.getElementById('curWeight').value);
+  if(start&&cur){const lost=start-cur;document.getElementById('ach-first-step').classList.add('earned');if(lost>=5)document.getElementById('ach-5kg').classList.add('earned');if(lost>=10)document.getElementById('ach-champion').classList.add('earned');}
+}
+
+function viewTour(){location.href='index.html';}
+function logout(){if(confirm('Are you sure you want to log out?'))location.href='index.html';}
+function restartOnboardingFlow(){ if(window.GLPApp) GLPApp.restartOnboarding(); }
+function exportUsageJson(){ if(window.GLPApp) GLPApp.exportUsage('json'); }
+function exportUsageCsv(){ if(window.GLPApp) GLPApp.exportUsage('csv'); }
+function refreshUsageSummary(){ if(!window.GLPApp) return; const s=GLPApp.summarize(); const el=document.getElementById('usageSummaryText'); if(!el) return; const pv = Object.values(s.pageViews||{}).reduce((a,b)=>a+b,0); el.textContent = `${s.totalEvents} events · ${pv} page views · ${s.activeDays||0} active days`; }
+
+loadSettings();
+checkAchievements();
+</script>
+</body>
+</html>

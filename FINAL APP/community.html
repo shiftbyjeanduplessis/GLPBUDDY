@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>GLP Buddy — Community</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input,textarea,select{font-family:inherit}
+a{text-decoration:none;color:inherit}
+:root{
+  --r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;
+  --page-px:20px;--nav-h:70px;--ease:cubic-bezier(.4,0,.2,1);
+  --ok:#2f9e7a;--ok-tint:rgba(47,158,122,0.09);
+  --warn:#c4782a;--warn-tint:rgba(196,120,42,0.09);
+}
+body,body.theme-rose{
+  --bg-app:#f8f5fb;--bg-shell:linear-gradient(135deg,#ede5f5,#e2e9f7);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);
+  --text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--text-faint:rgba(26,16,40,0.26);
+  --accent-primary:#a8406e;--accent-mid:#c85c87;--accent-light:#df85a8;--accent-pale:#f2c0d4;
+  --accent-tint:rgba(200,92,135,0.07);--accent-tint2:rgba(200,92,135,0.13);
+  --support-primary:#6b82cc;--support-light:#97a9dc;--support-tint:rgba(107,130,204,0.08);
+  --lav:#b8a8e8;
+  --border-soft:rgba(220,200,230,0.6);--border-mid:rgba(220,200,230,0.4);--border-accent:rgba(200,92,135,0.18);
+  --shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18);
+  --cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);
+  --nav-bg:rgba(18,10,28,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#c85c87,#6b82cc);--nav-active-shadow:0 4px 16px rgba(180,80,140,0.38);
+  --nav-active-label:linear-gradient(90deg,#df85a8,#97a9dc);
+  --page-ring:rgba(200,92,135,0.10);
+}
+body.theme-sage{
+  --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
+  --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
+  --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
+  --lav:#8ab4a8;
+  --border-soft:rgba(160,200,170,0.55);--border-mid:rgba(160,200,170,0.35);--border-accent:rgba(80,148,104,0.18);
+  --shadow-card:0 2px 12px rgba(60,120,80,0.07);--shadow-elevated:0 8px 28px rgba(60,120,80,0.16);
+  --cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);
+  --nav-bg:rgba(10,22,14,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#5a9a72,#4a8a80);--nav-active-shadow:0 4px 16px rgba(60,140,90,0.36);
+  --nav-active-label:linear-gradient(90deg,#84ba96,#72aaa2);
+  --page-ring:rgba(80,148,104,0.10);
+}
+body.theme-sand{
+  --bg-app:#f9f6f1;--bg-shell:linear-gradient(135deg,#ede6da,#e8e0d4);--bg-modal:#fdfaf6;
+  --surface-1:#fdfaf6;--surface-2:rgba(249,246,241,0.9);
+  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44);--text-faint:rgba(37,28,16,0.28);
+  --accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-light:#cc9a6e;--accent-pale:#e8cdb0;
+  --accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);
+  --support-primary:#7a6050;--support-light:#9a8070;--support-tint:rgba(122,96,80,0.08);
+  --lav:#b8a898;
+  --border-soft:rgba(200,175,145,0.55);--border-mid:rgba(200,175,145,0.35);--border-accent:rgba(170,110,60,0.18);
+  --shadow-card:0 2px 12px rgba(120,80,40,0.07);--shadow-elevated:0 8px 28px rgba(120,80,40,0.14);
+  --cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);
+  --nav-bg:rgba(22,14,8,0.94);
+  --nav-active-gradient:linear-gradient(135deg,#b07848,#7a6050);--nav-active-shadow:0 4px 16px rgba(140,90,40,0.34);
+  --nav-active-label:linear-gradient(90deg,#cc9a6e,#9a8070);
+  --page-ring:rgba(170,110,60,0.10);
+}
+body.theme-midnight{
+  --bg-app:#1a1424;--bg-shell:linear-gradient(135deg,#12101e,#1c1830);--bg-modal:#221c32;
+  --surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95);
+  --text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--text-faint:rgba(180,170,210,0.28);
+  --accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-light:#d0aaee;--accent-pale:rgba(200,160,240,0.18);
+  --accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);
+  --support-primary:#8899cc;--support-light:#a0b0d8;--support-tint:rgba(100,120,190,0.10);
+  --lav:#9088c0;
+  --border-soft:rgba(120,100,180,0.28);--border-mid:rgba(120,100,180,0.18);--border-accent:rgba(180,140,220,0.26);
+  --shadow-card:0 2px 16px rgba(0,0,0,0.28);--shadow-elevated:0 8px 32px rgba(0,0,0,0.38);
+  --cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);
+  --nav-bg:rgba(10,8,20,0.96);
+  --nav-active-gradient:linear-gradient(135deg,#b888d8,#8899cc);--nav-active-shadow:0 4px 16px rgba(140,100,200,0.38);
+  --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
+  --page-ring:rgba(180,140,220,0.14);
+}
+/* ── LAYOUT ─────────────────────────────────── */
+body{background:var(--bg-app);}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
+.scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
+@media(min-width:431px){
+  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
+  .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
+}
+/* ── NAV ────────────────────────────────────── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
+.bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
+.bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
+.bnav-label{font-size:.5rem;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,0.28);text-align:center;line-height:1.1;}
+.bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
+.bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
+/* ── BRAND ──────────────────────────────────── */
+
+/* ── FONTS ──────────────────────────────────── */
+
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px var(--page-px) 0;}
+.topbar-icon{width:44px;height:44px;border-radius:14px;flex-shrink:0;background:var(--cta-gradient);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 18px rgba(168,64,110,0.30);}
+/* SEC LABEL */
+.sec-label{display:flex;align-items:center;gap:9px;padding:22px var(--page-px) 10px;font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2.4px;color:var(--text-faint);}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-soft),transparent);}
+/* INVITE INPUT (used inside invite sheet) */
+.invite-title{font-family:'Clash Display',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;margin-bottom:5px;}
+.invite-sub{font-size:.74rem;color:var(--text-tertiary);line-height:1.55;margin-bottom:14px;}
+.invite-row{display:flex;gap:8px;}
+.invite-input{flex:1;background:rgba(255,255,255,0.70);border:1.5px solid var(--border-soft);border-radius:var(--r-lg);padding:11px 14px;font-size:.84rem;color:var(--text-primary);outline:none;transition:border-color .2s,box-shadow .2s;}
+.invite-input:focus{border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-tint);}
+.invite-input::placeholder{color:var(--text-faint);}
+.invite-btn{background:var(--cta-gradient);color:#fff;border-radius:var(--r-lg);padding:11px 20px;font-size:.84rem;font-weight:700;border:none;box-shadow:var(--shadow-elevated);white-space:nowrap;flex-shrink:0;}
+.invite-error{display:none;font-size:.72rem;color:#d04060;margin-top:8px;font-weight:600;}
+.invite-success{display:none;font-size:.72rem;color:var(--ok);margin-top:8px;font-weight:600;}
+/* BUDDIES */
+.buddies-scroll{display:flex;gap:10px;padding:0 var(--page-px) 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.buddies-scroll::-webkit-scrollbar{display:none;}
+.buddy-card{min-width:130px;max-width:150px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:16px 12px 14px;box-shadow:var(--shadow-card);cursor:pointer;flex-shrink:0;position:relative;backdrop-filter:blur(12px);transition:transform .18s,box-shadow .18s;}
+.buddy-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent);}
+.buddy-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(160,80,140,0.16);}
+.buddy-online{position:absolute;top:12px;right:12px;width:9px;height:9px;border-radius:50%;background:var(--ok);border:2px solid rgba(255,255,255,0.8);}
+.buddy-avatar{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:.82rem;font-weight:700;color:#fff;margin:0 auto 10px;}
+.buddy-name{font-family:'Clash Display',sans-serif;font-size:.84rem;font-weight:700;color:var(--text-primary);text-align:center;letter-spacing:-.2px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.buddy-handle{font-size:.60rem;color:var(--text-faint);text-align:center;margin-bottom:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.buddy-stats{display:flex;gap:4px;border-top:1px solid var(--border-mid);padding-top:10px;}
+.buddy-stat{flex:1;text-align:center;}
+.buddy-stat-val{font-family:'Clash Display',sans-serif;font-size:.82rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;}
+.buddy-stat-lbl{font-size:.52rem;font-weight:600;color:var(--text-faint);margin-top:2px;}
+.empty-buddies{margin:0 var(--page-px) 8px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:28px 20px;text-align:center;backdrop-filter:blur(10px);}
+.empty-icon{width:52px;height:52px;border-radius:16px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);margin:0 auto 12px;}
+.empty-title{font-family:'Clash Display',sans-serif;font-size:.96rem;font-weight:700;color:var(--text-primary);margin-bottom:5px;}
+.empty-sub{font-size:.74rem;color:var(--text-tertiary);line-height:1.55;}
+/* COMPOSER */
+.post-composer{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 10px;padding:14px;box-shadow:var(--shadow-card);backdrop-filter:blur(16px);transition:box-shadow .2s;}
+.post-composer.focused{box-shadow:0 10px 40px rgba(160,80,140,0.16),0 0 0 2px var(--accent-tint2);}
+.composer-row{display:flex;gap:10px;align-items:flex-start;}
+.composer-avatar{width:36px;height:36px;border-radius:11px;background:var(--cta-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:.70rem;font-weight:700;flex-shrink:0;}
+.composer-input-wrap{flex:1;}
+.composer-input{width:100%;background:transparent;border:none;outline:none;font-size:.82rem;color:var(--text-primary);line-height:1.5;resize:none;min-height:36px;}
+.composer-input::placeholder{color:var(--text-faint);}
+.composer-actions{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border-mid);}
+.composer-char{font-size:.70rem;font-weight:700;color:var(--text-faint);margin-right:auto;}
+.composer-char.warn{color:var(--warn);}
+.composer-char.danger{color:#d04060;}
+.composer-cancel{background:none;border:1px solid var(--border-soft);border-radius:var(--r-pill);padding:7px 14px;font-size:.76rem;font-weight:700;color:var(--text-tertiary);cursor:pointer;}
+.post-btn{background:var(--cta-gradient);color:#fff;border:none;border-radius:var(--r-pill);padding:7px 18px;font-size:.76rem;font-weight:700;box-shadow:var(--shadow-elevated);cursor:pointer;}
+/* FEED */
+#feedArea{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px);overflow:hidden;box-shadow:var(--shadow-card);backdrop-filter:blur(16px);}
+.feed-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-mid);}
+.feed-item:last-child{border-bottom:none;}
+.feed-avatar{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:.70rem;font-weight:700;color:#fff;flex-shrink:0;}
+.feed-body{flex:1;min-width:0;}
+.feed-name{font-weight:700;color:var(--text-primary);font-size:.80rem;}
+.feed-action{color:var(--text-tertiary);font-size:.80rem;}
+.feed-time{font-size:.64rem;color:var(--text-faint);margin-top:2px;margin-bottom:6px;}
+.feed-badge{display:inline-flex;align-items:center;border-radius:var(--r-pill);padding:2px 9px;font-size:.62rem;font-weight:700;}
+.feed-badge.workout{background:var(--accent-tint2);color:var(--accent-primary);}
+.feed-badge.weight{background:var(--ok-tint);color:var(--ok);}
+.feed-badge.streak{background:var(--warn-tint);color:var(--warn);}
+.feed-badge.water{background:var(--support-tint);color:var(--support-primary);}
+.feed-badge.meds{background:var(--accent-tint);color:var(--lav);}
+.feed-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.feed-post-text{font-size:.78rem;color:var(--text-primary);background:var(--accent-tint);border-radius:var(--r-lg);padding:10px 12px;line-height:1.55;margin-top:2px;}
+/* SHEET */
+.sheet-overlay{position:fixed;inset:0;background:rgba(14,6,24,0.48);backdrop-filter:blur(12px);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;}
+.sheet-overlay.vis{opacity:1;pointer-events:all;}
+.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:linear-gradient(180deg,rgba(255,255,255,0.97),rgba(250,247,253,0.97));border-radius:32px 32px 0 0;padding:0 22px 48px;z-index:210;transition:transform .36s var(--ease);border:1px solid rgba(255,255,255,0.88);border-bottom:none;box-shadow:0 -20px 70px rgba(160,70,130,0.18);}
+.sheet.vis{transform:translateX(-50%) translateY(0);}
+.sheet-handle{width:36px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--accent-pale),var(--support-pale,#c8d2f0));margin:14px auto 0;}
+.sheet-head{display:flex;align-items:center;gap:14px;margin:20px 0 16px;}
+.sheet-avatar{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:'Clash Display',sans-serif;font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0;}
+.sheet-name{font-family:'Clash Display',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;}
+.sheet-handle-txt{font-size:.72rem;color:var(--text-faint);margin-top:2px;}
+.sheet-rename-row{display:flex;gap:8px;margin-bottom:18px;}
+.sheet-rename-input{flex:1;background:rgba(255,255,255,0.80);border:1.5px solid var(--border-soft);border-radius:var(--r-lg);padding:10px 14px;font-size:.82rem;color:var(--text-primary);outline:none;transition:border-color .2s;}
+.sheet-rename-input:focus{border-color:var(--accent-mid);}
+.sheet-rename-btn{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:10px 16px;font-size:.80rem;font-weight:700;color:var(--accent-primary);box-shadow:var(--shadow-card);cursor:pointer;transition:all .2s;}
+.sheet-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.sheet-stat-box{background:var(--accent-tint);border-radius:var(--r-lg);padding:12px 8px;text-align:center;}
+.sheet-stat-val{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;}
+.sheet-stat-lbl{font-size:.56rem;font-weight:700;color:var(--text-faint);margin-top:2px;text-transform:uppercase;letter-spacing:1px;}
+.sheet-prog-label{font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--text-faint);margin-bottom:8px;}
+.sheet-prog-row{display:flex;justify-content:space-between;margin-bottom:7px;}
+.sheet-prog-names{font-size:.72rem;color:var(--text-tertiary);}
+.sheet-prog-bar-bg{height:6px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
+.sheet-prog-bar{height:100%;background:var(--cta-gradient);border-radius:var(--r-pill);}
+.sheet-remove-btn{display:block;width:100%;margin-top:20px;background:rgba(200,60,80,0.06);border:1.5px solid rgba(200,60,80,0.16);border-radius:var(--r-pill);padding:12px;font-size:.82rem;font-weight:700;color:#c04060;cursor:pointer;transition:all .2s;}
+.sheet-remove-btn:hover{background:rgba(200,60,80,0.12);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:.04s}.d2{animation-delay:.09s}.d3{animation-delay:.14s}
+.d4{animation-delay:.19s}.d5{animation-delay:.24s}
+
+body{visibility:hidden;}body.f-ready{visibility:visible;}
+/* ── GLP BUDDY TOP BAR ── */
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
+.glpb-topbar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
+}
+.glpb-topbar-name{
+  font-family:'Clash Display',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:3px;
+  color:rgba(255,255,255,0.85);line-height:1;
+}
+.glpb-topbar-face{
+  font-size:1.05rem;line-height:1;
+  color:rgba(255,255,255,0.45);
+}
+
+</style>
+<script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+</head>
+<body class="theme-rose">
+<script>
+(function(){
+  var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
+  try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');
+  var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';
+  S.forEach(function(x){document.body.classList.remove(x);});
+  document.body.classList.add(sk);}catch(e){}
+})();
+</script>
+<div class="page-wrap">
+<div class="scroll-area">
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:rgba(255,255,255,0.85);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="10" x2="9.01" y2="10" stroke-width="3"/><line x1="15" y1="10" x2="15.01" y2="10" stroke-width="3"/></svg></div>
+<!-- TOPBAR -->
+<div class="topbar d1">
+  <div>
+    <div style="font-family:'Clash Display',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.2px;line-height:1;">Community</div>
+    <div style="font-size:.74rem;color:var(--text-tertiary);margin-top:4px;font-weight:500;">Your support circle</div>
+  </div>
+  <button onclick="openInviteSheet()" style="display:flex;align-items:center;gap:7px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-pill);padding:9px 16px;font-size:.78rem;font-weight:700;color:var(--accent-primary);box-shadow:var(--shadow-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);white-space:nowrap;flex-shrink:0">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add a buddy
+  </button>
+</div>
+
+<!-- BUDDIES -->
+<div class="sec-label d3">Your Buddies <span id="buddyCount" style="font-size:.7rem;color:var(--rose);font-weight:700;letter-spacing:0;text-transform:none;margin-left:2px;"></span></div>
+
+<div id="buddiesArea"></div>
+
+<!-- FEED -->
+<div class="sec-label d4">Activity Feed</div>
+
+<!-- POST COMPOSER -->
+<div class="post-composer d5">
+  <div class="composer-row">
+    <div class="composer-avatar" id="myAvatar">Me</div>
+    <div class="composer-input-wrap" id="composerWrap">
+      <textarea class="composer-input" id="postInput" placeholder="Share something with your buddies…" rows="1" oninput="autoResize(this)" onfocus="expandComposer()" maxlength="280"></textarea>
+    </div>
+  </div>
+  <div class="composer-actions" id="composerActions" style="display:none;">
+    <div class="composer-char" id="charCount">280</div>
+    <button class="composer-cancel" onclick="collapseComposer()">Cancel</button>
+    <button class="post-btn" onclick="postMessage()">Post</button>
+  </div>
+</div>
+
+<div id="feedArea" style="background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);margin:0 var(--page-px);overflow:hidden;box-shadow:var(--shadow-sm);"></div>
+
+</div>
+</div>
+
+<!-- BUDDY DETAIL SHEET -->
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="sheet" id="buddySheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <div class="sheet-avatar" id="sheetAvatar"></div>
+    <div>
+      <div class="sheet-name" id="sheetName"></div>
+      <div class="sheet-handle-txt" id="sheetEmail"></div>
+    </div>
+  </div>
+  <div class="sheet-rename-row">
+    <input class="sheet-rename-input" id="renameInput" placeholder="Give them a nickname…" autocomplete="off">
+    <button class="sheet-rename-btn" onclick="saveName()">Save</button>
+  </div>
+  <div class="sheet-stats-grid" id="sheetStats"></div>
+  <div class="sheet-progress" id="sheetProgress"></div>
+  <button class="sheet-remove-btn" onclick="removeBuddy()">Remove buddy</button>
+</div>
+
+<!-- INVITE SHEET -->
+<div class="sheet-overlay" id="inviteOverlay" onclick="closeInviteSheet()"></div>
+<div class="sheet" id="inviteSheet">
+  <div class="sheet-handle"></div>
+  <div style="padding:20px 0 4px">
+    <div style="font-family:'Clash Display',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;margin-bottom:4px">Add a buddy</div>
+    <div style="font-size:.74rem;color:var(--text-tertiary);line-height:1.55">Enter their email and give them a name — they'll appear in your stream once added.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+    <input class="invite-input" id="inviteInput" type="email" placeholder="friend@email.com" autocomplete="off" inputmode="email">
+    <input class="invite-input" id="inviteNameInput" type="text" placeholder="What do you call them? (e.g. Sarah)" autocomplete="off">
+  </div>
+  <div class="invite-error" id="inviteError" style="margin-top:8px"></div>
+  <div class="invite-success" id="inviteSuccess" style="margin-top:8px"></div>
+  <button class="invite-btn" onclick="inviteBuddy()" style="width:100%;margin-top:16px;padding:13px;font-size:.88rem;border-radius:var(--r-pill)">Add buddy</button>
+  <button onclick="closeInviteSheet()" style="width:100%;margin-top:8px;padding:10px;font-size:.82rem;font-weight:700;color:var(--text-tertiary);background:none;border:none;cursor:pointer">Cancel</button>
+</div>
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
+  <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
+  <a href="progress.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
+  <a href="community.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="bnav-label">Community</div></a>
+  <a href="meals.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="bnav-label">Meals</div></a>
+  <a href="settings.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
+</nav>
+<script src="glp-common.js"></script>
+<script>
+GLPApp.boot('community');
+// ═══════════════════════════════════════
+// AVATAR COLOURS
+// ═══════════════════════════════════════
+const AVATAR_COLOURS = [
+  '#b85570','#5580b8','#55a87a','#b87c35','#7a55b8','#b85580','#3590b8','#b85555'
+];
+function avatarColour(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = str.charCodeAt(i) + ((h << 5) - h);
+  return AVATAR_COLOURS[Math.abs(h) % AVATAR_COLOURS.length];
+}
+function initials(name) {
+  const parts = name.trim().split(' ');
+  return parts.length >= 2
+    ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+    : name.slice(0,2).toUpperCase();
+}
+
+// ═══════════════════════════════════════
+// SEED DATA — demo buddies
+// ═══════════════════════════════════════
+let buddies = [
+  {
+    id:1, email:'sarah.m@email.com', realName:'Sarah Mitchell', nickname:'Sarah',
+    online:true, streak:14, workoutsWeek:2, currentWeight:84, startWeight:96, goalWeight:72,
+    colour:'#5580b8'
+  },
+  {
+    id:2, email:'james.k@email.com', realName:'James K', nickname:'James',
+    online:false, streak:6, workoutsWeek:3, currentWeight:102, startWeight:115, goalWeight:88,
+    colour:'#55a87a'
+  },
+];
+
+let nextId = 3;
+let openBuddyId = null;
+
+// ═══════════════════════════════════════
+// FEED DATA
+// ═══════════════════════════════════════
+const FEED_TYPES = {
+  workout: {
+    label: 'Completed a workout',
+    badge: 'workout',
+    badgeText: 'Workout done',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2"/><path d="M20 12h2"/><rect x="3" y="9.5" width="3.5" height="5" rx="1.5"/><rect x="17.5" y="9.5" width="3.5" height="5" rx="1.5"/><line x1="6.5" y1="12" x2="17.5" y2="12"/></svg>`,
+    iconBg: 'rgba(184,85,112,0.08)', iconColor: 'var(--accent-mid)'
+  },
+  weight: {
+    label: 'Logged their weight',
+    badge: 'weight',
+    badgeText: '',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h18v4l-9 9-9-9V3z"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>`,
+    iconBg: 'rgba(42,157,110,0.08)', iconColor: 'var(--ok)'
+  },
+  streak: {
+    label: 'Hit a streak milestone',
+    badge: 'streak',
+    badgeText: '',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    iconBg: 'rgba(212,134,10,0.1)', iconColor: 'var(--warn)'
+  },
+  water: {
+    label: 'Hit their water goal',
+    badge: 'water',
+    badgeText: '8 cups',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+    iconBg: 'rgba(60,130,220,0.08)', iconColor: '#3c82dc'
+  },
+  meds: {
+    label: 'Logged their medication',
+    badge: 'meds',
+    badgeText: 'On track',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg>`,
+    iconBg: 'rgba(130,80,180,0.08)', iconColor: '#8250b4'
+  },
+};
+
+let feedItems = [
+  { buddyId:1, type:'workout', detail:'Lower body — Chair Squat', time:'2 hours ago' },
+  { buddyId:2, type:'streak',  detail:'7-day streak!', time:'4 hours ago' },
+  { buddyId:1, type:'weight',  detail:'84 kg — down 0.4 kg', time:'Yesterday' },
+  { buddyId:2, type:'meds',    detail:'Weekly injection logged', time:'Yesterday' },
+  { buddyId:1, type:'water',   detail:'8 cups completed', time:'2 days ago' },
+  { buddyId:2, type:'workout', detail:'Push — Wall Push-Up', time:'2 days ago' },
+  { buddyId:1, type:'streak',  detail:'14-day streak!', time:'3 days ago' },
+];
+
+// ═══════════════════════════════════════
+// RENDER BUDDIES
+// ═══════════════════════════════════════
+function renderBuddies() {
+  const area = document.getElementById('buddiesArea');
+  const count = document.getElementById('buddyCount');
+
+  if (buddies.length === 0) {
+    count.textContent = '';
+    area.innerHTML = `
+      <div class="empty-buddies d3">
+        <div class="empty-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="empty-title">No buddies yet</div>
+        <div class="empty-sub">Invite a friend above to start your accountability circle.</div>
+      </div>`;
+    return;
+  }
+
+  count.textContent = buddies.length;
+  area.innerHTML = `<div class="buddies-scroll" id="buddiesScroll"></div>`;
+  const scroll = document.getElementById('buddiesScroll');
+
+  buddies.forEach(b => {
+    const progress = Math.round(((b.startWeight - b.currentWeight) / (b.startWeight - b.goalWeight)) * 100);
+    const card = document.createElement('div');
+    card.className = 'buddy-card';
+    card.onclick = () => openSheet(b.id);
+    card.innerHTML = `
+      ${b.online ? '<div class="buddy-online"></div>' : ''}
+      <div class="buddy-avatar" style="background:${b.colour}">${initials(b.nickname || b.realName)}</div>
+      <div class="buddy-name">${b.nickname || b.realName}</div>
+      <div class="buddy-handle">${b.email}</div>
+      <div class="buddy-stats">
+        <div class="buddy-stat">
+          <div class="buddy-stat-val">${b.streak}</div>
+          <div class="buddy-stat-lbl">Streak</div>
+        </div>
+        <div class="buddy-stat">
+          <div class="buddy-stat-val">${b.workoutsWeek}/3</div>
+          <div class="buddy-stat-lbl">Week</div>
+        </div>
+        <div class="buddy-stat">
+          <div class="buddy-stat-val">${Math.max(0,progress)}%</div>
+          <div class="buddy-stat-lbl">Goal</div>
+        </div>
+      </div>`;
+    scroll.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════
+// RENDER FEED
+// ═══════════════════════════════════════
+function renderFeed() {
+  const area = document.getElementById('feedArea');
+  if (buddies.length === 0 && !feedItems.find(f => f.buddyId === 0)) {
+    area.innerHTML = `<div style="padding:28px 20px;text-align:center;font-size:.82rem;color:var(--text-faint);">Invite a friend to start your accountability circle.</div>`;
+    return;
+  }
+
+  const visible = feedItems.filter(f => f.buddyId === 0 || buddies.find(b => b.id === f.buddyId));
+  if (visible.length === 0) {
+    area.innerHTML = `<div style="padding:28px 20px;text-align:center;font-size:.82rem;color:var(--text-faint);">No recent activity. Your buddies' updates will appear here.</div>`;
+    return;
+  }
+
+  area.innerHTML = visible.map(f => {
+    // My own post
+    if (f.buddyId === 0) {
+      return `
+        <div class="feed-item">
+          <div class="feed-avatar" style="background:linear-gradient(135deg,var(--accent-light),var(--accent-mid))">Me</div>
+          <div class="feed-body">
+            <div><span class="feed-name">You</span> <span class="feed-action">posted to your buddies</span></div>
+            <div class="feed-time">${f.time}</div>
+            <div class="feed-post-text">${f.detail}</div>
+          </div>
+        </div>`;
+    }
+
+    const b = buddies.find(x => x.id === f.buddyId);
+    if (!b) return '';
+    const t = FEED_TYPES[f.type];
+    const badgeExtra = f.type === 'weight' ? f.detail : (f.type === 'streak' ? f.detail : t.badgeText);
+    return `
+      <div class="feed-item">
+        <div class="feed-avatar" style="background:${b.colour}">${initials(b.nickname||b.realName)}</div>
+        <div class="feed-body">
+          <div><span class="feed-name">${b.nickname||b.realName}</span> <span class="feed-action">${t.label}</span></div>
+          <div class="feed-time">${f.time}</div>
+          <span class="feed-badge ${t.badge}">${badgeExtra || t.badgeText}</span>
+        </div>
+        <div class="feed-icon" style="background:${t.iconBg};color:${t.iconColor}">${t.icon}</div>
+      </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+// INVITE SHEET
+// ═══════════════════════════════════════
+function openInviteSheet() {
+  document.getElementById('inviteInput').value = '';
+  document.getElementById('inviteNameInput').value = '';
+  document.getElementById('inviteError').style.display = 'none';
+  document.getElementById('inviteSuccess').style.display = 'none';
+  document.getElementById('inviteOverlay').classList.add('vis');
+  document.getElementById('inviteSheet').classList.add('vis');
+  setTimeout(() => document.getElementById('inviteInput').focus(), 380);
+}
+
+function closeInviteSheet() {
+  document.getElementById('inviteOverlay').classList.remove('vis');
+  document.getElementById('inviteSheet').classList.remove('vis');
+}
+
+// ═══════════════════════════════════════
+// INVITE
+// ═══════════════════════════════════════
+function inviteBuddy() {
+  const input     = document.getElementById('inviteInput');
+  const nameInput = document.getElementById('inviteNameInput');
+  const err       = document.getElementById('inviteError');
+  const succ      = document.getElementById('inviteSuccess');
+  const email     = input.value.trim().toLowerCase();
+  const nameRaw   = nameInput.value.trim();
+
+  err.style.display  = 'none';
+  succ.style.display = 'none';
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'Please enter a valid email address.';
+    err.style.display = 'block'; return;
+  }
+  if (buddies.find(b => b.email === email)) {
+    err.textContent = 'This person is already in your buddies.';
+    err.style.display = 'block'; return;
+  }
+
+  // Use entered name, else derive from email
+  const autoName = nameRaw || (() => {
+    const local = email.split('@')[0].replace(/[._\-]/g,' ');
+    return local.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+  })();
+
+  const colour = avatarColour(email);
+
+  const newBuddy = {
+    id: nextId++, email,
+    realName: autoName, nickname: autoName,
+    online: false, streak: 0, workoutsWeek: 0,
+    currentWeight: 0, startWeight: 0, goalWeight: 0,
+    colour, isNew: true,
+  };
+
+  buddies.unshift(newBuddy);
+  input.value     = '';
+  nameInput.value = '';
+
+  succ.textContent = `${autoName} has been added to your buddy circle.`;
+  succ.style.display = 'block';
+  setTimeout(() => {
+    succ.style.display = 'none';
+    closeInviteSheet();
+  }, 1800);
+
+  renderBuddies();
+  renderFeed();
+}
+
+// ═══════════════════════════════════════
+// SHEET
+// ═══════════════════════════════════════
+function openSheet(id) {
+  const b = buddies.find(x => x.id === id);
+  if (!b) return;
+  openBuddyId = id;
+
+  const progress = b.startWeight && b.goalWeight
+    ? Math.min(100, Math.max(0, Math.round(((b.startWeight - b.currentWeight) / (b.startWeight - b.goalWeight)) * 100)))
+    : null;
+  const lostKg = b.startWeight ? (b.startWeight - b.currentWeight).toFixed(1) : null;
+
+  document.getElementById('sheetAvatar').style.background = b.colour;
+  document.getElementById('sheetAvatar').textContent = initials(b.nickname||b.realName);
+  document.getElementById('sheetName').textContent = b.nickname || b.realName;
+  document.getElementById('sheetEmail').textContent = b.email;
+  document.getElementById('renameInput').value = b.nickname || '';
+  document.getElementById('renameInput').placeholder = `Nickname for ${b.realName}…`;
+
+  // Stats grid
+  document.getElementById('sheetStats').innerHTML = `
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val">${b.streak}</div>
+      <div class="sheet-stat-lbl">Day streak</div>
+    </div>
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val">${b.workoutsWeek}/3</div>
+      <div class="sheet-stat-lbl">This week</div>
+    </div>
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val">${b.currentWeight ? b.currentWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-lbl">Current</div>
+    </div>
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val">${b.startWeight ? b.startWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-lbl">Starting</div>
+    </div>
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val">${b.goalWeight ? b.goalWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-lbl">Goal</div>
+    </div>
+    <div class="sheet-stat-box">
+      <div class="sheet-stat-val" style="color:var(--ok)">${lostKg && lostKg > 0 ? '-'+lostKg+'kg' : '—'}</div>
+      <div class="sheet-stat-lbl">Lost</div>
+    </div>`;
+
+  // Progress bar
+  document.getElementById('sheetProgress').innerHTML = progress !== null ? `
+    <div class="sheet-prog-label">Goal progress</div>
+    <div class="sheet-prog-row">
+      <span class="sheet-prog-names">${b.startWeight}kg → ${b.goalWeight}kg</span>
+      <span style="font-size:.76rem;font-weight:700;color:var(--accent-mid)">${progress}%</span>
+    </div>
+    <div class="sheet-prog-bar-bg"><div class="sheet-prog-bar" style="width:${progress}%"></div></div>
+    <div style="font-size:.72rem;color:var(--text-tertiary);margin-top:4px;">${b.currentWeight}kg current</div>` : '';
+
+  document.getElementById('sheetOverlay').classList.add('vis');
+  document.getElementById('buddySheet').classList.add('vis');
+}
+
+function closeSheet() {
+  document.getElementById('sheetOverlay').classList.remove('vis');
+  document.getElementById('buddySheet').classList.remove('vis');
+  openBuddyId = null;
+}
+
+function saveName() {
+  const val = document.getElementById('renameInput').value.trim();
+  if (!val || openBuddyId === null) return;
+  const b = buddies.find(x => x.id === openBuddyId);
+  if (!b) return;
+  b.nickname = val;
+  document.getElementById('sheetName').textContent = val;
+  renderBuddies();
+  renderFeed();
+  // Flash the save button
+  const btn = document.querySelector('.sheet-rename-btn');
+  btn.textContent = 'Saved!';
+  btn.style.background = 'var(--ok)';
+  btn.style.color = '#fff';
+  setTimeout(() => { btn.textContent = 'Save'; btn.style.background=''; btn.style.color=''; }, 1800);
+}
+
+function removeBuddy() {
+  if (openBuddyId === null) return;
+  buddies = buddies.filter(b => b.id !== openBuddyId);
+  closeSheet();
+  renderBuddies();
+  renderFeed();
+}
+
+// ═══════════════════════════════════════
+// COMPOSER
+// ═══════════════════════════════════════
+function expandComposer() {
+  document.getElementById('composerActions').style.display = 'flex';
+  document.querySelector('.post-composer').classList.add('focused');
+}
+
+function collapseComposer() {
+  const input = document.getElementById('postInput');
+  input.value = '';
+  input.style.height = '';
+  document.getElementById('composerActions').style.display = 'none';
+  document.querySelector('.post-composer').classList.remove('focused');
+  document.getElementById('charCount').textContent = '280';
+  document.getElementById('charCount').className = 'composer-char';
+  input.blur();
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+  const remaining = 280 - el.value.length;
+  const cc = document.getElementById('charCount');
+  cc.textContent = remaining;
+  cc.className = 'composer-char' + (remaining < 30 ? ' danger' : remaining < 60 ? ' warn' : '');
+}
+
+function postMessage() {
+  const input = document.getElementById('postInput');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  // Prepend to feed as a "message" type item
+  feedItems.unshift({
+    buddyId: 0, // 0 = me
+    type: 'message',
+    detail: text,
+    time: 'Just now',
+  });
+
+  collapseComposer();
+  renderFeed();
+
+  // Scroll feed into view
+  document.getElementById('feedArea').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+renderBuddies();
+renderFeed();
+</script>
+</body>
+</html>

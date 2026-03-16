@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>GLP Buddy — Onboarding</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;background:#f8f5fb;color:#1a1028}
+:root{--r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;--page-px:20px;--nav-h:70px;--accent-primary:#a8406e;--accent-mid:#c85c87;--accent-tint:rgba(200,92,135,0.08);--accent-tint2:rgba(200,92,135,0.14);--support-primary:#6b82cc;--text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--border-soft:rgba(220,200,230,0.6);--border-accent:rgba(200,92,135,0.22);--surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--nav-bg:rgba(18,10,28,0.93);--cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);--shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18)}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;position:relative;background:transparent}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:32px}
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h)}
+.glpb-topbar-name{font-family:'Clash Display',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.85)}
+.header{padding:26px var(--page-px) 14px}
+.title{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-1.2px;color:var(--text-primary);line-height:1}
+.sub{font-size:.78rem;color:var(--text-tertiary);margin-top:8px}
+.progress{display:flex;gap:6px;padding:0 var(--page-px);margin-bottom:18px}.dot{flex:1;height:5px;border-radius:999px;background:var(--border-soft)}.dot.active{background:var(--accent-mid)}
+.card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 14px;padding:18px;box-shadow:var(--shadow-card)}
+.card-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.card-sub{font-size:.76rem;color:var(--text-tertiary);margin-bottom:14px}
+.field{margin-bottom:14px}.field:last-child{margin-bottom:0}.field-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-tertiary);margin-bottom:6px}
+.field-input,.field-select{width:100%;background:var(--surface-2);border:1.5px solid var(--border-soft);border-radius:16px;padding:12px 14px;font-size:.9rem;color:var(--text-primary);outline:none}
+.toggle-pair,.chip-grid{display:flex;gap:8px;flex-wrap:wrap}.toggle-opt,.chip{padding:10px 14px;border-radius:999px;border:1.5px solid var(--border-soft);background:#fff;font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer}.toggle-opt.sel,.chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
+.actions{display:flex;gap:10px;padding:4px var(--page-px) 0}.btn{flex:1;border:none;border-radius:999px;padding:14px 18px;font-size:.88rem;font-weight:700;cursor:pointer}.btn-primary{background:var(--cta-gradient);color:#fff;box-shadow:var(--shadow-elevated)}.btn-secondary{background:#fff;color:var(--text-primary);border:1.5px solid var(--border-soft)}
+.callout{margin:0 var(--page-px) 14px;padding:16px 18px;border-radius:20px;background:linear-gradient(135deg,rgba(200,92,135,0.08),rgba(107,130,204,0.07));border:1px solid var(--border-soft)}
+.callout-title{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--accent-mid);margin-bottom:6px}.callout-text{font-size:.78rem;color:var(--text-secondary)}
+body.theme-rose{background:#f8f5fb;--accent-primary:#a8406e;--accent-mid:#c85c87;--accent-tint:rgba(200,92,135,0.08);--accent-tint2:rgba(200,92,135,0.14);--support-primary:#6b82cc;--text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--border-soft:rgba(220,200,230,0.6);--border-accent:rgba(200,92,135,0.22);--surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--nav-bg:rgba(18,10,28,0.93);--cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);--shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18)}
+body.theme-sage{background:#f5f8f5;--accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);--support-primary:#4a8a80;--nav-bg:rgba(10,22,14,0.93);--cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);--border-soft:rgba(160,200,170,0.55);--border-accent:rgba(80,148,104,0.18);--text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42)}
+body.theme-sand{background:#f9f6f1;--accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);--support-primary:#7a6050;--nav-bg:rgba(22,14,8,0.94);--cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);--border-soft:rgba(200,175,145,0.55);--border-accent:rgba(170,110,60,0.18);--text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44)}
+body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);--support-primary:#8899cc;--nav-bg:rgba(10,8,20,0.96);--cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);--border-soft:rgba(120,100,180,0.28);--border-accent:rgba(180,140,220,0.26);--text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95)}
+</style>
+<script src="glp-common.js"></script>
+</head>
+<body class="theme-rose">
+<div class="page-wrap"><div class="scroll-area">
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
+  <div class="header"><div class="title">Let’s set you up</div><div class="sub">A quick setup so the app feels personal from day one.</div></div>
+  <div class="progress"><div class="dot active" id="dot0"></div><div class="dot" id="dot1"></div><div class="dot" id="dot2"></div><div class="dot" id="dot3"></div></div>
+  <div class="callout"><div class="callout-title">What this does</div><div class="callout-text">We’ll save your basics, medication schedule, and weight targets. You can edit everything later in Settings.</div></div>
+  <div class="card step" id="step0">
+    <div class="card-title">Basics</div><div class="card-sub">A few simple details to personalise the app.</div>
+    <div class="field"><div class="field-label">Your name</div><input class="field-input" id="onbName" type="text" placeholder="e.g. Sarah"></div>
+    <div class="field"><div class="field-label">Age</div><input class="field-input" id="onbAge" type="number" placeholder="e.g. 38"></div>
+    <div class="field"><div class="field-label">Gender</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="gM">Male</button><button type="button" class="toggle-opt" id="gF">Female</button></div></div>
+    <div class="field"><div class="field-label">Skin</div><div class="chip-grid"><button type="button" class="chip sel" data-skin="theme-rose">Rose</button><button type="button" class="chip" data-skin="theme-sage">Sage</button><button type="button" class="chip" data-skin="theme-sand">Sand</button><button type="button" class="chip" data-skin="theme-midnight">Midnight</button></div></div>
+  </div>
+  <div class="card step" id="step1" style="display:none">
+    <div class="card-title">Weight goals</div><div class="card-sub">These drive your progress page and personal goal banner.</div>
+    <div class="field"><div class="field-label">Program start date</div><input class="field-input" id="onbStartDate" type="date"></div>
+    <div class="field"><div class="field-label">Starting weight</div><input class="field-input" id="onbStartWeight" type="number" step="0.1" placeholder="e.g. 90"></div>
+    <div class="field"><div class="field-label">Current weight</div><input class="field-input" id="onbCurWeight" type="number" step="0.1" placeholder="e.g. 85"></div>
+    <div class="field"><div class="field-label">Target weight</div><input class="field-input" id="onbGoalWeight" type="number" step="0.1" placeholder="e.g. 72"><div style="font-size:.67rem;color:var(--text-tertiary);margin-top:6px">Your target weight should be provided by your doctor.</div></div>
+  </div>
+  <div class="card step" id="step2" style="display:none">
+    <div class="card-title">Medication</div><div class="card-sub">This powers your injection-day reminders and medication card.</div>
+    <div class="field"><div class="field-label">Medication</div><select class="field-select" id="onbMed"><option value="">Select your medication…</option><option>Ozempic</option><option>Wegovy</option><option>Mounjaro</option><option>Zepbound</option><option>Saxenda</option><option>Other</option></select></div>
+    <div class="field"><div class="field-label">Current dose</div><input class="field-input" id="onbDose" type="text" placeholder="e.g. 0.5mg"></div>
+    <div class="field"><div class="field-label">Frequency</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="freqWeekly">Weekly</button><button type="button" class="toggle-opt" id="freqDaily">Daily</button></div></div>
+    <div class="field"><div class="field-label">Injection day</div><div class="chip-grid" id="dayGroup"><button type="button" class="chip sel" data-day="Mon">Mon</button><button type="button" class="chip" data-day="Tue">Tue</button><button type="button" class="chip" data-day="Wed">Wed</button><button type="button" class="chip" data-day="Thu">Thu</button><button type="button" class="chip" data-day="Fri">Fri</button><button type="button" class="chip" data-day="Sat">Sat</button><button type="button" class="chip" data-day="Sun">Sun</button></div></div>
+  </div>
+  <div class="card step" id="step3" style="display:none">
+    <div class="card-title">Final touches</div><div class="card-sub">A few defaults so the app feels helpful immediately.</div>
+    <div class="field"><div class="field-label">Units</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="uKg">Metric (kg)</button><button type="button" class="toggle-opt" id="uLbs">Imperial (lbs)</button></div></div>
+    <div class="field"><div class="field-label">Water glass size</div><div class="chip-grid" id="waterGroup"><button type="button" class="chip" data-water="200">200ml</button><button type="button" class="chip sel" data-water="250">250ml</button><button type="button" class="chip" data-water="300">300ml</button><button type="button" class="chip" data-water="500">500ml</button></div></div>
+    <div class="field"><div class="field-label">Home reminders</div><div style="font-size:.78rem;color:var(--text-secondary);line-height:1.55">Medication reminder, workout reminder, and weekly photo reminder are switched on by default. You can change these later in Settings.</div></div>
+  </div>
+  <div class="actions"><button type="button" class="btn btn-secondary" id="backBtn">Back</button><button type="button" class="btn btn-primary" id="nextBtn">Continue</button></div>
+</div></div>
+<script>
+GLPApp.boot('onboarding', {requireOnboarding:false});
+
+const steps = [...document.querySelectorAll('.step')];
+let step = 0;
+const byId = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const nextTarget = params.get('next') || 'index.html';
+const skinClasses = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
+
+function selectOne(group, target){
+  group.forEach(el => el.classList.toggle('sel', el === target));
+}
+function applySkin(skin){
+  skinClasses.forEach(s => document.body.classList.remove(s));
+  document.body.classList.add(skin || 'theme-rose');
+  const chip = document.querySelector(`[data-skin="${skin}"]`) || document.querySelector('[data-skin="theme-rose"]');
+  if(chip) selectOne([...document.querySelectorAll('[data-skin]')], chip);
+}
+function bindToggle(button, group){
+  if(!button) return;
+  button.addEventListener('click', function(e){
+    e.preventDefault();
+    selectOne(group, button);
+  });
+}
+function renderStep(){
+  steps.forEach((el, i) => { el.style.display = i === step ? 'block' : 'none'; });
+  [0,1,2,3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
+  const backBtn = byId('backBtn');
+  if(backBtn){ backBtn.style.display = step === 0 ? 'none' : 'block'; }
+  const nextBtn = byId('nextBtn');
+  if(nextBtn){ nextBtn.textContent = step === steps.length - 1 ? 'Finish setup' : 'Continue'; }
+}
+function goNext(){
+  if(step < steps.length - 1){
+    step += 1;
+    renderStep();
+    GLPApp.track('onboarding_step_advanced', {step});
+    return;
+  }
+  finish();
+}
+function goBack(){
+  if(step > 0){
+    step -= 1;
+    renderStep();
+  }
+}
+function finish(){
+  const prev = JSON.parse(localStorage.getItem('glp_settings') || '{}');
+  const s = {
+    ...prev,
+    name: byId('onbName')?.value.trim() || prev.name || 'Friend',
+    age: byId('onbAge')?.value || prev.age || '',
+    gender: byId('gF')?.classList.contains('sel') ? 'F' : 'M',
+    skin: document.querySelector('[data-skin].sel')?.dataset.skin || prev.skin || 'theme-rose',
+    startDate: byId('onbStartDate')?.value || prev.startDate || '',
+    startWeight: parseFloat(byId('onbStartWeight')?.value) || prev.startWeight || null,
+    curWeight: parseFloat(byId('onbCurWeight')?.value) || prev.curWeight || null,
+    goalWeight: parseFloat(byId('onbGoalWeight')?.value) || prev.goalWeight || null,
+    medName: byId('onbMed')?.value || prev.medName || '',
+    medDose: byId('onbDose')?.value || prev.medDose || '',
+    medFreq: byId('freqDaily')?.classList.contains('sel') ? 'daily' : 'weekly',
+    medDay: document.querySelector('#dayGroup .chip.sel')?.dataset.day || prev.medDay || 'Mon',
+    units: byId('uLbs')?.classList.contains('sel') ? 'lbs' : 'kg',
+    waterSize: document.querySelector('#waterGroup .chip.sel')?.dataset.water || prev.waterSize || '250',
+    notifMeds: true,
+    notifWater: true,
+    notifWorkout: true,
+    notifPhoto: true
+  };
+  localStorage.setItem('glp_settings', JSON.stringify(s));
+  localStorage.setItem('glp_onboarding', JSON.stringify({complete:true, completedAt:new Date().toISOString()}));
+  GLPApp.track('onboarding_completed', {skin:s.skin, medName:s.medName || '', units:s.units});
+  location.href = nextTarget;
+}
+
+bindToggle(byId('gM'), [byId('gM'), byId('gF')]);
+bindToggle(byId('gF'), [byId('gM'), byId('gF')]);
+bindToggle(byId('freqWeekly'), [byId('freqWeekly'), byId('freqDaily')]);
+bindToggle(byId('freqDaily'), [byId('freqWeekly'), byId('freqDaily')]);
+bindToggle(byId('uKg'), [byId('uKg'), byId('uLbs')]);
+bindToggle(byId('uLbs'), [byId('uKg'), byId('uLbs')]);
+
+document.querySelectorAll('[data-skin]').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    applySkin(el.dataset.skin);
+  });
+});
+document.querySelectorAll('#dayGroup .chip').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    selectOne([...document.querySelectorAll('#dayGroup .chip')], el);
+  });
+});
+document.querySelectorAll('#waterGroup .chip').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    selectOne([...document.querySelectorAll('#waterGroup .chip')], el);
+  });
+});
+
+byId('backBtn')?.addEventListener('click', function(e){
+  e.preventDefault();
+  goBack();
+});
+byId('nextBtn')?.addEventListener('click', function(e){
+  e.preventDefault();
+  goNext();
+});
+
+(function init(){
+  const s = JSON.parse(localStorage.getItem('glp_settings') || '{}');
+  applySkin(s.skin || 'theme-rose');
+  if(s.name) byId('onbName').value = s.name;
+  if(s.age) byId('onbAge').value = s.age;
+  if(s.gender === 'F') selectOne([byId('gM'), byId('gF')], byId('gF'));
+  if(s.startDate) byId('onbStartDate').value = s.startDate;
+  if(s.startWeight) byId('onbStartWeight').value = s.startWeight;
+  if(s.curWeight) byId('onbCurWeight').value = s.curWeight;
+  if(s.goalWeight) byId('onbGoalWeight').value = s.goalWeight;
+  if(s.medName) byId('onbMed').value = s.medName;
+  if(s.medDose) byId('onbDose').value = s.medDose;
+  if(s.medFreq === 'daily') selectOne([byId('freqWeekly'), byId('freqDaily')], byId('freqDaily'));
+  const day = document.querySelector(`#dayGroup .chip[data-day="${s.medDay || 'Mon'}"]`);
+  if(day) selectOne([...document.querySelectorAll('#dayGroup .chip')], day);
+  if(s.units === 'lbs') selectOne([byId('uKg'), byId('uLbs')], byId('uLbs'));
+  const water = document.querySelector(`#waterGroup .chip[data-water="${s.waterSize || '250'}"]`);
+  if(water) selectOne([...document.querySelectorAll('#waterGroup .chip')], water);
+  renderStep();
+})();
+</script>
+</body>
+</html>

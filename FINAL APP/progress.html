@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>GLP Buddy — Progress</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input,select{font-family:inherit}
+a{text-decoration:none;color:inherit}
+:root{
+  --r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:26px;--r-pill:50px;
+  --page-px:20px;--nav-h:70px;--ease:cubic-bezier(.4,0,.2,1);
+  --ok:#2f9e7a;--ok-tint:rgba(47,158,122,0.09);
+  --warn:#c4782a;--warn-tint:rgba(196,120,42,0.09);
+}
+body,body.theme-rose{
+  --bg-app:#f8f5fb;--bg-shell:linear-gradient(135deg,#ede5f5,#e2e9f7);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(248,245,251,0.9);--surface-accent:linear-gradient(150deg,rgba(200,92,135,0.04),rgba(107,130,204,0.02));
+  --text-primary:#1a1028;--text-secondary:rgba(26,16,40,0.64);--text-tertiary:rgba(26,16,40,0.42);--text-faint:rgba(26,16,40,0.26);
+  --accent-primary:#a8406e;--accent-mid:#c85c87;--accent-light:#df85a8;--accent-pale:#f2c0d4;
+  --accent-tint:rgba(200,92,135,0.07);--accent-tint2:rgba(200,92,135,0.13);
+  --support-primary:#6b82cc;--support-light:#97a9dc;--support-pale:#c8d2f0;--support-tint:rgba(107,130,204,0.08);
+  --lav:#b8a8e8;
+  --border-soft:rgba(220,200,230,0.6);--border-mid:rgba(220,200,230,0.4);--border-accent:rgba(200,92,135,0.18);
+  --shadow-card:0 2px 12px rgba(160,80,140,0.07);--shadow-elevated:0 8px 28px rgba(160,70,120,0.18);
+  --cta-gradient:linear-gradient(135deg,#a8406e,#c85c87 55%,#6b82cc);
+  --hero-gradient:linear-gradient(150deg,rgba(200,92,135,0.04),rgba(107,130,204,0.02));
+  --avatar-gradient:linear-gradient(135deg,#f2c0d4,#c8d2f0);
+  --nav-bg:rgba(18,10,28,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#c85c87,#6b82cc);--nav-active-shadow:0 4px 16px rgba(180,80,140,0.38);
+  --nav-active-label:linear-gradient(90deg,#df85a8,#97a9dc);
+  --chart-line-start:#d4638a;--chart-line-end:#7b8fd4;--chart-fill-color:#c85c87;--chart-goal-stroke:#a0aee0;
+  --prog-fill:linear-gradient(90deg,#a8406e,#6b82cc);--page-ring:rgba(200,92,135,0.10);
+}
+body.theme-sage{
+  --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
+  --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);--surface-accent:linear-gradient(150deg,rgba(80,140,100,0.05),rgba(60,120,120,0.03));
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
+  --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
+  --support-primary:#4a8a80;--support-light:#72aaa2;--support-pale:#b4d0cc;--support-tint:rgba(74,138,128,0.08);
+  --lav:#8ab4a8;
+  --border-soft:rgba(160,200,170,0.55);--border-mid:rgba(160,200,170,0.35);--border-accent:rgba(80,148,104,0.18);
+  --shadow-card:0 2px 12px rgba(60,120,80,0.07);--shadow-elevated:0 8px 28px rgba(60,120,80,0.16);
+  --cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);
+  --hero-gradient:linear-gradient(150deg,rgba(80,148,104,0.05),rgba(74,138,128,0.03));
+  --avatar-gradient:linear-gradient(135deg,#c4e0cc,#b4d0cc);
+  --nav-bg:rgba(10,22,14,0.93);
+  --nav-active-gradient:linear-gradient(135deg,#5a9a72,#4a8a80);--nav-active-shadow:0 4px 16px rgba(60,140,90,0.36);
+  --nav-active-label:linear-gradient(90deg,#84ba96,#72aaa2);
+  --chart-line-start:#5a9a72;--chart-line-end:#4a8a80;--chart-fill-color:#5a9a72;--chart-goal-stroke:#72aaa2;
+  --prog-fill:linear-gradient(90deg,#3d7a5a,#4a8a80);--page-ring:rgba(80,148,104,0.10);
+}
+body.theme-sand{
+  --bg-app:#f9f6f1;--bg-shell:linear-gradient(135deg,#ede6da,#e8e0d4);--bg-modal:#fdfaf6;
+  --surface-1:#fdfaf6;--surface-2:rgba(249,246,241,0.9);--surface-accent:linear-gradient(150deg,rgba(180,130,80,0.05),rgba(160,110,70,0.03));
+  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44);--text-faint:rgba(37,28,16,0.28);
+  --accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-light:#cc9a6e;--accent-pale:#e8cdb0;
+  --accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);
+  --support-primary:#7a6050;--support-light:#9a8070;--support-pale:#ccc0b4;--support-tint:rgba(122,96,80,0.08);
+  --lav:#b8a898;
+  --border-soft:rgba(200,175,145,0.55);--border-mid:rgba(200,175,145,0.35);--border-accent:rgba(170,110,60,0.18);
+  --shadow-card:0 2px 12px rgba(120,80,40,0.07);--shadow-elevated:0 8px 28px rgba(120,80,40,0.14);
+  --cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);
+  --hero-gradient:linear-gradient(150deg,rgba(170,110,60,0.05),rgba(122,96,80,0.03));
+  --avatar-gradient:linear-gradient(135deg,#e8cdb0,#ccc0b4);
+  --nav-bg:rgba(22,14,8,0.94);
+  --nav-active-gradient:linear-gradient(135deg,#b07848,#7a6050);--nav-active-shadow:0 4px 16px rgba(140,90,40,0.34);
+  --nav-active-label:linear-gradient(90deg,#cc9a6e,#9a8070);
+  --chart-line-start:#b07848;--chart-line-end:#7a6050;--chart-fill-color:#b07848;--chart-goal-stroke:#9a8070;
+  --prog-fill:linear-gradient(90deg,#8a5e3a,#7a6050);--page-ring:rgba(170,110,60,0.10);
+}
+body.theme-midnight{
+  --bg-app:#1a1424;--bg-shell:linear-gradient(135deg,#12101e,#1c1830);--bg-modal:#221c32;
+  --surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95);--surface-accent:linear-gradient(150deg,rgba(180,140,220,0.07),rgba(120,100,200,0.05));
+  --text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--text-faint:rgba(180,170,210,0.28);
+  --accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-light:#d0aaee;--accent-pale:rgba(200,160,240,0.18);
+  --accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);
+  --support-primary:#8899cc;--support-light:#a0b0d8;--support-pale:rgba(136,153,204,0.18);--support-tint:rgba(100,120,190,0.10);
+  --lav:#9088c0;
+  --border-soft:rgba(120,100,180,0.28);--border-mid:rgba(120,100,180,0.18);--border-accent:rgba(180,140,220,0.26);
+  --shadow-card:0 2px 16px rgba(0,0,0,0.28);--shadow-elevated:0 8px 32px rgba(0,0,0,0.38);
+  --cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);
+  --hero-gradient:linear-gradient(150deg,rgba(180,140,220,0.08),rgba(100,120,190,0.05));
+  --avatar-gradient:linear-gradient(135deg,rgba(200,160,240,0.22),rgba(136,153,204,0.18));
+  --nav-bg:rgba(10,8,20,0.96);
+  --nav-active-gradient:linear-gradient(135deg,#b888d8,#8899cc);--nav-active-shadow:0 4px 16px rgba(140,100,200,0.38);
+  --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
+  --chart-line-start:#c09ae0;--chart-line-end:#8899cc;--chart-fill-color:#b888d8;--chart-goal-stroke:#8899cc;
+  --prog-fill:linear-gradient(90deg,#9060c0,#8899cc);--page-ring:rgba(180,140,220,0.14);
+}
+
+/* ── LAYOUT ─────────────────────────────── */
+body{background:var(--bg-app);}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
+.scroll-area{padding-bottom:calc(var(--nav-h)+68px);padding-top:var(--nav-h);}
+@media(min-width:431px){
+  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
+  .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
+}
+
+/* ── NAV ────────────────────────────────── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
+.bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
+.bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
+.bnav-label{font-size:.5rem;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,0.28);transition:color .22s;text-align:center;line-height:1.1;}
+.bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
+.bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
+
+/* ── CARDS ──────────────────────────────── */
+.card{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);margin:0 var(--page-px) 12px;overflow:hidden;box-shadow:var(--shadow-card);}
+.card-header{padding:16px 20px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-mid);}
+.card-title{font-family:'Clash Display',sans-serif;font-size:.96rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;}
+.card-body{padding:16px 20px;}
+.card-footer{padding:12px 20px 16px;border-top:1px solid var(--border-mid);}
+
+/* ── BUTTONS ────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:var(--r-pill);font-family:'Satoshi',sans-serif;font-weight:700;cursor:pointer;transition:all .2s var(--ease);}
+.btn:active{transform:scale(.96);}
+.btn-primary{background:var(--cta-gradient);color:#fff;padding:14px 28px;font-size:.88rem;border:none;box-shadow:var(--shadow-elevated);}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.btn-ghost{background:none;color:var(--accent-primary);padding:10px 0;font-size:.82rem;font-weight:700;border:none;}
+.btn-pill{background:var(--accent-tint);color:var(--accent-primary);padding:7px 16px;font-size:.76rem;border:none;border-radius:var(--r-pill);}
+.btn-full{width:100%;}
+.btn-sm{padding:7px 14px;font-size:.74rem;}
+
+/* ── CHIPS ──────────────────────────────── */
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:var(--r-pill);padding:3px 10px;font-size:.64rem;font-weight:700;}
+.chip-ok{background:var(--ok-tint);color:var(--ok);}
+.chip-accent{background:var(--accent-tint);color:var(--accent-primary);}
+.chip-support{background:var(--support-tint);color:var(--support-primary);}
+.chip-warn{background:var(--warn-tint);color:var(--warn);}
+
+/* ── PROGRESS BAR ───────────────────────── */
+.prog-track{height:5px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
+.prog-fill{height:100%;border-radius:var(--r-pill);background:var(--prog-fill);transition:width 1.2s var(--ease);}
+
+/* ── MODAL ──────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-sheet{background:var(--bg-modal);border-radius:34px 34px 0 0;width:100%;max-width:430px;padding:0 0 46px;transform:translateY(100%);transition:transform .36s var(--ease);border:1px solid var(--border-soft);border-bottom:none;box-shadow:var(--shadow-elevated);}
+.modal-overlay.open .modal-sheet{transform:translateY(0);}
+.modal-handle{width:32px;height:4px;border-radius:2px;background:var(--border-soft);margin:14px auto 0;}
+.modal-title{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;padding:20px 26px 0;}
+.modal-body{padding:16px 26px 0;}
+
+/* ── PAGE HEADER ────────────────────────── */
+.page-header{padding:22px var(--page-px) 10px;display:flex;justify-content:space-between;align-items:flex-end;}
+.page-title{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.4px;line-height:1;}
+.page-sub{font-size:.74rem;color:var(--text-tertiary);margin-top:5px;font-weight:500;}
+.page-header-action{display:flex;align-items:center;gap:8px;flex-shrink:0;padding-bottom:4px;}
+
+/* ── SUMMARY GRID ───────────────────────── */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 var(--page-px);margin-bottom:12px;}
+.sum-cell{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:16px 16px 14px;box-shadow:var(--shadow-card);}
+.sum-cell.accent{border-color:var(--border-accent);background:var(--surface-accent);}
+.sum-cell.span2{grid-column:span 2;display:flex;gap:0;}
+.sum-lbl{font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-faint);margin-bottom:6px;}
+.sum-val{font-family:'Clash Display',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text-primary);letter-spacing:-1px;line-height:1;}
+.sum-unit{font-size:.7rem;font-weight:500;color:var(--text-tertiary);margin-left:2px;}
+.sum-note{font-size:.62rem;color:var(--text-tertiary);margin-top:4px;}
+.sum-ok{display:inline-flex;align-items:center;gap:3px;background:var(--ok-tint);color:var(--ok);border-radius:var(--r-pill);padding:3px 8px;font-size:.56rem;font-weight:700;margin-top:5px;}
+.sum-divider{width:1px;background:var(--border-mid);margin:0 4px;flex-shrink:0;}
+
+/* ── GOAL PROGRESS BANNER ───────────────── */
+.goal-banner{margin:0 var(--page-px) 12px;padding:18px 20px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);}
+.goal-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.goal-pct{font-family:'Clash Display',sans-serif;font-size:2.4rem;font-weight:700;color:var(--accent-primary);letter-spacing:-1.5px;line-height:1;}
+.goal-label{font-size:.74rem;font-weight:600;color:var(--text-tertiary);}
+.goal-track{height:8px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
+.goal-fill{height:100%;border-radius:var(--r-pill);background:var(--prog-fill);transition:width 1.4s var(--ease);}
+.goal-markers{display:flex;justify-content:space-between;margin-top:8px;}
+.goal-marker-lbl{font-size:.6rem;color:var(--text-faint);font-weight:600;}
+.goal-marker-val{font-size:.62rem;color:var(--text-tertiary);font-weight:700;}
+
+/* ── GRAPH SECTION ──────────────────────── */
+.graph-filters{display:flex;gap:6px;padding:0 var(--page-px) 12px;}
+.filter-btn{flex:1;padding:8px 0;border-radius:var(--r-md);border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.74rem;font-weight:700;color:var(--text-tertiary);cursor:pointer;transition:all .18s;text-align:center;}
+.filter-btn.active{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary);}
+.trend-text{font-size:.72rem;color:var(--text-tertiary);padding:0 0 4px;font-weight:500;}
+.trend-text strong{color:var(--accent-primary);font-weight:700;}
+.graph-empty{padding:32px 0;text-align:center;font-size:.78rem;color:var(--text-faint);}
+
+/* ── MILESTONES ─────────────────────────── */
+.milestone-row{display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--border-mid);}
+.milestone-row:last-child{border-bottom:none;}
+.milestone-icon{width:36px;height:36px;border-radius:11px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);flex-shrink:0;transition:all .3s;}
+.milestone-row.earned .milestone-icon{background:var(--cta-gradient);color:#fff;box-shadow:var(--shadow-elevated);}
+.milestone-title{font-size:.84rem;font-weight:700;color:var(--text-primary);}
+.milestone-desc{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
+.milestone-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;}
+.milestone-row.earned .milestone-check{background:var(--cta-gradient);border-color:transparent;}
+.milestone-row.earned .milestone-check svg{display:block;}
+.milestone-check svg{display:none;color:#fff;}
+.milestone-row.earned .milestone-title{color:var(--text-primary);}
+.milestone-row:not(.earned) .milestone-title{color:var(--text-tertiary);}
+.milestone-row:not(.earned) .milestone-icon{opacity:.4;}
+
+/* ── INSIGHTS ───────────────────────────── */
+.insight-row{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--border-mid);}
+.insight-row:last-child{border-bottom:none;}
+.insight-label{font-size:.78rem;font-weight:600;color:var(--text-secondary);}
+.insight-value{font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;}
+.insight-value.positive{color:var(--ok);}
+.insight-value.accent{color:var(--accent-primary);}
+
+/* ── PHOTOS ─────────────────────────────── */
+.photo-upload{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 20px;border:1.5px dashed var(--border-soft);border-radius:var(--r-lg);cursor:pointer;transition:all .2s;background:var(--surface-2);}
+.photo-upload:hover{border-color:var(--border-accent);background:var(--accent-tint);}
+.photo-upload-icon{width:42px;height:42px;border-radius:12px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);}
+.photo-upload-label{font-size:.78rem;font-weight:700;color:var(--accent-primary);}
+.photo-upload-sub{font-size:.66rem;color:var(--text-faint);text-align:center;}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.photo-tile{border-radius:var(--r-lg);overflow:hidden;position:relative;background:var(--surface-2);aspect-ratio:3/4;}
+.photo-tile img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-tile-meta{position:absolute;bottom:0;left:0;right:0;padding:8px 10px;background:linear-gradient(to top,rgba(0,0,0,0.55),transparent);display:flex;flex-direction:column;}
+.photo-tile-date{font-size:.6rem;font-weight:700;color:rgba(255,255,255,.85);}
+.photo-tile-del{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.42);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.8);border:none;}
+.compare-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.compare-tile{border-radius:var(--r-lg);overflow:hidden;background:var(--surface-2);aspect-ratio:3/4;position:relative;}
+.compare-tile img{width:100%;height:100%;object-fit:cover;}
+.compare-label{position:absolute;top:8px;left:8px;background:var(--cta-gradient);color:#fff;font-size:.58rem;font-weight:700;padding:3px 9px;border-radius:var(--r-pill);}
+.compare-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--text-faint);font-weight:600;padding:20px;text-align:center;}
+
+/* ── ANIMATIONS ─────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.a1{animation:fadeUp .32s var(--ease) .02s both}
+.a2{animation:fadeUp .32s var(--ease) .07s both}
+.a3{animation:fadeUp .32s var(--ease) .12s both}
+.a4{animation:fadeUp .32s var(--ease) .17s both}
+.a5{animation:fadeUp .32s var(--ease) .22s both}
+.a6{animation:fadeUp .32s var(--ease) .27s both}
+.photo-thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.photo-thumb{aspect-ratio:3/4;border-radius:10px;overflow:hidden;cursor:pointer;position:relative;background:var(--surface-2);}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s;}
+.photo-thumb:hover img{transform:scale(1.04);}
+.photo-thumb-date{position:absolute;bottom:0;left:0;right:0;padding:5px 7px;background:linear-gradient(to top,rgba(0,0,0,0.55),transparent);font-size:.54rem;font-weight:700;color:rgba(255,255,255,.85);}
+.photo-add-tile{aspect-ratio:3/4;border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px;background:linear-gradient(180deg,var(--accent-tint),var(--surface-2));border:1.5px dashed var(--border-accent);text-align:center;}
+.photo-add-icon{width:34px;height:34px;border-radius:12px;background:var(--surface-1);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);box-shadow:var(--shadow-soft);}
+.photo-add-label{font-size:.66rem;font-weight:800;line-height:1.3;color:var(--accent-primary);letter-spacing:.01em;}
+.photo-type-btn{flex:1;padding:9px 0;border-radius:var(--r-md);border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.78rem;font-weight:700;color:var(--text-tertiary);cursor:pointer;transition:all .18s;text-align:center;font-family:'Satoshi',sans-serif;}
+.photo-type-btn.active{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary);}
+.g-mode-btn{padding:8px 18px;border-radius:20px;border:none;background:rgba(255,255,255,0.08);color:rgba(255,255,255,.5);font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Satoshi',sans-serif;}
+.g-mode-btn.active{background:rgba(255,255,255,0.18);color:#fff;}
+.g-sub-btn{padding:7px 14px;border-radius:20px;border:none;background:rgba(255,255,255,0.07);color:rgba(255,255,255,.45);font-size:.70rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Satoshi',sans-serif;white-space:nowrap;}
+.g-sub-btn.active{background:rgba(255,255,255,0.16);color:#fff;}
+.film-thumb{width:46px;height:60px;border-radius:8px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:border-color .18s;}
+.film-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.film-thumb.active{border-color:#fff;}
+.s2-thumb{width:52px;height:68px;border-radius:8px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2.5px solid transparent;position:relative;transition:border-color .18s;}
+.s2-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.s2-thumb.picked-left{border-color:#a78bfa;}
+.s2-thumb.picked-right{border-color:#34d399;}
+
+body{visibility:hidden;}body.f-ready{visibility:visible;}
+/* ── GLP BUDDY TOP BAR ── */
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
+.glpb-topbar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
+}
+.glpb-topbar-name{
+  font-family:'Clash Display',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:3px;
+  color:rgba(255,255,255,0.85);line-height:1;
+}
+.glpb-topbar-face{
+  font-size:1.05rem;line-height:1;
+  color:rgba(255,255,255,0.45);
+}
+
+</style>
+<script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+</head>
+<body class="theme-rose">
+
+<!-- ══════════════════════════════════════════
+     ADD PHOTO SHEET
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="photoModal">
+  <div class="modal-sheet" style="padding-bottom:40px">
+    <div class="modal-handle"></div>
+    <div style="padding:16px 20px 0;display:flex;justify-content:space-between;align-items:center">
+      <div class="modal-title" style="padding:0;font-size:1.1rem">Add Progress Photo</div>
+      <button class="btn btn-ghost" onclick="closeModal('photoModal')" style="padding:0">Cancel</button>
+    </div>
+    <div style="padding:16px 20px 0">
+      <div style="display:flex;gap:6px;margin-bottom:14px">
+        <button class="photo-type-btn active" data-type="front" onclick="selectPhotoType(this)">Front</button>
+        <button class="photo-type-btn" data-type="side" onclick="selectPhotoType(this)">Side</button>
+        <button class="photo-type-btn" data-type="back" onclick="selectPhotoType(this)">Back</button>
+      </div>
+      <div class="photo-upload" onclick="document.getElementById('photoFileInput').click()">
+        <div class="photo-upload-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="photo-upload-label">Take a progress photo</div>
+        <div class="photo-upload-sub">Tap to open your camera or choose from your roll</div>
+      </div>
+      <input type="file" id="photoFileInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoSelected(event)">
+      <div id="photoPreviewWrap" style="display:none;margin-top:14px">
+        <img id="photoPreviewImg" style="width:100%;border-radius:var(--r-lg);max-height:300px;object-fit:cover;display:block">
+        <button class="btn btn-primary btn-full" onclick="savePhoto()" style="margin-top:14px">Save photo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FULLSCREEN GALLERY OVERLAY
+══════════════════════════════════════════ -->
+<div id="galleryOverlay" style="display:none;position:fixed;inset:0;z-index:400;background:#0a0812;flex-direction:column">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:52px 20px 14px;flex-shrink:0">
+    <button onclick="closeGallery()" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;color:#fff;flex-shrink:0">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div style="text-align:center;flex:1;padding:0 12px">
+      <div style="font-family:'Clash Display',sans-serif;font-size:.96rem;font-weight:700;color:#fff;letter-spacing:-.2px">Progress Photos</div>
+      <div id="galleryDateLabel" style="font-size:.66rem;color:rgba(255,255,255,.45);margin-top:2px"></div>
+    </div>
+    <button id="galleryDeleteBtn" onclick="galleryDeleteCurrent()" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;color:rgba(255,255,255,.7);flex-shrink:0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+    </button>
+  </div>
+
+  <!-- Mode tabs -->
+  <div style="display:flex;gap:6px;padding:0 20px 12px;flex-shrink:0">
+    <button class="g-mode-btn active" id="modeGallery" onclick="setGalleryMode('gallery')">Gallery</button>
+    <button class="g-mode-btn" id="modeCompare" onclick="setGalleryMode('compare')">Compare</button>
+  </div>
+
+  <!-- GALLERY MODE -->
+  <div id="galleryModeView" style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0">
+    <!-- Single photo -->
+    <div id="singleView" style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:0">
+      <img id="galleryMainImg" style="max-width:100%;max-height:100%;object-fit:contain;display:block;user-select:none;-webkit-user-drag:none" src="" alt="">
+      <div id="galleryTypeBadge" style="position:absolute;top:12px;left:16px;display:none">
+        <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-size:.62rem;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.4px" id="galleryTypeBadgeText"></span>
+      </div>
+      <button id="prevBtn" onclick="galleryPrev()" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button id="nextBtn" onclick="galleryNext()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <!-- Grid view -->
+    <div id="gridView" style="display:none;flex:1;overflow-y:auto;padding:0 20px 16px;min-height:0">
+      <div id="galleryGridInner" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"></div>
+    </div>
+    <!-- Counter + filmstrip -->
+    <div style="flex-shrink:0;padding:10px 0 6px">
+      <div id="galleryCounter" style="text-align:center;font-size:.64rem;color:rgba(255,255,255,.36);font-weight:600;margin-bottom:8px"></div>
+      <div id="filmstrip" style="display:flex;gap:5px;overflow-x:auto;padding:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch"></div>
+    </div>
+    <!-- Grid toggle -->
+    <div style="display:flex;justify-content:center;padding:8px 0 18px;flex-shrink:0">
+      <button id="gridToggleBtn" onclick="toggleGridView()" style="background:rgba(255,255,255,0.10);border:none;border-radius:20px;padding:7px 18px;color:rgba(255,255,255,.65);font-size:.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Satoshi',sans-serif">
+        <svg id="gridToggleIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span id="gridToggleLabel">All photos</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- COMPARE MODE -->
+  <div id="compareModeView" style="flex:1;display:none;flex-direction:column;overflow:hidden;min-height:0">
+    <!-- Sub-mode tabs -->
+    <div style="display:flex;gap:6px;padding:0 20px 12px;flex-shrink:0">
+      <button class="g-sub-btn active" id="subEarliestLatest" onclick="setCompareSubMode('earlylatest')">Earliest vs Latest</button>
+      <button class="g-sub-btn" id="subSelectTwo" onclick="setCompareSubMode('selecttwo')">Choose 2</button>
+    </div>
+    <!-- Side-by-side view -->
+    <div id="sxsView" style="flex:1;display:flex;gap:8px;overflow:hidden;min-height:0;padding:0 20px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div id="sxsLeft" style="flex:1;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;min-height:0">
+          <span style="color:rgba(255,255,255,.3);font-size:.7rem;font-weight:600">No photo</span>
+        </div>
+        <div style="text-align:center"><span id="sxsLeftLabel" style="font-size:.62rem;font-weight:700;color:rgba(255,255,255,.4)"></span></div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div id="sxsRight" style="flex:1;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;min-height:0">
+          <span style="color:rgba(255,255,255,.3);font-size:.7rem;font-weight:600">No photo</span>
+        </div>
+        <div style="text-align:center"><span id="sxsRightLabel" style="font-size:.62rem;font-weight:700;color:rgba(255,255,255,.4)"></span></div>
+      </div>
+    </div>
+    <!-- Slider compare view -->
+    <div id="sliderCompareWrap" style="flex:1;position:relative;overflow:hidden;min-height:0;display:none;margin:0 20px">
+      <img id="sliderImgBefore" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain" src="" alt="Before">
+      <div id="sliderClip" style="position:absolute;inset:0;overflow:hidden;width:50%">
+        <img id="sliderImgAfter" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;max-width:none" src="" alt="After">
+      </div>
+      <div id="sliderHandle" style="position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;cursor:ew-resize;transform:translateX(-50%)">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.5)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"><polyline points="8 5 2 12 8 19"/><polyline points="16 5 22 12 16 19"/></svg>
+        </div>
+      </div>
+    </div>
+    <!-- Choose-2 picker -->
+    <div id="selectTwoPicker" style="display:none;overflow-x:auto;padding:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+      <div id="selectTwoInner" style="display:flex;gap:6px;padding:8px 0"></div>
+    </div>
+    <!-- Compare controls -->
+    <div style="display:flex;gap:8px;padding:12px 20px 20px;flex-shrink:0">
+      <button id="toggleSliderBtn" onclick="toggleSliderMode()" style="background:rgba(255,255,255,0.10);border:none;border-radius:20px;padding:8px 16px;color:rgba(255,255,255,.65);font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Satoshi',sans-serif">
+        Slider view
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-wrap">
+<div class="scroll-area">
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:rgba(255,255,255,0.85);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="10" x2="9.01" y2="10" stroke-width="3"/><line x1="15" y1="10" x2="15.01" y2="10" stroke-width="3"/></svg></div>
+<!-- PAGE HEADER -->
+<div class="page-header a1">
+  <div>
+    <div class="page-title">Progress</div>
+    <div class="page-sub" id="journeyLabel">Your progress, at a glance</div>
+  </div>
+  <div class="page-header-action">
+    <div style="width:44px;height:44px;border-radius:14px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);cursor:pointer" onclick="location='settings.html'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- ① SUMMARY GRID -->
+<div class="summary-grid a2">
+  <div class="sum-cell">
+    <div class="sum-lbl">Current</div>
+    <div><span class="sum-val" id="sumCurrent">—</span><span class="sum-unit" id="sumCurrentUnit">kg</span></div>
+    <div class="sum-ok" id="sumLostBadge" style="display:none">
+      <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <span id="sumLostText">—</span>
+    </div>
+  </div>
+  <div class="sum-cell">
+    <div class="sum-lbl">Start</div>
+    <div><span class="sum-val" id="sumStart">—</span><span class="sum-unit" id="sumStartUnit">kg</span></div>
+    <div class="sum-note" id="sumStartDate">—</div>
+  </div>
+  <div class="sum-cell accent" style="grid-column:span 2;display:flex;gap:0;padding:0;overflow:hidden">
+    <div style="flex:1;padding:16px 16px 14px">
+      <div class="sum-lbl">Goal weight</div>
+      <div><span class="sum-val" id="sumGoal">—</span><span class="sum-unit" id="sumGoalUnit">kg</span></div>
+      <div class="sum-note" id="sumToGo">— to go</div>
+    </div>
+    <div class="sum-divider"></div>
+    <div style="flex:1;padding:16px 16px 14px">
+      <div class="sum-lbl">Total lost</div>
+      <div><span class="sum-val" id="sumTotalLost">—</span><span class="sum-unit" id="sumLostUnit">kg</span></div>
+      <div class="sum-note" id="sumConsistency">— weigh-ins</div>
+    </div>
+  </div>
+</div>
+
+<!-- GOAL PROGRESS BANNER -->
+<div class="goal-banner a2">
+  <div class="goal-top">
+    <div>
+      <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-mid);margin-bottom:4px">Goal progress</div>
+      <span class="goal-pct" id="goalPctDisplay">—</span><span style="font-size:1rem;font-weight:500;color:var(--text-tertiary);margin-left:3px">%</span>
+    </div>
+    <div style="text-align:right">
+      <div class="goal-label" id="goalLabelRight">toward goal</div>
+      <div style="font-size:.7rem;color:var(--text-faint);margin-top:3px" id="goalSubRight">Log weight to start</div>
+    </div>
+  </div>
+  <div class="goal-track"><div class="goal-fill" id="goalFillBar" style="width:0%"></div></div>
+  <div class="goal-markers">
+    <div><div class="goal-marker-lbl">Start</div><div class="goal-marker-val" id="markerStart">—</div></div>
+    <div style="text-align:center"><div class="goal-marker-lbl">Now</div><div class="goal-marker-val" id="markerNow">—</div></div>
+    <div style="text-align:right"><div class="goal-marker-lbl">Goal</div><div class="goal-marker-val" id="markerGoal">—</div></div>
+  </div>
+</div>
+
+<!-- ② WEIGHT GRAPH CARD -->
+<div class="card a3" id="graphCard">
+  <div class="card-header">
+    <div class="card-title">Weight trend</div>
+    <div class="trend-text" id="trendSummary" style="font-size:.67rem"></div>
+  </div>
+  <div style="padding:14px 20px 0">
+    <div class="graph-filters" style="padding:0 0 14px">
+      <button class="filter-btn" data-range="7"   onclick="setRange(7)"  >7D</button>
+      <button class="filter-btn active" data-range="30"  onclick="setRange(30)" >30D</button>
+      <button class="filter-btn" data-range="90"  onclick="setRange(90)" >90D</button>
+      <button class="filter-btn" data-range="0"   onclick="setRange(0)"  >All</button>
+    </div>
+    <div id="graphArea">
+      <div class="graph-empty" id="graphEmpty">Log your first weight to see your trend</div>
+      <svg id="trendSvg" style="width:100%;height:180px;overflow:visible;display:none" viewBox="0 0 340 160" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" id="tgStop1" stop-opacity=".18"/>
+            <stop offset="100%" id="tgStop2" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="tgl" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" id="tglS"/>
+            <stop offset="100%" id="tglE"/>
+          </linearGradient>
+        </defs>
+        <g id="trendContent"></g>
+      </svg>
+    </div>
+    <div id="graphLegend" style="display:none;padding:6px 0 16px">
+      <div style="display:flex;gap:14px">
+        <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;font-weight:600;color:var(--text-tertiary)">
+          <div id="legendLine" style="width:12px;height:2px;border-radius:2px"></div>Weight
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;font-weight:600;color:var(--text-tertiary)">
+          <div id="legendGoalLine" style="width:12px;height:0;border-top:2px dashed;opacity:.7"></div>Goal
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ MILESTONES -->
+<div class="card a4">
+  <div class="card-header"><div class="card-title">Milestones</div></div>
+  <div id="milestoneList">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<!-- ④ PROGRESS PHOTOS -->
+<div class="card a5">
+  <div class="card-header">
+    <div class="card-title">Progress photos</div>
+  </div>
+  <div class="card-body" style="padding-top:12px">
+    <!-- Empty state -->
+    <div id="photoEmpty">
+      <div class="photo-upload" onclick="openAddPhoto()">
+        <div class="photo-upload-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="photo-upload-label">Take your first progress photo</div>
+        <div class="photo-upload-sub">A simple photo every week helps you see your real progress.</div>
+      </div>
+    </div>
+    <!-- Thumbnail preview (hidden when empty) -->
+    <div id="photoPreviewGrid" style="display:none">
+      <div class="photo-thumb-grid" id="photoThumbGrid"></div>
+      <div style="display:flex;gap:8px;margin-top:14px;padding-bottom:18px">
+        <button class="btn btn-pill btn-sm" style="flex:1;justify-content:center" onclick="openGallery(0)">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          View all
+        </button>
+        <button class="btn btn-pill btn-sm" id="compareBtn" style="flex:1;justify-content:center;display:none" onclick="openGalleryCompare()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
+          Compare
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ INSIGHTS -->
+<div class="card a6">
+  <div class="card-header"><div class="card-title">Insights</div></div>
+  <div id="insightsList">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<div style="height:28px"></div>
+</div><!-- /scroll-area -->
+</div><!-- /page-wrap -->
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
+  <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
+  <a href="progress.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
+  <a href="community.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="bnav-label">Community</div></a>
+  <a href="meals.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="bnav-label">Meals</div></a>
+  <a href="settings.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
+</nav>
+
+<script src="glp-common.js"></script>
+<script>GLPApp.boot('progress');</script>
+<script>
+'use strict';
+
+// ── SKIN ─────────────────────────────────────────────
+const SKINS = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
+function applySkin(skin) {
+  if (!SKINS.includes(skin)) skin = 'theme-rose';
+  SKINS.forEach(s => document.body.classList.remove(s));
+  document.body.classList.add(skin);
+  updateChartColors();
+}
+
+function updateChartColors() {
+  const st  = getComputedStyle(document.body);
+  const fill = st.getPropertyValue('--chart-fill-color').trim() || '#c85c87';
+  const ls   = st.getPropertyValue('--chart-line-start').trim() || '#d4638a';
+  const le   = st.getPropertyValue('--chart-line-end').trim()   || '#7b8fd4';
+  const goal = st.getPropertyValue('--chart-goal-stroke').trim()|| '#a0aee0';
+  const s1 = document.getElementById('tgStop1');
+  const s2 = document.getElementById('tgStop2');
+  const ls_el = document.getElementById('tglS');
+  const le_el = document.getElementById('tglE');
+  if (s1) s1.setAttribute('stop-color', fill);
+  if (s2) s2.setAttribute('stop-color', fill);
+  if (ls_el) ls_el.setAttribute('stop-color', ls);
+  if (le_el) le_el.setAttribute('stop-color', le);
+  const ll = document.getElementById('legendLine');
+  if (ll) ll.style.background = `linear-gradient(90deg,${ls},${le})`;
+  const gl = document.getElementById('legendGoalLine');
+  if (gl) gl.style.borderColor = goal;
+}
+
+// ── STORAGE ───────────────────────────────────────────
+function loadSettings()  { try { return JSON.parse(localStorage.getItem('glp_settings')    || '{}'); } catch { return {}; } }
+function loadWeightLog() { try { return JSON.parse(localStorage.getItem('glp_weight_log')  || '[]'); } catch { return []; } }
+function loadPhotos()    { try { return JSON.parse(localStorage.getItem('glp_photos')       || '[]'); } catch { return []; } }
+function savePhotos(arr) { localStorage.setItem('glp_photos', JSON.stringify(arr)); }
+
+function todayKey() { return new Date().toISOString().slice(0, 10); }
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+// ── RANGE STATE ───────────────────────────────────────
+let _range = 30;
+function setRange(days) {
+  _range = days;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.range) === days);
+  });
+  drawTrend();
+}
+
+// ── FILTER LOG BY RANGE ───────────────────────────────
+function filterLog(log, days) {
+  if (!days) return log; // All
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+  return log.filter(e => e.date >= cutoffStr);
+}
+
+// ── ANALYTICS ─────────────────────────────────────────
+function calcAvgWeeklyLoss(log) {
+  if (log.length < 2) return null;
+  const sorted = [...log].sort((a, b) => a.date.localeCompare(b.date));
+  const first  = sorted[0];
+  const last   = sorted[sorted.length - 1];
+  const days   = Math.max(1, (new Date(last.date) - new Date(first.date)) / 86400000);
+  const weeks  = days / 7;
+  return (first.weight - last.weight) / weeks;
+}
+
+function calcStreak(log) {
+  if (!log.length) return 0;
+  const byDate = {};
+  log.forEach(e => byDate[e.date] = true);
+  let streak = 0;
+  const d = new Date(todayKey());
+  if (!byDate[todayKey()]) d.setDate(d.getDate() - 1);
+  for (let i = 0; i < 365; i++) {
+    const k = d.toISOString().slice(0, 10);
+    if (byDate[k]) streak++;
+    else break;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+
+// ── TREND CHART ───────────────────────────────────────
+function drawTrend() {
+  const S   = loadSettings();
+  const log = loadWeightLog().sort((a, b) => a.date.localeCompare(b.date));
+  const filtered = filterLog(log, _range);
+
+  const empty  = document.getElementById('graphEmpty');
+  const svg    = document.getElementById('trendSvg');
+  const legend = document.getElementById('graphLegend');
+  const trendEl = document.getElementById('trendSummary');
+
+  if (!filtered.length) {
+    empty.style.display  = 'block';
+    svg.style.display    = 'none';
+    legend.style.display = 'none';
+    if (trendEl) trendEl.innerHTML = '';
+    return;
+  }
+  empty.style.display  = 'none';
+  svg.style.display    = 'block';
+  legend.style.display = 'block';
+
+  const goalW = S.goalWeight || null;
+  const W = 340, H = 150, PAD = 10;
+
+  const weights = filtered.map(e => e.weight);
+  const refs    = [...weights];
+  if (goalW) refs.push(goalW);
+  const minW = Math.min(...refs) - 1;
+  const maxW = Math.max(...refs) + 1;
+  const range = maxW - minW || 1;
+
+  const n = filtered.length;
+  const px = i  => PAD + (i / Math.max(n - 1, 1)) * (W - PAD * 2);
+  const py = w  => H - ((w - minW) / range) * (H - PAD * 2) - PAD;
+
+  const st   = getComputedStyle(document.body);
+  const ls   = st.getPropertyValue('--chart-line-start').trim() || '#d4638a';
+  const le   = st.getPropertyValue('--chart-line-end').trim()   || '#7b8fd4';
+  const fill = st.getPropertyValue('--chart-fill-color').trim() || '#c85c87';
+  const goal = st.getPropertyValue('--chart-goal-stroke').trim()|| '#a0aee0';
+
+  // Update gradient stops
+  const s1 = document.getElementById('tgStop1'), s2 = document.getElementById('tgStop2');
+  const ls_el = document.getElementById('tglS'),  le_el = document.getElementById('tglE');
+  if (s1) s1.setAttribute('stop-color', fill);
+  if (s2) s2.setAttribute('stop-color', fill);
+  if (ls_el) ls_el.setAttribute('stop-color', ls);
+  if (le_el) le_el.setAttribute('stop-color', le);
+
+  let svgStr = '';
+
+  // Goal line
+  if (goalW != null) {
+    const gy = py(goalW).toFixed(1);
+    svgStr += `<line x1="${PAD}" y1="${gy}" x2="${W-PAD}" y2="${gy}" stroke="${goal}" stroke-width="1.5" stroke-dasharray="5,4" opacity=".7"/>`;
+  }
+
+  // Area + line
+  if (n >= 2) {
+    const path = filtered.map((e, i) => `${i === 0 ? 'M' : 'L'}${px(i).toFixed(1)},${py(e.weight).toFixed(1)}`).join(' ');
+    const lastX = px(n - 1).toFixed(1);
+    const firstX = px(0).toFixed(1);
+    svgStr += `<path d="${path} L${lastX},${H} L${firstX},${H} Z" fill="url(#tg)"/>`;
+    svgStr += `<path d="${path}" fill="none" stroke="url(#tgl)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+
+  // Dots — only first, last, and any notable low points (not every point if >20)
+  const isDark = document.body.classList.contains('theme-midnight');
+  const dotStroke = isDark ? '#2a2240' : 'white';
+  const threshold = n > 20 ? 10 : 1;
+  filtered.forEach((e, i) => {
+    const isFirst = i === 0;
+    const isLast  = i === n - 1;
+    if (!isFirst && !isLast && i % threshold !== 0) return;
+    const cx = px(i).toFixed(1), cy = py(e.weight).toFixed(1);
+    if (isLast) {
+      svgStr += `<circle cx="${cx}" cy="${cy}" r="7" fill="${fill}" fill-opacity=".14"/>`;
+      svgStr += `<circle cx="${cx}" cy="${cy}" r="4" fill="${ls}" stroke="${dotStroke}" stroke-width="2"/>`;
+    } else {
+      svgStr += `<circle cx="${cx}" cy="${cy}" r="2.5" fill="${ls}" stroke="${dotStroke}" stroke-width="1.5"/>`;
+    }
+  });
+
+  // X-axis date labels — first and last
+  const textFill = isDark ? 'rgba(220,210,240,.35)' : 'rgba(26,16,40,.28)';
+  const d0 = fmtDate(filtered[0].date).replace(/\d{4}$/, '').trim().replace(/,$/, '');
+  const d1 = fmtDate(filtered[n - 1].date).replace(/\d{4}$/, '').trim().replace(/,$/, '');
+  svgStr += `<text x="${PAD}" y="${H + 14}" font-size="8" fill="${textFill}" font-family="Satoshi,sans-serif" font-weight="600">${d0}</text>`;
+  svgStr += `<text x="${W - PAD}" y="${H + 14}" font-size="8" fill="${textFill}" text-anchor="end" font-family="Satoshi,sans-serif" font-weight="600">${d1}</text>`;
+
+  document.getElementById('trendContent').innerHTML = svgStr;
+  document.getElementById('legendLine').style.background = `linear-gradient(90deg,${ls},${le})`;
+  document.getElementById('legendGoalLine').style.borderColor = goal;
+
+  // Trend summary
+  const avgLoss = calcAvgWeeklyLoss(filtered);
+  const unitLabel = (filtered[0] && filtered[0].units) ? filtered[0].units : (S.units || 'kg');
+  if (trendEl) {
+    if (avgLoss == null) {
+      trendEl.innerHTML = '';
+    } else if (avgLoss > 0.01) {
+      trendEl.innerHTML = `<strong>−${avgLoss.toFixed(2)}${unitLabel}/wk</strong> avg`;
+    } else if (avgLoss < -0.01) {
+      trendEl.innerHTML = `<strong>+${Math.abs(avgLoss).toFixed(2)}${unitLabel}/wk</strong>`;
+    } else {
+      trendEl.innerHTML = 'Stable';
+    }
+  }
+}
+
+// ── MILESTONES ────────────────────────────────────────
+const MILESTONES = [
+  { id:'first_log',    icon:'scale',   title:'First weigh-in',          desc:'You took the first step' },
+  { id:'log_5',        icon:'streak',  title:'5 weigh-ins',             desc:'Building the habit' },
+  { id:'log_10',       icon:'streak',  title:'10 weigh-ins',            desc:'Consistency is showing' },
+  { id:'log_30',       icon:'streak',  title:'30 weigh-ins',            desc:'A month of data' },
+  { id:'lost_1',       icon:'down',    title:'1 kg lost',               desc:'Momentum has started' },
+  { id:'lost_2',       icon:'down',    title:'2 kg lost',               desc:'Measurable progress' },
+  { id:'lost_5',       icon:'down',    title:'5 kg lost',               desc:'A meaningful milestone' },
+  { id:'lost_pct5',    icon:'pct',     title:'5% body weight lost',     desc:'Clinically significant change' },
+  { id:'lost_pct10',   icon:'pct',     title:'10% body weight lost',    desc:'Exceptional progress' },
+  { id:'at_goal',      icon:'trophy',  title:'Goal weight reached',     desc:'You made it' },
+];
+
+function milestoneIcon(type) {
+  const icons = {
+    scale:  `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`,
+    streak: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    down:   `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>`,
+    pct:    `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+    trophy: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>`,
+  };
+  return icons[type] || icons.scale;
+}
+
+function computeEarned(log, S) {
+  const earned = new Set();
+  const sorted = [...log].sort((a, b) => a.date.localeCompare(b.date));
+  const startW = S.startWeight || (sorted.length ? sorted[0].weight : null);
+  const goalW  = S.goalWeight  || null;
+  const latest = sorted.length ? sorted[sorted.length - 1].weight : null;
+  const lost   = (startW != null && latest != null) ? startW - latest : 0;
+  const pctLost = startW ? (lost / startW * 100) : 0;
+
+  if (sorted.length >= 1)  earned.add('first_log');
+  if (sorted.length >= 5)  earned.add('log_5');
+  if (sorted.length >= 10) earned.add('log_10');
+  if (sorted.length >= 30) earned.add('log_30');
+  if (lost >= 1)   earned.add('lost_1');
+  if (lost >= 2)   earned.add('lost_2');
+  if (lost >= 5)   earned.add('lost_5');
+  if (pctLost >= 5)  earned.add('lost_pct5');
+  if (pctLost >= 10) earned.add('lost_pct10');
+  if (goalW != null && latest != null && latest <= goalW) earned.add('at_goal');
+
+  return earned;
+}
+
+function renderMilestones(log, S) {
+  const earned = computeEarned(log, S);
+  const list   = document.getElementById('milestoneList');
+  if (!list) return;
+  // Show earned first, then locked
+  const sorted = [...MILESTONES].sort((a, b) => {
+    const ae = earned.has(a.id), be = earned.has(b.id);
+    if (ae && !be) return -1;
+    if (!ae && be) return 1;
+    return 0;
+  });
+  list.innerHTML = sorted.map(m => {
+    const isEarned = earned.has(m.id);
+    return `<div class="milestone-row${isEarned ? ' earned' : ''}">
+      <div class="milestone-icon">${milestoneIcon(m.icon)}</div>
+      <div style="flex:1">
+        <div class="milestone-title">${m.title}</div>
+        <div class="milestone-desc">${m.desc}</div>
+      </div>
+      <div class="milestone-check">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── INSIGHTS ──────────────────────────────────────────
+function renderInsights(log, S) {
+  const el = document.getElementById('insightsList');
+  if (!el) return;
+  const sorted  = [...log].sort((a, b) => a.date.localeCompare(b.date));
+  const unitLabel = (sorted.length && sorted[0].units) ? sorted[0].units : (S.units || 'kg');
+  const startW  = S.startWeight || (sorted.length ? sorted[0].weight : null);
+  const goalW   = S.goalWeight  || null;
+  const latest  = sorted.length ? sorted[sorted.length - 1].weight : null;
+  const lost    = (startW != null && latest != null) ? Math.max(0, startW - latest) : null;
+  const pct     = (startW != null && goalW != null && startW !== goalW && lost != null)
+    ? Math.min(100, Math.round(lost / (startW - goalW) * 100)) : null;
+  const streak  = calcStreak(log);
+  const avgLoss = calcAvgWeeklyLoss(sorted);
+
+  const rows = [];
+
+  if (pct != null) rows.push({ label:'Toward goal', value:`${pct}%`, cls:'accent' });
+  if (avgLoss != null) {
+    const sign = avgLoss >= 0 ? '−' : '+';
+    rows.push({ label:'Avg weekly change', value:`${sign}${Math.abs(avgLoss).toFixed(2)} ${unitLabel}`, cls: avgLoss > 0 ? 'positive' : '' });
+  }
+  rows.push({ label:'Current streak', value: streak > 0 ? `${streak} day${streak > 1 ? 's' : ''}` : 'No streak yet', cls: streak >= 3 ? 'positive' : '' });
+  rows.push({ label:'Total weigh-ins', value:`${log.length}`, cls:'' });
+  if (lost != null) rows.push({ label:'Total lost', value:`${lost.toFixed(1)} ${unitLabel}`, cls: lost > 0 ? 'positive' : '' });
+  if (startW != null && goalW != null && latest != null) {
+    const toGo = Math.max(0, latest - goalW);
+    rows.push({ label:'Remaining to goal', value:`${toGo.toFixed(1)} ${unitLabel}`, cls:'' });
+  }
+  if (sorted.length >= 2) {
+    const firstDate = fmtDate(sorted[0].date);
+    rows.push({ label:'Journey started', value: firstDate, cls:'' });
+  }
+
+  if (!rows.length) {
+    el.innerHTML = `<div style="padding:20px;text-align:center;font-size:.78rem;color:var(--text-faint)">Log your first weight to see insights</div>`;
+    return;
+  }
+
+  el.innerHTML = rows.map((r, i) => `
+    <div class="insight-row" style="${i === rows.length - 1 ? 'border-bottom:none' : ''}">
+      <div class="insight-label">${r.label}</div>
+      <div class="insight-value ${r.cls || ''}">${r.value}</div>
+    </div>`).join('');
+}
+
+// ── PHOTOS ────────────────────────────────────────────
+let _pendingPhotoData = null;
+let _pendingPhotoType = 'front';
+
+function openAddPhoto() {
+  _pendingPhotoType = 'front';
+  _pendingPhotoData = null;
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('photoPreviewWrap').style.display = 'none';
+  // Reset type buttons
+  document.querySelectorAll('.photo-type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'front'));
+  openModal('photoModal');
+}
+
+function selectPhotoType(btn) {
+  document.querySelectorAll('.photo-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _pendingPhotoType = btn.dataset.type;
+}
+
+function handlePhotoSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    _pendingPhotoData = ev.target.result;
+    const prev = document.getElementById('photoPreviewImg');
+    const wrap = document.getElementById('photoPreviewWrap');
+    if (prev) prev.src = _pendingPhotoData;
+    if (wrap) wrap.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function savePhoto() {
+  if (!_pendingPhotoData) return;
+  const photos = loadPhotos();
+  photos.push({ date: todayKey(), data: _pendingPhotoData, type: _pendingPhotoType });
+  savePhotos(photos);
+  if (window.GLPApp) GLPApp.track('progress_photo_saved', { type: _pendingPhotoType });
+  _pendingPhotoData = null;
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('photoPreviewWrap').style.display = 'none';
+  closeModal('photoModal');
+  renderPhotos();
+}
+
+function deletePhoto(index) {
+  if (!confirm('Remove this photo?')) return;
+  const photos = loadPhotos();
+  photos.splice(index, 1);
+  savePhotos(photos);
+  renderPhotos();
+}
+
+function renderPhotos() {
+  const photos = loadPhotos();
+  const empty  = document.getElementById('photoEmpty');
+  const preview = document.getElementById('photoPreviewGrid');
+  const compareBtn = document.getElementById('compareBtn');
+
+  if (!photos.length) {
+    if (empty)   empty.style.display   = 'block';
+    if (preview) preview.style.display = 'none';
+    if (compareBtn) compareBtn.style.display = 'none';
+    return;
+  }
+  if (empty)   empty.style.display   = 'none';
+  if (preview) preview.style.display = 'block';
+  if (compareBtn) compareBtn.style.display = photos.length >= 2 ? 'flex' : 'none';
+
+  // Thumbnail preview — newest first, max 6
+  const sorted = [...photos].map((p, i) => ({ ...p, idx: i })).reverse();
+  const grid = document.getElementById('photoThumbGrid');
+  if (grid) {
+    const show = sorted.slice(0, 5);
+    const addTile = `
+      <div class="photo-add-tile" onclick="openAddPhoto()">
+        <div class="photo-add-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="photo-add-label">Take a<br>progress photo</div>
+      </div>`;
+    grid.innerHTML = addTile + show.map(p => `
+      <div class="photo-thumb" onclick="openGallery(${p.idx})">
+        <img src="${p.data}" alt="${fmtDate(p.date)}" loading="lazy">
+        <div class="photo-thumb-date">${fmtDate(p.date)}</div>
+      </div>`).join('');
+  }
+}
+
+// ── GALLERY OVERLAY ───────────────────────────────────
+let _galleryPhotos  = [];  // current sorted photo array (oldest→newest)
+let _galleryIndex   = 0;   // index in _galleryPhotos of currently shown photo
+let _galleryMode    = 'gallery'; // 'gallery' | 'compare'
+let _compareSubMode = 'earlylatest'; // 'earlylatest' | 'selecttwo'
+let _sliderMode     = false;
+let _s2Left         = 0;
+let _s2Right        = 1;
+let _gridOpen       = false;
+
+function openGallery(startIndex) {
+  const photos = loadPhotos();
+  if (!photos.length) return;
+  // Sort oldest→newest
+  _galleryPhotos = photos.map((p, i) => ({ ...p, origIdx: i }));
+  // startIndex is origIdx, find position in sorted array
+  _galleryIndex = _galleryPhotos.findIndex(p => p.origIdx === startIndex);
+  if (_galleryIndex < 0) _galleryIndex = _galleryPhotos.length - 1;
+  _galleryMode    = 'gallery';
+  _compareSubMode = 'earlylatest';
+  _sliderMode     = false;
+  _gridOpen       = false;
+  const overlay = document.getElementById('galleryOverlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setGalleryMode('gallery');
+  renderGalleryPhoto();
+  renderFilmstrip();
+  initSwipe();
+}
+
+function openGalleryCompare() {
+  const photos = loadPhotos();
+  if (photos.length < 2) return;
+  _galleryPhotos  = photos.map((p, i) => ({ ...p, origIdx: i }));
+  _galleryMode    = 'compare';
+  _compareSubMode = 'earlylatest';
+  _sliderMode     = false;
+  _s2Left         = 0;
+  _s2Right        = _galleryPhotos.length - 1;
+  const overlay = document.getElementById('galleryOverlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setGalleryMode('compare');
+}
+
+function closeGallery() {
+  document.getElementById('galleryOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+  // Refresh card in case photos were deleted
+  renderPhotos();
+}
+
+function setGalleryMode(mode) {
+  _galleryMode = mode;
+  document.getElementById('modeGallery').classList.toggle('active', mode === 'gallery');
+  document.getElementById('modeCompare').classList.toggle('active', mode === 'compare');
+  document.getElementById('galleryModeView').style.display  = mode === 'gallery'  ? 'flex' : 'none';
+  document.getElementById('compareModeView').style.display  = mode === 'compare' ? 'flex' : 'none';
+  document.getElementById('galleryDeleteBtn').style.display = mode === 'gallery'  ? 'flex' : 'none';
+  if (mode === 'compare') {
+    setCompareSubMode(_compareSubMode);
+  } else {
+    renderGalleryPhoto();
+    renderFilmstrip();
+  }
+}
+
+function renderGalleryPhoto() {
+  if (!_galleryPhotos.length) return;
+  const p = _galleryPhotos[_galleryIndex];
+  const img = document.getElementById('galleryMainImg');
+  const dateEl = document.getElementById('galleryDateLabel');
+  const badge  = document.getElementById('galleryTypeBadge');
+  const badgeText = document.getElementById('galleryTypeBadgeText');
+  const counter   = document.getElementById('galleryCounter');
+  if (img) img.src = p.data;
+  if (dateEl) dateEl.textContent = fmtDate(p.date);
+  if (badge && badgeText) {
+    if (p.type && p.type !== 'front') {
+      badge.style.display = 'block';
+      badgeText.textContent = p.type.charAt(0).toUpperCase() + p.type.slice(1);
+    } else { badge.style.display = 'none'; }
+  }
+  if (counter) counter.textContent = `${_galleryIndex + 1} / ${_galleryPhotos.length}`;
+  // Prev/next visibility
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  if (prev) prev.style.opacity = _galleryIndex > 0 ? '0.7' : '0.2';
+  if (next) next.style.opacity = _galleryIndex < _galleryPhotos.length - 1 ? '0.7' : '0.2';
+  // Sync filmstrip
+  document.querySelectorAll('.film-thumb').forEach((el, i) => {
+    el.classList.toggle('active', i === _galleryIndex);
+  });
+}
+
+function renderFilmstrip() {
+  const strip = document.getElementById('filmstrip');
+  if (!strip) return;
+  strip.innerHTML = _galleryPhotos.map((p, i) => `
+    <div class="film-thumb${i === _galleryIndex ? ' active' : ''}" onclick="galleryGoTo(${i})">
+      <img src="${p.data}" alt="" loading="lazy">
+    </div>`).join('');
+}
+
+function renderGalleryGrid() {
+  const grid = document.getElementById('galleryGridInner');
+  if (!grid) return;
+  grid.innerHTML = _galleryPhotos.map((p, i) => `
+    <div style="aspect-ratio:3/4;border-radius:10px;overflow:hidden;cursor:pointer;position:relative;background:rgba(255,255,255,.06)" onclick="galleryGoTo(${i});toggleGridView()">
+      <img src="${p.data}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:4px 6px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);font-size:.52rem;font-weight:700;color:rgba(255,255,255,.8)">${fmtDate(p.date)}</div>
+    </div>`).join('');
+}
+
+function galleryGoTo(i) {
+  _galleryIndex = Math.max(0, Math.min(_galleryPhotos.length - 1, i));
+  renderGalleryPhoto();
+  // Scroll filmstrip to active
+  const strip = document.getElementById('filmstrip');
+  if (strip) {
+    const active = strip.children[_galleryIndex];
+    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+}
+
+function galleryPrev() { if (_galleryIndex > 0) galleryGoTo(_galleryIndex - 1); }
+function galleryNext() { if (_galleryIndex < _galleryPhotos.length - 1) galleryGoTo(_galleryIndex + 1); }
+
+function galleryDeleteCurrent() {
+  if (!_galleryPhotos.length) return;
+  if (!confirm('Delete this photo?')) return;
+  const p = _galleryPhotos[_galleryIndex];
+  const photos = loadPhotos();
+  photos.splice(p.origIdx, 1);
+  savePhotos(photos);
+  // Rebuild gallery
+  _galleryPhotos = loadPhotos().map((ph, i) => ({ ...ph, origIdx: i }));
+  if (!_galleryPhotos.length) { closeGallery(); return; }
+  _galleryIndex = Math.min(_galleryIndex, _galleryPhotos.length - 1);
+  renderGalleryPhoto();
+  renderFilmstrip();
+  if (_gridOpen) renderGalleryGrid();
+}
+
+function toggleGridView() {
+  _gridOpen = !_gridOpen;
+  document.getElementById('singleView').style.display  = _gridOpen ? 'none' : 'flex';
+  document.getElementById('gridView').style.display    = _gridOpen ? 'block' : 'none';
+  document.getElementById('filmstrip').parentElement.style.display = _gridOpen ? 'none' : 'block';
+  document.getElementById('gridToggleLabel').textContent = _gridOpen ? 'Close grid' : 'All photos';
+  if (_gridOpen) renderGalleryGrid();
+}
+
+// ── COMPARE MODE ──────────────────────────────────────
+function setCompareSubMode(mode) {
+  _compareSubMode = mode;
+  _sliderMode = false;
+  document.getElementById('subEarliestLatest').classList.toggle('active', mode === 'earlylatest');
+  document.getElementById('subSelectTwo').classList.toggle('active', mode === 'selecttwo');
+  document.getElementById('selectTwoPicker').style.display = mode === 'selecttwo' ? 'block' : 'none';
+  document.getElementById('toggleSliderBtn').textContent = 'Slider view';
+
+  if (mode === 'earlylatest') {
+    _s2Left  = 0;
+    _s2Right = _galleryPhotos.length - 1;
+  }
+  renderCompare();
+  if (mode === 'selecttwo') renderSelectTwoPicker();
+}
+
+function renderCompare() {
+  const left  = _galleryPhotos[_s2Left];
+  const right = _galleryPhotos[_s2Right];
+  if (!left || !right) return;
+
+  if (_sliderMode) {
+    // Slider
+    document.getElementById('sxsView').style.display          = 'none';
+    document.getElementById('sliderCompareWrap').style.display = 'flex';
+    const imgB = document.getElementById('sliderImgBefore');
+    const imgA = document.getElementById('sliderImgAfter');
+    if (imgB) imgB.src = left.data;
+    if (imgA) imgA.src = right.data;
+    // Set clip to 50%
+    const clip = document.getElementById('sliderClip');
+    const handle = document.getElementById('sliderHandle');
+    if (clip)   clip.style.width   = '50%';
+    if (handle) handle.style.left  = '50%';
+  } else {
+    // Side-by-side
+    document.getElementById('sxsView').style.display          = 'flex';
+    document.getElementById('sliderCompareWrap').style.display = 'none';
+    const lEl = document.getElementById('sxsLeft');
+    const rEl = document.getElementById('sxsRight');
+    const lLbl = document.getElementById('sxsLeftLabel');
+    const rLbl = document.getElementById('sxsRightLabel');
+    if (lEl) lEl.innerHTML = `<img src="${left.data}" style="width:100%;height:100%;object-fit:contain" alt="">`;
+    if (rEl) rEl.innerHTML = `<img src="${right.data}" style="width:100%;height:100%;object-fit:contain" alt="">`;
+    if (lLbl) lLbl.textContent = fmtDate(left.date) + (left.type ? ` · ${left.type}` : '');
+    if (rLbl) rLbl.textContent = fmtDate(right.date) + (right.type ? ` · ${right.type}` : '');
+  }
+}
+
+function toggleSliderMode() {
+  _sliderMode = !_sliderMode;
+  document.getElementById('toggleSliderBtn').textContent = _sliderMode ? 'Side-by-side' : 'Slider view';
+  renderCompare();
+  if (_sliderMode) initSliderDrag();
+}
+
+function renderSelectTwoPicker() {
+  const inner = document.getElementById('selectTwoInner');
+  if (!inner) return;
+  inner.innerHTML = _galleryPhotos.map((p, i) => {
+    const cls = i === _s2Left ? 'picked-left' : i === _s2Right ? 'picked-right' : '';
+    const badge = i === _s2Left ? 'Before' : i === _s2Right ? 'After' : '';
+    return `<div class="s2-thumb ${cls}" onclick="s2Pick(${i})">
+      <img src="${p.data}" alt="" loading="lazy">
+      ${badge ? `<div class="s2-badge">${badge}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function s2Pick(i) {
+  // Cycle: neither → left → right → neither
+  if (i !== _s2Left && i !== _s2Right) {
+    // Assign to left if unset, else right
+    if (_s2Left === _s2Right) { _s2Left = i; }
+    else { _s2Right = i; }
+  } else if (i === _s2Left) {
+    _s2Left = _s2Right;
+  } else {
+    _s2Right = _s2Left;
+  }
+  // Ensure different
+  if (_s2Left === _s2Right) _s2Right = (_s2Left + 1) % _galleryPhotos.length;
+  renderSelectTwoPicker();
+  renderCompare();
+}
+
+// ── SLIDER DRAG ───────────────────────────────────────
+function initSliderDrag() {
+  const handle = document.getElementById('sliderHandle');
+  const wrap   = document.getElementById('sliderCompareWrap');
+  const clip   = document.getElementById('sliderClip');
+  if (!handle || !wrap) return;
+  let dragging = false;
+  const move = e => {
+    if (!dragging) return;
+    const r = wrap.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    const pct = Math.max(0, Math.min(100, (x / r.width) * 100));
+    handle.style.left = pct + '%';
+    if (clip) clip.style.width = pct + '%';
+    // Fix after-image width so it doesn't stretch
+    const imgA = document.getElementById('sliderImgAfter');
+    if (imgA) imgA.style.left = `-${r.width * (pct/100) - r.width * (pct/100)}px`;
+  };
+  handle.addEventListener('mousedown',  () => dragging = true);
+  handle.addEventListener('touchstart', () => dragging = true, { passive: true });
+  document.addEventListener('mousemove',  move);
+  document.addEventListener('touchmove',  move, { passive: true });
+  document.addEventListener('mouseup',   () => dragging = false);
+  document.addEventListener('touchend',  () => dragging = false);
+}
+
+// ── TOUCH SWIPE (gallery mode) ────────────────────────
+function initSwipe() {
+  const view = document.getElementById('singleView');
+  if (!view) return;
+  let startX = 0;
+  view.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  view.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) dx < 0 ? galleryNext() : galleryPrev();
+  }, { passive: true });
+}
+
+// ── MODAL HELPERS ─────────────────────────────────────
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.getElementById('photoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal('photoModal');
+});
+
+// ── SUMMARY SECTION ───────────────────────────────────
+function renderSummary(log, S) {
+  const sorted  = [...log].sort((a, b) => a.date.localeCompare(b.date));
+  const unitLabel = (sorted.length && sorted[0].units) ? sorted[0].units : (S.units || 'kg');
+  const startW  = S.startWeight || (sorted.length ? sorted[0].weight : null);
+  const goalW   = S.goalWeight  || null;
+  const latest  = sorted.length ? sorted[sorted.length - 1].weight : null;
+  const lost    = (startW != null && latest != null) ? startW - latest : null;
+  const pct     = (startW != null && goalW != null && startW !== goalW && lost != null)
+    ? Math.max(0, Math.min(100, Math.round(lost / (startW - goalW) * 100))) : null;
+
+  // Set unit labels
+  ['sumCurrentUnit','sumStartUnit','sumGoalUnit','sumLostUnit'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = unitLabel;
+  });
+
+  const sc = document.getElementById('sumCurrent');
+  if (sc) sc.textContent = latest != null ? latest.toFixed(1) : '—';
+
+  const slb = document.getElementById('sumLostBadge');
+  const slt = document.getElementById('sumLostText');
+  if (slb) {
+    if (lost != null && lost > 0.05) {
+      slb.style.display = 'inline-flex';
+      if (slt) slt.textContent = `${lost.toFixed(1)}${unitLabel} lost`;
+    } else {
+      slb.style.display = 'none';
+    }
+  }
+
+  const ss = document.getElementById('sumStart');
+  if (ss) ss.textContent = startW != null ? startW.toFixed(1) : '—';
+
+  const ssd = document.getElementById('sumStartDate');
+  if (ssd) ssd.textContent = S.startDate ? fmtDate(S.startDate) : (sorted.length ? fmtDate(sorted[0].date) : '—');
+
+  const sg = document.getElementById('sumGoal');
+  if (sg) sg.textContent = goalW != null ? goalW.toFixed(1) : '—';
+
+  const stg = document.getElementById('sumToGo');
+  if (stg && latest != null && goalW != null)
+    stg.textContent = `${Math.max(0, latest - goalW).toFixed(1)}${unitLabel} to go`;
+
+  const stl = document.getElementById('sumTotalLost');
+  if (stl) stl.textContent = lost != null && lost > 0 ? lost.toFixed(1) : '0.0';
+
+  const sc2 = document.getElementById('sumConsistency');
+  if (sc2) sc2.textContent = `${log.length} weigh-in${log.length !== 1 ? 's' : ''}`;
+
+  // Goal banner
+  const gpd = document.getElementById('goalPctDisplay');
+  if (gpd) gpd.textContent = pct != null ? pct : '—';
+
+  const gfb = document.getElementById('goalFillBar');
+  if (gfb) gfb.style.width = (pct != null ? pct : 0) + '%';
+
+  const glr = document.getElementById('goalLabelRight');
+  const gsr = document.getElementById('goalSubRight');
+  if (glr) glr.textContent = 'toward goal';
+  if (gsr && pct != null) {
+    const rem = goalW != null && latest != null ? Math.max(0, latest - goalW).toFixed(1) : null;
+    gsr.textContent = rem != null ? `${rem}${unitLabel} remaining` : '';
+  }
+
+  // Markers
+  const ms = document.getElementById('markerStart');
+  const mn = document.getElementById('markerNow');
+  const mg = document.getElementById('markerGoal');
+  if (ms) ms.textContent = startW != null ? `${startW.toFixed(1)}${unitLabel}` : '—';
+  if (mn) mn.textContent = latest != null ? `${latest.toFixed(1)}${unitLabel}` : '—';
+  if (mg) mg.textContent = goalW  != null ? `${goalW.toFixed(1)}${unitLabel}` : '—';
+
+  // Journey label
+  const jl = document.getElementById('journeyLabel');
+  if (jl && S.startDate) {
+    const weeks = Math.max(1, Math.floor((new Date() - new Date(S.startDate)) / (7 * 24 * 60 * 60 * 1000)) + 1);
+    jl.textContent = `Week ${weeks} of your journey`;
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────
+function init() {
+  const S   = loadSettings();
+  const log = loadWeightLog();
+  applySkin(S.skin || 'theme-rose');
+  renderSummary(log, S);
+  drawTrend();
+  renderMilestones(log, S);
+  renderPhotos();
+  renderInsights(log, S);
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('openPhoto') === '1') {
+    setTimeout(openAddPhoto, 80);
+    if (history.replaceState) history.replaceState(null, '', window.location.pathname);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

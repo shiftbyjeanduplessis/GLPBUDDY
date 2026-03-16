@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GLP Buddy Auth</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f5f8f5;color:#162018;margin:0;padding:24px}
+    .wrap{max-width:420px;margin:0 auto;background:#fff;border:1px solid #d8e4dc;border-radius:20px;padding:24px;box-shadow:0 8px 30px rgba(20,40,30,.08)}
+    h1{margin:0 0 16px;font-size:28px}.tabs{display:flex;gap:8px;margin-bottom:16px}.tabs button{padding:10px 14px;border-radius:999px;border:1px solid #cfe0d6;background:#fff}.tabs button.active{background:#3d7a5a;color:#fff;border-color:#3d7a5a}
+    label{display:block;font-size:14px;margin:12px 0 6px} input{width:100%;padding:12px 14px;border:1px solid #cfe0d6;border-radius:12px}
+    .primary{width:100%;margin-top:16px;padding:12px 14px;border:none;border-radius:14px;background:#3d7a5a;color:#fff;font-weight:700}
+    .muted{font-size:13px;color:#476050}.hidden{display:none} .msg{margin-top:14px;font-size:14px}
+  </style>
+  <script src="glp-supabase-config.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>GLP Buddy</h1>
+    <div class="tabs">
+      <button id="tab-login" class="active" type="button">Log in</button>
+      <button id="tab-signup" type="button">Sign up</button>
+      <button id="tab-reset" type="button">Reset</button>
+    </div>
+    <section id="login-panel">
+      <label>Email</label><input id="login-email" type="email" autocomplete="email">
+      <label>Password</label><input id="login-password" type="password" autocomplete="current-password">
+      <button id="login-btn" class="primary" type="button">Log in</button>
+    </section>
+    <section id="signup-panel" class="hidden">
+      <label>Email</label><input id="signup-email" type="email" autocomplete="email">
+      <label>Password</label><input id="signup-password" type="password" autocomplete="new-password">
+      <button id="signup-btn" class="primary" type="button">Create account</button>
+    </section>
+    <section id="reset-panel" class="hidden">
+      <label>Email</label><input id="reset-email" type="email" autocomplete="email">
+      <button id="reset-btn" class="primary" type="button">Send reset email</button>
+    </section>
+    <p class="muted">After login, send new users to onboarding and returning users to Home.</p>
+    <div id="msg" class="msg"></div>
+  </div>
+
+  <script type="module">
+    import { signIn, signUp, requestPasswordReset } from './glp-tier1-implementation/frontend/glp-supabase-client.js';
+    import { logEvent } from './glp-tier1-implementation/frontend/glp-tier1-api.js';
+    import { EVENTS } from './glp-tier1-implementation/frontend/event-taxonomy.js';
+
+    const panels = { login: document.getElementById('login-panel'), signup: document.getElementById('signup-panel'), reset: document.getElementById('reset-panel') };
+    const tabs = { login: document.getElementById('tab-login'), signup: document.getElementById('tab-signup'), reset: document.getElementById('tab-reset') };
+    const msg = document.getElementById('msg');
+    function show(which){
+      Object.entries(panels).forEach(([k, el]) => el.classList.toggle('hidden', k !== which));
+      Object.entries(tabs).forEach(([k, el]) => el.classList.toggle('active', k === which));
+      msg.textContent = '';
+    }
+    tabs.login.onclick = () => show('login');
+    tabs.signup.onclick = () => show('signup');
+    tabs.reset.onclick = () => show('reset');
+
+    document.getElementById('login-btn').onclick = async () => {
+      try {
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const { error } = await signIn(email, password);
+        if (error) throw error;
+        await logEvent(EVENTS.LOGIN_COMPLETED, { source: 'auth.html' }, 'auth.html');
+        location.href = 'index.html';
+      } catch (err) { msg.textContent = err.message || String(err); }
+    };
+    document.getElementById('signup-btn').onclick = async () => {
+      try {
+        const email = document.getElementById('signup-email').value.trim();
+        const password = document.getElementById('signup-password').value;
+        await logEvent(EVENTS.SIGNUP_STARTED, {}, 'auth.html');
+        const { error } = await signUp(email, password);
+        if (error) throw error;
+        await logEvent(EVENTS.SIGNUP_COMPLETED, { source: 'auth.html' }, 'auth.html');
+        msg.textContent = 'Account created. Check email confirmation if enabled, then log in.';
+        show('login');
+      } catch (err) { msg.textContent = err.message || String(err); }
+    };
+    document.getElementById('reset-btn').onclick = async () => {
+      try {
+        const email = document.getElementById('reset-email').value.trim();
+        const redirectTo = location.origin + location.pathname.replace('auth.html', 'auth.html');
+        const { error } = await requestPasswordReset(email, redirectTo);
+        if (error) throw error;
+        await logEvent(EVENTS.PASSWORD_RESET_REQUESTED, {}, 'auth.html');
+        msg.textContent = 'Reset email sent.';
+      } catch (err) { msg.textContent = err.message || String(err); }
+    };
+  </script>
+</body>
+</html>

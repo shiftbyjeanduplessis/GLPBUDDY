@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GLP Buddy Admin Stats</title>
+  <style>
+    :root{
+      --bg:#0f1720; --surface:#182330; --surface-2:#202d3d; --text:#eef2f7; --muted:#9fb0c0; --line:#263546; --brand:#2d8f72;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);padding:24px}
+    .wrap{max-width:1100px;margin:0 auto}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+    h1{margin:0;font-size:32px}
+    .sub{color:var(--muted);font-size:14px}
+    .row{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+    .btn{padding:11px 14px;border-radius:12px;border:none;background:var(--brand);color:#fff;font-weight:700;cursor:pointer}
+    .btn.alt{background:var(--surface-2);border:1px solid var(--line)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+    .label{font-size:12px;opacity:.72;text-transform:uppercase;letter-spacing:.08em}
+    .value{font-size:28px;font-weight:700;margin-top:8px}
+    .muted{color:var(--muted)}
+    .list{margin-top:18px}.item{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+    .warn{background:#3a1f1f;border:1px solid #754040;color:#ffdede;padding:12px 14px;border-radius:14px;margin:14px 0}
+  </style>
+  <script src="glp-supabase-config.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>GLP Buddy admin stats</h1>
+        <div class="sub">Internal product dashboard for tester phase</div>
+      </div>
+      <button id="signout" class="btn alt" type="button">Sign out</button>
+    </div>
+    <div id="config-warning" class="warn" hidden>Supabase is not configured yet. Add your project URL and anon key to <strong>glp-supabase-config.js</strong>.</div>
+    <div class="row">
+      <button id="refresh" class="btn" type="button">Refresh</button>
+      <button data-dataset="users" class="btn alt" type="button">Export users CSV</button>
+      <button data-dataset="onboarding" class="btn alt" type="button">Export onboarding CSV</button>
+      <button data-dataset="usage_events" class="btn alt" type="button">Export usage CSV</button>
+      <button data-dataset="weight_logs" class="btn alt" type="button">Export weights CSV</button>
+      <button data-dataset="progress_photos" class="btn alt" type="button">Export photos CSV</button>
+    </div>
+    <div id="status" class="muted">Waiting for configuration…</div>
+    <div id="grid" class="grid"></div>
+    <div class="card list">
+      <div class="label">Top events</div>
+      <div id="events"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    const cfg = window.GLP_SUPABASE_CONFIG || {};
+    const status = document.getElementById('status');
+    const warning = document.getElementById('config-warning');
+    const grid = document.getElementById('grid');
+    const eventsEl = document.getElementById('events');
+
+    if (!(cfg.url && cfg.anonKey)) {
+      warning.hidden = false;
+      status.textContent = 'Supabase not configured.';
+    }
+
+    const [{ requireSession, signOut }, { fetchAdminSummary, exportCsv }] = await Promise.all([
+      import('./glp-tier1-implementation/frontend/glp-supabase-client.js'),
+      import('./glp-tier1-implementation/frontend/glp-tier1-api.js')
+    ]);
+
+    function card(label, value){
+      return `<div class="card"><div class="label">${label}</div><div class="value">${value ?? 0}</div></div>`;
+    }
+
+    async function load(){
+      try {
+        if (!(cfg.url && cfg.anonKey)) return;
+        await requireSession('auth.html');
+        status.textContent = 'Loading summary…';
+        const summary = await fetchAdminSummary();
+        const t = summary.totals || {};
+        grid.innerHTML = [
+          card('Users', t.users),
+          card('Onboarded', t.onboardedUsers),
+          card('Active 7 days', t.activeUsers7),
+          card('Active 30 days', t.activeUsers30),
+          card('Check-ins', t.checkins),
+          card('Weight logs', t.weightLogs),
+          card('Progress photos', t.progressPhotos),
+          card('Meal plans', t.mealPlans),
+          card('Completed workouts', t.completedWorkouts)
+        ].join('');
+        eventsEl.innerHTML = (summary.topEvents || []).map(item => `<div class="item"><span>${item.event_name}</span><strong>${item.count}</strong></div>`).join('') || '<div class="muted">No events yet.</div>';
+        status.textContent = `Updated ${new Date(summary.generatedAt).toLocaleString()}`;
+      } catch (err) {
+        status.textContent = err.message || String(err);
+      }
+    }
+
+    document.getElementById('refresh').onclick = load;
+    document.getElementById('signout').onclick = async () => { try { await signOut(); location.href='auth.html'; } catch (err) { status.textContent = err.message || String(err); } };
+    document.querySelectorAll('[data-dataset]').forEach(btn => btn.addEventListener('click', async () => {
+      try { await exportCsv(btn.dataset.dataset); } catch (err) { status.textContent = err.message || String(err); }
+    }));
+
+    load();
+  </script>
+</body>
+</html>
