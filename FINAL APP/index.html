@@ -125,10 +125,11 @@ body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
 .scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
 @media(min-width:431px){
-  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
-  .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
+  body{background:var(--bg-app);padding:0}
+  .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
+  .bnav,.glpb-topbar{max-width:none;width:100%;left:0;transform:none}
 }
-.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
 .bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
 .bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
@@ -297,7 +298,7 @@ body{background:var(--bg-app);}
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
 /* ── GLP BUDDY TOP BAR ── */
-.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
 .glpb-topbar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
@@ -309,14 +310,60 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   color:rgba(255,255,255,0.85);line-height:1;
 }
 .glpb-topbar-face{
-  font-size:1.05rem;line-height:1;
-  color:rgba(255,255,255,0.45);
+  width:18px;height:18px;flex-shrink:0;
+  color:rgba(255,255,255,0.72);
 }
 
 .motivation-strip{background:var(--nav-bg)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:var(--shadow-elevated)!important;}
 .motivation-dot{background:linear-gradient(135deg,var(--accent-light),#fff)!important;box-shadow:0 0 0 4px rgba(255,255,255,.08)!important;}
 </style>
-<script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+<script>
+(function(){
+  var page = 'index.html';
+  var canReveal = true;
+  var params = new URLSearchParams(location.search);
+  var queryCompleted = params.get('ob') === '1';
+
+  if(queryCompleted){
+    try{
+      localStorage.setItem('glp_onboarding', JSON.stringify({complete:true, completedAt:new Date().toISOString()}));
+    }catch(e){}
+    try{
+      sessionStorage.setItem('glp_onboarding_complete', '1');
+    }catch(e){}
+    try{
+      params.delete('ob');
+      var cleanQuery = params.toString();
+      var cleanUrl = location.pathname + (cleanQuery ? ('?' + cleanQuery) : '') + location.hash;
+      history.replaceState(null, '', cleanUrl);
+    }catch(e){}
+    window.__glpCanReveal = true;
+    return;
+  }
+
+  try{
+    var ob = JSON.parse(localStorage.getItem('glp_onboarding') || '{}');
+    var sessionComplete = false;
+    try{
+      sessionComplete = sessionStorage.getItem('glp_onboarding_complete') === '1';
+    }catch(e){}
+
+    if(!((ob && ob.complete) || sessionComplete)){
+      canReveal = false;
+      window.__glpCanReveal = false;
+      location.replace('onboarding.html?next=' + encodeURIComponent(page));
+      return;
+    }
+  }catch(e){
+    canReveal = false;
+    window.__glpCanReveal = false;
+    location.replace('onboarding.html?next=' + encodeURIComponent(page));
+    return;
+  }
+  window.__glpCanReveal = canReveal;
+})();
+</script>
+<script>document.fonts.ready.then(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}});setTimeout(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}},400);</script>
 </head>
 <body class="theme-rose">
 <script>
@@ -369,7 +416,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 
 <div class="page-wrap">
 <div class="scroll-area">
-  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:rgba(255,255,255,0.85);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="10" x2="9.01" y2="10" stroke-width="3"/><line x1="15" y1="10" x2="15.01" y2="10" stroke-width="3"/></svg></div>
+  <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg class="glpb-topbar-face" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14s1.2 1.8 3.5 1.8 3.5-1.8 3.5-1.8"></path><line x1="9" y1="10" x2="9.01" y2="10"></line><line x1="15" y1="10" x2="15.01" y2="10"></line></svg></div>
 <!-- ① HEADER -->
   <div class="header-wrap a1">
     <div>
@@ -632,14 +679,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 
 <script src="glp-common.js"></script>
-<script>
-  const onboardingState = JSON.parse(localStorage.getItem('glp_onboarding') || '{}');
-  if (!onboardingState.complete) {
-    window.location.replace('onboarding.html?next=index.html');
-  } else {
-    GLPApp.boot('home');
-  }
-</script>
+<script>GLPApp.boot('home');</script>
 <script>
 'use strict';
 
