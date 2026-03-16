@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>GLP Buddy</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1028">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLP Buddy">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -122,8 +128,9 @@ body.theme-midnight{
   --prog-fill:linear-gradient(90deg,#9060c0,#8899cc);--page-ring:rgba(180,140,220,0.14);
 }
 body{background:var(--bg-app);}
-.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+80px);padding-top:var(--nav-h);}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,0px);}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 160px + env(safe-area-inset-bottom,0px));}
+.scroll-area > *:last-child{margin-bottom:24px;}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
@@ -253,11 +260,11 @@ body{background:var(--bg-app);}
 .coach-avatar{width:38px;height:38px;border-radius:12px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary);}
 .coach-title{font-size:.82rem;font-weight:700;color:var(--text-primary);}
 .coach-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
-/* ── MOTIVATION STRIP ──────────────────────────────── */
+/* -- MOTIVATION STRIP -------------------------------- */
   .motivation-strip{background:var(--nav-bg);border-color:rgba(255,255,255,.08);box-shadow:var(--shadow-elevated);display:flex;align-items:center;gap:10px;margin:0 var(--page-px) 14px;padding:11px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:var(--shadow-card);}
 .motivation-dot{box-shadow:0 0 0 4px rgba(255,255,255,.08);width:6px;height:6px;border-radius:50%;background:var(--accent-light);flex-shrink:0;opacity:.7;}
 
-/* ── LESSON CARD ───────────────────────────────────── */
+/* -- LESSON CARD ------------------------------------- */
 .lesson-card{margin:0 var(--page-px) 12px;}
 .lc-wrap{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-card);}
 .lc-header{padding:14px 18px 12px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
@@ -297,7 +304,7 @@ body{background:var(--bg-app);}
 .a7{animation:fadeUp .32s var(--ease) .32s both}
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
-/* ── GLP BUDDY TOP BAR ── */
+/* -- GLP BUDDY TOP BAR -- */
 .glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
 .glpb-topbar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
@@ -454,7 +461,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="hero-status" id="heroStatus">Log your weight to get started</div>
       <div class="hero-sub" id="heroSub">Your journey begins with one number</div>
     </div>
-    <div class="task-row" onclick="openWeighIn()">
+    <div class="task-row" id="dailyWeighInTask" onclick="openWeighIn()">
       <div class="task-check" id="taskWeighCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskWeighLabel">Daily Weigh-In</div>
@@ -512,12 +519,6 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
           <span class="weight-unit" id="currentWeightUnit">kg</span>
           <div id="lostPill" hidden><span class="chip chip-ok" style="font-size:.6rem" id="lostPillText">—</span></div>
         </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <button class="btn btn-pill btn-sm" onclick="openWeighIn()">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span id="logWeightBtnLabel">Log</span>
-        </button>
       </div>
     </div>
     <div style="padding:10px 20px 14px">
@@ -622,7 +623,6 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
         <div class="fx-item" data-fx="Appetite" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="fx-label">Appetite</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="How do you feel?" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">How do you feel?</div><div class="fx-sev"></div></div>
       </div>
-      <button class="btn btn-ghost btn-sm" id="saveSymptomsBtn" onclick="saveSymptoms()" style="padding:0 0 12px;width:100%">Save symptoms</button>
     </div>
   </div>
 
@@ -651,7 +651,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </div>
 </div>
 
-<nav class="bnav">
+<nav class="bnav" style="padding-bottom:env(safe-area-inset-bottom,0px)">
   <a href="index.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
   <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
   <a href="progress.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
@@ -665,9 +665,9 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script>
 'use strict';
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  LESSONS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 const LESSONS = [
   {
     num: 1, title: 'How GLP-1 medicines help', read: '2 min',
@@ -891,7 +891,7 @@ const MOTIVATION = [
   'Let the process work. It is working.',
   'You are supported. By the medicine, by this app, and by your own commitment.',
 ];
-// ── LESSON STORAGE ─────────────────────────────────────
+// -- LESSON STORAGE -------------------------------------
 function loadLessonData() {
   try { return JSON.parse(localStorage.getItem('glp_lessons') || '{}'); } catch { return {}; }
 }
@@ -1038,7 +1038,7 @@ function markLessonComplete(idx) {
   renderLessonCard();
 }
 
-// ── MOTIVATION ─────────────────────────────────────────
+// -- MOTIVATION -----------------------------------------
 function renderMotivation() {
   const el = document.getElementById('motivationText');
   if (!el) return;
@@ -1050,7 +1050,7 @@ function renderMotivation() {
   el.textContent = MOTIVATION[idx];
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 const SKINS = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
 
 function applySkin(skin, persist) {
@@ -1073,9 +1073,9 @@ function updateGraphColors() {
   drawSparkline(loadWeightLog());
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  STORAGE HELPERS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function loadSettings() {
   try { return JSON.parse(localStorage.getItem('glp_settings') || '{}'); } catch { return {}; }
 }
@@ -1109,16 +1109,16 @@ function saveTodayState(patch) {
   saveHomeLog(log);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  DATE HELPERS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  MEDICATION HELPERS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function getDisplayMedicationName(s) {
   if (!s.medName) return 'your medication';
   if (s.medName === 'Other') return s.medOther || 'your medication';
@@ -1140,9 +1140,9 @@ function getNextDoseInfo(s) {
   return { daysUntil: diff, isToday, label };
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  STREAK (weight log only)
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function calcStreak(log) {
   if (!log.length) return 0;
   const byDate = {};
@@ -1160,9 +1160,9 @@ function calcStreak(log) {
   return streak;
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  HERO STATUS DERIVATION
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function deriveHomeStatus(ts) {
   // ts = today state from getTodayState()
   const log       = loadWeightLog();
@@ -1180,9 +1180,9 @@ function deriveHomeStatus(ts) {
   return { weightOk, checkinOk, task3Ok, done, msg: MSGS[Math.min(done, 3)] };
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  TASK 3 — walk on normal days, log dose on injection day
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 let _isInjectionDay = false;
 
 function setupTask3(s, ts) {
@@ -1210,9 +1210,9 @@ function task3Action() {
   }
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  WEEKLY PROGRESS PHOTO TASK
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function getSundayKey(dateObj) {
   const d = new Date(dateObj);
   d.setHours(12, 0, 0, 0);
@@ -1247,9 +1247,9 @@ function setupWeeklyPhotoTask() {
   markTask('taskPhotoCheck', 'taskPhotoLabel', info.done);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  HERO CTA — always points to the first incomplete task
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function updateHeroCta(status) {
   const btn = document.getElementById('heroCtaBtn');
   if (!btn) return;
@@ -1273,9 +1273,9 @@ function heroCtaAction() {
   openWeighIn();
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  MARK TASK DONE/UNDONE
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function markTask(checkId, labelId, done) {
   const c = document.getElementById(checkId);
   const l = document.getElementById(labelId);
@@ -1283,9 +1283,9 @@ function markTask(checkId, labelId, done) {
   if (l) l.classList.toggle('done', done);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  FULL UI REFRESH
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function refreshAll() {
   const S   = loadSettings();
   const log = loadWeightLog();
@@ -1380,10 +1380,6 @@ function refreshAll() {
   if (sndEl) sndEl.textContent = doseInfo.label;
   if (smnEl) smnEl.textContent = getDisplayMedicationName(S);
 
-  // Weight log button label
-  const lwbl = document.getElementById('logWeightBtnLabel');
-  if (lwbl) lwbl.textContent = loggedToday ? 'Update' : 'Log weight';
-
   // Weight unit in modal — show what the new entry will be saved as
   const wul = document.getElementById('weightUnitLabel');
   if (wul) wul.textContent = settingsUnit === 'lbs' ? 'pounds (lbs)' : 'kilograms (kg)';
@@ -1453,9 +1449,9 @@ function refreshAll() {
   renderAchieveNudge();
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  GRAPH
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function drawSparkline(log) {
   const gc = document.getElementById('sparkContent');
   if (!gc) return;
@@ -1511,9 +1507,9 @@ function drawSparkline(log) {
   gc.innerHTML = svg;
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  WEIGHT MODAL
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -1557,9 +1553,9 @@ function saveWeight() {
   refreshAll();
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  SLIDERS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 let _dragging = null;
 
 function setSlider(name, val) {
@@ -1592,9 +1588,9 @@ document.addEventListener('touchmove', e => { if (_dragging) updateSlider(e, _dr
 document.addEventListener('mouseup',   () => _dragging = null);
 document.addEventListener('touchend',  () => _dragging = null);
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  CHECK-IN
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function getSliderVal(name) {
   return parseInt(document.getElementById(name + 'Val').textContent) || 5;
 }
@@ -1625,7 +1621,6 @@ function saveCheckin() {
   if (statusEl) statusEl.textContent = status.msg[0];
   if (subEl)    subEl.textContent    = status.msg[1];
   updateHeroCta(status);
-  if (window.GLPApp) GLPApp.track('dose_logged', {});
 }
 
 
@@ -1633,9 +1628,9 @@ function scrollToCheckin() {
   document.getElementById('checkinCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  WALK
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function toggleWalk() {
   const ts      = getTodayState();
   const newVal  = !ts.walkDone;
@@ -1653,9 +1648,9 @@ function toggleWalk() {
   updateHeroCta(status);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  WATER
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function toggleCup(i) {
   const ts   = getTodayState();
   const cups = ts.waterCups ? [...ts.waterCups] : Array(8).fill(false);
@@ -1672,9 +1667,9 @@ function updateWaterCount(cups) {
   if (el) el.innerHTML = n + ' <span style="font-size:.72rem;font-weight:500;color:var(--text-tertiary)">/ 8</span>';
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  SYMPTOMS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 const FX_LABELS = ['', 'Mild', 'Moderate', 'Severe'];
 const FX_CUSTOM = {
   'Appetite': ['', 'Not hungry', 'Hungry', 'Very hungry'],
@@ -1682,22 +1677,15 @@ const FX_CUSTOM = {
 };
 function fxLabelFor(name, sev){ const labels = FX_CUSTOM[name] || FX_LABELS; return labels[sev] || ''; }
 
-// PATCH: Auto-save timer added
-let symptomTimer; 
-
 function tapFx(el) {
-  const sev = parseInt(el.dataset.sev || '0');
+  const sev = parseInt(el.dataset.sev || '0', 10);
   const next = sev >= 3 ? 0 : sev + 1;
-  el.dataset.sev = next;
+  el.dataset.sev = String(next);
   el.classList.toggle('selected', next > 0);
   const sevEl = el.querySelector('.fx-sev');
   if (sevEl) sevEl.textContent = next > 0 ? fxLabelFor(el.dataset.fx, next) : '';
-  
-  // Auto-save logic
-  clearTimeout(symptomTimer);
-  symptomTimer = setTimeout(() => { saveSymptoms(); }, 1500);
+  saveSymptoms();
 }
-
 
 function clearAllSymptomUI() {
   document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
@@ -1713,8 +1701,8 @@ function restoreSymptoms(symptoms) {
   (symptoms || []).forEach(({ name, level }) => {
     const item = document.querySelector(`#fxGrid .fx-item[data-fx="${name}"]`);
     if (!item) return;
-    const sev = Math.min(3, level||1);
-    item.dataset.sev = sev;
+    const sev = Math.min(3, level || 1);
+    item.dataset.sev = String(sev);
     item.classList.add('selected');
     const sevEl = item.querySelector('.fx-sev');
     if (sevEl) sevEl.textContent = fxLabelFor(item.dataset.fx, sev) || '';
@@ -1724,18 +1712,16 @@ function restoreSymptoms(symptoms) {
 function saveSymptoms() {
   const symptoms = [];
   document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
-    const sev = parseInt(item.dataset.sev||'0');
+    const sev = parseInt(item.dataset.sev || '0', 10);
     if (sev > 0) symptoms.push({ name: item.dataset.fx, level: sev });
   });
   saveTodayState({ symptoms });
-  const btn = document.getElementById('saveSymptomsBtn');
-  if (btn) { btn.textContent = 'Saved'; setTimeout(() => { btn.textContent = 'Save symptoms'; }, 1800); }
   if (window.GLPApp) GLPApp.track('symptoms_saved', { count: symptoms.length });
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  LOG DOSE
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 function logDose() {
   const ts = getTodayState();
   if (ts.doseLogged) return; // already logged today
@@ -1760,9 +1746,9 @@ function logDose() {
   updateHeroCta(status);
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 //  ACHIEVEMENTS
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 const ACHIEVEMENTS = [
   { id:'first_step',  name:'First Step',  desc:'Log your first weight entry',   icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>` },
   { id:'week_warrior',name:'Week Warrior', desc:'Log weight 7 days in a row',    icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>` },
@@ -1850,10 +1836,44 @@ function renderAchieveNudge() {
   iconEl.innerHTML    = next.icon;
 }
 
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
+//  PWA INSTALL SUPPORT
+// -------------------------------------------------------
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+});
+
+async function promptInstall() {
+  if (!deferredInstallPrompt) return;
+  await deferredInstallPrompt.prompt();
+  deferredInstallPrompt = null;
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+// -------------------------------------------------------
 //  INIT
-// ═══════════════════════════════════════════════════════
+// -------------------------------------------------------
 refreshAll();
+
+const dailyWeighInTask = document.getElementById('dailyWeighInTask');
+if (dailyWeighInTask) {
+  dailyWeighInTask.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openWeighIn();
+    }
+  });
+  dailyWeighInTask.setAttribute('role', 'button');
+  dailyWeighInTask.setAttribute('tabindex', '0');
+}
 </script>
 </body>
 </html>
