@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="theme-color" content="#1a1028">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLP Buddy">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>GLP Buddy — Settings</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
@@ -85,7 +92,7 @@ body.theme-midnight{
   --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
   --page-ring:rgba(180,140,220,0.14);
 }
-/* ── LAYOUT ─────────────────────────────────── */
+/* -- LAYOUT ----------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
 .scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
@@ -93,7 +100,7 @@ body{background:var(--bg-app);}
   body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
 }
-/* ── NAV ────────────────────────────────────── */
+/* -- NAV -------------------------------------- */
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
 .bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
@@ -102,9 +109,9 @@ body{background:var(--bg-app);}
 .bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
 .bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
-/* ── BRAND ──────────────────────────────────── */
+/* -- BRAND ------------------------------------ */
 
-/* ── FONTS ──────────────────────────────────── */
+/* -- FONTS ------------------------------------ */
 
 
 /* topbar */
@@ -183,7 +190,7 @@ body{background:var(--bg-app);}
 .d7{animation-delay:.32s}.d8{animation-delay:.36s}
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
-/* ── GLP BUDDY TOP BAR ── */
+/* -- GLP BUDDY TOP BAR -- */
 .glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
 .glpb-topbar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
@@ -199,6 +206,16 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   font-size:1.05rem;line-height:1;
   color:rgba(255,255,255,0.45);
 }
+
+
+.install-card-copy{font-size:.70rem;color:var(--text-tertiary);line-height:1.55;margin-bottom:12px}
+.install-help{font-size:.68rem;color:var(--text-faint);line-height:1.5;margin-top:8px}
+.install-status{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--accent-tint);border:1px solid var(--border-soft);font-size:.62rem;font-weight:700;color:var(--text-secondary);margin-bottom:12px}
+body.theme-midnight .toggle-opt,
+body.theme-midnight .multi-opt{background:rgba(255,255,255,0.06);color:rgba(245,239,255,0.86);border-color:rgba(180,140,220,0.34);}
+body.theme-midnight .toggle-opt.sel,
+body.theme-midnight .multi-opt.sel{background:rgba(180,140,220,0.24);color:#f7f2ff;border-color:rgba(210,180,245,0.5);}
+body.theme-midnight .logout-btn{color:rgba(245,239,255,0.76);}
 
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
@@ -352,6 +369,76 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script src="glp-common.js"></script>
 <script>
 GLPApp.boot('settings');
+
+let deferredInstallPrompt = null;
+
+function isStandaloneMode(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function isIOSDevice(){
+  return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+}
+function updateInstallUI(){
+  const btn = document.getElementById('settingsInstallBtn');
+  const text = document.getElementById('settingsInstallText');
+  const help = document.getElementById('settingsInstallHelp');
+  const status = document.getElementById('settingsInstallStatus');
+  if(!btn || !text || !help || !status) return;
+
+  if(isStandaloneMode()){
+    btn.style.display = 'none';
+    text.textContent = 'GLP Buddy is already installed on this device.';
+    help.textContent = 'You can open it from your home screen whenever you want the full app experience.';
+    status.textContent = 'Already installed';
+    return;
+  }
+
+  btn.style.display = 'inline-flex';
+
+  if(deferredInstallPrompt){
+    btn.textContent = 'Install GLP Buddy';
+    text.textContent = 'Add GLP Buddy to this device for the cleanest app-style experience.';
+    help.textContent = 'Tap install and your browser should handle the rest.';
+    status.textContent = 'Ready to install';
+    return;
+  }
+
+  if(isIOSDevice()){
+    btn.textContent = 'How to install';
+    text.textContent = 'Add GLP Buddy to your iPhone home screen so it opens like an app.';
+    help.textContent = 'Open this page in Safari, tap Share, then choose Add to Home Screen.';
+    status.textContent = 'Manual install';
+    return;
+  }
+
+  btn.textContent = 'How to install';
+  text.textContent = 'Install may not be available yet in this browser.';
+  help.textContent = 'Open the browser menu and look for Install App or Add to Home Screen.';
+  status.textContent = 'Browser dependent';
+}
+
+async function handleInstallClick(){
+  if(deferredInstallPrompt){
+    try{
+      await deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    }catch(e){}
+    deferredInstallPrompt = null;
+  }
+  updateInstallUI();
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallUI();
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  updateInstallUI();
+});
+
 const SKINS=['theme-rose','theme-sage','theme-sand','theme-midnight'];
 function applySkin(skin,persist){
   if(!SKINS.includes(skin))skin='theme-rose';
