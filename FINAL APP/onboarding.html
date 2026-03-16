@@ -32,10 +32,19 @@ body.theme-rose{background:#f8f5fb;--accent-primary:#a8406e;--accent-mid:#c85c87
 body.theme-sage{background:#f5f8f5;--accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);--support-primary:#4a8a80;--nav-bg:rgba(10,22,14,0.93);--cta-gradient:linear-gradient(135deg,#3d7a5a,#5a9a72 55%,#4a8a80);--border-soft:rgba(160,200,170,0.55);--border-accent:rgba(80,148,104,0.18);--text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42)}
 body.theme-sand{background:#f9f6f1;--accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);--support-primary:#7a6050;--nav-bg:rgba(22,14,8,0.94);--cta-gradient:linear-gradient(135deg,#8a5e3a,#b07848 55%,#7a6050);--border-soft:rgba(200,175,145,0.55);--border-accent:rgba(170,110,60,0.18);--text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44)}
 body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b888d8;--accent-tint:rgba(180,140,220,0.10);--accent-tint2:rgba(180,140,220,0.18);--support-primary:#8899cc;--nav-bg:rgba(10,8,20,0.96);--cta-gradient:linear-gradient(135deg,#9060c0,#b888d8 55%,#8899cc);--border-soft:rgba(120,100,180,0.28);--border-accent:rgba(180,140,220,0.26);--text-primary:rgba(240,234,255,0.92);--text-secondary:rgba(220,210,240,0.60);--text-tertiary:rgba(200,190,225,0.42);--surface-1:#2a2240;--surface-2:rgba(38,30,58,0.95)}
+
+body.preboot .page-wrap{opacity:0;pointer-events:none}
+.splash-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#1a1028;z-index:9999;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.splash-screen.show{opacity:1;pointer-events:auto}
+.splash-inner{text-align:center;padding:24px}
+.splash-logo{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:1.6px;color:#fff;text-transform:uppercase}
+.splash-logo span{display:block;font-size:1.05rem;letter-spacing:4px;opacity:.96;margin-top:8px}
+
 </style>
 <script src="glp-common.js"></script>
 </head>
-<body class="theme-rose">
+<body class="theme-rose preboot">
+<div class="splash-screen" id="firstLoginSplash" aria-hidden="true"><div class="splash-inner"><div class="splash-logo">GLP 1<span>BUDDY</span></div></div></div>
 <div class="page-wrap"><div class="scroll-area">
   <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
   <div class="header"><div class="title">Let’s set you up</div><div class="sub">A quick setup so the app feels personal from day one.</div></div>
@@ -71,137 +80,251 @@ body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b8
   <div class="actions"><button type="button" class="btn btn-secondary" id="backBtn">Back</button><button type="button" class="btn btn-primary" id="nextBtn">Continue</button></div>
 </div></div>
 <script>
-GLPApp.boot('onboarding', {requireOnboarding:false});
+GLPApp.boot('onboarding', { requireOnboarding: false });
 
 const steps = [...document.querySelectorAll('.step')];
 let step = 0;
 const byId = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
 const nextTarget = params.get('next') || 'index.html';
-const skinClasses = ['theme-rose','theme-sage','theme-sand','theme-midnight'];
+const skinClasses = ['theme-rose', 'theme-sage', 'theme-sand', 'theme-midnight'];
+const state = {
+  gender: 'M',
+  skin: 'theme-rose',
+  medFreq: 'weekly',
+  medDay: 'Mon',
+  units: 'kg',
+  waterSize: '250'
+};
 
-function selectOne(group, target){
-  group.forEach(el => el.classList.toggle('sel', el === target));
+function selectOne(group, target) {
+  group.filter(Boolean).forEach(el => el.classList.toggle('sel', el === target));
 }
-function applySkin(skin){
+
+function syncGenderUI() {
+  selectOne([byId('gM'), byId('gF')], state.gender === 'F' ? byId('gF') : byId('gM'));
+}
+
+function syncSkinUI() {
   skinClasses.forEach(s => document.body.classList.remove(s));
-  document.body.classList.add(skin || 'theme-rose');
-  const chip = document.querySelector(`[data-skin="${skin}"]`) || document.querySelector('[data-skin="theme-rose"]');
-  if(chip) selectOne([...document.querySelectorAll('[data-skin]')], chip);
+  document.body.classList.add(state.skin || 'theme-rose');
+  const chip = document.querySelector(`[data-skin="${state.skin}"]`) || document.querySelector('[data-skin="theme-rose"]');
+  if (chip) selectOne([...document.querySelectorAll('[data-skin]')], chip);
 }
-function bindToggle(button, group){
-  if(!button) return;
-  button.addEventListener('click', function(e){
-    e.preventDefault();
-    selectOne(group, button);
-  });
+
+function syncFreqUI() {
+  selectOne([byId('freqWeekly'), byId('freqDaily')], state.medFreq === 'daily' ? byId('freqDaily') : byId('freqWeekly'));
 }
-function renderStep(){
+
+function syncDayUI() {
+  const chip = document.querySelector(`#dayGroup .chip[data-day="${state.medDay}"]`) || document.querySelector('#dayGroup .chip[data-day="Mon"]');
+  if (chip) selectOne([...document.querySelectorAll('#dayGroup .chip')], chip);
+}
+
+function syncUnitsUI() {
+  selectOne([byId('uKg'), byId('uLbs')], state.units === 'lbs' ? byId('uLbs') : byId('uKg'));
+}
+
+function syncWaterUI() {
+  const chip = document.querySelector(`#waterGroup .chip[data-water="${state.waterSize}"]`) || document.querySelector('#waterGroup .chip[data-water="250"]');
+  if (chip) selectOne([...document.querySelectorAll('#waterGroup .chip')], chip);
+}
+
+function renderStep() {
   steps.forEach((el, i) => { el.style.display = i === step ? 'block' : 'none'; });
-  [0,1,2,3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
+  [0, 1, 2, 3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
   const backBtn = byId('backBtn');
-  if(backBtn){ backBtn.style.display = step === 0 ? 'none' : 'block'; }
+  if (backBtn) backBtn.style.display = step === 0 ? 'none' : 'block';
   const nextBtn = byId('nextBtn');
-  if(nextBtn){ nextBtn.textContent = step === steps.length - 1 ? 'Finish setup' : 'Continue'; }
+  if (nextBtn) nextBtn.textContent = step === steps.length - 1 ? 'Finish setup' : 'Continue';
 }
-function goNext(){
-  if(step < steps.length - 1){
+
+function goNext() {
+  if (step < steps.length - 1) {
     step += 1;
     renderStep();
-    GLPApp.track('onboarding_step_advanced', {step});
+    GLPApp.track('onboarding_step_advanced', { step });
     return;
   }
   finish();
 }
-function goBack(){
-  if(step > 0){
+
+function goBack() {
+  if (step > 0) {
     step -= 1;
     renderStep();
   }
 }
-function finish(){
+
+async function persistOnboarding(settings) {
+  localStorage.setItem('glp_settings', JSON.stringify(settings));
+  localStorage.setItem('glp_onboarding', JSON.stringify({ complete: true, completedAt: new Date().toISOString() }));
+
+  if (window.supabase && settings.profile_id) {
+    const payload = {
+      id: settings.profile_id,
+      name: settings.name,
+      age: settings.age || null,
+      gender: settings.gender,
+      skin: settings.skin,
+      start_date: settings.startDate || null,
+      start_weight: settings.startWeight,
+      current_weight: settings.curWeight,
+      goal_weight: settings.goalWeight,
+      medication_name: settings.medName || null,
+      medication_dose: settings.medDose || null,
+      medication_frequency: settings.medFreq,
+      medication_day: settings.medDay,
+      units: settings.units,
+      water_size: Number(settings.waterSize),
+      onboarding_complete: true,
+      onboarding_completed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    const { error } = await window.supabase.from('profiles').upsert(payload);
+    if (error) {
+      console.error('Supabase onboarding save failed:', error);
+    }
+  }
+}
+
+async function finish() {
   const prev = JSON.parse(localStorage.getItem('glp_settings') || '{}');
   const s = {
     ...prev,
     name: byId('onbName')?.value.trim() || prev.name || 'Friend',
     age: byId('onbAge')?.value || prev.age || '',
-    gender: byId('gF')?.classList.contains('sel') ? 'F' : 'M',
-    skin: document.querySelector('[data-skin].sel')?.dataset.skin || prev.skin || 'theme-rose',
+    gender: state.gender,
+    skin: state.skin,
     startDate: byId('onbStartDate')?.value || prev.startDate || '',
     startWeight: parseFloat(byId('onbStartWeight')?.value) || prev.startWeight || null,
     curWeight: parseFloat(byId('onbCurWeight')?.value) || prev.curWeight || null,
     goalWeight: parseFloat(byId('onbGoalWeight')?.value) || prev.goalWeight || null,
     medName: byId('onbMed')?.value || prev.medName || '',
     medDose: byId('onbDose')?.value || prev.medDose || '',
-    medFreq: byId('freqDaily')?.classList.contains('sel') ? 'daily' : 'weekly',
-    medDay: document.querySelector('#dayGroup .chip.sel')?.dataset.day || prev.medDay || 'Mon',
-    units: byId('uLbs')?.classList.contains('sel') ? 'lbs' : 'kg',
-    waterSize: document.querySelector('#waterGroup .chip.sel')?.dataset.water || prev.waterSize || '250',
+    medFreq: state.medFreq,
+    medDay: state.medDay,
+    units: state.units,
+    waterSize: state.waterSize,
     notifMeds: true,
     notifWater: true,
     notifWorkout: true,
-    notifPhoto: true
+    notifPhoto: true,
+    profile_id: prev.profile_id || null
   };
-  localStorage.setItem('glp_settings', JSON.stringify(s));
-  localStorage.setItem('glp_onboarding', JSON.stringify({complete:true, completedAt:new Date().toISOString()}));
-  GLPApp.track('onboarding_completed', {skin:s.skin, medName:s.medName || '', units:s.units});
-  location.href = nextTarget;
+
+  await persistOnboarding(s);
+  GLPApp.track('onboarding_completed', { skin: s.skin, medName: s.medName || '', units: s.units });
+  location.replace(nextTarget);
 }
 
-bindToggle(byId('gM'), [byId('gM'), byId('gF')]);
-bindToggle(byId('gF'), [byId('gM'), byId('gF')]);
-bindToggle(byId('freqWeekly'), [byId('freqWeekly'), byId('freqDaily')]);
-bindToggle(byId('freqDaily'), [byId('freqWeekly'), byId('freqDaily')]);
-bindToggle(byId('uKg'), [byId('uKg'), byId('uLbs')]);
-bindToggle(byId('uLbs'), [byId('uKg'), byId('uLbs')]);
+function bindEvents() {
+  document.addEventListener('click', function (e) {
+    const genderBtn = e.target.closest('#gM, #gF');
+    if (genderBtn) {
+      e.preventDefault();
+      state.gender = genderBtn.id === 'gF' ? 'F' : 'M';
+      syncGenderUI();
+      return;
+    }
 
-document.querySelectorAll('[data-skin]').forEach(el => {
-  el.addEventListener('click', function(e){
-    e.preventDefault();
-    applySkin(el.dataset.skin);
-  });
-});
-document.querySelectorAll('#dayGroup .chip').forEach(el => {
-  el.addEventListener('click', function(e){
-    e.preventDefault();
-    selectOne([...document.querySelectorAll('#dayGroup .chip')], el);
-  });
-});
-document.querySelectorAll('#waterGroup .chip').forEach(el => {
-  el.addEventListener('click', function(e){
-    e.preventDefault();
-    selectOne([...document.querySelectorAll('#waterGroup .chip')], el);
-  });
-});
+    const skinChip = e.target.closest('[data-skin]');
+    if (skinChip) {
+      e.preventDefault();
+      state.skin = skinChip.dataset.skin || 'theme-rose';
+      syncSkinUI();
+      return;
+    }
 
-byId('backBtn')?.addEventListener('click', function(e){
-  e.preventDefault();
-  goBack();
-});
-byId('nextBtn')?.addEventListener('click', function(e){
-  e.preventDefault();
-  goNext();
-});
+    const freqBtn = e.target.closest('#freqWeekly, #freqDaily');
+    if (freqBtn) {
+      e.preventDefault();
+      state.medFreq = freqBtn.id === 'freqDaily' ? 'daily' : 'weekly';
+      syncFreqUI();
+      return;
+    }
 
-(function init(){
+    const dayChip = e.target.closest('#dayGroup .chip');
+    if (dayChip) {
+      e.preventDefault();
+      state.medDay = dayChip.dataset.day || 'Mon';
+      syncDayUI();
+      return;
+    }
+
+    const unitBtn = e.target.closest('#uKg, #uLbs');
+    if (unitBtn) {
+      e.preventDefault();
+      state.units = unitBtn.id === 'uLbs' ? 'lbs' : 'kg';
+      syncUnitsUI();
+      return;
+    }
+
+    const waterChip = e.target.closest('#waterGroup .chip');
+    if (waterChip) {
+      e.preventDefault();
+      state.waterSize = waterChip.dataset.water || '250';
+      syncWaterUI();
+      return;
+    }
+  });
+
+  byId('backBtn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    goBack();
+  });
+
+  byId('nextBtn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    goNext();
+  });
+}
+
+function maybeShowSplash() {
+  const splash = byId('firstLoginSplash');
+  const seen = localStorage.getItem('glp_seen_first_login_splash');
+  if (!splash || seen) return Promise.resolve();
+
+  localStorage.setItem('glp_seen_first_login_splash', 'true');
+  splash.classList.add('show');
+  return new Promise(resolve => {
+    window.setTimeout(() => {
+      splash.classList.remove('show');
+      window.setTimeout(resolve, 280);
+    }, 1200);
+  });
+}
+
+(async function init() {
   const s = JSON.parse(localStorage.getItem('glp_settings') || '{}');
-  applySkin(s.skin || 'theme-rose');
-  if(s.name) byId('onbName').value = s.name;
-  if(s.age) byId('onbAge').value = s.age;
-  if(s.gender === 'F') selectOne([byId('gM'), byId('gF')], byId('gF'));
-  if(s.startDate) byId('onbStartDate').value = s.startDate;
-  if(s.startWeight) byId('onbStartWeight').value = s.startWeight;
-  if(s.curWeight) byId('onbCurWeight').value = s.curWeight;
-  if(s.goalWeight) byId('onbGoalWeight').value = s.goalWeight;
-  if(s.medName) byId('onbMed').value = s.medName;
-  if(s.medDose) byId('onbDose').value = s.medDose;
-  if(s.medFreq === 'daily') selectOne([byId('freqWeekly'), byId('freqDaily')], byId('freqDaily'));
-  const day = document.querySelector(`#dayGroup .chip[data-day="${s.medDay || 'Mon'}"]`);
-  if(day) selectOne([...document.querySelectorAll('#dayGroup .chip')], day);
-  if(s.units === 'lbs') selectOne([byId('uKg'), byId('uLbs')], byId('uLbs'));
-  const water = document.querySelector(`#waterGroup .chip[data-water="${s.waterSize || '250'}"]`);
-  if(water) selectOne([...document.querySelectorAll('#waterGroup .chip')], water);
+  state.gender = s.gender || 'M';
+  state.skin = s.skin || 'theme-rose';
+  state.medFreq = s.medFreq || 'weekly';
+  state.medDay = s.medDay || 'Mon';
+  state.units = s.units || 'kg';
+  state.waterSize = String(s.waterSize || '250');
+
+  if (s.name) byId('onbName').value = s.name;
+  if (s.age) byId('onbAge').value = s.age;
+  if (s.startDate) byId('onbStartDate').value = s.startDate;
+  if (s.startWeight) byId('onbStartWeight').value = s.startWeight;
+  if (s.curWeight) byId('onbCurWeight').value = s.curWeight;
+  if (s.goalWeight) byId('onbGoalWeight').value = s.goalWeight;
+  if (s.medName) byId('onbMed').value = s.medName;
+  if (s.medDose) byId('onbDose').value = s.medDose;
+
+  syncGenderUI();
+  syncSkinUI();
+  syncFreqUI();
+  syncDayUI();
+  syncUnitsUI();
+  syncWaterUI();
   renderStep();
+  bindEvents();
+
+  await maybeShowSplash();
+  document.body.classList.remove('preboot');
 })();
 </script>
 </body>
