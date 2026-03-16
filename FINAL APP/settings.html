@@ -3,13 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<meta name="theme-color" content="#1a1028">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GLP Buddy">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>GLP Buddy — Settings</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
@@ -163,6 +156,11 @@ body{background:var(--bg-app);}
 .swatch-sage{background:linear-gradient(135deg,#c4e0cc,#b4d0cc);}
 .swatch-sand{background:linear-gradient(135deg,#e8cdb0,#ccc0b4);}
 .swatch-midnight{background:linear-gradient(135deg,#3a2d54,#2a3060);}
+
+.install-card-copy{font-size:.70rem;color:var(--text-tertiary);line-height:1.55;margin-bottom:12px}
+.install-help{font-size:.68rem;color:var(--text-faint);line-height:1.5;margin-top:8px}
+.install-status{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--accent-tint);border:1px solid var(--border-soft);font-size:.62rem;font-weight:700;color:var(--text-secondary);margin-bottom:12px}
+body.theme-midnight .install-status{background:rgba(255,255,255,0.06);border-color:rgba(180,140,220,0.26);color:#efe7ff}
 /* achievements */
 .achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .ach-item{border-radius:var(--r-lg);border:1.5px solid var(--border-soft);background:var(--surface-1);padding:14px 10px 12px;text-align:center;opacity:.38;transition:opacity .3s,border-color .3s;}
@@ -206,16 +204,6 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   font-size:1.05rem;line-height:1;
   color:rgba(255,255,255,0.45);
 }
-
-
-.install-card-copy{font-size:.70rem;color:var(--text-tertiary);line-height:1.55;margin-bottom:12px}
-.install-help{font-size:.68rem;color:var(--text-faint);line-height:1.5;margin-top:8px}
-.install-status{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--accent-tint);border:1px solid var(--border-soft);font-size:.62rem;font-weight:700;color:var(--text-secondary);margin-bottom:12px}
-body.theme-midnight .toggle-opt,
-body.theme-midnight .multi-opt{background:rgba(255,255,255,0.06);color:rgba(245,239,255,0.86);border-color:rgba(180,140,220,0.34);}
-body.theme-midnight .toggle-opt.sel,
-body.theme-midnight .multi-opt.sel{background:rgba(180,140,220,0.24);color:#f7f2ff;border-color:rgba(210,180,245,0.5);}
-body.theme-midnight .logout-btn{color:rgba(245,239,255,0.76);}
 
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
@@ -325,6 +313,15 @@ body.theme-midnight .logout-btn{color:rgba(245,239,255,0.76);}
   <div class="appear-row" onclick="viewTour()"><div class="appear-row-label">View App Tour</div><div class="appear-row-val"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div></div>
 </div>
 
+
+<div class="s-card d6">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></div><div><div class="s-card-title">Install GLP Buddy</div><div class="s-card-sub">Add the app to your phone or desktop for the cleanest app-style experience.</div></div></div>
+  <div class="install-status" id="settingsInstallStatus">Checking install option</div>
+  <div class="install-card-copy" id="settingsInstallText">Install GLP Buddy from here whenever you are ready.</div>
+  <button class="save-btn" style="margin:0;width:100%" id="settingsInstallBtn" onclick="handleInstallClick()">How to install</button>
+  <div class="install-help" id="settingsInstallHelp">If your browser does not show an install prompt, use its menu and choose Install App or Add to Home Screen.</div>
+</div>
+
 <button class="save-btn d7" id="saveBtn" onclick="saveSettings()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Save Settings</button>
 
 <div class="s-card d7">
@@ -368,7 +365,9 @@ body.theme-midnight .logout-btn{color:rgba(245,239,255,0.76);}
 
 <script src="glp-common.js"></script>
 <script>
-GLPApp.boot('settings');
+if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('settings'); }catch(e){} }
+
+const SKINS=['theme-rose','theme-sage','theme-sand','theme-midnight'];
 
 let deferredInstallPrompt = null;
 
@@ -377,6 +376,11 @@ function isStandaloneMode(){
 }
 function isIOSDevice(){
   return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+}
+function registerInstallSupport(){
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
 }
 function updateInstallUI(){
   const btn = document.getElementById('settingsInstallBtn');
@@ -388,16 +392,16 @@ function updateInstallUI(){
   if(isStandaloneMode()){
     btn.style.display = 'none';
     text.textContent = 'GLP Buddy is already installed on this device.';
-    help.textContent = 'You can open it from your home screen whenever you want the full app experience.';
+    help.textContent = 'Open it from your home screen whenever you want the full app experience.';
     status.textContent = 'Already installed';
     return;
   }
 
-  btn.style.display = 'inline-flex';
+  btn.style.display = 'flex';
 
   if(deferredInstallPrompt){
     btn.textContent = 'Install GLP Buddy';
-    text.textContent = 'Add GLP Buddy to this device for the cleanest app-style experience.';
+    text.textContent = 'Your browser is ready to install GLP Buddy now.';
     help.textContent = 'Tap install and your browser should handle the rest.';
     status.textContent = 'Ready to install';
     return;
@@ -405,7 +409,7 @@ function updateInstallUI(){
 
   if(isIOSDevice()){
     btn.textContent = 'How to install';
-    text.textContent = 'Add GLP Buddy to your iPhone home screen so it opens like an app.';
+    text.textContent = 'Install from Safari using Add to Home Screen.';
     help.textContent = 'Open this page in Safari, tap Share, then choose Add to Home Screen.';
     status.textContent = 'Manual install';
     return;
@@ -414,7 +418,7 @@ function updateInstallUI(){
   btn.textContent = 'How to install';
   text.textContent = 'Install may not be available yet in this browser.';
   help.textContent = 'Open the browser menu and look for Install App or Add to Home Screen.';
-  status.textContent = 'Browser dependent';
+  status.textContent = 'Browser menu';
 }
 
 async function handleInstallClick(){
@@ -424,22 +428,19 @@ async function handleInstallClick(){
       await deferredInstallPrompt.userChoice;
     }catch(e){}
     deferredInstallPrompt = null;
+    updateInstallUI();
+    return;
   }
-  updateInstallUI();
+
+  if(isIOSDevice()){
+    alert('Open this page in Safari, tap Share, then choose Add to Home Screen.');
+  }else{
+    alert('Open your browser menu and look for Install App or Add to Home Screen.');
+  }
 }
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredInstallPrompt = e; updateInstallUI(); });
+window.addEventListener('appinstalled', function(){ deferredInstallPrompt = null; updateInstallUI(); });
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-  updateInstallUI();
-});
-
-window.addEventListener('appinstalled', () => {
-  deferredInstallPrompt = null;
-  updateInstallUI();
-});
-
-const SKINS=['theme-rose','theme-sage','theme-sand','theme-midnight'];
 function applySkin(skin,persist){
   if(!SKINS.includes(skin))skin='theme-rose';
   SKINS.forEach(s=>document.body.classList.remove(s));document.body.classList.add(skin);
@@ -447,6 +448,8 @@ function applySkin(skin,persist){
   if(persist){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');s.skin=skin;localStorage.setItem('glp_settings',JSON.stringify(s));}catch(e){}}
 }
 (function(){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');if(s.skin)applySkin(s.skin,false);}catch(e){}})();
+registerInstallSupport();
+updateInstallUI();
 
 function selTwo(a,b){document.getElementById(a).classList.add('sel');document.getElementById(b).classList.remove('sel');}
 function selDay(btn){document.querySelectorAll('#injDayGroup .multi-opt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}

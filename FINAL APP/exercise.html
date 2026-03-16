@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>GLP Buddy � Exercise</title>
+<title>GLP Buddy — Exercise</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -95,7 +95,7 @@ body.theme-midnight{
 /* -- LAYOUT ----------------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+40px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h)+32px);padding-top:var(--nav-h);}
 @media(min-width:431px){
   body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
@@ -276,6 +276,14 @@ body{background:var(--bg-app);}
 .ws-rest-bar-fill{height:100%;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--support-primary),var(--accent-primary));transition:width 1s linear;}
 .ws-skip-rest{padding:9px 24px;border-radius:var(--r-pill);background:var(--surface-1);border:1.5px solid var(--border-soft);font-size:.78rem;font-weight:700;color:var(--text-secondary);cursor:pointer;}
 
+
+.ws-current-set{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--accent-tint2);color:var(--accent-primary);font-size:.70rem;font-weight:700;margin-bottom:14px}
+.ws-flow-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-mid);font-size:.66rem;font-weight:700;color:var(--text-secondary);margin-bottom:14px}
+.ws-rep-card{padding:16px;border-radius:var(--r-xl);background:var(--surface-1);border:1.5px solid var(--border-soft);box-shadow:var(--shadow-card);margin-bottom:16px}
+.ws-rep-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-faint);margin-bottom:8px}.ws-rep-counter{display:flex;align-items:center;gap:12px}.ws-rep-counter input{flex:1;height:56px;border-radius:18px;border:1.5px solid var(--border-soft);padding:0 16px;background:var(--surface-1);color:var(--text-primary);font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;outline:none;text-align:center}.ws-rep-counter input:focus{border-color:var(--accent-mid)}
+.ws-rest-copy{font-size:.80rem;color:var(--text-secondary);line-height:1.55;margin-top:10px}.ws-rest-hint{font-size:.70rem;color:var(--text-tertiary);margin-top:12px}.ws-rest-ready{margin-top:14px;padding:12px 14px;border-radius:18px;background:var(--surface-1);border:1px solid var(--border-soft);font-size:.78rem;font-weight:700;color:var(--text-primary)}
+.ws-next-move{margin-top:12px;padding:12px 14px;border-radius:18px;background:var(--support-tint);color:var(--support-primary);font-size:.76rem;font-weight:700}
+.ws-progress-note{font-size:.72rem;color:var(--text-tertiary);margin-top:10px;line-height:1.45}
 /* Bottom nav inside session */
 .ws-footer{display:flex;gap:10px;padding:12px var(--page-px) 32px;border-top:1px solid var(--border-mid);flex-shrink:0;background:var(--bg-app);}
 .ws-done-all{background:var(--ok-tint);border:1.5px solid rgba(47,158,122,.22);border-radius:var(--r-xl);padding:16px var(--page-px);margin:0 var(--page-px) 16px;display:flex;align-items:center;gap:12px;}
@@ -332,7 +340,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="k">This week</div><div class="v" id="heroWeekly">0/3</div></div>
-      <div class="hero-stat"><div class="k">Last workout</div><div class="v" id="heroLast">�</div></div>
+      <div class="hero-stat"><div class="k">Last workout</div><div class="v" id="heroLast">—</div></div>
       <div class="hero-stat"><div class="k">Next step</div><div class="v" id="heroNext">Start</div></div>
     </div>
   </div>
@@ -351,8 +359,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="badge badge-available" id="todayBadge">Available</div>
   </div>
   <div class="today-actions">
-    <button class="btn btn-primary" id="startBtn" onclick="startWorkout()">Start workout</button>
-    <button class="btn btn-secondary" id="resumeBtn" onclick="startWorkout()">Resume session</button>
+    <button class="btn btn-primary" id="startBtn">Start workout</button>
+    <button class="btn btn-secondary" id="resumeBtn">Resume session</button>
   </div>
   <div class="notice hidden" id="todayNotice"></div>
 </div>
@@ -423,34 +431,12 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   </div>
   <div class="ws-progress-bar"><div class="ws-progress-fill" id="wsProgressFill" style="width:0%"></div></div>
   <div class="ws-body" id="wsBody"></div>
-  <div class="ws-footer" id="wsFooter">
+  <div class="ws-footer" id="wsFooter" style="display:none">
     <button class="btn btn-secondary" style="flex:1" onclick="wsPrev()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <button class="btn btn-primary" style="flex:2" id="wsNextBtn" onclick="wsNext()">Next exercise</button>
-  </div>
-</div>
-
-
-<!-- MOVEMENT DETAIL OVERLAY -->
-<div class="overlay" id="movementOverlay">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-head">
-      <div>
-        <div class="sheet-title" id="movementSheetTitle">Exercise details</div>
-        <div class="sheet-sub" id="movementSheetSub">How to perform this movement well.</div>
-      </div>
-      <button class="sheet-close" type="button" onclick="closeMovementSheet()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <div id="movementSheetBody"></div>
-    <div class="sheet-actions">
-      <button class="btn btn-secondary" type="button" onclick="closeMovementSheet()">Close</button>
-      <button class="btn btn-primary" type="button" onclick="closeMovementSheet();startWorkout();">Start workout</button>
-    </div>
   </div>
 </div>
 
@@ -470,13 +456,13 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="info-copy">
       Each movement progresses on its own schedule. When you hit the target reps for two separate sessions at your current variation, the app offers a level up. You can accept it or stay where you are.
       <br><br>
-      Rest at least one day between workouts. The goal is steady consistency � not intensity.
+      Rest at least one day between workouts. The goal is steady consistency — not intensity.
     </div>
   </div>
 </div>
 
 <script src="glp-common.js"></script>
-<script>window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('exercise');</script>
+<script>if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('exercise'); }catch(e){} }</script>
 <script>
 'use strict';
 
@@ -495,7 +481,7 @@ const PROGRAM = [
   {
     id:'squat', name:'Squat', sets:2, targetReps:10,
     levels:[
-      {name:'Chair-assisted squat',  instruction:'Lower slowly onto a chair � touch it but don\'t sit. Drive back up through your heels.'},
+      {name:'Chair-assisted squat',  instruction:'Lower slowly onto a chair — touch it but don\'t sit. Drive back up through your heels.'},
       {name:'Bodyweight squat',      instruction:'Feet shoulder-width, toes slightly out. Lower until thighs are parallel, then stand tall.'},
       {name:'Pause squat',           instruction:'Lower under control, pause 2 seconds at the bottom, then drive back up.'},
     ],
@@ -515,7 +501,7 @@ const PROGRAM = [
     ],
     steps:[
       'Place hands just wider than shoulder-width.',
-      'Keep your body in a straight line � don\'t let your hips sag.',
+      'Keep your body in a straight line — don\'t let your hips sag.',
       'Lower your chest with control.',
       'Push back up to full arm extension.',
     ]
@@ -529,7 +515,7 @@ const PROGRAM = [
     ],
     steps:[
       'Stand with feet hip-width, slight bend in knees.',
-      'Push your hips back � not down.',
+      'Push your hips back — not down.',
       'Keep your back flat as you hinge forward.',
       'Drive your hips forward to stand, squeezing your glutes.',
     ]
@@ -545,20 +531,20 @@ const PROGRAM = [
       'Lie on your back, knees bent, feet flat on the floor.',
       'Press through your heels and squeeze your glutes to lift your hips.',
       'Your body should form a straight line from shoulders to knees.',
-      'Lower slowly � don\'t let your back arch.',
+      'Lower slowly — don\'t let your back arch.',
     ]
   },
   {
     id:'core', name:'Core Hold', sets:2, targetReps:30,  // seconds
     isTime:true,
     levels:[
-      {name:'Dead bug hold',   instruction:'Lie on your back, lower back pressed flat. Raise arms up, knees at 90�. Hold the position and breathe steadily.'},
+      {name:'Dead bug hold',   instruction:'Lie on your back, lower back pressed flat. Raise arms up, knees at 90°. Hold the position and breathe steadily.'},
       {name:'Plank on knees',  instruction:'Forearms on floor, knees down. Keep a straight line from head to knees. Core braced, breathe steadily.'},
       {name:'Full forearm plank', instruction:'Forearms on floor, toes down. Straight line from head to heels. Don\'t let hips drop or rise.'},
     ],
     steps:[
       'Set up in your chosen position.',
-      'Brace your core � draw your belly button in gently.',
+      'Brace your core — draw your belly button in gently.',
       'Keep breathing steadily throughout.',
       'Stop before your form breaks down.',
     ]
@@ -626,7 +612,7 @@ function renderPage(){
 
   // Last workout
   const lastDate = hist.length ? hist[hist.length-1].date : null;
-  document.getElementById('heroLast').textContent = lastDate ? new Date(lastDate+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'}) : '�';
+  document.getElementById('heroLast').textContent = lastDate ? new Date(lastDate+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'}) : '—';
 
   // Hero / today state
   if(done){
@@ -649,8 +635,7 @@ function renderPage(){
     document.getElementById('todayBadge').textContent='In progress';
     document.getElementById('todayBadge').className='badge badge-support';
     document.getElementById('startBtn').textContent='Resume workout';
-    document.getElementById('resumeBtn').style.display='inline-flex';
-    document.getElementById('resumeBtn').textContent='Resume session';
+    document.getElementById('resumeBtn').style.display='none';
   } else {
     document.getElementById('heroTitle').textContent='Ready when you are';
     document.getElementById('heroText').textContent='3 sessions a week keeps you strong. Each workout takes about 20 minutes.';
@@ -668,14 +653,13 @@ function renderPage(){
   renderHistory(hist);
 }
 
-
 function renderMovementLadder(prog){
   const root = document.getElementById('movementList');
   root.innerHTML = PROGRAM.map(m=>{
     const p = prog[m.id];
     const lev = m.levels[Math.min(p.levelIndex, m.levels.length-1)];
     const pct = Math.min(100, (p.sessionsAtLevel/2)*100);
-    return `<div class="card movement-card fade-up" onclick="openMovementSheet('${m.id}')">
+    return `<div class="card movement-card fade-up">
       <div class="movement-top">
         <div>
           <div class="movement-name">${m.name}</div>
@@ -687,12 +671,8 @@ function renderMovementLadder(prog){
       </div>
       <div class="small-copy" style="margin-top:8px"><strong>${lev.name}</strong></div>
       <div class="small-copy" style="margin-top:4px">${lev.instruction}</div>
-      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-secondary btn-sm" onclick="openMovementSheet('${m.id}');event.stopPropagation();">View exercise</button>
-        <button class="btn btn-primary btn-sm" onclick="startWorkout();event.stopPropagation();">Start</button>
-      </div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="small-copy" style="margin-top:6px;font-size:.68rem">${p.sessionsAtLevel}/2 qualifying sessions at this level</div>
+      <div class="small-copy" style="margin-top:6px;font-size:.68rem">${p.sessionsAtLevel}/2 sessions toward your next unlock</div>
       ${p.readyToLevelUp ? `<div style="margin-top:12px;display:flex;gap:8px">
         <button class="btn btn-primary btn-sm" onclick="acceptLevelUp('${m.id}')">Level up</button>
         <button class="btn btn-outline btn-sm" onclick="dismissLevelUp('${m.id}')">Stay here</button>
@@ -733,29 +713,57 @@ function renderHistory(hist){
         <div class="history-title">Strength session</div>
         <span class="pill pill-ok">${h.totalSets||0} sets</span>
       </div>
-      <div class="history-sub">${(h.exercises||[]).map(e=>e.name).join(' � ')}</div>
+      <div class="history-sub">${(h.exercises||[]).map(e=>e.name).join(' · ')}</div>
     </div>`).join('');
 }
 
 // -- WORKOUT SESSION ------------------------------------
-let _wsState = null;  // live session object
+let _wsState = null;
+let _restTimer = null;
+const REST_TARGET_MIN = 60;
+const REST_TARGET_MAX = 90;
+
+function currentMovement(){
+  if(!_wsState) return null;
+  return PROGRAM[Math.min(_wsState.stepIndex || 0, PROGRAM.length-1)] || null;
+}
+
+function nextOpenSetIndex(movement){
+  const sets = (_wsState && _wsState.sets && _wsState.sets[movement.id]) || [];
+  const idx = sets.findIndex(s => !s.logged);
+  return idx >= 0 ? idx : sets.length;
+}
+
+function formatSecs(secs){
+  const safe = Math.max(0, parseInt(secs || 0, 10));
+  return String(safe).padStart(2,'0') + 's';
+}
+
+function restElapsed(){
+  if(!_wsState || !_wsState.resting || !_wsState.restStartedAt) return 0;
+  return Math.max(0, Math.floor((Date.now() - _wsState.restStartedAt) / 1000));
+}
+
+function clearRestTicker(){
+  if(_restTimer){ clearInterval(_restTimer); _restTimer = null; }
+}
 
 function startWorkout(){
   if(isRestDay()){ renderPage(); return; }
   const st = loadState();
-  const prog = loadProgress();
 
   if(st.date===todayKey() && !st.complete){
-    // Resume existing session
-    _wsState = st;
+    _wsState = { resting:false, restStartedAt:null, restAfterSet:null, ...st };
   } else {
-    // Fresh session
     _wsState = {
       date: todayKey(),
       stepIndex: 0,
-      sets: {},     // { movementId: [{reps,logged},...] }
+      sets: {},
       complete: false,
       lastWorkoutDate: null,
+      resting: false,
+      restStartedAt: null,
+      restAfterSet: null
     };
     PROGRAM.forEach(m=>{
       _wsState.sets[m.id] = Array.from({length:m.sets},(_,i)=>({set:i+1,reps:0,logged:false}));
@@ -770,124 +778,130 @@ function startWorkout(){
 }
 
 function closeWorkout(){
-  // Save progress
+  clearRestTicker();
   if(_wsState) save('glp_ex_session', _wsState);
   document.getElementById('wsOverlay').classList.remove('open');
   document.body.style.overflow='';
-  renderPage();
 }
 
-let _restTimer = null;
-let _restLeft  = 0;
-const REST_DURATION = 75; // seconds between sets
-
 function renderWorkoutStep(){
-  const idx = _wsState.stepIndex;
-  const total = PROGRAM.length;
+  clearRestTicker();
+  if(!_wsState) return;
 
-  // Update top bar
-  document.getElementById('wsTopSub').textContent = `Exercise ${Math.min(idx+1,total)} of ${total}`;
-  document.getElementById('wsProgressFill').style.width = (idx/total*100)+'%';
+  while((_wsState.stepIndex || 0) < PROGRAM.length){
+    const move = PROGRAM[_wsState.stepIndex];
+    if(nextOpenSetIndex(move) >= move.sets){
+      _wsState.stepIndex += 1;
+      _wsState.resting = false;
+      _wsState.restStartedAt = null;
+      _wsState.restAfterSet = null;
+      save('glp_ex_session', _wsState);
+    } else {
+      break;
+    }
+  }
 
-  // Check if all done
-  const allDone = PROGRAM.every(m=> (_wsState.sets[m.id]||[]).every(s=>s.logged));
-  if(allDone && idx>=total){
+  if((_wsState.stepIndex || 0) >= PROGRAM.length){
     renderWorkoutComplete();
     return;
   }
 
-  if(idx >= total){
-    renderWorkoutComplete();
-    return;
-  }
-
-  const m    = PROGRAM[idx];
+  const idx = _wsState.stepIndex || 0;
+  const m = PROGRAM[idx];
   const prog = loadProgress();
-  const lev  = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
-  const sets = _wsState.sets[m.id] || [];
+  const lev = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
+  const setIdx = nextOpenSetIndex(m);
+  const total = PROGRAM.length;
+  const pct = Math.min(100, (((idx) + (Math.min(setIdx, m.sets)/m.sets)) / total) * 100);
 
-  document.getElementById('wsTopTitle').textContent = lev.name;
+  document.getElementById('wsProgressFill').style.width = pct + '%';
+  document.getElementById('wsFooter').style.display='none';
 
-  // Figure out which set we're on
-  const currentSetIdx = sets.findIndex(s=>!s.logged);
-  const allSetsLogged = currentSetIdx === -1;
+  if(_wsState.resting){
+    document.getElementById('wsTopTitle').textContent = m.name;
+    document.getElementById('wsTopSub').textContent = `Exercise ${idx+1} of ${total} · Set ${Math.min(setIdx+1, m.sets)} next`;
+    renderRestStep(m, lev, setIdx);
+    return;
+  }
 
-  // Determine if in rest
-  const inRest = _restLeft > 0;
+  document.getElementById('wsTopTitle').textContent = m.name;
+  document.getElementById('wsTopSub').textContent = `Exercise ${idx+1} of ${total} · Set ${setIdx+1} of ${m.sets}`;
+  const currentSet = (_wsState.sets[m.id] || [])[setIdx] || { reps: 0 };
+  const targetLabel = m.isTime ? `${m.targetReps} seconds` : `${m.targetReps} reps`;
 
-  let html = `<div class="ws-step">`;
-
-  // Exercise number + name
-  html += `<div class="ws-ex-num">Exercise ${idx+1} of ${total} � ${m.name}</div>`;
-  html += `<div class="ws-ex-name">${lev.name}</div>`;
-  html += `<div class="ws-ex-instruction">${lev.instruction}</div>`;
-
-  // Image placeholder (SVG silhouette)
-  html += `<div class="ws-img-placeholder">
-    ${getExerciseIllustration(m.id)}
-    <div class="ws-img-placeholder-label">${lev.name}</div>
-  </div>`;
-
-  // Instructions
-  html += `<div class="ws-steps">`;
-  m.steps.forEach((step,i)=>{
-    html += `<div class="ws-step-row"><div class="ws-step-num">${i+1}</div><div class="ws-step-txt">${step}</div></div>`;
-  });
-  html += `</div>`;
-
-  // Sets
-  html += `<div class="ws-sets-area"><div class="ws-sets-label">Log your sets</div>`;
-  sets.forEach((s,i)=>{
-    const isCurrent = i===currentSetIdx && !inRest;
-    html += `<div class="ws-set-card${s.logged?' logged':''}">
-      <div class="ws-set-badge">${s.logged ? '?' : i+1}</div>
-      <div class="ws-set-info">
-        <div class="ws-set-title">Set ${i+1}</div>
-        <div class="ws-set-target">${m.isTime ? `Target: ${m.targetReps} seconds` : `Target: ${m.targetReps} reps`}</div>
+  document.getElementById('wsBody').innerHTML = `
+    <div class="ws-step">
+      <div class="ws-current-set">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        Set ${setIdx+1} of ${m.sets}
       </div>
-      <input class="ws-set-input" type="number" min="0" max="99" inputmode="numeric"
-        placeholder="${m.isTime?'sec':'reps'}"
-        value="${s.reps||''}"
-        ${s.logged?'readonly':''}
-        onchange="wsSetVal(${idx},${i},this.value)"
-        id="wsInput_${idx}_${i}">
+      <div class="ws-ex-num">Exercise ${idx+1}</div>
+      <div class="ws-ex-name">${lev.name}</div>
+      <div class="ws-ex-instruction">${lev.instruction}</div>
+      <div class="ws-img-placeholder">
+        ${getExerciseIllustration(m.id)}
+        <div class="ws-img-placeholder-label">How to do the ${m.name.toLowerCase()}</div>
+      </div>
+      <div class="ws-steps">
+        ${m.steps.map((s,i)=>`<div class="ws-step-row"><div class="ws-step-num">${i+1}</div><div class="ws-step-txt">${s}</div></div>`).join('')}
+      </div>
+      <div class="ws-rep-card">
+        <div class="ws-rep-label">Rep counter</div>
+        <div class="ws-rep-counter">
+          <input type="number" inputmode="numeric" min="0" step="1" id="wsCurrentSetInput" value="${currentSet.reps || ''}" placeholder="${m.isTime ? 'sec' : 'reps'}" oninput="wsSetVal(${idx}, ${setIdx}, this.value)">
+        </div>
+        <div class="ws-progress-note">Target for this set: ${targetLabel}. Log your result when you are done.</div>
+      </div>
+      <button class="ws-log-set-btn" id="wsLogBtn" onclick="wsLogSet(${idx})" ${currentSet.reps ? '' : 'disabled'}>Log set ${setIdx+1}</button>
+      <div class="ws-progress-note">Complete two good sessions at this level to unlock the next progression.</div>
     </div>`;
-  });
-  html += `</div>`;
+}
 
-  // Rest timer or Log button
-  if(inRest){
-    html += `<div class="ws-rest">
-      <div class="ws-rest-label">Rest between sets</div>
-      <div class="ws-rest-time" id="wsRestTime">${_restLeft}s elapsed</div>
-      <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${(_restLeft/REST_DURATION)*100}%"></div></div>
-      <button class="ws-skip-rest" onclick="wsSkipRest()">Start next set</button>
+function renderRestStep(m, lev, setIdx){
+  const elapsed = restElapsed();
+  document.getElementById('wsBody').innerHTML = `
+    <div class="ws-step">
+      <div class="ws-flow-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+        60–90 seconds of rest
+      </div>
+      <div class="ws-ex-num">Nice work</div>
+      <div class="ws-ex-name">Rest before set ${Math.min(setIdx+1, m.sets)}</div>
+      <div class="ws-rest">
+        <div class="ws-rest-label">Rest timer</div>
+        <div class="ws-rest-time" id="wsRestTime">${formatSecs(elapsed)}</div>
+        <div class="ws-rest-copy" id="wsRestLead">Set ${Math.min(setIdx+1, m.sets)} starts after ${formatSecs(elapsed)} rest.</div>
+        <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${Math.min(100, (elapsed/REST_TARGET_MAX)*100)}%"></div></div>
+        <div class="ws-rest-ready" id="wsRestReady">${elapsed < REST_TARGET_MIN ? 'Aim for at least 60 seconds if you need it.' : elapsed <= REST_TARGET_MAX ? 'You are in the ideal 60–90 second rest window.' : 'You are ready. Start the next set when you want.'}</div>
+        <div class="ws-rest-hint">The timer starts at 0 and counts upward while you recover.</div>
+      </div>
+      <div class="ws-next-move">Next up: ${lev.name}</div>
+      <button class="ws-log-set-btn" onclick="wsStartNextSet()">Let’s go</button>
     </div>`;
-  } else if(!allSetsLogged){
-    html += `<button class="ws-log-set-btn" id="wsLogBtn" onclick="wsLogSet(${idx})"
-      ${!sets[currentSetIdx]||sets[currentSetIdx].reps===0 ? 'disabled' : ''}>
-      Log set ${currentSetIdx+1}
-    </button>`;
-  }
 
-  html += `</div>`;
-  document.getElementById('wsBody').innerHTML = html;
-  document.getElementById('wsBody').scrollTop = 0;
-
-  // Footer button
-  const nextBtn = document.getElementById('wsNextBtn');
-  if(allSetsLogged){
-    nextBtn.textContent = idx < total-1 ? 'Next exercise ?' : 'Finish workout';
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.textContent = idx < total-1 ? 'Skip exercise' : 'Finish workout';
-    nextBtn.disabled = false;
-  }
+  _restTimer = setInterval(function(){
+    const elapsedNow = restElapsed();
+    const timeEl = document.getElementById('wsRestTime');
+    const leadEl = document.getElementById('wsRestLead');
+    const fillEl = document.getElementById('wsRestFill');
+    const readyEl = document.getElementById('wsRestReady');
+    if(timeEl) timeEl.textContent = formatSecs(elapsedNow);
+    if(leadEl) leadEl.textContent = `Set ${Math.min(setIdx+1, m.sets)} starts after ${formatSecs(elapsedNow)} rest.`;
+    if(fillEl) fillEl.style.width = Math.min(100, (elapsedNow/REST_TARGET_MAX)*100) + '%';
+    if(readyEl){
+      readyEl.textContent = elapsedNow < REST_TARGET_MIN
+        ? 'Aim for at least 60 seconds if you need it.'
+        : elapsedNow <= REST_TARGET_MAX
+          ? 'You are in the ideal 60–90 second rest window.'
+          : 'You are ready. Start the next set when you want.';
+    }
+  }, 1000);
 }
 
 function renderWorkoutComplete(){
+  clearRestTicker();
   document.getElementById('wsTopTitle').textContent='Workout complete!';
-  document.getElementById('wsTopSub').textContent='All done � great work.';
+  document.getElementById('wsTopSub').textContent='All movements done';
   document.getElementById('wsProgressFill').style.width='100%';
 
   const totalSets = PROGRAM.reduce((acc,m)=>{
@@ -897,7 +911,7 @@ function renderWorkoutComplete(){
 
   document.getElementById('wsBody').innerHTML = `
     <div class="ws-step">
-      <div class="ws-done-all" style="flex-direction:column;align-items:flex-start;gap:8px">
+      <div class="ws-done-all" style="flex-direction:column;align-items:flex-start;gap:8px;margin:0 0 16px">
         <div style="display:flex;align-items:center;gap:12px">
           <div class="ws-done-all-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -914,22 +928,19 @@ function renderWorkoutComplete(){
           const reps = sets.map(s=>s.reps).join(' / ');
           return `<div class="card" style="padding:12px 14px">
             <div style="font-size:.60rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--text-faint);margin-bottom:4px">${m.name}</div>
-            <div style="font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--text-primary)">${reps||'�'}</div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--text-primary)">${reps||'—'}</div>
             <div style="font-size:.64rem;color:var(--text-tertiary);margin-top:2px">${m.isTime?'seconds':'reps'}</div>
           </div>`;
         }).join('')}
       </div>
       <button class="ws-log-set-btn" onclick="saveWorkout()">Save &amp; close</button>
     </div>`;
-
-  document.getElementById('wsFooter').style.display='none';
 }
 
 function wsSetVal(movIdx, setIdx, val){
   const m = PROGRAM[movIdx];
   _wsState.sets[m.id][setIdx].reps = parseInt(val)||0;
   save('glp_ex_session', _wsState);
-  // Re-enable log button if value entered
   const logBtn = document.getElementById('wsLogBtn');
   if(logBtn) logBtn.disabled = (_wsState.sets[m.id][setIdx].reps===0);
 }
@@ -938,72 +949,44 @@ function wsLogSet(movIdx){
   const m = PROGRAM[movIdx];
   const sets = _wsState.sets[m.id];
   const curIdx = sets.findIndex(s=>!s.logged);
-  if(curIdx<0) return;
-  if(!sets[curIdx].reps) return;
+  if(curIdx < 0 || !sets[curIdx].reps) return;
 
   sets[curIdx].logged = true;
-  save('glp_ex_session', _wsState);
-
-  const nextIdx = sets.findIndex(s=>!s.logged);
-  if(nextIdx>=0){
-    // Start rest timer
-    _restLeft = 0;
-    if(_restTimer) clearInterval(_restTimer);
-    _restTimer = setInterval(()=>{
-      _restLeft++;
-      const rt = document.getElementById('wsRestTime');
-      const rf = document.getElementById('wsRestFill');
-      if(rt) rt.textContent = _restLeft+'s elapsed';
-      if(rf) rf.style.width = (_restLeft/REST_DURATION*100)+'%';
-      if(_restLeft>=REST_DURATION){
-        clearInterval(_restTimer);
-        renderWorkoutStep();
-      }
-    },1000);
-    renderWorkoutStep();
+  if(curIdx < sets.length - 1){
+    _wsState.resting = true;
+    _wsState.restStartedAt = Date.now();
+    _wsState.restAfterSet = curIdx + 1;
   } else {
-    // All sets done for this movement
-    renderWorkoutStep();
+    _wsState.resting = false;
+    _wsState.restStartedAt = null;
+    _wsState.restAfterSet = null;
+    _wsState.stepIndex += 1;
   }
-}
-
-function wsSkipRest(){
-  if(_restTimer) clearInterval(_restTimer);
-  _restLeft=0;
+  save('glp_ex_session', _wsState);
   renderWorkoutStep();
 }
 
-function wsNext(){
-  if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
-  const total = PROGRAM.length;
-  if(_wsState.stepIndex < total-1){
-    _wsState.stepIndex++;
-    save('glp_ex_session', _wsState);
-    renderWorkoutStep();
-    document.getElementById('wsBody').scrollTop=0;
-  } else {
-    // Last exercise � finish
-    renderWorkoutComplete();
-  }
+function wsStartNextSet(){
+  _wsState.resting = false;
+  _wsState.restStartedAt = null;
+  _wsState.restAfterSet = null;
+  save('glp_ex_session', _wsState);
+  renderWorkoutStep();
 }
 
-function wsPrev(){
-  if(_wsState.stepIndex > 0){
-    if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
-    _wsState.stepIndex--;
-    save('glp_ex_session', _wsState);
-    renderWorkoutStep();
-    document.getElementById('wsBody').scrollTop=0;
-  }
-}
+function wsSkipRest(){ wsStartNextSet(); }
+function wsNext(){ renderWorkoutStep(); }
+function wsPrev(){ renderWorkoutStep(); }
 
 function saveWorkout(){
-  // Mark complete
+  clearRestTicker();
   _wsState.complete = true;
   _wsState.lastWorkoutDate = todayKey();
+  _wsState.resting = false;
+  _wsState.restStartedAt = null;
+  _wsState.restAfterSet = null;
   save('glp_ex_session', _wsState);
 
-  // Build history entry
   const prog = loadProgress();
   const exercises = PROGRAM.map(m=>{
     const sets = _wsState.sets[m.id]||[];
@@ -1011,7 +994,6 @@ function saveWorkout(){
     const lev = m.levels[Math.min(prog[m.id].levelIndex,m.levels.length-1)];
     const target = m.targetReps;
     const qualified = loggedSets.length>0 && loggedSets.every(s=>s.reps>=target);
-    // Update progression
     if(qualified){
       prog[m.id].sessionsAtLevel = Math.min(2,(prog[m.id].sessionsAtLevel||0)+1);
       if(prog[m.id].sessionsAtLevel>=2 && prog[m.id].levelIndex<m.levels.length-1){
@@ -1053,7 +1035,7 @@ window.acceptLevelUp=acceptLevelUp;
 window.dismissLevelUp=dismissLevelUp;
 
 // -- EXERCISE ILLUSTRATIONS -----------------------------
-// SVG silhouettes � premium placeholder style
+// SVG silhouettes — premium placeholder style
 function getExerciseIllustration(id){
   const icons = {
     squat: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
@@ -1097,36 +1079,12 @@ function getExerciseIllustration(id){
   return icons[id] || icons.squat;
 }
 
-
-function openMovementSheet(id){
-  const movement = PROGRAM.find(m => m.id === id) || PROGRAM[0];
-  const prog = loadProgress();
-  const p = prog[movement.id] || { levelIndex: 0, sessionsAtLevel: 0, readyToLevelUp: false };
-  const lev = movement.levels[Math.min(p.levelIndex, movement.levels.length - 1)];
-  document.getElementById('movementSheetTitle').textContent = movement.name;
-  document.getElementById('movementSheetSub').textContent = lev.name;
-  document.getElementById('movementSheetBody').innerHTML = `
-    <div class="ws-img-placeholder" style="margin-bottom:14px">${getExerciseIllustration(movement.id)}<div class="ws-img-placeholder-label">${lev.name}</div></div>
-    <div class="small-copy" style="font-size:.82rem;color:var(--text-secondary);line-height:1.6">${lev.instruction}</div>
-    <div class="ws-steps" style="margin-top:14px">${movement.steps.map((step, i) => `<div class="ws-step-row"><div class="ws-step-num">${i + 1}</div><div class="ws-step-txt">${step}</div></div>`).join('')}</div>
-    <div class="session-notice">Target for today: ${movement.sets} sets of ${movement.targetReps} ${movement.isTime ? 'seconds' : 'reps'}.</div>
-  `;
-  document.getElementById('movementOverlay').classList.add('open');
-}
-function closeMovementSheet(){
-  document.getElementById('movementOverlay').classList.remove('open');
-}
-window.openMovementSheet = openMovementSheet;
-window.closeMovementSheet = closeMovementSheet;
-window.startWorkout = startWorkout;
-
 // -- EVENT LISTENERS ------------------------------------
 document.getElementById('startBtn').addEventListener('click', startWorkout);
 document.getElementById('resumeBtn').addEventListener('click', startWorkout);
 document.getElementById('infoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.add('open'));
 document.getElementById('closeInfoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.remove('open'));
 document.getElementById('infoOverlay').addEventListener('click', e=>{if(e.target.id==='infoOverlay')document.getElementById('infoOverlay').classList.remove('open');});
-document.getElementById('movementOverlay').addEventListener('click', e=>{if(e.target.id==='movementOverlay')closeMovementSheet();});
 
 // -- INIT -----------------------------------------------
 renderPage();
