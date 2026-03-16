@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>GLP Buddy</title>
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 <meta name="theme-color" content="#1a1028">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -129,8 +130,8 @@ body.theme-midnight{
 }
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,0px);}
-.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 160px + env(safe-area-inset-bottom,0px));}
-.scroll-area > *:last-child{margin-bottom:24px;}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 118px + env(safe-area-inset-bottom,0px));}
+.scroll-area > *:last-child{margin-bottom:12px;}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
@@ -163,6 +164,16 @@ body{background:var(--bg-app);}
 .chip-accent{background:var(--accent-tint);color:var(--accent-primary);}
 .chip-support{background:var(--support-tint);color:var(--support-primary);}
 .chip-warn{background:var(--warn-tint);color:var(--warn);}
+body.theme-midnight .btn-pill{background:rgba(255,255,255,0.12);color:rgba(248,244,255,0.96);border:1px solid rgba(208,170,238,0.24);}
+body.theme-midnight .btn-ghost{color:rgba(240,234,255,0.9);}
+body.theme-midnight .btn-ghost:hover{color:#fff;}
+body.theme-midnight .chip-accent{background:rgba(255,255,255,0.10);color:rgba(248,244,255,0.94);}
+.install-card{margin:0 var(--page-px) 12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:var(--r-xl);background:var(--surface-1);border:1px solid var(--border-accent);box-shadow:var(--shadow-card);}
+.install-copy{min-width:0;flex:1;}
+.install-title{font-size:.84rem;font-weight:800;color:var(--text-primary);}
+.install-sub{margin-top:3px;font-size:.68rem;line-height:1.45;color:var(--text-tertiary);}
+.install-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+@media (max-width:380px){.install-card{flex-direction:column;align-items:flex-start;}.install-actions{width:100%;justify-content:flex-start;}}
 .prog-track{height:5px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
 .prog-fill{height:100%;border-radius:var(--r-pill);background:var(--prog-fill);transition:width 1.2s var(--ease);}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
@@ -440,6 +451,17 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     </div>
   </div>
 
+  <div id="installPromoCard" class="install-card a1" hidden>
+    <div class="install-copy">
+      <div class="install-title" id="installPromoTitle">Install GLP Buddy</div>
+      <div class="install-sub" id="installPromoText">Add GLP Buddy to your home screen for a cleaner app-style experience.</div>
+    </div>
+    <div class="install-actions">
+      <button class="btn btn-pill btn-sm" id="installPromoBtn" type="button">Install</button>
+      <button class="btn btn-ghost btn-sm" id="installPromoDismiss" type="button">Not now</button>
+    </div>
+  </div>
+
   <div id="motivationStrip" class="motivation-strip a1">
     <div class="motivation-dot"></div>
     <div id="motivationText" style="flex:1;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.88);line-height:1.45;letter-spacing:.01em"></div>
@@ -450,7 +472,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="inject-banner a2" id="medReminderBanner" style="display:none">
     <div class="inject-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
     <div>
-      <div class="inject-title">Injection day â€” <span id="bannerMedName">your medication</span></div>
+      <div class="inject-title">Injection day — <span id="bannerMedName">your medication</span></div>
       <div class="inject-sub">Don't forget your dose today</div>
     </div>
   </div>
@@ -472,21 +494,21 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="task-check" id="taskCheckinCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskCheckinLabel">Daily check-in</div>
-        <div class="task-sub">Energy Â· mood Â· hunger</div>
+        <div class="task-sub">Energy · mood · hunger</div>
       </div>
     </div>
     <div class="task-row" id="task3Row" onclick="task3Action()">
       <div class="task-check" id="task3Check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="task3Label">Daily walk</div>
-        <div class="task-sub" id="task3Sub">20â€“30 min Â· enhances GLP-1 effectiveness</div>
+        <div class="task-sub" id="task3Sub">20–30 min · enhances GLP-1 effectiveness</div>
       </div>
     </div>
     <div class="task-row" id="taskPhotoRow" onclick="openWeeklyPhotoTask()" style="display:none">
       <div class="task-check" id="taskPhotoCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskPhotoLabel">Take a progress photo</div>
-        <div class="task-sub" id="taskPhotoSub">Weekly reminder Â· due by Monday evening</div>
+        <div class="task-sub" id="taskPhotoSub">Weekly reminder · due by Monday evening</div>
       </div>
     </div>
     <div class="hero-actions">
@@ -498,16 +520,16 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="stat-row a3">
     <div class="stat-cell" style="flex:1.4">
       <div class="stat-lbl">Current weight</div>
-      <div class="stat-val" id="statCurrent">â€” <span class="stat-unit">kg</span></div>
+      <div class="stat-val" id="statCurrent">— <span class="stat-unit">kg</span></div>
       <div class="stat-ok" id="statLostBadge" style="display:none">
         <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-        <span id="statLostText">â€”</span>
+        <span id="statLostText">—</span>
       </div>
     </div>
     <div class="stat-cell">
       <div class="stat-lbl">Next dose</div>
-      <div class="stat-val" style="color:var(--support-primary)" id="statNextDose">â€”</div>
-      <div class="stat-note" id="statMedName">â€”</div>
+      <div class="stat-val" style="color:var(--support-primary)" id="statNextDose">—</div>
+      <div class="stat-note" id="statMedName">—</div>
     </div>
   </div>
 
@@ -515,9 +537,9 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="card-header">
       <div>
         <div class="card-title" style="display:flex;align-items:baseline;gap:8px">
-          <span id="currentWeightDisplay" class="weight-big" style="font-size:1.6rem;letter-spacing:-1px">â€”</span>
+          <span id="currentWeightDisplay" class="weight-big" style="font-size:1.6rem;letter-spacing:-1px">—</span>
           <span class="weight-unit" id="currentWeightUnit">kg</span>
-          <div id="lostPill" hidden><span class="chip chip-ok" style="font-size:.6rem" id="lostPillText">â€”</span></div>
+          <div id="lostPill" hidden><span class="chip chip-ok" style="font-size:.6rem" id="lostPillText">—</span></div>
         </div>
       </div>
     </div>
@@ -577,7 +599,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       </div>
       <div style="flex:1">
         <div class="habit-title">Daily walk</div>
-        <div class="habit-sub">20â€“30 min recommended</div>
+        <div class="habit-sub">20–30 min recommended</div>
       </div>
       <button class="btn btn-pill btn-sm" onclick="location='exercise.html'" style="font-size:.7rem">Workouts</button>
     </div>
@@ -585,7 +607,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
         <div>
           <div class="habit-title">Water intake</div>
-          <div class="habit-sub">8 glasses Â· 2â€“3L daily</div>
+          <div class="habit-sub">8 glasses · 2–3L daily</div>
         </div>
         <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px" id="waterCount">0 <span style="font-size:.72rem;font-weight:500;color:var(--text-tertiary)">/ 8</span></div>
       </div>
@@ -608,8 +630,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="med-icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
       <div style="flex:1">
         <div class="med-title" id="medNextLabel">Next dose</div>
-        <div class="med-sub" id="medNameDisplay">â€”</div>
-        <div class="med-countdown" id="medCountdown">â€”</div>
+        <div class="med-sub" id="medNameDisplay">—</div>
+        <div class="med-countdown" id="medCountdown">—</div>
       </div>
       <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Log dose</button>
     </div>
@@ -669,227 +691,227 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 //  LESSONS
 // -------------------------------------------------------
 const LESSONS = [
-Â  {
-Â  Â  num: 1, title: 'How GLP-1 medicines help', read: '2 min',
-Â  Â  summary: 'GLP-1 medicines work with your body\'s own signals to reduce hunger and slow digestion. Understanding the basics helps you trust the process.',
-Â  Â  body: `<p>GLP-1 medicines mimic a hormone your gut releases after eating. That hormone tells your brain you\'ve had enough, slows the movement of food through your stomach, and helps your body manage blood sugar more evenly.</p><p>The result is that hunger feels less urgent, meals feel satisfying with less food, and cravings tend to quieten over time. This isn\'t willpower â€” it\'s your biology working with the medicine.</p><p>Progress can feel subtle at first. That\'s normal. The medicine is building a foundation, not delivering instant results.</p>`
-Â  },
-Â  {
-Â  Â  num: 2, title: 'Smaller meals often feel better', read: '2 min',
-Â  Â  summary: 'As GLP-1 slows digestion, large meals can become uncomfortable. Smaller portions more often tends to work better for most people.',
-Â  Â  body: `<p>Because GLP-1 medicine slows how quickly food leaves your stomach, eating a large meal can lead to fullness, bloating, or nausea â€” especially in the early weeks.</p><p>Many people find that shifting to smaller, more frequent meals helps significantly. You don\'t need to count every calorie. Just pay attention to how your body feels and pause before reaching for a second portion.</p><p>Eating slowly also helps. It gives the signals time to reach your brain before you\'ve eaten past the point of comfort.</p>`
-Â  },
-Â  {
-Â  Â  num: 3, title: 'Hydration matters more than you think', read: '2 min',
-Â  Â  summary: 'Staying well hydrated supports your energy, digestion, and how you feel on this medicine. It\'s one of the simplest things you can do.',
-Â  Â  body: `<p>GLP-1 medicines can reduce appetite, which sometimes means people forget to drink enough water too. Mild dehydration can cause headaches, fatigue, and low mood â€” things that are easy to blame on the medicine when water is actually the issue.</p><p>Aim for around 2 litres of water per day as a starting point. More if the weather is warm or you\'ve been active.</p><p>If plain water feels difficult, herbal teas and water-rich foods like cucumber or melon count. The goal is steady hydration through the day, not drinking large amounts at once.</p>`
-Â  },
-Â  {
-Â  Â  num: 4, title: 'Protein helps protect progress', read: '2 min',
-Â  Â  summary: 'Eating enough protein while on GLP-1 medicine helps preserve muscle mass, which matters for your long-term health and metabolism.',
-Â  Â  body: `<p>When you eat less, there\'s a risk of losing muscle alongside fat. Muscle matters â€” it supports your metabolism, your energy, and your physical capability over time.</p><p>Getting enough protein helps your body hold onto muscle even when your overall food intake is lower. Good sources include eggs, fish, chicken, legumes, yoghurt, and tofu.</p><p>You don\'t need to track grams obsessively. A simple approach is to make sure there\'s a decent source of protein at each meal. If your appetite is low, a small protein-rich snack can help fill the gap.</p>`
-Â  },
-Â  {
-Â  Â  num: 5, title: 'Common side effects are usually digestive', read: '2 min',
-Â  Â  summary: 'Nausea, constipation, and reflux are the most common early side effects. Most people find they ease over the first few weeks.',
-Â  Â  body: `<p>The most common side effects of GLP-1 medicines are digestive â€” nausea, constipation, reflux, and sometimes loose stools. They tend to be most noticeable in the early weeks and usually settle as your body adjusts.</p><p>A few things that help: eating slowly, avoiding very fatty or heavily spiced meals, not lying down right after eating, and staying well hydrated.</p><p>If side effects are significantly affecting your daily life, it\'s worth speaking to your prescribing clinician. There are ways to manage them, and sometimes adjusting the dose or timing helps.</p>`
-Â  },
-Â  {
-Â  Â  num: 6, title: 'Know the red flags', read: '2 min',
-Â  Â  summary: 'Most side effects are mild and temporary. But a few symptoms need prompt medical attention. It\'s worth knowing what to look out for.',
-Â  Â  body: `<p>The vast majority of people tolerate GLP-1 medicines well. But some symptoms should prompt you to contact your clinician or seek medical advice promptly.</p><p>These include: severe abdominal pain that radiates to your back (which can indicate pancreatitis), persistent vomiting that prevents you from keeping fluids down, signs of an allergic reaction such as facial swelling or difficulty breathing, or vision changes.</p><p>This isn\'t a reason to worry â€” these events are uncommon. It\'s simply good to know what warrants a call to your clinician versus what can be managed at home with rest and hydration.</p>`
-Â  },
-Â  {
-Â  Â  num: 7, title: 'Consistency beats perfect days', read: '2 min',
-Â  Â  summary: 'Progress on this medicine comes from showing up consistently, not from being perfect. One difficult day doesn\'t change the bigger picture.',
-Â  Â  body: `<p>GLP-1 medicine works over time. The day-to-day variation in how you feel, what you eat, or how active you are matters less than the long-term pattern you\'re building.</p><p>It\'s easy to feel like a bad day undoes progress. It doesn\'t. Your body is making changes gradually, and one meal or one difficult week rarely sets you back significantly.</p><p>Focus on what you\'re doing most of the time, not on optimising every moment. Steady is more powerful than perfect.</p>`
-Â  },
-Â  {
-Â  Â  num: 8, title: 'Build a calm injection routine', read: '2 min',
-Â  Â  summary: 'A simple, consistent injection routine reduces anxiety and makes it easier to stay on track. Small rituals make a real difference.',
-Â  Â  body: `<p>For weekly injectables, having a consistent day and time removes the mental load of remembering. Many people pick a day that\'s naturally low-stress â€” a Sunday evening, for example.</p><p>A simple routine might look like: keep your pen in a visible, temperature-appropriate place; rotate injection sites to avoid skin changes; inject at room temperature for comfort; note it in your log immediately after.</p><p>If you feel anxious about injections, you\'re not alone. It often eases quickly with repetition. The injection itself is typically far less uncomfortable than people expect beforehand.</p>`
-Â  },
-Â  {
-Â  Â  num: 9, title: 'Look at trends, not one weigh-in', read: '2 min',
-Â  Â  summary: 'Weight naturally fluctuates day to day. What matters is the direction of your trend over weeks â€” not any single number on the scale.',
-Â  Â  body: `<p>Body weight can vary by one to two kilograms on the same day depending on hydration, what you\'ve eaten, hormonal cycles, and how much you\'ve moved. This is completely normal.</p><p>One higher reading on the scale doesn\'t mean you\'ve gained fat. It almost certainly doesn\'t. Weekly or fortnightly averages give a much clearer picture of what\'s actually happening.</p><p>The most useful question to ask isn\'t "what did I weigh today?" but "where is my average heading over the last month?" That\'s the number that reflects real progress.</p>`
-Â  },
-Â  {
-Â  Â  num: 10, title: 'Stay in contact with your clinician', read: '2 min',
-Â  Â  summary: 'Your prescribing clinician is your partner in this. Regular check-ins help them support you well and adjust your plan when needed.',
-Â  Â  body: `<p>GLP-1 medicines are prescription treatments, and your prescribing clinician is there to support you â€” not just to issue renewals. Regular check-ins help them understand how you\'re responding, what side effects you\'re managing, and whether your dose is right.</p><p>Don't feel like you need to save up concerns for a formal appointment. A quick message or call about a side effect, a question about timing, or a change in how you\'re feeling is exactly what they\'re there for.</p><p>Staying in contact also means your clinician can spot things early â€” whether that\'s an adjustment that could help, or a sign that something needs attention. This is a partnership, not a one-off prescription.</p>`
-Â  }
+  {
+    num: 1, title: 'How GLP-1 medicines help', read: '2 min',
+    summary: 'GLP-1 medicines work with your body\'s own signals to reduce hunger and slow digestion. Understanding the basics helps you trust the process.',
+    body: `<p>GLP-1 medicines mimic a hormone your gut releases after eating. That hormone tells your brain you\'ve had enough, slows the movement of food through your stomach, and helps your body manage blood sugar more evenly.</p><p>The result is that hunger feels less urgent, meals feel satisfying with less food, and cravings tend to quieten over time. This isn\'t willpower — it\'s your biology working with the medicine.</p><p>Progress can feel subtle at first. That\'s normal. The medicine is building a foundation, not delivering instant results.</p>`
+  },
+  {
+    num: 2, title: 'Smaller meals often feel better', read: '2 min',
+    summary: 'As GLP-1 slows digestion, large meals can become uncomfortable. Smaller portions more often tends to work better for most people.',
+    body: `<p>Because GLP-1 medicine slows how quickly food leaves your stomach, eating a large meal can lead to fullness, bloating, or nausea — especially in the early weeks.</p><p>Many people find that shifting to smaller, more frequent meals helps significantly. You don\'t need to count every calorie. Just pay attention to how your body feels and pause before reaching for a second portion.</p><p>Eating slowly also helps. It gives the signals time to reach your brain before you\'ve eaten past the point of comfort.</p>`
+  },
+  {
+    num: 3, title: 'Hydration matters more than you think', read: '2 min',
+    summary: 'Staying well hydrated supports your energy, digestion, and how you feel on this medicine. It\'s one of the simplest things you can do.',
+    body: `<p>GLP-1 medicines can reduce appetite, which sometimes means people forget to drink enough water too. Mild dehydration can cause headaches, fatigue, and low mood — things that are easy to blame on the medicine when water is actually the issue.</p><p>Aim for around 2 litres of water per day as a starting point. More if the weather is warm or you\'ve been active.</p><p>If plain water feels difficult, herbal teas and water-rich foods like cucumber or melon count. The goal is steady hydration through the day, not drinking large amounts at once.</p>`
+  },
+  {
+    num: 4, title: 'Protein helps protect progress', read: '2 min',
+    summary: 'Eating enough protein while on GLP-1 medicine helps preserve muscle mass, which matters for your long-term health and metabolism.',
+    body: `<p>When you eat less, there\'s a risk of losing muscle alongside fat. Muscle matters — it supports your metabolism, your energy, and your physical capability over time.</p><p>Getting enough protein helps your body hold onto muscle even when your overall food intake is lower. Good sources include eggs, fish, chicken, legumes, yoghurt, and tofu.</p><p>You don\'t need to track grams obsessively. A simple approach is to make sure there\'s a decent source of protein at each meal. If your appetite is low, a small protein-rich snack can help fill the gap.</p>`
+  },
+  {
+    num: 5, title: 'Common side effects are usually digestive', read: '2 min',
+    summary: 'Nausea, constipation, and reflux are the most common early side effects. Most people find they ease over the first few weeks.',
+    body: `<p>The most common side effects of GLP-1 medicines are digestive — nausea, constipation, reflux, and sometimes loose stools. They tend to be most noticeable in the early weeks and usually settle as your body adjusts.</p><p>A few things that help: eating slowly, avoiding very fatty or heavily spiced meals, not lying down right after eating, and staying well hydrated.</p><p>If side effects are significantly affecting your daily life, it\'s worth speaking to your prescribing clinician. There are ways to manage them, and sometimes adjusting the dose or timing helps.</p>`
+  },
+  {
+    num: 6, title: 'Know the red flags', read: '2 min',
+    summary: 'Most side effects are mild and temporary. But a few symptoms need prompt medical attention. It\'s worth knowing what to look out for.',
+    body: `<p>The vast majority of people tolerate GLP-1 medicines well. But some symptoms should prompt you to contact your clinician or seek medical advice promptly.</p><p>These include: severe abdominal pain that radiates to your back (which can indicate pancreatitis), persistent vomiting that prevents you from keeping fluids down, signs of an allergic reaction such as facial swelling or difficulty breathing, or vision changes.</p><p>This isn\'t a reason to worry — these events are uncommon. It\'s simply good to know what warrants a call to your clinician versus what can be managed at home with rest and hydration.</p>`
+  },
+  {
+    num: 7, title: 'Consistency beats perfect days', read: '2 min',
+    summary: 'Progress on this medicine comes from showing up consistently, not from being perfect. One difficult day doesn\'t change the bigger picture.',
+    body: `<p>GLP-1 medicine works over time. The day-to-day variation in how you feel, what you eat, or how active you are matters less than the long-term pattern you\'re building.</p><p>It\'s easy to feel like a bad day undoes progress. It doesn\'t. Your body is making changes gradually, and one meal or one difficult week rarely sets you back significantly.</p><p>Focus on what you\'re doing most of the time, not on optimising every moment. Steady is more powerful than perfect.</p>`
+  },
+  {
+    num: 8, title: 'Build a calm injection routine', read: '2 min',
+    summary: 'A simple, consistent injection routine reduces anxiety and makes it easier to stay on track. Small rituals make a real difference.',
+    body: `<p>For weekly injectables, having a consistent day and time removes the mental load of remembering. Many people pick a day that\'s naturally low-stress — a Sunday evening, for example.</p><p>A simple routine might look like: keep your pen in a visible, temperature-appropriate place; rotate injection sites to avoid skin changes; inject at room temperature for comfort; note it in your log immediately after.</p><p>If you feel anxious about injections, you\'re not alone. It often eases quickly with repetition. The injection itself is typically far less uncomfortable than people expect beforehand.</p>`
+  },
+  {
+    num: 9, title: 'Look at trends, not one weigh-in', read: '2 min',
+    summary: 'Weight naturally fluctuates day to day. What matters is the direction of your trend over weeks — not any single number on the scale.',
+    body: `<p>Body weight can vary by one to two kilograms on the same day depending on hydration, what you\'ve eaten, hormonal cycles, and how much you\'ve moved. This is completely normal.</p><p>One higher reading on the scale doesn\'t mean you\'ve gained fat. It almost certainly doesn\'t. Weekly or fortnightly averages give a much clearer picture of what\'s actually happening.</p><p>The most useful question to ask isn\'t "what did I weigh today?" but "where is my average heading over the last month?" That\'s the number that reflects real progress.</p>`
+  },
+  {
+    num: 10, title: 'Stay in contact with your clinician', read: '2 min',
+    summary: 'Your prescribing clinician is your partner in this. Regular check-ins help them support you well and adjust your plan when needed.',
+    body: `<p>GLP-1 medicines are prescription treatments, and your prescribing clinician is there to support you — not just to issue renewals. Regular check-ins help them understand how you\'re responding, what side effects you\'re managing, and whether your dose is right.</p><p>Don't feel like you need to save up concerns for a formal appointment. A quick message or call about a side effect, a question about timing, or a change in how you\'re feeling is exactly what they\'re there for.</p><p>Staying in contact also means your clinician can spot things early — whether that\'s an adjustment that could help, or a sign that something needs attention. This is a partnership, not a one-off prescription.</p>`
+  }
 ];
 
 const MOTIVATION = [
-Â  'Small steps still count.','Progress is built quietly.','You do not need a perfect day to move forward.',
-Â  'Consistency feels small while it is working.','A calm choice still changes your future.',
-Â  'Patience is part of the process.','Your body is doing more than you can see.',
-Â  'Every good day adds to the one before it.','Slow and steady is not a consolation prize.',
-Â  'Trust the direction, not just the pace.','Rest is not stopping. It is part of going.',
-Â  'One steady week is worth more than one perfect day.','Progress happens between the dramatic moments.',
-Â  'You are already further than you were.','Show up gently. That still counts.',
-Â  'The quiet choices are the ones that last.','A small improvement held consistently becomes significant.',
-Â  'You do not need to earn rest.','Being kind to yourself is not weakness.',
-Â  'Imperfect progress is still progress.','Your effort is real even when results are slow.',
-Â  'This week does not need to be your best. It just needs to happen.',
-Â  'Taking care of yourself is a long game.','You are building something durable.',
-Â  'One good decision today is enough.','Each injection is an act of self-care.',
-Â  'It is not about speed. It is about not stopping.',
-Â  'How you treat yourself day-to-day shapes everything.','Calm consistency wins.',
-Â  'The hard days count too.','Progress does not always feel like progress.',
-Â  'You do not need motivation every day. You just need to keep going.',
-Â  'A gentle week is still a working week.','What you do most of the time matters most.',
-Â  'Your future self will thank today\'s version of you.',
-Â  'Small consistent actions compound quietly.','The trend is the truth, not the single day.',
-Â  'Being here is already part of it.','You are practising, not performing.',
-Â  'Effort that no one sees still works.','This is a season, not a sprint.',
-Â  'Good enough, done consistently, is excellent.','Rest without guilt. Move without shame.',
-Â  'What feels slow to you may look like strength from outside.',
-Â  'You have more momentum than you realise.','Stay steady. That is the whole strategy.',
-Â  'Today does not need to be impressive. It just needs to be real.',
-Â  'You are adjusting. That takes time and it is working.',
-Â  'Health built slowly holds.','A kind routine is a powerful one.',
-Â  'There is real courage in showing up on average days.',
-Â  'Let the medicine do its work. You just need to support it.',
-Â  'One glass of water more is a good choice. All good choices add up.',
-Â  'You are not behind. You are on your own timeline.',
-Â  'Gentleness toward yourself is not an obstacle. It is the path.',
-Â  'Difficult weeks are still part of the journey.',
-Â  'You have changed more than you think since you started.',
-Â  'Steady is underrated.','A quiet day is still a day moving forward.',
-Â  'You are building a relationship with your body. That takes time.',
-Â  'Three good choices today beats one perfect day this month.',
-Â  'Your health is worth this patience.','Lean into the process.',
-Â  'Some days the win is just keeping things stable.','Stable is good.',
-Â  'This does not need to be all or nothing.','Progress tolerates imperfection.',
-Â  'The version of you who started is not the version reading this.',
-Â  'Not every day needs a milestone. Some just need to happen.',
-Â  'You are further along than you were when you started reading this series.',
-Â  'A week of showing up quietly is worth celebrating.',
-Â  'Your commitment does not need to be loud to be real.',
-Â  'There is no perfect moment to begin again. This is fine.',
-Â  'The medicine, the movement, the meals. All of it is working together.',
-Â  'You do not have to be motivated. You just have to do the next thing.',
-Â  'What changes your health is what you do most often.',
-Â  'One steady month changes the numbers more than one intense week.',
-Â  'You are building a new pattern. Patterns take time.',
-Â  'The work you do on ordinary days is the real work.',
-Â  'Your progress is not defined by your fastest week.',
-Â  'Comfort and progress are not opposites.','You can move slowly and still arrive.',
-Â  'The best plan is the one you can actually follow.',
-Â  'You are doing something real.','A calm approach is a sustainable one.',
-Â  'Wherever you are in this, you are not wrong to keep going.',
-Â  'Your future is being shaped by how you treat yourself today.',
-Â  'Being consistent is the most underrated form of discipline.',
-Â  'You do not owe anyone a dramatic transformation.',
-Â  'This is about how you feel. That matters.',
-Â  'Some progress is invisible from the outside and very real on the inside.',
-Â  'Trust what the data shows over time, not how you feel on a single morning.',
-Â  'You are adapting. Adaptation is not always comfortable.',
-Â  'The pause before the second portion is the habit you are building.',
-Â  'One good sleep supports everything else.','Drink the water. It helps more than you think.',
-Â  'The day after a difficult day is a fresh opportunity.',
-Â  'You are not starting over. You are continuing.',
-Â  'Every time you show up, you are reinforcing a better pattern.',
-Â  'Not every week will show results. Every week still counts.',
-Â  'You are not competing with anyone else on this journey.',
-Â  'The version of health you are building is yours. No one else\'s.',
-Â  'Less pressure, more consistency. That is the formula.',
-Â  'You have made it to today. That is the work.',
-Â  'Long-term results come from short-term repetition.',
-Â  'Progress is not always visible. It is often happening beneath the surface.',
-Â  'Every choice that supports your health adds to the account.',
-Â  'You can be gentle with yourself and still be committed.',
-Â  'Your body is not against you. It is working with you.',
-Â  'This is a process you are part of, not a test you are passing or failing.',
-Â  'The fact that you are paying attention already matters.',
-Â  'Keep going at whatever pace is sustainable for you.',
-Â  'You do not need to earn your meals.','Nourishment is not a reward.',
-Â  'Your relationship with food is allowed to be calm.',
-Â  'This medicine is a tool. You are the one doing the work.',
-Â  'Slow progress on a long road is still moving forward.',
-Â  'You are not the same person who first started this. That is progress.',
-Â  'Protein, water, movement, rest. Simple things done often.',
-Â  'Perfection is not the standard. Showing up is.',
-Â  'You are more capable of consistency than you realise.',
-Â  'Let today be enough.','Tomorrow you can build on it.',
-Â  'Health is not a destination. It is what you practise.',
-Â  'There is dignity in doing ordinary things well.',
-Â  'You are learning what works for your body. That takes time.',
-Â  'One less heavily processed meal is a win.','Increments matter.',
-Â  'Progress is most visible when you look back further.',
-Â  'A week from now you will be glad you stayed the course today.',
-Â  'You are not expected to have this all figured out.',
-Â  'Consistency over months will surprise you.',
-Â  'The number on the scale is one signal, not the whole story.',
-Â  'Your energy and how you feel are also progress.',
-Â  'You are building new defaults. Defaults take repetition.',
-Â  'The quieter habits are often the most lasting ones.',
-Â  'What you are doing is harder than it looks from outside.',
-Â  'Let yourself feel good about the small wins.',
-Â  'You are the only person who knows how much effort this takes.',
-Â  'Progress is rarely linear. That does not make it less real.',
-Â  'You are not broken. You are adjusting.',
-Â  'A gentle week is still pointing in the right direction.',
-Â  'You are doing the work in a real and meaningful way.',
-Â  'Trust the compound effect of small good choices.',
-Â  'You are allowed to be proud of ordinary progress.',
-Â  'The consistency you are building now is valuable.',
-Â  'This is what looking after yourself actually looks like.',
-Â  'You are not behind. You are on your path.',
-Â  'Small improvements, day after day, become something significant.',
-Â  'You do not need to see the whole picture today.',
-Â  'The decision to continue on hard days is a powerful one.',
-Â  'You are learning to listen to your body. That is a skill.',
-Â  'Eating when you are genuinely hungry is good practice.',
-Â  'Stopping when you are full is a habit worth building.',
-Â  'Every injection you remember and do is a form of self-discipline.',
-Â  'You are building a version of health that fits your actual life.',
-Â  'Boring consistency produces remarkable results.',
-Â  'You are not doing this perfectly and that is fine.',
-Â  'Progress tolerates rest, setbacks, and quiet weeks.',
-Â  'The next right thing is enough. Just do that.',
-Â  'Your effort today does not expire overnight.',
-Â  'The changes you are making are more significant than they appear day-to-day.',
-Â  'You are not just losing weight. You are building new habits.',
-Â  'Good patterns take three weeks to form and much longer to fully hold. Keep going.',
-Â  'Your clinician is on your side. Let them support you.',
-Â  'You are doing something that future you will benefit from.',
-Â  'Routine is not boring. Routine is the foundation.',
-Â  'The best version of this journey is the one you actually do.',
-Â  'You are allowed to rest without guilt.',
-Â  'Taking this one day at a time is wisdom, not weakness.',
-Â  'Your health is not a project with a deadline.',
-Â  'The middle of the journey is where most of the real work happens.',
-Â  'You have made choices today that your future self will thank you for.',
-Â  'Every step forward is valid, regardless of the size.',
-Â  'You are building something real. Keep going.',
-Â  'Progress is quiet most of the time. That is how it works.',
-Â  'You are not expected to feel inspired every day. Just keep moving.',
-Â  'This is your pace. It is the right pace.',
-Â  'You are doing better than you think.',
-Â  'Today is enough. Tomorrow you can do a little more.',
-Â  'The work is ordinary. The result is extraordinary.',
-Â  'Small habits, held long enough, change everything.',
-Â  'You are here. That is the first and most important part.',
-Â  'Let patience be your strategy today.',
-Â  'You are not a before photo. You are a whole person, today.',
-Â  'Ease into it. You have time.',
-Â  'Something is always better than nothing.',
-Â  'Show up however you can. That is the standard.',
-Â  'You are exactly where you need to be for today.',
-Â  'Progress does not care about the speed, only the direction.',
-Â  'Keep your eyes on your own journey.',
-Â  'You know more about what works for your body than you did when you started.',
-Â  'A consistent effort, however small, is better than a perfect effort you cannot sustain.',
-Â  'You are building. Not just maintaining.',
-Â  'The hardest days you showed up anyway are the ones that shaped you most.',
-Â  'Today\'s choices are tomorrow\'s foundation.',
-Â  'You are further along the path than you were when you took the first step.',
-Â  'Being here, doing this work, is already success.',
-Â  'Let the process work. It is working.',
-Â  'You are supported. By the medicine, by this app, and by your own commitment.',
+  'Small steps still count.','Progress is built quietly.','You do not need a perfect day to move forward.',
+  'Consistency feels small while it is working.','A calm choice still changes your future.',
+  'Patience is part of the process.','Your body is doing more than you can see.',
+  'Every good day adds to the one before it.','Slow and steady is not a consolation prize.',
+  'Trust the direction, not just the pace.','Rest is not stopping. It is part of going.',
+  'One steady week is worth more than one perfect day.','Progress happens between the dramatic moments.',
+  'You are already further than you were.','Show up gently. That still counts.',
+  'The quiet choices are the ones that last.','A small improvement held consistently becomes significant.',
+  'You do not need to earn rest.','Being kind to yourself is not weakness.',
+  'Imperfect progress is still progress.','Your effort is real even when results are slow.',
+  'This week does not need to be your best. It just needs to happen.',
+  'Taking care of yourself is a long game.','You are building something durable.',
+  'One good decision today is enough.','Each injection is an act of self-care.',
+  'It is not about speed. It is about not stopping.',
+  'How you treat yourself day-to-day shapes everything.','Calm consistency wins.',
+  'The hard days count too.','Progress does not always feel like progress.',
+  'You do not need motivation every day. You just need to keep going.',
+  'A gentle week is still a working week.','What you do most of the time matters most.',
+  'Your future self will thank today\'s version of you.',
+  'Small consistent actions compound quietly.','The trend is the truth, not the single day.',
+  'Being here is already part of it.','You are practising, not performing.',
+  'Effort that no one sees still works.','This is a season, not a sprint.',
+  'Good enough, done consistently, is excellent.','Rest without guilt. Move without shame.',
+  'What feels slow to you may look like strength from outside.',
+  'You have more momentum than you realise.','Stay steady. That is the whole strategy.',
+  'Today does not need to be impressive. It just needs to be real.',
+  'You are adjusting. That takes time and it is working.',
+  'Health built slowly holds.','A kind routine is a powerful one.',
+  'There is real courage in showing up on average days.',
+  'Let the medicine do its work. You just need to support it.',
+  'One glass of water more is a good choice. All good choices add up.',
+  'You are not behind. You are on your own timeline.',
+  'Gentleness toward yourself is not an obstacle. It is the path.',
+  'Difficult weeks are still part of the journey.',
+  'You have changed more than you think since you started.',
+  'Steady is underrated.','A quiet day is still a day moving forward.',
+  'You are building a relationship with your body. That takes time.',
+  'Three good choices today beats one perfect day this month.',
+  'Your health is worth this patience.','Lean into the process.',
+  'Some days the win is just keeping things stable.','Stable is good.',
+  'This does not need to be all or nothing.','Progress tolerates imperfection.',
+  'The version of you who started is not the version reading this.',
+  'Not every day needs a milestone. Some just need to happen.',
+  'You are further along than you were when you started reading this series.',
+  'A week of showing up quietly is worth celebrating.',
+  'Your commitment does not need to be loud to be real.',
+  'There is no perfect moment to begin again. This is fine.',
+  'The medicine, the movement, the meals. All of it is working together.',
+  'You do not have to be motivated. You just have to do the next thing.',
+  'What changes your health is what you do most often.',
+  'One steady month changes the numbers more than one intense week.',
+  'You are building a new pattern. Patterns take time.',
+  'The work you do on ordinary days is the real work.',
+  'Your progress is not defined by your fastest week.',
+  'Comfort and progress are not opposites.','You can move slowly and still arrive.',
+  'The best plan is the one you can actually follow.',
+  'You are doing something real.','A calm approach is a sustainable one.',
+  'Wherever you are in this, you are not wrong to keep going.',
+  'Your future is being shaped by how you treat yourself today.',
+  'Being consistent is the most underrated form of discipline.',
+  'You do not owe anyone a dramatic transformation.',
+  'This is about how you feel. That matters.',
+  'Some progress is invisible from the outside and very real on the inside.',
+  'Trust what the data shows over time, not how you feel on a single morning.',
+  'You are adapting. Adaptation is not always comfortable.',
+  'The pause before the second portion is the habit you are building.',
+  'One good sleep supports everything else.','Drink the water. It helps more than you think.',
+  'The day after a difficult day is a fresh opportunity.',
+  'You are not starting over. You are continuing.',
+  'Every time you show up, you are reinforcing a better pattern.',
+  'Not every week will show results. Every week still counts.',
+  'You are not competing with anyone else on this journey.',
+  'The version of health you are building is yours. No one else\'s.',
+  'Less pressure, more consistency. That is the formula.',
+  'You have made it to today. That is the work.',
+  'Long-term results come from short-term repetition.',
+  'Progress is not always visible. It is often happening beneath the surface.',
+  'Every choice that supports your health adds to the account.',
+  'You can be gentle with yourself and still be committed.',
+  'Your body is not against you. It is working with you.',
+  'This is a process you are part of, not a test you are passing or failing.',
+  'The fact that you are paying attention already matters.',
+  'Keep going at whatever pace is sustainable for you.',
+  'You do not need to earn your meals.','Nourishment is not a reward.',
+  'Your relationship with food is allowed to be calm.',
+  'This medicine is a tool. You are the one doing the work.',
+  'Slow progress on a long road is still moving forward.',
+  'You are not the same person who first started this. That is progress.',
+  'Protein, water, movement, rest. Simple things done often.',
+  'Perfection is not the standard. Showing up is.',
+  'You are more capable of consistency than you realise.',
+  'Let today be enough.','Tomorrow you can build on it.',
+  'Health is not a destination. It is what you practise.',
+  'There is dignity in doing ordinary things well.',
+  'You are learning what works for your body. That takes time.',
+  'One less heavily processed meal is a win.','Increments matter.',
+  'Progress is most visible when you look back further.',
+  'A week from now you will be glad you stayed the course today.',
+  'You are not expected to have this all figured out.',
+  'Consistency over months will surprise you.',
+  'The number on the scale is one signal, not the whole story.',
+  'Your energy and how you feel are also progress.',
+  'You are building new defaults. Defaults take repetition.',
+  'The quieter habits are often the most lasting ones.',
+  'What you are doing is harder than it looks from outside.',
+  'Let yourself feel good about the small wins.',
+  'You are the only person who knows how much effort this takes.',
+  'Progress is rarely linear. That does not make it less real.',
+  'You are not broken. You are adjusting.',
+  'A gentle week is still pointing in the right direction.',
+  'You are doing the work in a real and meaningful way.',
+  'Trust the compound effect of small good choices.',
+  'You are allowed to be proud of ordinary progress.',
+  'The consistency you are building now is valuable.',
+  'This is what looking after yourself actually looks like.',
+  'You are not behind. You are on your path.',
+  'Small improvements, day after day, become something significant.',
+  'You do not need to see the whole picture today.',
+  'The decision to continue on hard days is a powerful one.',
+  'You are learning to listen to your body. That is a skill.',
+  'Eating when you are genuinely hungry is good practice.',
+  'Stopping when you are full is a habit worth building.',
+  'Every injection you remember and do is a form of self-discipline.',
+  'You are building a version of health that fits your actual life.',
+  'Boring consistency produces remarkable results.',
+  'You are not doing this perfectly and that is fine.',
+  'Progress tolerates rest, setbacks, and quiet weeks.',
+  'The next right thing is enough. Just do that.',
+  'Your effort today does not expire overnight.',
+  'The changes you are making are more significant than they appear day-to-day.',
+  'You are not just losing weight. You are building new habits.',
+  'Good patterns take three weeks to form and much longer to fully hold. Keep going.',
+  'Your clinician is on your side. Let them support you.',
+  'You are doing something that future you will benefit from.',
+  'Routine is not boring. Routine is the foundation.',
+  'The best version of this journey is the one you actually do.',
+  'You are allowed to rest without guilt.',
+  'Taking this one day at a time is wisdom, not weakness.',
+  'Your health is not a project with a deadline.',
+  'The middle of the journey is where most of the real work happens.',
+  'You have made choices today that your future self will thank you for.',
+  'Every step forward is valid, regardless of the size.',
+  'You are building something real. Keep going.',
+  'Progress is quiet most of the time. That is how it works.',
+  'You are not expected to feel inspired every day. Just keep moving.',
+  'This is your pace. It is the right pace.',
+  'You are doing better than you think.',
+  'Today is enough. Tomorrow you can do a little more.',
+  'The work is ordinary. The result is extraordinary.',
+  'Small habits, held long enough, change everything.',
+  'You are here. That is the first and most important part.',
+  'Let patience be your strategy today.',
+  'You are not a before photo. You are a whole person, today.',
+  'Ease into it. You have time.',
+  'Something is always better than nothing.',
+  'Show up however you can. That is the standard.',
+  'You are exactly where you need to be for today.',
+  'Progress does not care about the speed, only the direction.',
+  'Keep your eyes on your own journey.',
+  'You know more about what works for your body than you did when you started.',
+  'A consistent effort, however small, is better than a perfect effort you cannot sustain.',
+  'You are building. Not just maintaining.',
+  'The hardest days you showed up anyway are the ones that shaped you most.',
+  'Today\'s choices are tomorrow\'s foundation.',
+  'You are further along the path than you were when you took the first step.',
+  'Being here, doing this work, is already success.',
+  'Let the process work. It is working.',
+  'You are supported. By the medicine, by this app, and by your own commitment.',
 ];
 // -- LESSON STORAGE -------------------------------------
 function loadLessonData() {
@@ -910,7 +932,7 @@ function getActiveLesson() {
   for (let i = 0; i < LESSONS.length; i++) {
     const entry = data[i];
     if (!entry || !entry.completed) {
-      // This lesson not yet done â€” it's the active one
+      // This lesson not yet done — it's the active one
       idx = i;
       break;
     }
@@ -920,7 +942,7 @@ function getActiveLesson() {
       // Advance to next
       idx = i + 1;
     } else {
-      // Completed today â€” stay on this lesson (show done state)
+      // Completed today — stay on this lesson (show done state)
       idx = i;
       break;
     }
@@ -979,7 +1001,7 @@ function renderLessonCard() {
   const isCompletedToday = data[activeIdx] && data[activeIdx].completed && data[activeIdx].completedDate === today;
   const isCompleted      = data[activeIdx] && data[activeIdx].completed;
 
-  // Completed today â€” done state, next unlocks tomorrow
+  // Completed today — done state, next unlocks tomorrow
   if (isCompleted && !isNextLessonUnlocked(activeIdx)) {
     card.innerHTML = `<div class="lc-wrap">
       ${pipBar}
@@ -989,14 +1011,14 @@ function renderLessonCard() {
         </div>
         <div>
           <div class="lc-done-title">Today\'s lesson complete</div>
-          <div class="lc-done-sub">Lesson ${lesson.num} Â· Next lesson unlocks tomorrow</div>
+          <div class="lc-done-sub">Lesson ${lesson.num} · Next lesson unlocks tomorrow</div>
         </div>
       </div>
     </div>`;
     return;
   }
 
-  // Active lesson â€” always show full card open, highlighted
+  // Active lesson — always show full card open, highlighted
   // Collapsed shows summary + pulsing "Read lesson" CTA
   card.innerHTML = `<div class="lc-wrap lc-active-highlight">
     <div class="lc-header" onclick="toggleLesson()" style="cursor:pointer">
@@ -1004,7 +1026,7 @@ function renderLessonCard() {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       </div>
       <div style="flex:1;min-width:0">
-        <div class="lc-num">Lesson ${lesson.num} of ${LESSONS.length} Â· ${lesson.read}</div>
+        <div class="lc-num">Lesson ${lesson.num} of ${LESSONS.length} · ${lesson.read}</div>
         <div class="lc-title">${lesson.title}</div>
       </div>
       <svg class="lc-chevron${_lessonExpanded ? ' open' : ''}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1127,11 +1149,11 @@ function getDisplayMedicationName(s) {
 
 function getNextDoseInfo(s) {
   // Returns { daysUntil: number, isToday: bool, label: string }
-  if (!s.medDay) return { daysUntil: null, isToday: false, label: 'â€”' };
+  if (!s.medDay) return { daysUntil: null, isToday: false, label: '—' };
   const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const todayIdx  = new Date().getDay(); // 0=Sun
   const injIdx    = DAY_NAMES.findIndex(d => (s.medDay || 'Mon').startsWith(d));
-  if (injIdx < 0) return { daysUntil: null, isToday: false, label: 'â€”' };
+  if (injIdx < 0) return { daysUntil: null, isToday: false, label: '—' };
   let diff = injIdx - todayIdx;
   if (diff < 0) diff += 7;
   // diff === 0 means today
@@ -1173,15 +1195,15 @@ function deriveHomeStatus(ts) {
   const done      = [weightOk, checkinOk, task3Ok].filter(Boolean).length;
   const MSGS = [
     ['Log your weight to get started', 'Your journey begins with one number'],
-    ['Good start',                     'Keep going â€” 2 more tasks today'],
+    ['Good start',                     'Keep going — 2 more tasks today'],
     ['Making progress',                'One more task to complete your day'],
-    ['Day complete',                   'All three tasks done â€” well done'],
+    ['Day complete',                   'All three tasks done — well done'],
   ];
   return { weightOk, checkinOk, task3Ok, done, msg: MSGS[Math.min(done, 3)] };
 }
 
 // -------------------------------------------------------
-//  TASK 3 â€” walk on normal days, log dose on injection day
+//  TASK 3 — walk on normal days, log dose on injection day
 // -------------------------------------------------------
 let _isInjectionDay = false;
 
@@ -1192,12 +1214,12 @@ function setupTask3(s, ts) {
   const sub3   = document.getElementById('task3Sub');
   if (_isInjectionDay) {
     label3.textContent = 'Log today\'s dose';
-    sub3.textContent   = getDisplayMedicationName(s) + (s.medDose ? ' Â· ' + s.medDose : '');
+    sub3.textContent   = getDisplayMedicationName(s) + (s.medDose ? ' · ' + s.medDose : '');
     // task3 done if dose logged
     markTask('task3Check', 'task3Label', !!ts.doseLogged);
   } else {
     label3.textContent = 'Daily walk';
-    sub3.textContent   = '20â€“30 min Â· enhances GLP-1 effectiveness';
+    sub3.textContent   = '20–30 min · enhances GLP-1 effectiveness';
     markTask('task3Check', 'task3Label', !!ts.walkDone);
   }
 }
@@ -1243,12 +1265,12 @@ function setupWeeklyPhotoTask() {
   row.style.display = info.visible ? 'flex' : 'none';
   if (!info.visible) return;
   label.textContent = info.done ? 'Progress photo done' : 'Take a progress photo';
-  sub.textContent = info.done ? 'This week is logged' : 'Weekly reminder Â· due by Monday evening';
+  sub.textContent = info.done ? 'This week is logged' : 'Weekly reminder · due by Monday evening';
   markTask('taskPhotoCheck', 'taskPhotoLabel', info.done);
 }
 
 // -------------------------------------------------------
-//  HERO CTA â€” always points to the first incomplete task
+//  HERO CTA — always points to the first incomplete task
 // -------------------------------------------------------
 function updateHeroCta(status) {
   const btn = document.getElementById('heroCtaBtn');
@@ -1269,7 +1291,7 @@ function updateHeroCta(status) {
 }
 
 function heroCtaAction() {
-  // actual action is set dynamically â€” this is just a fallback
+  // actual action is set dynamically — this is just a fallback
   openWeighIn();
 }
 
@@ -1317,7 +1339,7 @@ function refreshAll() {
     const weeks = Math.max(1, Math.floor((new Date() - new Date(S.startDate)) / (7 * 24 * 60 * 60 * 1000)) + 1);
     const sublabels = ['Just getting started', 'Building momentum', 'Finding your rhythm', 'In the zone', 'Going strong'];
     const subEl = document.getElementById('weekSubtitle');
-    if (subEl) subEl.textContent = `Week ${weeks} Â· ${sublabels[Math.min(Math.floor((weeks - 1) / 4), sublabels.length - 1)]}`;
+    if (subEl) subEl.textContent = `Week ${weeks} · ${sublabels[Math.min(Math.floor((weeks - 1) / 4), sublabels.length - 1)]}`;
   }
 
   // Streak chip
@@ -1335,20 +1357,20 @@ function refreshAll() {
     if (bannerName) bannerName.textContent = getDisplayMedicationName(S);
   }
 
-  // Weight â€” use latest log entry, fall back to settings curWeight
+  // Weight — use latest log entry, fall back to settings curWeight
   const currentW    = latest ? latest.weight : (S.curWeight || null);
   const loggedToday = !!(latest && latest.date === todayKey());
 
   const dispEl = document.getElementById('currentWeightDisplay');
   const unitEl = document.getElementById('currentWeightUnit');
-  if (dispEl) dispEl.textContent = currentW != null ? currentW.toFixed(1) : 'â€”';
+  if (dispEl) dispEl.textContent = currentW != null ? currentW.toFixed(1) : '—';
   if (unitEl) unitEl.textContent = unitLabel;
 
   // Stat: current
   const scEl = document.getElementById('statCurrent');
   if (scEl) scEl.innerHTML = currentW != null
     ? `${currentW.toFixed(1)} <span class="stat-unit">${unitLabel}</span>`
-    : `â€” <span class="stat-unit">${unitLabel}</span>`;
+    : `— <span class="stat-unit">${unitLabel}</span>`;
 
   // Stat: lost badge
   const slb = document.getElementById('statLostBadge');
@@ -1380,7 +1402,7 @@ function refreshAll() {
   if (sndEl) sndEl.textContent = doseInfo.label;
   if (smnEl) smnEl.textContent = getDisplayMedicationName(S);
 
-  // Weight unit in modal â€” show what the new entry will be saved as
+  // Weight unit in modal — show what the new entry will be saved as
   const wul = document.getElementById('weightUnitLabel');
   if (wul) wul.textContent = settingsUnit === 'lbs' ? 'pounds (lbs)' : 'kilograms (kg)';
 
@@ -1390,8 +1412,8 @@ function refreshAll() {
   const mnLbl = document.getElementById('medNextLabel');
   if (S.medName) {
     const dispName = getDisplayMedicationName(S);
-    if (mnEl) mnEl.textContent = `${dispName}${S.medDose ? ' Â· ' + S.medDose : ''} Â· ${S.medFreq === 'daily' ? 'Daily' : 'Weekly'}`;
-    if (mcEl) mcEl.textContent = doseInfo.isToday ? 'Today â€” log your dose' : `${doseInfo.label} until next dose`;
+    if (mnEl) mnEl.textContent = `${dispName}${S.medDose ? ' · ' + S.medDose : ''} · ${S.medFreq === 'daily' ? 'Daily' : 'Weekly'}`;
+    if (mcEl) mcEl.textContent = doseInfo.isToday ? 'Today — log your dose' : `${doseInfo.label} until next dose`;
     if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Injection today' : 'Next injection';
   }
 
@@ -1414,7 +1436,7 @@ function refreshAll() {
     if (ts.checkin.savedAt) markCheckinDone();
   }
 
-  // Restore walk (only if not injection day â€” task3 handles it)
+  // Restore walk (only if not injection day — task3 handles it)
   const walkCheck = document.getElementById('walkCheck');
   if (walkCheck) walkCheck.classList.toggle('done', !!ts.walkDone);
   markTask('taskWeighCheck', 'taskWeighLabel', loggedToday);
@@ -1427,7 +1449,7 @@ function refreshAll() {
   });
   updateWaterCount(cups);
 
-  // Restore symptoms â€” always clear first so deselections are respected
+  // Restore symptoms — always clear first so deselections are respected
   restoreSymptoms(ts.symptoms || []);
 
   // Hero status + CTA
@@ -1445,7 +1467,7 @@ function refreshAll() {
   renderMotivation();
   renderLessonCard();
 
-  // Achievement nudge â€” show next badge to earn
+  // Achievement nudge — show next badge to earn
   renderAchieveNudge();
 }
 
@@ -1510,8 +1532,8 @@ function drawSparkline(log) {
 // -------------------------------------------------------
 //  WEIGHT MODAL
 // -------------------------------------------------------
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function openModal(id)  { const el = document.getElementById(id); if (!el) return; el.classList.add('open'); el.setAttribute('aria-hidden','false'); }
+function closeModal(id) { const el = document.getElementById(id); if (!el) return; el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
 
 document.getElementById('weightModal').addEventListener('click', function(e) {
   if (e.target === this) closeModal('weightModal');
@@ -1526,7 +1548,7 @@ function openWeighIn() {
   if (ad) ad.style.display = (latest && latest.date === todayKey()) ? 'block' : 'none';
   const streak = calcStreak(log);
   const si = document.getElementById('streakInfo');
-  if (si) si.textContent = streak > 1 ? `${streak}-day streak â€” keep going!` : streak === 1 ? 'Day 1 â€” great start!' : 'Log daily to build your streak';
+  if (si) si.textContent = streak > 1 ? `${streak}-day streak — keep going!` : streak === 1 ? 'Day 1 — great start!' : 'Log daily to build your streak';
   openModal('weightModal');
   setTimeout(() => inp.focus(), 200);
 }
@@ -1546,11 +1568,16 @@ function saveWeight() {
   if (idx >= 0) { log[idx].weight = val; log[idx].units = entryUnits; }
   else log.push({ date: todayKey(), weight: val, units: entryUnits });
   saveWeightLog(log);
-  if (window.GLPApp) GLPApp.track('weight_logged', { value: val, units: entryUnits });
-  // Mark weight as logged in home log
   saveTodayState({ weightLogged: true });
+  inp.blur();
   closeModal('weightModal');
+  requestAnimationFrame(() => closeModal('weightModal'));
   refreshAll();
+  try {
+    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('weight_logged', { value: val, units: entryUnits });
+  } catch (error) {
+    console.warn('weight_logged tracking skipped', error);
+  }
 }
 
 // -------------------------------------------------------
@@ -1612,7 +1639,11 @@ function saveCheckin() {
   };
   saveTodayState({ checkin });
   markCheckinDone();
-  if (window.GLPApp) GLPApp.track('checkin_saved', { energy: checkin.energy, mood: checkin.mood, hunger: checkin.hunger });
+  try {
+    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('checkin_saved', { energy: checkin.energy, mood: checkin.mood, hunger: checkin.hunger });
+  } catch (error) {
+    console.warn('checkin_saved tracking skipped', error);
+  }
   // Update hero
   const ts = getTodayState();
   const status = deriveHomeStatus(ts);
@@ -1716,7 +1747,11 @@ function saveSymptoms() {
     if (sev > 0) symptoms.push({ name: item.dataset.fx, level: sev });
   });
   saveTodayState({ symptoms });
-  if (window.GLPApp) GLPApp.track('symptoms_saved', { count: symptoms.length });
+  try {
+    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('symptoms_saved', { count: symptoms.length });
+  } catch (error) {
+    console.warn('symptoms_saved tracking skipped', error);
+  }
 }
 
 // -------------------------------------------------------
@@ -1823,9 +1858,9 @@ function renderAchieveNudge() {
   // Find first unearned achievement
   const next = ACHIEVEMENTS.find(a => !earned.includes(a.id));
   if (!next) {
-    // All earned â€” show celebration
+    // All earned — show celebration
     titleEl.textContent = 'All badges earned!';
-    subEl.textContent   = 'Amazing â€” you\'ve completed every milestone.';
+    subEl.textContent   = 'Amazing — you\'ve completed every milestone.';
     iconEl.innerHTML    = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>';
     iconEl.style.background = 'var(--ok-tint)';
     return;
@@ -1841,27 +1876,101 @@ function renderAchieveNudge() {
 // -------------------------------------------------------
 let deferredInstallPrompt = null;
 
+function isStandaloneMode() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function isIosSafari() {
+  const ua = window.navigator.userAgent;
+  const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const webkit = /WebKit/i.test(ua);
+  const otherBrowser = /CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo/i.test(ua);
+  return iOS && webkit && !otherBrowser;
+}
+
+function hideInstallPromo() {
+  const card = document.getElementById('installPromoCard');
+  if (card) card.hidden = true;
+}
+
+function showInstallPromo(mode) {
+  if (isStandaloneMode()) return hideInstallPromo();
+  const dismissed = localStorage.getItem('glp_install_promo_dismissed') === '1';
+  if (dismissed) return hideInstallPromo();
+
+  const card = document.getElementById('installPromoCard');
+  const title = document.getElementById('installPromoTitle');
+  const text = document.getElementById('installPromoText');
+  const btn = document.getElementById('installPromoBtn');
+  const dismiss = document.getElementById('installPromoDismiss');
+  if (!card || !title || !text || !btn || !dismiss) return;
+
+  dismiss.onclick = () => {
+    localStorage.setItem('glp_install_promo_dismissed', '1');
+    hideInstallPromo();
+  };
+
+  if (mode === 'browser') {
+    title.textContent = 'Install GLP Buddy';
+    text.textContent = 'Add GLP Buddy to your home screen so it opens without normal browser controls.';
+    btn.hidden = false;
+    btn.textContent = 'Install';
+    btn.onclick = promptInstall;
+    card.hidden = false;
+    return;
+  }
+
+  if (mode === 'ios') {
+    title.textContent = 'Add GLP Buddy to Home Screen';
+    text.textContent = 'In Safari, tap Share, then Add to Home Screen, then turn on Open as Web App.';
+    btn.hidden = true;
+    btn.onclick = null;
+    card.hidden = false;
+    return;
+  }
+
+  hideInstallPromo();
+}
+
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
+  localStorage.removeItem('glp_install_promo_dismissed');
+  showInstallPromo('browser');
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  hideInstallPromo();
 });
 
 async function promptInstall() {
   if (!deferredInstallPrompt) return;
-  await deferredInstallPrompt.prompt();
+  deferredInstallPrompt.prompt();
+  try {
+    await deferredInstallPrompt.userChoice;
+  } catch (error) {
+    console.warn('install prompt result unavailable', error);
+  }
   deferredInstallPrompt = null;
+  hideInstallPromo();
 }
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('/sw.js').catch((error) => {
+      console.warn('service worker registration failed', error);
+    });
   });
 }
-
 // -------------------------------------------------------
 //  INIT
 // -------------------------------------------------------
 refreshAll();
+
+if (isIosSafari() && !isStandaloneMode()) {
+  showInstallPromo('ios');
+}
 
 const dailyWeighInTask = document.getElementById('dailyWeighInTask');
 if (dailyWeighInTask) {

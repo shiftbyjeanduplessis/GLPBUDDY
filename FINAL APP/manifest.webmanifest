@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "GLP Buddy",
+  "short_name": "GLP Buddy",
+  "description": "Your GLP-1 companion for weight, symptoms, habits, meals, exercise, and progress tracking.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#1a1028",
+  "theme_color": "#1a1028",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
