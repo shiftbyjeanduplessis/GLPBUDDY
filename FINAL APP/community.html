@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>GLP Buddy — Community</title>
+<title>GLP Buddy � Community</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -85,7 +85,7 @@ body.theme-midnight{
   --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
   --page-ring:rgba(180,140,220,0.14);
 }
-/* ── LAYOUT ─────────────────────────────────── */
+/* -- LAYOUT ----------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
 .scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
@@ -93,7 +93,7 @@ body{background:var(--bg-app);}
   body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
 }
-/* ── NAV ────────────────────────────────────── */
+/* -- NAV -------------------------------------- */
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
 .bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
@@ -102,9 +102,9 @@ body{background:var(--bg-app);}
 .bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff;box-shadow:var(--nav-active-shadow);}
 .bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .bnav-item:not(.active):hover .bnav-icon{background:rgba(255,255,255,0.06);}
-/* ── BRAND ──────────────────────────────────── */
+/* -- BRAND ------------------------------------ */
 
-/* ── FONTS ──────────────────────────────────── */
+/* -- FONTS ------------------------------------ */
 
 
 /* TOPBAR */
@@ -202,7 +202,7 @@ body{background:var(--bg-app);}
 .d4{animation-delay:.19s}.d5{animation-delay:.24s}
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
-/* ── GLP BUDDY TOP BAR ── */
+/* -- GLP BUDDY TOP BAR -- */
 .glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
 .glpb-topbar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
@@ -260,7 +260,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="composer-row">
     <div class="composer-avatar" id="myAvatar">Me</div>
     <div class="composer-input-wrap" id="composerWrap">
-      <textarea class="composer-input" id="postInput" placeholder="Share something with your buddies…" rows="1" oninput="autoResize(this)" onfocus="expandComposer()" maxlength="280"></textarea>
+      <textarea class="composer-input" id="postInput" placeholder="Share something with your buddies�" rows="1" oninput="autoResize(this)" onfocus="expandComposer()" maxlength="280"></textarea>
     </div>
   </div>
   <div class="composer-actions" id="composerActions" style="display:none;">
@@ -287,7 +287,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     </div>
   </div>
   <div class="sheet-rename-row">
-    <input class="sheet-rename-input" id="renameInput" placeholder="Give them a nickname…" autocomplete="off">
+    <input class="sheet-rename-input" id="renameInput" placeholder="Give them a nickname�" autocomplete="off">
     <button class="sheet-rename-btn" onclick="saveName()">Save</button>
   </div>
   <div class="sheet-stats-grid" id="sheetStats"></div>
@@ -301,7 +301,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="sheet-handle"></div>
   <div style="padding:20px 0 4px">
     <div style="font-family:'Clash Display',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;margin-bottom:4px">Add a buddy</div>
-    <div style="font-size:.74rem;color:var(--text-tertiary);line-height:1.55">Enter their email and give them a name — they'll appear in your stream once added.</div>
+    <div style="font-size:.74rem;color:var(--text-tertiary);line-height:1.55">Enter their email and give them a name � they'll appear in your stream once added.</div>
   </div>
   <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
     <input class="invite-input" id="inviteInput" type="email" placeholder="friend@email.com" autocomplete="off" inputmode="email">
@@ -323,10 +323,10 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 <script src="glp-common.js"></script>
 <script>
-GLPApp.boot('community');
-// ═══════════════════════════════════════
+window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('community');
+// ---------------------------------------
 // AVATAR COLOURS
-// ═══════════════════════════════════════
+// ---------------------------------------
 const AVATAR_COLOURS = [
   '#b85570','#5580b8','#55a87a','#b87c35','#7a55b8','#b85580','#3590b8','#b85555'
 ];
@@ -342,9 +342,9 @@ function initials(name) {
     : name.slice(0,2).toUpperCase();
 }
 
-// ═══════════════════════════════════════
-// SEED DATA — demo buddies
-// ═══════════════════════════════════════
+// ---------------------------------------
+// SEED DATA � demo buddies
+// ---------------------------------------
 let buddies = [
   {
     id:1, email:'sarah.m@email.com', realName:'Sarah Mitchell', nickname:'Sarah',
@@ -360,10 +360,29 @@ let buddies = [
 
 let nextId = 3;
 let openBuddyId = null;
+const COMMUNITY_BUDDIES_KEY = 'glp_community_buddies';
+const COMMUNITY_FEED_KEY = 'glp_community_feed';
+function saveCommunityState(){
+  localStorage.setItem(COMMUNITY_BUDDIES_KEY, JSON.stringify(buddies));
+  localStorage.setItem(COMMUNITY_FEED_KEY, JSON.stringify(feedItems));
+}
+function loadCommunityState(){
+  try {
+    const savedBuddies = JSON.parse(localStorage.getItem(COMMUNITY_BUDDIES_KEY) || 'null');
+    const savedFeed = JSON.parse(localStorage.getItem(COMMUNITY_FEED_KEY) || 'null');
+    if (Array.isArray(savedBuddies) && savedBuddies.length) {
+      buddies = savedBuddies;
+      nextId = Math.max(0, ...buddies.map(b => Number(b.id) || 0)) + 1;
+    }
+    if (Array.isArray(savedFeed) && savedFeed.length) {
+      feedItems = savedFeed;
+    }
+  } catch (e) {}
+}
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // FEED DATA
-// ═══════════════════════════════════════
+// ---------------------------------------
 const FEED_TYPES = {
   workout: {
     label: 'Completed a workout',
@@ -403,18 +422,18 @@ const FEED_TYPES = {
 };
 
 let feedItems = [
-  { buddyId:1, type:'workout', detail:'Lower body — Chair Squat', time:'2 hours ago' },
+  { buddyId:1, type:'workout', detail:'Lower body � Chair Squat', time:'2 hours ago' },
   { buddyId:2, type:'streak',  detail:'7-day streak!', time:'4 hours ago' },
-  { buddyId:1, type:'weight',  detail:'84 kg — down 0.4 kg', time:'Yesterday' },
+  { buddyId:1, type:'weight',  detail:'84 kg � down 0.4 kg', time:'Yesterday' },
   { buddyId:2, type:'meds',    detail:'Weekly injection logged', time:'Yesterday' },
   { buddyId:1, type:'water',   detail:'8 cups completed', time:'2 days ago' },
-  { buddyId:2, type:'workout', detail:'Push — Wall Push-Up', time:'2 days ago' },
+  { buddyId:2, type:'workout', detail:'Push � Wall Push-Up', time:'2 days ago' },
   { buddyId:1, type:'streak',  detail:'14-day streak!', time:'3 days ago' },
 ];
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // RENDER BUDDIES
-// ═══════════════════════════════════════
+// ---------------------------------------
 function renderBuddies() {
   const area = document.getElementById('buddiesArea');
   const count = document.getElementById('buddyCount');
@@ -437,7 +456,8 @@ function renderBuddies() {
   const scroll = document.getElementById('buddiesScroll');
 
   buddies.forEach(b => {
-    const progress = Math.round(((b.startWeight - b.currentWeight) / (b.startWeight - b.goalWeight)) * 100);
+    const progressBase = (b.startWeight - b.goalWeight);
+    const progress = progressBase > 0 ? Math.round(((b.startWeight - b.currentWeight) / progressBase) * 100) : 0;
     const card = document.createElement('div');
     card.className = 'buddy-card';
     card.onclick = () => openSheet(b.id);
@@ -464,9 +484,9 @@ function renderBuddies() {
   });
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // RENDER FEED
-// ═══════════════════════════════════════
+// ---------------------------------------
 function renderFeed() {
   const area = document.getElementById('feedArea');
   if (buddies.length === 0 && !feedItems.find(f => f.buddyId === 0)) {
@@ -511,9 +531,9 @@ function renderFeed() {
   }).join('');
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // INVITE SHEET
-// ═══════════════════════════════════════
+// ---------------------------------------
 function openInviteSheet() {
   document.getElementById('inviteInput').value = '';
   document.getElementById('inviteNameInput').value = '';
@@ -529,9 +549,9 @@ function closeInviteSheet() {
   document.getElementById('inviteSheet').classList.remove('vis');
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // INVITE
-// ═══════════════════════════════════════
+// ---------------------------------------
 function inviteBuddy() {
   const input     = document.getElementById('inviteInput');
   const nameInput = document.getElementById('inviteNameInput');
@@ -581,11 +601,12 @@ function inviteBuddy() {
 
   renderBuddies();
   renderFeed();
+  saveCommunityState();
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // SHEET
-// ═══════════════════════════════════════
+// ---------------------------------------
 function openSheet(id) {
   const b = buddies.find(x => x.id === id);
   if (!b) return;
@@ -601,7 +622,7 @@ function openSheet(id) {
   document.getElementById('sheetName').textContent = b.nickname || b.realName;
   document.getElementById('sheetEmail').textContent = b.email;
   document.getElementById('renameInput').value = b.nickname || '';
-  document.getElementById('renameInput').placeholder = `Nickname for ${b.realName}…`;
+  document.getElementById('renameInput').placeholder = `Nickname for ${b.realName}�`;
 
   // Stats grid
   document.getElementById('sheetStats').innerHTML = `
@@ -614,19 +635,19 @@ function openSheet(id) {
       <div class="sheet-stat-lbl">This week</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.currentWeight ? b.currentWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-val">${b.currentWeight ? b.currentWeight+'kg' : '�'}</div>
       <div class="sheet-stat-lbl">Current</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.startWeight ? b.startWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-val">${b.startWeight ? b.startWeight+'kg' : '�'}</div>
       <div class="sheet-stat-lbl">Starting</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.goalWeight ? b.goalWeight+'kg' : '—'}</div>
+      <div class="sheet-stat-val">${b.goalWeight ? b.goalWeight+'kg' : '�'}</div>
       <div class="sheet-stat-lbl">Goal</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val" style="color:var(--ok)">${lostKg && lostKg > 0 ? '-'+lostKg+'kg' : '—'}</div>
+      <div class="sheet-stat-val" style="color:var(--ok)">${lostKg && lostKg > 0 ? '-'+lostKg+'kg' : '�'}</div>
       <div class="sheet-stat-lbl">Lost</div>
     </div>`;
 
@@ -634,7 +655,7 @@ function openSheet(id) {
   document.getElementById('sheetProgress').innerHTML = progress !== null ? `
     <div class="sheet-prog-label">Goal progress</div>
     <div class="sheet-prog-row">
-      <span class="sheet-prog-names">${b.startWeight}kg → ${b.goalWeight}kg</span>
+      <span class="sheet-prog-names">${b.startWeight}kg ? ${b.goalWeight}kg</span>
       <span style="font-size:.76rem;font-weight:700;color:var(--accent-mid)">${progress}%</span>
     </div>
     <div class="sheet-prog-bar-bg"><div class="sheet-prog-bar" style="width:${progress}%"></div></div>
@@ -659,6 +680,7 @@ function saveName() {
   document.getElementById('sheetName').textContent = val;
   renderBuddies();
   renderFeed();
+  saveCommunityState();
   // Flash the save button
   const btn = document.querySelector('.sheet-rename-btn');
   btn.textContent = 'Saved!';
@@ -673,11 +695,12 @@ function removeBuddy() {
   closeSheet();
   renderBuddies();
   renderFeed();
+  saveCommunityState();
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // COMPOSER
-// ═══════════════════════════════════════
+// ---------------------------------------
 function expandComposer() {
   document.getElementById('composerActions').style.display = 'flex';
   document.querySelector('.post-composer').classList.add('focused');
@@ -718,16 +741,21 @@ function postMessage() {
 
   collapseComposer();
   renderFeed();
+  saveCommunityState();
 
   // Scroll feed into view
   document.getElementById('feedArea').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
-// ═══════════════════════════════════════
+// ---------------------------------------
 // INIT
-// ═══════════════════════════════════════
+// ---------------------------------------
+loadCommunityState();
 renderBuddies();
 renderFeed();
+document.getElementById('inviteInput').addEventListener('keydown', e => { if (e.key === 'Enter') inviteBuddy(); });
+document.getElementById('inviteNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') inviteBuddy(); });
+
 </script>
 </body>
 </html>

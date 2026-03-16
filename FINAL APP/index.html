@@ -130,7 +130,7 @@ body.theme-midnight{
 }
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,0px);}
-.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 96px + env(safe-area-inset-bottom,0px));}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 84px + env(safe-area-inset-bottom,0px));}
 .scroll-area > *:last-child{margin-bottom:6px;}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
@@ -647,13 +647,13 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
   </div>
 
-  <div style="margin:0 var(--page-px) 12px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);display:flex;align-items:center;gap:12px;cursor:pointer" onclick="location='progress.html#photos'">
+  <div id="weeklyPhotoReminderCard" style="margin:0 var(--page-px) 12px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);display:none;align-items:center;gap:12px;cursor:pointer" onclick="openWeeklyPhotoTask()">
     <div style="width:36px;height:36px;border-radius:11px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary)">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     </div>
     <div style="flex:1;min-width:0">
-      <div style="font-size:.82rem;font-weight:700;color:var(--text-primary)">Add a progress photo</div>
-      <div style="font-size:.67rem;color:var(--text-tertiary);margin-top:1px">Track your visual transformation</div>
+      <div id="weeklyPhotoReminderTitle" style="font-size:.82rem;font-weight:700;color:var(--text-primary)">Take your weekly progress photos</div>
+      <div id="weeklyPhotoReminderSub" style="font-size:.67rem;color:var(--text-tertiary);margin-top:1px">Front, side and back · weekly reminder</div>
     </div>
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
   </div>
@@ -671,7 +671,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 
 <script src="glp-common.js"></script>
-<script>GLPApp.boot('home');</script>
+<script>window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('home');</script>
 <script>
 'use strict';
 
@@ -1223,21 +1223,26 @@ function task3Action() {
 // -------------------------------------------------------
 //  WEEKLY PROGRESS PHOTO TASK
 // -------------------------------------------------------
-function getSundayKey(dateObj) {
-  const d = new Date(dateObj);
-  d.setHours(12, 0, 0, 0);
-  d.setDate(d.getDate() - d.getDay());
-  return d.toISOString().slice(0, 10);
+
+function getWeeklyPhotoWindowInfo(nowDate) {
+  const now = new Date(nowDate || new Date());
+  const start = new Date(now);
+  start.setHours(8, 0, 0, 0);
+  const diffToSaturday = (6 - start.getDay() + 7) % 7;
+  start.setDate(start.getDate() + diffToSaturday);
+  if (now < start) start.setDate(start.getDate() - 7);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 48);
+  return { start, end };
 }
 
 function getWeeklyPhotoTaskInfo() {
   const now = new Date();
-  const day = now.getDay();
-  const hour = now.getHours();
-  const visible = day === 0 || (day === 1 && hour < 18);
-  const weekStartKey = getSundayKey(now);
-  const done = loadPhotos().some(p => p.date >= weekStartKey);
-  return { visible, done };
+  const windowInfo = getWeeklyPhotoWindowInfo(now);
+  const startKey = windowInfo.start.toISOString().slice(0, 10);
+  const inWindow = now >= windowInfo.start && now < windowInfo.end;
+  const done = loadPhotos().some(p => (p.date || '') >= startKey);
+  return { visible: inWindow && !done, done, startKey, end: windowInfo.end };
 }
 
 function openWeeklyPhotoTask() {
@@ -1246,15 +1251,16 @@ function openWeeklyPhotoTask() {
 
 function setupWeeklyPhotoTask() {
   const row = document.getElementById('taskPhotoRow');
-  const label = document.getElementById('taskPhotoLabel');
-  const sub = document.getElementById('taskPhotoSub');
-  if (!row || !label || !sub) return;
+  const card = document.getElementById('weeklyPhotoReminderCard');
+  const cardTitle = document.getElementById('weeklyPhotoReminderTitle');
+  const cardSub = document.getElementById('weeklyPhotoReminderSub');
+  if (row) row.style.display = 'none';
+  if (!card || !cardTitle || !cardSub) return;
   const info = getWeeklyPhotoTaskInfo();
-  row.style.display = info.visible ? 'flex' : 'none';
+  card.style.display = info.visible ? 'flex' : 'none';
   if (!info.visible) return;
-  label.textContent = info.done ? 'Weekly progress photos done' : 'Take your weekly progress photos';
-  sub.textContent = info.done ? 'This week is logged' : 'Front, side and back · weekly reminder';
-  markTask('taskPhotoCheck', 'taskPhotoLabel', info.done);
+  cardTitle.textContent = 'Take your weekly progress photos';
+  cardSub.textContent = 'Front, side and back · shown from Saturday morning';
 }
 
 // -------------------------------------------------------

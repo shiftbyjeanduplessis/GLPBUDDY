@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>GLP Buddy — Meals</title>
+<title>GLP Buddy � Meals</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 </div>
 <div id="planView" style="display:none">
   <div class="header-tight" style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="page-title">Meal Plan</div><div class="page-sub">7-day plan with portion guidance and a practical shopping list.</div></div><button class="btn btn-secondary" id="resetPlanBtn" style="padding:9px 14px">Reset</button></div>
-  <div class="info-banner"><div class="small">Portion guide</div><div class="text">Protein: palm-sized portion · Vegetables: two fist-sized portions · Cooking oil (olive, coconut, or other): max 1 tablespoon · Use non-stick spray where possible</div></div>
+  <div class="info-banner"><div class="small">Portion guide</div><div class="text">Protein: palm-sized portion � Vegetables: two fist-sized portions � Cooking oil (olive, coconut, or other): max 1 tablespoon � Use non-stick spray where possible</div></div>
   <div class="pill-row"><button class="pill active" data-view="daily">Daily view</button><button class="pill" data-view="weekly">Weekly view</button><button class="pill" data-view="shopping">Shopping list</button></div>
   <div class="pill-row" id="dayPills"></div>
   <div id="dailyView"></div>
@@ -65,7 +65,7 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
   <a href="settings.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
 </nav>
 <script>
-GLPApp.boot('meals');
+window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('meals');
 (function(){ try{ const s=JSON.parse(localStorage.getItem('glp_settings')||'{}'); if(s.skin) document.body.classList.add(s.skin); }catch(e){} })();
 const STEPS=['ws0','ws1','ws2','ws3']; let stepIndex=0; let activeDay=0; let activeView='daily';
 const prefs={ diet:'omnivore', breakfast:['eggs','oats','yoghurt'], proteins:['chicken','beef','tofu','beans'], veg:['spinach','cucumber','tomato','onion','broccoli'] };
@@ -116,8 +116,8 @@ const dinnerTemplates=[
 function qs(sel){ return [...document.querySelectorAll(sel)]; }
 function selectedValues(id){ return qs(`#${id} .chip.sel`).map(el=>el.dataset.v); }
 function selectOneInGroup(id, el){ qs(`#${id} .chip`).forEach(c=>c.classList.toggle('sel', c===el)); }
-qs('.chip').forEach(chip=>{ chip.addEventListener('click', ()=>{ const p=chip.parentElement.id; if(p==='cg-diet'){ selectOneInGroup('cg-diet', chip); } else chip.classList.toggle('sel'); }); });
-function refreshWizard(){ STEPS.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.style.display=i===stepIndex?'block':'none'; const dot=document.getElementById('wd'+i); if(dot) dot.classList.toggle('active', i<=stepIndex); }); document.getElementById('backBtn').style.visibility = stepIndex===0 ? 'hidden':'visible'; document.getElementById('nextBtn').textContent = stepIndex===STEPS.length-1 ? 'Generate plan' : 'Continue'; }
+qs('.chip').forEach(chip=>{ chip.addEventListener('click', ()=>{ const p=chip.parentElement.id; if(p==='cg-diet'){ selectOneInGroup('cg-diet', chip); } else chip.classList.toggle('sel'); applyPrefs(); saveMealsState(); }); });
+function refreshWizard(){ STEPS.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.style.display=i===stepIndex?'block':'none'; const dot=document.getElementById('wd'+i); if(dot) dot.classList.toggle('active', i<=stepIndex); }); document.getElementById('backBtn').style.visibility = stepIndex===0 ? 'hidden':'visible'; document.getElementById('nextBtn').textContent = stepIndex===STEPS.length-1 ? 'Generate plan' : 'Continue'; saveMealsState(); }
 function applyPrefs(){ prefs.diet = document.querySelector('#cg-diet .chip.sel')?.dataset.v || 'omnivore'; prefs.breakfast = selectedValues('cg-breakfast'); prefs.proteins = selectedValues('cg-protein'); prefs.veg = selectedValues('cg-veg'); if(!prefs.breakfast.length) prefs.breakfast=['eggs','oats','yoghurt']; if(!prefs.proteins.length) prefs.proteins = prefs.diet==='vegan' ? ['tofu','beans','lentils','chickpeas'] : prefs.diet==='vegetarian' ? ['tofu','tempeh','beans','lentils','chickpeas'] : ['chicken','beef','tofu','beans']; if(!prefs.veg.length) prefs.veg=['spinach','cucumber','tomato','broccoli']; }
 function allowedProteins(){ let arr=[...prefs.proteins]; if(prefs.diet==='vegetarian') arr=arr.filter(p=>!['chicken','beef','leanbeefmince','gamemeat','turkey','whitefish','salmon','tuna','prawns','calamari'].includes(p)); if(prefs.diet==='vegan') arr=arr.filter(p=>['tofu','tempeh','beans','lentils','chickpeas'].includes(p)); return arr.length?arr:['tofu','beans']; }
 function pick(arr, idx){ return arr[idx % arr.length]; }
@@ -158,22 +158,24 @@ function buildPlan(){
   document.getElementById('wizardView').style.display='none';
   document.getElementById('planView').style.display='block';
   renderDayPills(); renderDaily(); renderWeekly(); renderShopping();
-  GLPApp.track('meal_plan_generated', { diet:prefs.diet, breakfasts:prefs.breakfast.length, proteins:prefs.proteins.length, veg:prefs.veg.length });
+  saveMealsState();
+  if (window.GLPApp) GLPApp.track('meal_plan_generated', { diet:prefs.diet, breakfasts:prefs.breakfast.length, proteins:prefs.proteins.length, veg:prefs.veg.length });
 }
 function renderDayPills(){ document.getElementById('dayPills').innerHTML = shortDays.map((d,i)=>`<button class="pill ${i===activeDay&&activeView==='daily'?'active':''}" onclick="selectDay(${i})">${d}</button>`).join(''); document.getElementById('dayPills').style.display = activeView==='daily'?'flex':'none'; }
-function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1 tablespoon')) out.push('fats capped'); if((meal.desc||'').includes('1/2 a medium avocado')) out.push('½ avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('daily starch'); return out; }
-function mealCard(slot, meal){ return `<div class="meal-card"><div class="meal-slot">${slot}</div><div class="meal-title">${meal.title}</div><div class="meal-desc">${meal.desc}</div><div class="meal-guide">Protein: palm-sized portion · Vegetables: two fist-sized portions · Cooking oil: max 1 tablespoon</div><div class="meal-tags">${tagsFor(meal).map(t=>`<span class="meal-tag">${t}</span>`).join('')}</div></div>`; }
+function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1 tablespoon')) out.push('fats capped'); if((meal.desc||'').includes('1/2 a medium avocado')) out.push('� avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('daily starch'); return out; }
+function mealCard(slot, meal){ return `<div class="meal-card"><div class="meal-slot">${slot}</div><div class="meal-title">${meal.title}</div><div class="meal-desc">${meal.desc}</div><div class="meal-guide">Protein: palm-sized portion � Vegetables: two fist-sized portions � Cooking oil: max 1 tablespoon</div><div class="meal-tags">${tagsFor(meal).map(t=>`<span class="meal-tag">${t}</span>`).join('')}</div></div>`; }
 function renderDaily(){ const day=generatedPlan[activeDay]; if(!day) return; document.getElementById('dailyView').innerHTML = `<div class="meal-card"><div class="day-summary"><div><div class="day-name">${day.day}</div><div class="day-meta">Breakfast is included. Starch appears at most once today. Eggs are limited to breakfast only.</div></div><div class="day-chip-compact">Day ${activeDay+1}</div></div></div>${mealCard('Breakfast',day.breakfast)}${mealCard('Lunch',day.lunch)}${mealCard('Dinner',day.dinner)}`; }
 function renderWeekly(){ document.getElementById('weeklyView').innerHTML = `<div class="week-list">${generatedPlan.map(day=>`<div class="week-day"><div class="week-day-title">${day.day}</div><div class="week-meal"><b>Breakfast:</b> ${day.breakfast.title}</div><div class="week-meal"><b>Lunch:</b> ${day.lunch.title}</div><div class="week-meal"><b>Dinner:</b> ${day.dinner.title}</div></div>`).join('')}</div>`; }
 function fmtQty(row){ const q=row.qty; if(row.unit==='g') return `${Math.round(q)} g`; if(row.unit==='tbsp') return `${Math.round(q*10)/10} tbsp`; if(row.unit==='slices') return `${Math.round(q)} slices`; if(row.unit==='cup') return `${Math.round(q*10)/10} cups`; if(row.unit==='can') return `${Math.round(q)} cans`; if(row.unit==='banana') return `${Math.round(q*10)/10} bananas`; if(row.unit==='apple') return `${Math.round(q*10)/10} apples`; if(row.unit==='medium') return `${Math.round(q*10)/10} medium`; if(row.unit==='medium avocado') return `${Math.round(q*10)/10} medium avocados`; if(row.unit==='pepper') return `${Math.round(q*10)/10} peppers`; if(row.unit==='cucumber') return `${Math.round(q*10)/10} cucumbers`; if(row.unit==='eggs') return `${Math.round(q)} eggs`; if(row.unit==='lemon') return `${Math.round(q*10)/10} lemons`; return `${Math.round(q*10)/10} ${row.unit}`; }
 function renderShopping(){ document.getElementById('shoppingView').innerHTML = `<div class="shop-list">${shoppingSummary.map(row=>`<div class="shop-row"><div><div class="shop-name">${row.name}</div><div class="shop-sub">Estimated for 7 days</div></div><div class="shop-qty">${fmtQty(row)}</div></div>`).join('')}</div>`; }
-function setView(view){ activeView=view; qs('.pill[data-view]').forEach(el=>el.classList.toggle('active', el.dataset.view===view)); document.getElementById('dailyView').style.display=view==='daily'?'block':'none'; document.getElementById('weeklyView').style.display=view==='weekly'?'block':'none'; document.getElementById('shoppingView').style.display=view==='shopping'?'block':'none'; renderDayPills(); }
-function selectDay(i){ activeDay=i; activeView='daily'; setView('daily'); renderDaily(); renderDayPills(); }
+function setView(view){ activeView=view; qs('.pill[data-view]').forEach(el=>el.classList.toggle('active', el.dataset.view===view)); document.getElementById('dailyView').style.display=view==='daily'?'block':'none'; document.getElementById('weeklyView').style.display=view==='weekly'?'block':'none'; document.getElementById('shoppingView').style.display=view==='shopping'?'block':'none'; renderDayPills(); saveMealsState(); }
+function selectDay(i){ activeDay=i; activeView='daily'; setView('daily'); renderDaily(); renderDayPills(); saveMealsState(); }
 qs('.pill[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
 document.getElementById('backBtn').addEventListener('click',()=>{ if(stepIndex>0){ stepIndex--; refreshWizard(); } });
 document.getElementById('nextBtn').addEventListener('click',()=>{ if(stepIndex<STEPS.length-1){ stepIndex++; refreshWizard(); } else buildPlan(); });
-document.getElementById('resetPlanBtn').addEventListener('click',()=>location.reload());
-refreshWizard();
+document.getElementById('resetPlanBtn').addEventListener('click',()=>{ localStorage.removeItem(MEALS_STATE_KEY); location.reload(); });
+restoreMealsState();
+if (generatedPlan.length) { document.getElementById('wizardView').style.display='none'; document.getElementById('planView').style.display='block'; renderDayPills(); renderDaily(); renderWeekly(); renderShopping(); setView(activeView); } else { refreshWizard(); }
 window.selectDay=selectDay;
 </script>
 </body>
