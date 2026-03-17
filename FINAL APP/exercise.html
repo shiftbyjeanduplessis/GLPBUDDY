@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>GLP Buddy — Exercise</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1028">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLP Buddy">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -300,8 +307,28 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   color:rgba(255,255,255,0.45);
 }
 
+
+button{touch-action:manipulation}
+.ws-set-card{gap:12px;align-items:center}
+.ws-set-input-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ws-set-step{width:38px;height:38px;border-radius:12px;border:1.5px solid var(--border-soft);background:var(--surface-2);color:var(--text-primary);font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ws-set-step:active{transform:scale(.97)}
+.ws-set-card.logged .ws-set-step{opacity:.45;pointer-events:none}
+.ws-hype{padding:12px 14px;border-radius:18px;background:var(--accent-tint2);color:var(--accent-primary);font-size:.78rem;font-weight:700;margin-bottom:14px;text-align:center}
+.ws-complete-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ws-complete-actions .btn{flex:1}
+.badges-wrap{display:grid;gap:8px}
+.badge-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--border-mid)}
+.badge-row:first-child{border-top:none;padding-top:0}
+.badge-lock{padding:6px 10px;border-radius:999px;font-size:.62rem;font-weight:700;background:var(--surface-2);color:var(--text-secondary);border:1px solid var(--border-soft)}
+.badge-lock.earned{background:var(--ok-tint);color:var(--ok);border-color:rgba(47,158,122,.18)}
+.badge-lock.next{background:var(--accent-tint2);color:var(--accent-primary);border-color:var(--border-accent)}
+.collapse-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}
+.collapse-content{margin-top:14px}
+
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(err){console.warn('SW registration failed',err);});});}</script>
 </head>
 <body>
 <script>
@@ -401,6 +428,22 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <div class="section hidden" id="levelupSection">
   <div class="section-head">Ready to progress</div>
   <div id="levelupList"></div>
+</div>
+
+
+<!-- BADGES -->
+<div class="section">
+  <div class="section-head">Badges</div>
+  <div class="card fade-up">
+    <div class="collapse-toggle" id="badgeToggle">
+      <div>
+        <div class="movement-name" style="font-size:1rem">Badge cabinet</div>
+        <div class="small-copy" style="margin-top:4px">See what you have already earned and what is still available.</div>
+      </div>
+      <div class="pill pill-accent" id="badgeToggleIcon">Hide</div>
+    </div>
+    <div class="collapse-content" id="badgeShowcase"></div>
+  </div>
 </div>
 
 <!-- RECENT SESSIONS -->
@@ -655,6 +698,7 @@ function renderPage(){
 
   // History
   renderHistory(hist);
+  renderBadgeShowcase(hist);
 }
 
 
@@ -739,9 +783,22 @@ function renderHistory(hist){
     </div>`).join('');
 }
 
-// -- WORKOUT SESSION ------------------------------------
-let _wsState = null;  // live session object
 
+// -- WORKOUT SESSION ------------------------------------
+let _wsState = null;
+let _restTimer = null;
+let _restElapsed = 0;
+let _restActive = false;
+let _hypeMsg = '';
+const REST_DURATION = 90;
+
+const HYPE_LINES = [
+  'Atta boy — set done.',
+  'That was strong. Keep rolling.',
+  'Boom. Another set in the bank.',
+  'Nice work — you are stacking wins.',
+  'Sharp set. You are earning this progression.'
+];
 
 function startWorkout(){
   try {
@@ -752,12 +809,16 @@ function startWorkout(){
       _wsState = { date: todayKey(), stepIndex: 0, sets: {}, complete: false, lastWorkoutDate: st.lastWorkoutDate || null };
       PROGRAM.forEach(m=>{ _wsState.sets[m.id] = Array.from({length:m.sets},(_,i)=>({set:i+1,reps:0,logged:false})); });
     }
+    _restActive = false;
+    _restElapsed = 0;
+    _hypeMsg = '';
     save('glp_ex_session', _wsState);
     try { if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('workout_started', { resumed: st.date===todayKey() && !st.complete }); } catch(e){}
     const ov = document.getElementById('wsOverlay');
     if (ov) ov.classList.add('open');
+    const footer = document.getElementById('wsFooter');
+    if (footer) footer.style.display = 'flex';
     document.body.style.overflow='hidden';
-    _restLeft = 0;
     renderWorkoutStep();
   } catch (err) {
     console.error('startWorkout failed', err);
@@ -765,126 +826,114 @@ function startWorkout(){
   }
 }
 
-
 function closeWorkout(){
-  // Save progress
+  if(_restTimer) clearInterval(_restTimer);
+  _restTimer = null;
+  _restActive = false;
+  _restElapsed = 0;
   if(_wsState) save('glp_ex_session', _wsState);
   document.getElementById('wsOverlay').classList.remove('open');
   document.body.style.overflow='';
   renderPage();
 }
 
-let _restTimer = null;
-let _restLeft  = 0;
-const REST_DURATION = 90; // seconds between sets
+function currentExerciseComplete(m){
+  const sets = (_wsState.sets[m.id]||[]);
+  return sets.every(s=>s.logged);
+}
 
 function renderWorkoutStep(){
   const idx = _wsState.stepIndex;
   const total = PROGRAM.length;
+  const footer = document.getElementById('wsFooter');
+  if (footer) footer.style.display = 'none';
 
-  // Update top bar
   document.getElementById('wsTopSub').textContent = `Exercise ${Math.min(idx+1,total)} of ${total}`;
-  document.getElementById('wsProgressFill').style.width = (idx/total*100)+'%';
+  document.getElementById('wsProgressFill').style.width = `${Math.round((idx/total)*100)}%`;
 
-  // Check if all done
   const allDone = PROGRAM.every(m=> (_wsState.sets[m.id]||[]).every(s=>s.logged));
-  if(allDone && idx>=total){
+  if(allDone || idx >= total){
     renderWorkoutComplete();
     return;
   }
 
-  if(idx >= total){
-    renderWorkoutComplete();
-    return;
-  }
-
-  const m    = PROGRAM[idx];
+  const m = PROGRAM[idx];
   const prog = loadProgress();
-  const lev  = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
+  const lev = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
   const sets = _wsState.sets[m.id] || [];
+  const currentSetIdx = sets.findIndex(s=>!s.logged);
+  const allSetsLogged = currentSetIdx === -1;
+  const activeSet = allSetsLogged ? null : sets[currentSetIdx];
+  const targetLabel = m.isTime ? `${m.targetReps} sec target` : `${m.targetReps} reps target`;
 
   document.getElementById('wsTopTitle').textContent = lev.name;
 
-  // Figure out which set we're on
-  const currentSetIdx = sets.findIndex(s=>!s.logged);
-  const allSetsLogged = currentSetIdx === -1;
-
-  // Determine if in rest
-  const inRest = _restLeft > 0;
-
   let html = `<div class="ws-step">`;
-
-  // Exercise number + name
   html += `<div class="ws-ex-num">Exercise ${idx+1} of ${total} · ${m.name}</div>`;
   html += `<div class="ws-ex-name">${lev.name}</div>`;
   html += `<div class="ws-ex-instruction">${lev.instruction}</div>`;
 
-  // Image placeholder (SVG silhouette)
-  html += `<div class="ws-img-placeholder">
-    ${getExerciseIllustration(m.id)}
-    <div class="ws-img-placeholder-label">${lev.name}</div>
-  </div>`;
+  if(_hypeMsg){
+    html += `<div class="ws-hype">${_hypeMsg}</div>`;
+  }
 
-  // Instructions
+  html += `<div class="ws-img-placeholder">${getExerciseIllustration(m.id)}<div class="ws-img-placeholder-label">${lev.name}</div></div>`;
+
   html += `<div class="ws-steps">`;
   m.steps.forEach((step,i)=>{
     html += `<div class="ws-step-row"><div class="ws-step-num">${i+1}</div><div class="ws-step-txt">${step}</div></div>`;
   });
   html += `</div>`;
 
-  // Sets
-  html += `<div class="ws-sets-area"><div class="ws-sets-label">Log your sets</div>`;
+  html += `<div class="ws-sets-area"><div class="ws-sets-label">Your sets</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px">`;
   sets.forEach((s,i)=>{
-    const isCurrent = i===currentSetIdx && !inRest;
-    html += `<div class="ws-set-card${s.logged?' logged':''}">
-      <div class="ws-set-badge">${s.logged ? '?' : i+1}</div>
-      <div class="ws-set-info">
-        <div class="ws-set-title">Set ${i+1}</div>
-        <div class="ws-set-target">${m.isTime ? `Target: ${m.targetReps} seconds` : `Target: ${m.targetReps} reps`}</div>
-      </div>
-      <input class="ws-set-input" type="number" min="0" max="99" inputmode="numeric"
-        placeholder="${m.isTime?'sec':'reps'}"
-        value="${s.reps||''}"
-        ${s.logged?'readonly':''}
-        onchange="wsSetVal(${idx},${i},this.value)"
-        id="wsInput_${idx}_${i}">
-    </div>`;
+    const status = s.logged ? 'done' : (i===currentSetIdx ? 'active' : 'upcoming');
+    html += `<div class="pill ${s.logged ? 'pill-ok' : 'pill-soft'}" style="padding:8px 12px;border-width:1.5px;${status==='active' ? 'box-shadow:0 0 0 2px var(--accent-tint2);' : ''}">Set ${i+1}${s.logged ? ' ✓' : ''}</div>`;
   });
   html += `</div>`;
 
-  // Rest timer or Log button
-  if(inRest){
+  if(_restActive && !allSetsLogged){
+    const nextSetNumber = currentSetIdx + 1;
     html += `<div class="ws-rest">
       <div class="ws-rest-label">60–90 seconds of rest</div>
-      <div class="ws-rest-time" id="wsRestTime">${_restLeft}s</div>
-      <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${(_restLeft/REST_DURATION)*100}%"></div></div>
-      <div class="small-copy" style="margin:10px 0 12px">Set ${currentSetIdx+2} starts in <strong id="wsRestCopy">${_restLeft}</strong> seconds. Catch your breath, then tap Let’s go when you’re ready.</div><button class="ws-skip-rest" onclick="wsSkipRest()">Let’s go</button>
+      <div class="ws-rest-time" id="wsRestTime">${_restElapsed}s</div>
+      <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${(_restElapsed/REST_DURATION)*100}%"></div></div>
+      <div class="small-copy" style="margin:10px 0 12px">Set ${nextSetNumber} starts in <strong id="wsRestCopy">${_restElapsed}</strong> seconds. Breathe, reset, then tap Let’s go.</div>
+      <button class="ws-skip-rest" type="button" onclick="wsSkipRest()">Let’s go</button>
     </div>`;
   } else if(!allSetsLogged){
-    html += `<button class="ws-log-set-btn" id="wsLogBtn" onclick="wsLogSet(${idx})"
-      ${!sets[currentSetIdx]||sets[currentSetIdx].reps===0 ? 'disabled' : ''}>
-      Log set ${currentSetIdx+1}
-    </button>`;
+    html += `<div class="card" style="margin:0;padding:18px;border-radius:22px;border:1.5px solid var(--border-accent);background:var(--surface-2)">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px">
+        <div>
+          <div class="movement-name">Set ${currentSetIdx+1}</div>
+          <div class="small-copy">${targetLabel}</div>
+        </div>
+        <div class="pill pill-soft">Current move</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0 12px">
+        <button class="ws-set-step" style="width:52px;height:52px;font-size:1.5rem" type="button" onclick="wsAdjust(${idx},${currentSetIdx},-1)">−</button>
+        <div style="min-width:108px;text-align:center">
+          <div style="font-family:'Clash Display',sans-serif;font-size:2rem;line-height:1;color:var(--text-primary)" id="wsCounterVal">${activeSet.reps||0}</div>
+          <div class="small-copy">${m.isTime ? 'seconds' : 'reps'}</div>
+        </div>
+        <button class="ws-set-step" style="width:52px;height:52px;font-size:1.5rem" type="button" onclick="wsAdjust(${idx},${currentSetIdx},1)">+</button>
+      </div>
+      <button class="ws-log-set-btn" id="wsLogBtn" type="button" onclick="wsLogSet(${idx})" ${((activeSet&&activeSet.reps)||0)===0 ? 'disabled' : ''}>Log set ${currentSetIdx+1} and continue</button>
+    </div>`;
+  } else {
+    html += `<div class="ws-hype">${idx < total-1 ? 'Exercise complete. Nice work — move to the next exercise.' : 'Final exercise complete. You are ready to finish this workout.'}</div>`;
+    html += `<button class="ws-log-set-btn" type="button" onclick="wsNext()">${idx < total-1 ? 'Next exercise' : 'Finish workout'}</button>`;
   }
 
   html += `</div>`;
   document.getElementById('wsBody').innerHTML = html;
   document.getElementById('wsBody').scrollTop = 0;
-
-  // Footer button
-  const nextBtn = document.getElementById('wsNextBtn');
-  if(allSetsLogged){
-    nextBtn.textContent = idx < total-1 ? 'Next exercise' : 'Finish workout';
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.textContent = idx < total-1 ? 'Skip exercise' : 'Finish workout';
-    nextBtn.disabled = false;
-  }
 }
 
 function renderWorkoutComplete(){
+  const footer = document.getElementById('wsFooter');
   document.getElementById('wsTopTitle').textContent='Workout complete!';
-  document.getElementById('wsTopSub').textContent='All done — great work.';
+  document.getElementById('wsTopSub').textContent='Well done — you finished your session.';
   document.getElementById('wsProgressFill').style.width='100%';
 
   const totalSets = PROGRAM.reduce((acc,m)=>{
@@ -900,94 +949,136 @@ function renderWorkoutComplete(){
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div>
-            <div class="ws-done-all-title">Session complete</div>
-            <div class="ws-done-all-sub">${totalSets} sets logged across all movements</div>
+            <div class="ws-done-all-title">Workout complete — well done.</div>
+            <div class="ws-done-all-sub">${totalSets} sets logged across all movements. Nice one.</div>
           </div>
         </div>
       </div>
+      <div class="ws-hype" style="margin-top:16px">You showed up, got it done, and moved your progress forward today.</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0">
         ${PROGRAM.map(m=>{
           const sets = (_wsState.sets[m.id]||[]).filter(s=>s.logged);
           const reps = sets.map(s=>s.reps).join(' / ');
-          return `<div class="card" style="padding:12px 14px">
+          return `<div class="card" style="padding:12px 14px;margin:0">
             <div style="font-size:.60rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--text-faint);margin-bottom:4px">${m.name}</div>
             <div style="font-family:'Clash Display',sans-serif;font-size:.92rem;font-weight:700;color:var(--text-primary)">${reps||'—'}</div>
             <div style="font-size:.64rem;color:var(--text-tertiary);margin-top:2px">${m.isTime?'seconds':'reps'}</div>
           </div>`;
         }).join('')}
       </div>
-      <button class="ws-log-set-btn" onclick="saveWorkout()">Save &amp; close</button>
+      <div class="ws-complete-actions">
+        <button class="btn btn-primary" type="button" onclick="saveWorkout()">Finish workout</button>
+        <button class="btn btn-secondary" type="button" onclick="closeWorkout()">Review later</button>
+      </div>
     </div>`;
 
-  document.getElementById('wsFooter').style.display='none';
+  if (footer) footer.style.display='none';
+}
+
+function wsAdjust(movIdx, setIdx, delta){
+  const m = PROGRAM[movIdx];
+  const item = _wsState.sets[m.id][setIdx];
+  if(!item || item.logged) return;
+  const next = Math.max(0, Math.min(99, (parseInt(item.reps,10)||0) + delta));
+  item.reps = next;
+  save('glp_ex_session', _wsState);
+  const input = document.getElementById(`wsInput_${movIdx}_${setIdx}`);
+  if(input) input.value = next || '';
+  const currentSetIdx = (_wsState.sets[m.id]||[]).findIndex(s=>!s.logged);
+  if(setIdx === currentSetIdx){
+    const logBtn = document.getElementById('wsLogBtn');
+    if(logBtn) logBtn.disabled = next===0;
+  }
 }
 
 function wsSetVal(movIdx, setIdx, val){
   const m = PROGRAM[movIdx];
-  _wsState.sets[m.id][setIdx].reps = parseInt(val)||0;
+  const clean = Math.max(0, Math.min(99, parseInt(val,10)||0));
+  _wsState.sets[m.id][setIdx].reps = clean;
   save('glp_ex_session', _wsState);
-  // Re-enable log button if value entered
-  const logBtn = document.getElementById('wsLogBtn');
-  if(logBtn) logBtn.disabled = (_wsState.sets[m.id][setIdx].reps===0);
+  const currentSetIdx = (_wsState.sets[m.id]||[]).findIndex(s=>!s.logged);
+  if(setIdx === currentSetIdx){
+    const logBtn = document.getElementById('wsLogBtn');
+    if(logBtn) logBtn.disabled = clean===0;
+  }
+}
+
+function beginRest(){
+  _restActive = true;
+  _restElapsed = 0;
+  if(_restTimer) clearInterval(_restTimer);
+  renderWorkoutStep();
+  _restTimer = setInterval(()=>{
+    _restElapsed++;
+    const rt = document.getElementById('wsRestTime');
+    const rf = document.getElementById('wsRestFill');
+    const rc = document.getElementById('wsRestCopy');
+    if(rt) rt.textContent = _restElapsed+'s';
+    if(rc) rc.textContent = _restElapsed;
+    if(rf) rf.style.width = (_restElapsed/REST_DURATION*100)+'%';
+    if(_restElapsed >= REST_DURATION){
+      clearInterval(_restTimer);
+      _restTimer = null;
+    }
+  },1000);
 }
 
 function wsLogSet(movIdx){
   const m = PROGRAM[movIdx];
   const sets = _wsState.sets[m.id];
   const curIdx = sets.findIndex(s=>!s.logged);
-  if(curIdx<0) return;
+  if(curIdx < 0) return;
   if(!sets[curIdx].reps) return;
 
   sets[curIdx].logged = true;
+  _hypeMsg = HYPE_LINES[(curIdx + movIdx) % HYPE_LINES.length];
   save('glp_ex_session', _wsState);
 
   const nextIdx = sets.findIndex(s=>!s.logged);
-  if(nextIdx>=0){
-    // Start rest timer
-    _restLeft = 0;
-    if(_restTimer) clearInterval(_restTimer);
-    _restTimer = setInterval(()=>{
-      _restLeft++;
-      const rt = document.getElementById('wsRestTime');
-      const rf = document.getElementById('wsRestFill');
-      if(rt) rt.textContent = _restLeft+'s';
-      var rc=document.getElementById('wsRestCopy'); if(rc) rc.textContent=_restLeft;
-      if(rf) rf.style.width = (_restLeft/REST_DURATION*100)+'%';
-      if(_restLeft>=REST_DURATION){
-        clearInterval(_restTimer);
-        renderWorkoutStep();
-      }
-    },1000);
-    renderWorkoutStep();
+  if(nextIdx >= 0){
+    beginRest();
   } else {
-    // All sets done for this movement
+    _restActive = false;
+    _restElapsed = 0;
+    if(_restTimer) clearInterval(_restTimer);
+    _hypeMsg = 'Exercise complete — nice work.';
     renderWorkoutStep();
   }
 }
 
 function wsSkipRest(){
   if(_restTimer) clearInterval(_restTimer);
-  _restLeft=0;
+  _restTimer = null;
+  _restActive = false;
+  _restElapsed = 0;
+  _hypeMsg = 'Atta boy — get after the next set.';
   renderWorkoutStep();
 }
 
 function wsNext(){
-  if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
+  if(_restTimer) clearInterval(_restTimer);
+  _restTimer = null;
+  _restActive = false;
+  _restElapsed = 0;
+  _hypeMsg = '';
   const total = PROGRAM.length;
   if(_wsState.stepIndex < total-1){
     _wsState.stepIndex++;
     save('glp_ex_session', _wsState);
     renderWorkoutStep();
-    document.getElementById('wsBody').scrollTop=0;
+    document.getElementById('wsBody').scrollTop = 0;
   } else {
-    // Last exercise — finish
     renderWorkoutComplete();
   }
 }
 
 function wsPrev(){
   if(_wsState.stepIndex > 0){
-    if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
+    if(_restTimer) clearInterval(_restTimer);
+    _restTimer = null;
+    _restActive = false;
+    _restElapsed = 0;
+    _hypeMsg = '';
     _wsState.stepIndex--;
     save('glp_ex_session', _wsState);
     renderWorkoutStep();
@@ -996,59 +1087,65 @@ function wsPrev(){
 }
 
 function saveWorkout(){
-  // Mark complete
   _wsState.complete = true;
   _wsState.lastWorkoutDate = todayKey();
   save('glp_ex_session', _wsState);
 
-  // Build history entry
   const prog = loadProgress();
   const exercises = PROGRAM.map(m=>{
     const sets = _wsState.sets[m.id]||[];
     const loggedSets = sets.filter(s=>s.logged);
-    const lev = m.levels[Math.min(prog[m.id].levelIndex,m.levels.length-1)];
-    const target = m.targetReps;
-    const qualified = loggedSets.length>0 && loggedSets.every(s=>s.reps>=target);
-    // Update progression
-    if(qualified){
-      prog[m.id].sessionsAtLevel = Math.min(2,(prog[m.id].sessionsAtLevel||0)+1);
-      if(prog[m.id].sessionsAtLevel>=2 && prog[m.id].levelIndex<m.levels.length-1){
-        prog[m.id].readyToLevelUp=true;
+    if(loggedSets.length >= 2){
+      prog[m.id].sessions = (prog[m.id].sessions||0) + 1;
+      if(prog[m.id].sessions >= 3){
+        const curIdx = prog[m.id].levelIndex || 0;
+        if(curIdx < m.levels.length-1){
+          prog[m.id].readyToLevelUp = true;
+        }
       }
     }
-    return {id:m.id, name:lev.name, sets:loggedSets, qualified};
+    return { name:m.name, sets: loggedSets.map(s=>s.reps) };
   });
+  saveProgress(prog);
 
   const hist = loadHistory();
-  const totalSets = exercises.reduce((a,e)=>a+e.sets.length,0);
-  hist.push({date:todayKey(),exercises,totalSets});
-  save('glp_exercise_history', hist);
-  save('glp_exercise_progress', prog);
-  if (window.GLPApp) GLPApp.track('workout_completed', { totalSets });
+  hist.push({ date: todayKey(), totalSets: exercises.reduce((a,e)=>a+e.sets.length,0), exercises });
+  save('glp_ex_history', hist);
+  try { if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('workout_completed', { totalSets: exercises.reduce((a,e)=>a+e.sets.length,0) }); } catch(e){}
 
-  document.getElementById('wsOverlay').classList.remove('open');
-  document.body.style.overflow='';
-  renderPage();
+  _hypeMsg = 'Workout saved. Nice one.';
+  closeWorkout();
 }
 
-function acceptLevelUp(id){
-  const prog=loadProgress();
-  if(prog[id].levelIndex<PROGRAM.find(m=>m.id===id).levels.length-1){
-    prog[id].levelIndex++;
-    prog[id].sessionsAtLevel=0;
-    prog[id].readyToLevelUp=false;
-    save('glp_exercise_progress',prog);
-    renderPage();
-  }
+function renderBadgeShowcase(hist){
+  const root = document.getElementById('badgeShowcase');
+  if(!root) return;
+  const totalSessions = hist.length;
+  const weekly = weeklyCount();
+  const earned = {
+    first: totalSessions >= 1,
+    three: totalSessions >= 3,
+    six: totalSessions >= 6,
+    streak: weekly >= 3,
+    levelup: PROGRAM.some(m=>loadProgress()[m.id].readyToLevelUp || loadProgress()[m.id].levelIndex > 0)
+  };
+  const rows = [
+    {name:'First Step', desc:'Complete your first workout session.', earned:earned.first},
+    {name:'Momentum', desc:'Log 3 total workout sessions.', earned:earned.three},
+    {name:'Steady Builder', desc:'Log 6 total workout sessions.', earned:earned.six},
+    {name:'Weekly Win', desc:'Complete 3 workouts inside one week.', earned:earned.streak},
+    {name:'Level Up', desc:'Unlock your first progression step.', earned:earned.levelup},
+  ];
+  const nextIdx = rows.findIndex(r=>!r.earned);
+  root.innerHTML = `<div class="badges-wrap">${rows.map((r,i)=>`
+    <div class="badge-row">
+      <div>
+        <div class="movement-name" style="font-size:.9rem">${r.name}</div>
+        <div class="small-copy" style="margin-top:4px">${r.desc}</div>
+      </div>
+      <div class="badge-lock ${r.earned ? 'earned' : (i===nextIdx ? 'next' : '')}">${r.earned ? 'Earned' : (i===nextIdx ? 'Next up' : 'Locked')}</div>
+    </div>`).join('')}</div>`;
 }
-function dismissLevelUp(id){
-  const prog=loadProgress();
-  prog[id].readyToLevelUp=false;
-  save('glp_exercise_progress',prog);
-  renderPage();
-}
-window.acceptLevelUp=acceptLevelUp;
-window.dismissLevelUp=dismissLevelUp;
 
 // -- EXERCISE ILLUSTRATIONS -----------------------------
 // SVG silhouettes — premium placeholder style
@@ -1101,6 +1198,17 @@ var _startBtn=document.getElementById('startBtn'); if(_startBtn) _startBtn.addEv
 document.getElementById('infoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.add('open'));
 document.getElementById('closeInfoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.remove('open'));
 document.getElementById('infoOverlay').addEventListener('click', e=>{if(e.target.id==='infoOverlay')document.getElementById('infoOverlay').classList.remove('open');});
+
+const badgeToggle = document.getElementById('badgeToggle');
+if(badgeToggle){
+  badgeToggle.addEventListener('click', function(){
+    const body = document.getElementById('badgeShowcase');
+    const icon = document.getElementById('badgeToggleIcon');
+    const open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'block';
+    icon.textContent = open ? 'Show' : 'Hide';
+  });
+}
 
 // -- INIT -----------------------------------------------
 renderPage();
