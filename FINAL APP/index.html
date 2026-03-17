@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
 <title>GLP Buddy</title>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
@@ -17,6 +18,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -56,7 +58,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);--surface-accent:linear-gradient(150deg,rgba(80,140,100,0.05),rgba(60,120,120,0.03));
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-pale:#b4d0cc;--support-tint:rgba(74,138,128,0.08);
@@ -130,8 +132,8 @@ body.theme-midnight{
 }
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,0px);}
-.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 84px + env(safe-area-inset-bottom,0px));}
-.scroll-area > *:last-child{margin-bottom:6px;}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 70px + env(safe-area-inset-bottom,0px));}
+.scroll-area > *:last-child{margin-bottom:0;}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
@@ -384,6 +386,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script>document.fonts.ready.then(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}});setTimeout(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}},400);</script>
 </head>
 <body class="theme-rose">
+<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
 <script>
 (function(){
   var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
@@ -460,7 +463,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="inject-banner a2" id="medReminderBanner" style="display:none">
     <div class="inject-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
     <div>
-      <div class="inject-title">Injection day — <span id="bannerMedName">your medication</span></div>
+      <div class="inject-title">Medication day — <span id="bannerMedName">your medication</span></div>
       <div class="inject-sub">Don't forget your dose today</div>
     </div>
   </div>
@@ -482,7 +485,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="task-check" id="taskCheckinCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskCheckinLabel">Daily check-in</div>
-        <div class="task-sub">Energy · mood · hunger</div>
+        <div class="task-sub">A quick check-in for today</div>
       </div>
     </div>
     <div class="task-row" id="task3Row" onclick="task3Action()">
@@ -613,7 +616,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   </div>
 
   <div class="card a6">
-    <div class="card-header"><div class="card-title">Treatment</div></div>
+    <div class="card-header"><div class="card-title">Medication routine</div></div>
     <div class="med-row">
       <div class="med-icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
       <div style="flex:1">
@@ -624,14 +627,13 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Log dose</button>
     </div>
     <div style="border-top:1px solid var(--border-mid);padding:8px 20px 4px">
-      <div style="font-size:.66rem;color:var(--text-faint);padding:4px 0 8px">How's your body today? Tap any that apply.</div>
+      <div style="font-size:.70rem;color:var(--text-secondary);padding:4px 0 8px">Anything to note today? Tap any that apply.</div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-bottom:14px" id="fxGrid">
         <div class="fx-item" data-fx="Nausea" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1 1 4 1 4-1 4-1"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">Nausea</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Fatigue" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="fx-label">Fatigue</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Headache" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a10 10 0 0 0-6.88 17.25L6 21h12l.88-1.75A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="fx-label">Headache</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Bloating" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="13" rx="8" ry="6"/><path d="M12 7V5"/></svg></div><div class="fx-label">Bloating</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="Appetite" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="fx-label">Appetite</div><div class="fx-sev"></div></div>
-        <div class="fx-item" data-fx="How do you feel?" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">How do you feel?</div><div class="fx-sev"></div></div>
+<div class="fx-label">How do you feel?</div><div class="fx-sev"></div></div>
       </div>
     </div>
   </div>
@@ -1408,7 +1410,7 @@ function refreshAll() {
     const dispName = getDisplayMedicationName(S);
     if (mnEl) mnEl.textContent = `${dispName}${S.medDose ? ' · ' + S.medDose : ''} · ${S.medFreq === 'daily' ? 'Daily' : 'Weekly'}`;
     if (mcEl) mcEl.textContent = doseInfo.isToday ? 'Today — log your dose' : `${doseInfo.label} until next dose`;
-    if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Injection today' : 'Next injection';
+    if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Dose today' : 'Next dose';
   }
 
   // Log dose button state

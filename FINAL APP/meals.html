@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>GLP Buddy � Meals</title>
+<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
+<title>GLP Buddy — Meals</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -35,6 +36,7 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 <script src="glp-common.js"></script>
 </head>
 <body>
+<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
 <div class="page-wrap"><div class="scroll-area">
 <div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
 <div id="wizardView">
@@ -48,7 +50,7 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 </div>
 <div id="planView" style="display:none">
   <div class="header-tight" style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="page-title">Meal Plan</div><div class="page-sub">7-day plan with portion guidance and a practical shopping list.</div></div><button class="btn btn-secondary" id="resetPlanBtn" style="padding:9px 14px">Reset</button></div>
-  <div class="info-banner"><div class="small">Portion guide</div><div class="text">Protein: palm-sized portion � Vegetables: two fist-sized portions � Cooking oil (olive, coconut, or other): max 1 tablespoon � Use non-stick spray where possible</div></div>
+  <div class="info-banner"><div class="small">Portion guide</div><div class="text">Protein: palm-sized portion • Vegetables: two fist-sized portions • Cooking oil (olive, coconut, or other): max 1 tablespoon • Use non-stick spray where possible</div></div>
   <div class="pill-row"><button class="pill active" data-view="daily">Daily view</button><button class="pill" data-view="weekly">Weekly view</button><button class="pill" data-view="shopping">Shopping list</button></div>
   <div class="pill-row" id="dayPills"></div>
   <div id="dailyView"></div>
@@ -65,7 +67,7 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
   <a href="settings.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div class="bnav-label">Settings</div></a>
 </nav>
 <script>
-window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('meals');
+if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('meals'); }catch(e){} }
 (function(){ try{ const s=JSON.parse(localStorage.getItem('glp_settings')||'{}'); if(s.skin) document.body.classList.add(s.skin); }catch(e){} })();
 const STEPS=['ws0','ws1','ws2','ws3']; let stepIndex=0; let activeDay=0; let activeView='daily';
 const prefs={ diet:'omnivore', breakfast:['eggs','oats','yoghurt'], proteins:['chicken','beef','tofu','beans'], veg:['spinach','cucumber','tomato','onion','broccoli'] };
@@ -162,8 +164,8 @@ function buildPlan(){
   if (window.GLPApp) GLPApp.track('meal_plan_generated', { diet:prefs.diet, breakfasts:prefs.breakfast.length, proteins:prefs.proteins.length, veg:prefs.veg.length });
 }
 function renderDayPills(){ document.getElementById('dayPills').innerHTML = shortDays.map((d,i)=>`<button class="pill ${i===activeDay&&activeView==='daily'?'active':''}" onclick="selectDay(${i})">${d}</button>`).join(''); document.getElementById('dayPills').style.display = activeView==='daily'?'flex':'none'; }
-function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1 tablespoon')) out.push('fats capped'); if((meal.desc||'').includes('1/2 a medium avocado')) out.push('� avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('daily starch'); return out; }
-function mealCard(slot, meal){ return `<div class="meal-card"><div class="meal-slot">${slot}</div><div class="meal-title">${meal.title}</div><div class="meal-desc">${meal.desc}</div><div class="meal-guide">Protein: palm-sized portion � Vegetables: two fist-sized portions � Cooking oil: max 1 tablespoon</div><div class="meal-tags">${tagsFor(meal).map(t=>`<span class="meal-tag">${t}</span>`).join('')}</div></div>`; }
+function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1 tablespoon')) out.push('fats capped'); if((meal.desc||'').includes('1/2 a medium avocado')) out.push('avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('daily starch'); return out; }
+function mealCard(slot, meal){ return `<div class="meal-card"><div class="meal-slot">${slot}</div><div class="meal-title">${meal.title}</div><div class="meal-desc">${meal.desc}</div><div class="meal-guide">Protein: palm-sized portion • Vegetables: two fist-sized portions • Cooking oil: max 1 tablespoon</div><div class="meal-tags">${tagsFor(meal).map(t=>`<span class="meal-tag">${t}</span>`).join('')}</div></div>`; }
 function renderDaily(){ const day=generatedPlan[activeDay]; if(!day) return; document.getElementById('dailyView').innerHTML = `<div class="meal-card"><div class="day-summary"><div><div class="day-name">${day.day}</div><div class="day-meta">Breakfast is included. Starch appears at most once today. Eggs are limited to breakfast only.</div></div><div class="day-chip-compact">Day ${activeDay+1}</div></div></div>${mealCard('Breakfast',day.breakfast)}${mealCard('Lunch',day.lunch)}${mealCard('Dinner',day.dinner)}`; }
 function renderWeekly(){ document.getElementById('weeklyView').innerHTML = `<div class="week-list">${generatedPlan.map(day=>`<div class="week-day"><div class="week-day-title">${day.day}</div><div class="week-meal"><b>Breakfast:</b> ${day.breakfast.title}</div><div class="week-meal"><b>Lunch:</b> ${day.lunch.title}</div><div class="week-meal"><b>Dinner:</b> ${day.dinner.title}</div></div>`).join('')}</div>`; }
 function fmtQty(row){ const q=row.qty; if(row.unit==='g') return `${Math.round(q)} g`; if(row.unit==='tbsp') return `${Math.round(q*10)/10} tbsp`; if(row.unit==='slices') return `${Math.round(q)} slices`; if(row.unit==='cup') return `${Math.round(q*10)/10} cups`; if(row.unit==='can') return `${Math.round(q)} cans`; if(row.unit==='banana') return `${Math.round(q*10)/10} bananas`; if(row.unit==='apple') return `${Math.round(q*10)/10} apples`; if(row.unit==='medium') return `${Math.round(q*10)/10} medium`; if(row.unit==='medium avocado') return `${Math.round(q*10)/10} medium avocados`; if(row.unit==='pepper') return `${Math.round(q*10)/10} peppers`; if(row.unit==='cucumber') return `${Math.round(q*10)/10} cucumbers`; if(row.unit==='eggs') return `${Math.round(q)} eggs`; if(row.unit==='lemon') return `${Math.round(q*10)/10} lemons`; return `${Math.round(q*10)/10} ${row.unit}`; }
@@ -176,6 +178,7 @@ document.getElementById('nextBtn').addEventListener('click',()=>{ if(stepIndex<S
 document.getElementById('resetPlanBtn').addEventListener('click',()=>{ localStorage.removeItem(MEALS_STATE_KEY); location.reload(); });
 restoreMealsState();
 if (generatedPlan.length) { document.getElementById('wizardView').style.display='none'; document.getElementById('planView').style.display='block'; renderDayPills(); renderDaily(); renderWeekly(); renderShopping(); setView(activeView); } else { refreshWizard(); }
+document.querySelectorAll('button').forEach(btn=>{ if(!btn.getAttribute('type')) btn.setAttribute('type','button'); });
 window.selectDay=selectDay;
 </script>
 </body>

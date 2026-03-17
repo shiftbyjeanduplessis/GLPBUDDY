@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>GLP Buddy � Community</title>
+<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
+<title>GLP Buddy — Community</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -40,7 +42,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
@@ -223,6 +225,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
 </head>
 <body class="theme-rose">
+<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
 <script>
 (function(){
   var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
@@ -260,7 +263,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="composer-row">
     <div class="composer-avatar" id="myAvatar">Me</div>
     <div class="composer-input-wrap" id="composerWrap">
-      <textarea class="composer-input" id="postInput" placeholder="Share something with your buddies�" rows="1" oninput="autoResize(this)" onfocus="expandComposer()" maxlength="280"></textarea>
+      <textarea class="composer-input" id="postInput" placeholder="Share something with your buddies—" rows="1" oninput="autoResize(this)" onfocus="expandComposer()" maxlength="280"></textarea>
     </div>
   </div>
   <div class="composer-actions" id="composerActions" style="display:none;">
@@ -287,7 +290,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     </div>
   </div>
   <div class="sheet-rename-row">
-    <input class="sheet-rename-input" id="renameInput" placeholder="Give them a nickname�" autocomplete="off">
+    <input class="sheet-rename-input" id="renameInput" placeholder="Give them a nickname—" autocomplete="off">
     <button class="sheet-rename-btn" onclick="saveName()">Save</button>
   </div>
   <div class="sheet-stats-grid" id="sheetStats"></div>
@@ -301,7 +304,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="sheet-handle"></div>
   <div style="padding:20px 0 4px">
     <div style="font-family:'Clash Display',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;margin-bottom:4px">Add a buddy</div>
-    <div style="font-size:.74rem;color:var(--text-tertiary);line-height:1.55">Enter their email and give them a name � they'll appear in your stream once added.</div>
+    <div style="font-size:.74rem;color:var(--text-tertiary);line-height:1.55">Enter their email and give them a name — they'll appear in your stream once added.</div>
   </div>
   <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
     <input class="invite-input" id="inviteInput" type="email" placeholder="friend@email.com" autocomplete="off" inputmode="email">
@@ -323,7 +326,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 <script src="glp-common.js"></script>
 <script>
-window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('community');
+if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('community'); }catch(e){} }
 // ---------------------------------------
 // AVATAR COLOURS
 // ---------------------------------------
@@ -343,7 +346,7 @@ function initials(name) {
 }
 
 // ---------------------------------------
-// SEED DATA � demo buddies
+// SEED DATA — demo buddies
 // ---------------------------------------
 let buddies = [
   {
@@ -422,12 +425,12 @@ const FEED_TYPES = {
 };
 
 let feedItems = [
-  { buddyId:1, type:'workout', detail:'Lower body � Chair Squat', time:'2 hours ago' },
+  { buddyId:1, type:'workout', detail:'Lower body — Chair Squat', time:'2 hours ago' },
   { buddyId:2, type:'streak',  detail:'7-day streak!', time:'4 hours ago' },
-  { buddyId:1, type:'weight',  detail:'84 kg � down 0.4 kg', time:'Yesterday' },
+  { buddyId:1, type:'weight',  detail:'84 kg — down 0.4 kg', time:'Yesterday' },
   { buddyId:2, type:'meds',    detail:'Weekly injection logged', time:'Yesterday' },
   { buddyId:1, type:'water',   detail:'8 cups completed', time:'2 days ago' },
-  { buddyId:2, type:'workout', detail:'Push � Wall Push-Up', time:'2 days ago' },
+  { buddyId:2, type:'workout', detail:'Push — Wall Push-Up', time:'2 days ago' },
   { buddyId:1, type:'streak',  detail:'14-day streak!', time:'3 days ago' },
 ];
 
@@ -622,7 +625,7 @@ function openSheet(id) {
   document.getElementById('sheetName').textContent = b.nickname || b.realName;
   document.getElementById('sheetEmail').textContent = b.email;
   document.getElementById('renameInput').value = b.nickname || '';
-  document.getElementById('renameInput').placeholder = `Nickname for ${b.realName}�`;
+  document.getElementById('renameInput').placeholder = `Nickname for ${b.realName}—`;
 
   // Stats grid
   document.getElementById('sheetStats').innerHTML = `
@@ -635,19 +638,19 @@ function openSheet(id) {
       <div class="sheet-stat-lbl">This week</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.currentWeight ? b.currentWeight+'kg' : '�'}</div>
+      <div class="sheet-stat-val">${b.currentWeight ? b.currentWeight+'kg' : '—'}</div>
       <div class="sheet-stat-lbl">Current</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.startWeight ? b.startWeight+'kg' : '�'}</div>
+      <div class="sheet-stat-val">${b.startWeight ? b.startWeight+'kg' : '—'}</div>
       <div class="sheet-stat-lbl">Starting</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val">${b.goalWeight ? b.goalWeight+'kg' : '�'}</div>
+      <div class="sheet-stat-val">${b.goalWeight ? b.goalWeight+'kg' : '—'}</div>
       <div class="sheet-stat-lbl">Goal</div>
     </div>
     <div class="sheet-stat-box">
-      <div class="sheet-stat-val" style="color:var(--ok)">${lostKg && lostKg > 0 ? '-'+lostKg+'kg' : '�'}</div>
+      <div class="sheet-stat-val" style="color:var(--ok)">${lostKg && lostKg > 0 ? '-'+lostKg+'kg' : '—'}</div>
       <div class="sheet-stat-lbl">Lost</div>
     </div>`;
 

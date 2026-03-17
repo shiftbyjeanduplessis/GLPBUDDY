@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
 <title>GLP Buddy — Exercise</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
@@ -10,6 +11,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -43,7 +45,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
@@ -95,7 +97,7 @@ body.theme-midnight{
 /* -- LAYOUT ----------------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+32px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h)+44px);padding-top:var(--nav-h);}
 @media(min-width:431px){
   body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
@@ -172,6 +174,9 @@ body{background:var(--bg-app);}
 /* -- MOVEMENT CARDS --------------------------------- */
 .movement-card{padding:16px;}
 .movement-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}
+.fav-btn{width:40px;height:40px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--text-tertiary);flex-shrink:0;transition:all .18s var(--ease);}
+.fav-btn:hover{transform:translateY(-1px);color:var(--accent-primary);border-color:var(--border-accent);}
+.fav-btn.on{background:var(--accent-tint2);color:var(--accent-primary);border-color:var(--border-accent);box-shadow:var(--shadow-card);}
 .movement-name{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.1;}
 .movement-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
 .small-copy{font-size:.80rem;color:var(--text-secondary);line-height:1.5;}
@@ -312,6 +317,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
 </head>
 <body class="theme-rose">
+<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
 
 <div class="page-wrap">
 <div class="scroll-area">
@@ -653,9 +659,18 @@ function renderPage(){
   renderHistory(hist);
 }
 
+
+const EXERCISE_FAV_KEY = 'glp_exercise_favourites';
+function loadFavourites(){ return load(EXERCISE_FAV_KEY, []); }
+function saveFavourites(arr){ save(EXERCISE_FAV_KEY, arr); }
+function isFavourite(id){ return loadFavourites().includes(id); }
+function toggleFavourite(id, ev){ if(ev){ ev.stopPropagation(); ev.preventDefault(); } const current = loadFavourites(); const next = current.includes(id) ? current.filter(x=>x!==id) : current.concat(id); saveFavourites(next); renderAll(); try{ if(window.GLPApp && typeof GLPApp.track==='function') GLPApp.track('exercise_favourite_toggled',{ movement:id, active: next.includes(id) }); }catch(e){} }
+
 function renderMovementLadder(prog){
   const root = document.getElementById('movementList');
-  root.innerHTML = PROGRAM.map(m=>{
+  const favourites = loadFavourites();
+  const ordered = [...PROGRAM].sort((a,b)=> Number(favourites.includes(b.id)) - Number(favourites.includes(a.id)) || a.name.localeCompare(b.name));
+  root.innerHTML = ordered.map(m=>{
     const p = prog[m.id];
     const lev = m.levels[Math.min(p.levelIndex, m.levels.length-1)];
     const pct = Math.min(100, (p.sessionsAtLevel/2)*100);
@@ -665,9 +680,13 @@ function renderMovementLadder(prog){
           <div class="movement-name">${m.name}</div>
           <div class="movement-meta">
             <span class="pill pill-accent">Level ${p.levelIndex+1}</span>
+            ${favourites.includes(m.id) ? '<span class="pill pill-support">Saved</span>' : ''}
             ${p.readyToLevelUp ? '<span class="pill pill-ok">Ready to level up</span>' : ''}
           </div>
         </div>
+        <button class="fav-btn ${favourites.includes(m.id) ? 'on' : ''}" onclick="toggleFavourite('${m.id}', event)" aria-label="${favourites.includes(m.id) ? 'Remove favourite' : 'Save favourite'}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="${favourites.includes(m.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </button>
       </div>
       <div class="small-copy" style="margin-top:8px"><strong>${lev.name}</strong></div>
       <div class="small-copy" style="margin-top:4px">${lev.instruction}</div>
