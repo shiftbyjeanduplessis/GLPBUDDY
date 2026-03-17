@@ -123,7 +123,7 @@ body.theme-midnight{
 }
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+34px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h)+12px);padding-top:var(--nav-h);}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
@@ -252,7 +252,7 @@ body{background:var(--bg-app);}
 .coach-card{margin:8px var(--page-px) 12px;background:var(--coach-gradient);border:1px solid var(--border-accent);border-radius:var(--r-xl);padding:16px 20px;display:flex;align-items:center;gap:14px;}
 .coach-avatar{width:38px;height:38px;border-radius:12px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary);}
 .coach-title{font-size:.82rem;font-weight:700;color:var(--text-primary);}
-.coach-sub{font-size:.67rem;color:var(--text-tertiary);margin-top:1px;}
+.coach-sub{font-size:.69rem;color:var(--text-secondary);margin-top:2px;line-height:1.4;}
 /* -- MOTIVATION STRIP -------------------------------- */
   .motivation-strip{background:var(--nav-bg);border-color:rgba(255,255,255,.08);box-shadow:var(--shadow-elevated);display:flex;align-items:center;gap:10px;margin:0 var(--page-px) 14px;padding:11px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:var(--shadow-card);}
 .motivation-dot{box-shadow:0 0 0 4px rgba(255,255,255,.08);width:6px;height:6px;border-radius:50%;background:var(--accent-light);flex-shrink:0;opacity:.7;}
@@ -406,7 +406,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <input class="modal-input" type="number" step="0.1" id="weightInput" inputmode="decimal" placeholder="0.0">
       <div style="text-align:center;font-size:.76rem;color:var(--text-tertiary);margin-top:6px" id="weightUnitLabel">kilograms (kg)</div>
       <div id="streakInfo" style="text-align:center;margin-top:10px;font-size:.72rem;color:var(--text-tertiary);font-weight:500;min-height:18px"></div>
-      <div style="margin-top:18px"><button class="btn btn-primary btn-full" onclick="saveWeight()">Save weight</button></div>
+      <div style="margin-top:18px"><button type="button" class="btn btn-primary btn-full" id="saveWeightBtn" onclick="saveWeight()">Save weight</button></div>
       <div style="margin-top:8px;text-align:center"><button class="btn btn-ghost" onclick="closeModal('weightModal')">Cancel</button></div>
     </div>
   </div>
@@ -601,14 +601,14 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="med-row">
       <div class="med-icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
       <div style="flex:1">
-        <div class="med-title" id="medNextLabel">Next medication day</div>
+        <div class="med-title" id="medNextLabel">Next medication check-in</div>
         <div class="med-sub" id="medNameDisplay">—</div>
         <div class="med-countdown" id="medCountdown">—</div>
       </div>
-      <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Mark as taken</button>
+      <button type="button" class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Mark as taken</button>
     </div>
     <div style="border-top:1px solid var(--border-mid);padding:8px 20px 10px">
-      <div style="font-size:.60rem;color:var(--text-secondary);padding:4px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anything to note today? Tap any that apply.</div>
+      <div style="font-size:.56rem;color:var(--text-secondary);padding:3px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anything to note today?</div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding-bottom:4px" id="fxGrid">
         <div class="fx-item" data-fx="Nausea" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1 1 4 1 4-1 4-1"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">Nausea</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Fatigue" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="fx-label">Fatigue</div><div class="fx-sev"></div></div>
@@ -1212,15 +1212,22 @@ function getSundayKey(dateObj) {
   return d.toISOString().slice(0, 10);
 }
 
+
 function getWeeklyPhotoTaskInfo() {
   const now = new Date();
+  const start = new Date(now);
+  start.setHours(8,0,0,0);
   const day = now.getDay();
-  const hour = now.getHours();
-  const visible = day === 0 || (day === 1 && hour < 18);
-  const weekStartKey = getSundayKey(now);
+  const diffToSat = (day + 1) % 7;
+  start.setDate(now.getDate() - diffToSat);
+  const end = new Date(start);
+  end.setDate(start.getDate() + 2);
+  const weekStartKey = start.toISOString().slice(0, 10);
   const done = loadPhotos().some(p => p.date >= weekStartKey);
-  return { visible, done };
+  const visible = now >= start && now < end && !done;
+  return { visible, done, weekStartKey };
 }
+
 
 function openWeeklyPhotoTask() {
   location.href = 'progress.html?openPhoto=1';
@@ -1528,27 +1535,38 @@ function openWeighIn() {
   setTimeout(() => inp.focus(), 200);
 }
 
+
 function saveWeight() {
   const inp = document.getElementById('weightInput');
-  const val = parseFloat(inp.value);
-  if (!val || val < 20 || val > 500) {
+  const btn = document.getElementById('saveWeightBtn');
+  const raw = String(inp.value || '').trim();
+  const val = parseFloat(raw.replace(',', '.'));
+  if (!Number.isFinite(val) || val < 20 || val > 500) {
     inp.style.borderColor = 'var(--accent-mid)';
-    setTimeout(() => inp.style.borderColor = '', 800);
-    return;
+    inp.focus();
+    setTimeout(() => inp.style.borderColor = '', 900);
+    return false;
   }
-  const log = loadWeightLog();
-  const idx = log.findIndex(e => e.date === todayKey());
-  const S   = loadSettings();
-  const entryUnits = S.units || 'kg';
-  if (idx >= 0) { log[idx].weight = val; log[idx].units = entryUnits; }
-  else log.push({ date: todayKey(), weight: val, units: entryUnits });
-  saveWeightLog(log);
-  if (window.GLPApp) GLPApp.track('weight_logged', { value: val, units: entryUnits });
-  // Mark weight as logged in home log
-  saveTodayState({ weightLogged: true });
-  closeModal('weightModal');
-  refreshAll();
+  try {
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    const log = loadWeightLog();
+    const existing = log.findIndex(e => e.date === todayKey());
+    const S = loadSettings();
+    const entryUnits = S.units || 'kg';
+    if (existing >= 0) { log[existing].weight = val; log[existing].units = entryUnits; }
+    else log.push({ date: todayKey(), weight: val, units: entryUnits });
+    saveWeightLog(log);
+    saveTodayState({ weightLogged: true });
+    try { if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('weight_logged', { value: val, units: entryUnits }); } catch(e){}
+    closeModal('weightModal');
+    refreshAll();
+    inp.blur();
+    return false;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Save weight'; }
+  }
 }
+
 
 // -------------------------------------------------------
 //  SLIDERS
@@ -1842,6 +1860,7 @@ function renderAchieveNudge() {
 //  INIT
 // -------------------------------------------------------
 refreshAll();
+document.querySelectorAll('button').forEach(function(b){ if(!b.getAttribute('type')) b.setAttribute('type','button'); });
 </script>
 </body>
 </html>

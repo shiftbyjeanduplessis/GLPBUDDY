@@ -95,7 +95,7 @@ body.theme-midnight{
 /* -- LAYOUT ----------------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h)+42px);padding-top:var(--nav-h);}
 @media(min-width:431px){
   body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px;visibility:hidden}body.skin-ready{visibility:visible}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
@@ -363,8 +363,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="badge badge-available" id="todayBadge">Available</div>
   </div>
   <div class="today-actions">
-    <button class="btn btn-primary" id="startBtn" onclick="startWorkout()">Start workout</button>
-    <button class="btn btn-secondary" id="resumeBtn" onclick="startWorkout()">Resume session</button>
+    <button type="button" class="btn btn-primary" id="startBtn" onclick="startWorkout()">Start workout</button>
+    <button type="button" class="btn btn-secondary" id="resumeBtn" onclick="startWorkout()">Resume session</button>
   </div>
   <div class="notice hidden" id="todayNotice"></div>
 </div>
@@ -742,34 +742,29 @@ function renderHistory(hist){
 // -- WORKOUT SESSION ------------------------------------
 let _wsState = null;  // live session object
 
+
 function startWorkout(){
-  if(isRestDay()){ renderPage(); return; }
-  const st = loadState();
-  const prog = loadProgress();
-
-  if(st.date===todayKey() && !st.complete){
-    // Resume existing session
-    _wsState = st;
-  } else {
-    // Fresh session
-    _wsState = {
-      date: todayKey(),
-      stepIndex: 0,
-      sets: {},     // { movementId: [{reps,logged},...] }
-      complete: false,
-      lastWorkoutDate: null,
-    };
-    PROGRAM.forEach(m=>{
-      _wsState.sets[m.id] = Array.from({length:m.sets},(_,i)=>({set:i+1,reps:0,logged:false}));
-    });
+  try {
+    const st = loadState();
+    if(st.date===todayKey() && !st.complete && st.sets && Object.keys(st.sets).length){
+      _wsState = st;
+    } else {
+      _wsState = { date: todayKey(), stepIndex: 0, sets: {}, complete: false, lastWorkoutDate: st.lastWorkoutDate || null };
+      PROGRAM.forEach(m=>{ _wsState.sets[m.id] = Array.from({length:m.sets},(_,i)=>({set:i+1,reps:0,logged:false})); });
+    }
+    save('glp_ex_session', _wsState);
+    try { if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('workout_started', { resumed: st.date===todayKey() && !st.complete }); } catch(e){}
+    const ov = document.getElementById('wsOverlay');
+    if (ov) ov.classList.add('open');
+    document.body.style.overflow='hidden';
+    _restLeft = 0;
+    renderWorkoutStep();
+  } catch (err) {
+    console.error('startWorkout failed', err);
+    alert('Workout could not start. Please refresh and try again.');
   }
-
-  save('glp_ex_session', _wsState);
-  if (window.GLPApp) GLPApp.track('workout_started', { resumed: st.date===todayKey() && !st.complete });
-  document.getElementById('wsOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-  renderWorkoutStep();
 }
+
 
 function closeWorkout(){
   // Save progress
@@ -1101,6 +1096,7 @@ function getExerciseIllustration(id){
 }
 
 // -- EVENT LISTENERS ------------------------------------
+window.startWorkout = startWorkout;
 var _startBtn=document.getElementById('startBtn'); if(_startBtn) _startBtn.addEventListener('click', startWorkout);
 document.getElementById('infoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.add('open'));
 document.getElementById('closeInfoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.remove('open'));
