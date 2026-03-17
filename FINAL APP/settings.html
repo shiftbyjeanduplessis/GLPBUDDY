@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
 <title>GLP Buddy — Settings</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
@@ -11,7 +10,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -42,7 +40,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
@@ -158,11 +156,6 @@ body{background:var(--bg-app);}
 .swatch-sage{background:linear-gradient(135deg,#c4e0cc,#b4d0cc);}
 .swatch-sand{background:linear-gradient(135deg,#e8cdb0,#ccc0b4);}
 .swatch-midnight{background:linear-gradient(135deg,#3a2d54,#2a3060);}
-
-.install-card-copy{font-size:.70rem;color:var(--text-tertiary);line-height:1.55;margin-bottom:12px}
-.install-help{font-size:.68rem;color:var(--text-faint);line-height:1.5;margin-top:8px}
-.install-status{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--accent-tint);border:1px solid var(--border-soft);font-size:.62rem;font-weight:700;color:var(--text-secondary);margin-bottom:12px}
-body.theme-midnight .install-status{background:rgba(255,255,255,0.06);border-color:rgba(180,140,220,0.26);color:#efe7ff}
 /* achievements */
 .achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .ach-item{border-radius:var(--r-lg);border:1.5px solid var(--border-soft);background:var(--surface-1);padding:14px 10px 12px;text-align:center;opacity:.38;transition:opacity .3s,border-color .3s;}
@@ -180,10 +173,6 @@ body.theme-midnight .install-status{background:rgba(255,255,255,0.06);border-col
 /* appear row */
 .appear-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border-mid);margin-top:14px;cursor:pointer;}
 .appear-row-label{font-size:.84rem;font-weight:600;color:var(--text-primary);}
-.collapse-head{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left;background:none;padding:0;cursor:pointer;}
-.collapse-icon{width:34px;height:34px;border-radius:12px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:transform .2s var(--ease);flex-shrink:0;}
-.collapsed-card .card-collapse-body{display:none;}
-.collapsed-card .collapse-icon{transform:rotate(-90deg);}
 .appear-row-val{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-tertiary);}
 /* toast */
 .toast{position:fixed;bottom:calc(var(--nav-h) + 16px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--ok);color:#fff;font-size:.78rem;font-weight:700;padding:10px 22px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;z-index:300;}
@@ -214,8 +203,18 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
 </head>
-<body class="theme-rose">
-<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
+<body>
+<script>
+(function(){
+  var skins=['theme-rose','theme-sage','theme-sand','theme-midnight'];
+  var skin='theme-rose';
+  try{
+    var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');
+    if(skins.indexOf(s.skin)>=0) skin=s.skin;
+  }catch(e){}
+  document.body.className=skin;
+})();
+</script>
 <script>
 (function(){
   var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
@@ -257,6 +256,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h18v4l-9 9-9-9V3z"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div><div><div class="s-card-title" id="wtTitle">Weight Goals (kg)</div></div></div>
   <div class="field"><div class="field-label">Program start date</div><input class="field-input" id="startDate" type="date"><div class="field-hint">When you started your GLP-1 journey.</div></div>
   <div class="field"><div class="field-label" id="startWtLbl">Starting Weight (kg)</div><input class="field-input" id="startWeight" type="number" placeholder="e.g. 90" min="30" max="300"></div>
+  <input id="curWeight" type="hidden">
   <div class="field" style="margin-bottom:0;"><div class="field-label" id="tgtWtLbl">Target Weight (kg)</div><input class="field-input" id="tgtWeight" type="number" placeholder="e.g. 72" min="30" max="300"><div class="field-hint">Your target weight should be provided by your doctor.</div></div>
 </div>
 
@@ -299,14 +299,12 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   </div>
 </div>
 
-<div class="s-card d5 collapsed-card" id="remindersCard">
-  <button class="s-card-head collapse-head" type="button" onclick="toggleCard('remindersCard')"><div style="display:flex;align-items:center;gap:12px"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div><div class="s-card-title">In-App Reminders</div><div class="s-card-sub">Shown on your home screen when you open the app</div></div></div><div class="collapse-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></button>
-  <div class="card-collapse-body" id="remindersBody">
-    <div class="notif-row"><div><div class="notif-label">Medication reminder</div><div class="notif-sub">Show banner on your medication day</div></div><div class="tog on" id="togMeds" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
-    <div class="notif-row"><div><div class="notif-label">Water goal reminder</div><div class="notif-sub">Show nudge if goal not hit by 6pm</div></div><div class="tog on" id="togWater" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
-    <div class="notif-row"><div><div class="notif-label">Workout reminder</div><div class="notif-sub">Show banner on workout days</div></div><div class="tog" id="togWorkout" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
-    <div class="notif-row"><div><div class="notif-label">Weekly photo reminder</div><div class="notif-sub">Show prompt on Saturday morning</div></div><div class="tog on" id="togPhoto" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
-  </div>
+<div class="s-card d5">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div><div class="s-card-title">In-App Reminders</div><div class="s-card-sub">Shown on your home screen when you open the app</div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Medication reminder</div><div class="notif-sub">Show banner on injection day</div></div><div class="tog on" id="togMeds" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Water goal reminder</div><div class="notif-sub">Show nudge if goal not hit by 6pm</div></div><div class="tog on" id="togWater" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Workout reminder</div><div class="notif-sub">Show banner on workout days</div></div><div class="tog" id="togWorkout" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
+  <div class="notif-row"><div><div class="notif-label">Weekly photo reminder</div><div class="notif-sub">Show prompt on your chosen photo day</div></div><div class="tog on" id="togPhoto" onclick="this.classList.toggle('on')"><div class="tog-track"></div><div class="tog-thumb"></div></div></div>
 </div>
 
 <div class="s-card d6">
@@ -317,21 +315,39 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="skin-tile" data-skin="theme-sage" onclick="applySkin('theme-sage',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-sage"></div><div class="skin-tile-name">Sage</div></div>
     <div class="skin-tile" data-skin="theme-sand" onclick="applySkin('theme-sand',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-sand"></div><div class="skin-tile-name">Sand</div></div>
     <div class="skin-tile" data-skin="theme-midnight" onclick="applySkin('theme-midnight',true)"><div class="skin-tile-check"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="skin-tile-swatch swatch-midnight"></div><div class="skin-tile-name">Midnight</div></div>
-  </div>
+  </div><div class="appear-row-val"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div></div>
 </div>
 
-
-<div class="s-card d6">
-  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></div><div><div class="s-card-title">Install GLP Buddy</div><div class="s-card-sub">Add the app to your phone or desktop for the cleanest app-style experience.</div></div></div>
-  <div class="install-status" id="settingsInstallStatus">Checking install option</div>
-  <div class="install-card-copy" id="settingsInstallText">Install GLP Buddy from here whenever you are ready.</div>
-  <button class="save-btn" style="margin:0;width:100%" id="settingsInstallBtn" onclick="handleInstallClick()">How to install</button>
-  <div class="install-help" id="settingsInstallHelp">If your browser does not show an install prompt, use its menu and choose Install App or Add to Home Screen.</div>
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></div><div><div class="s-card-title">Install GLP Buddy</div><div class="s-card-sub">Best on Android. On iPhone use Share → Add to Home Screen.</div></div></div>
+  <div class="field" style="margin-bottom:0">
+    <div class="field-hint" id="installCopySettings">Use the install button below when your browser supports it.</div>
+    <button class="save-btn" type="button" id="installBtnSettings" style="margin-top:12px">Install app</button>
+  </div>
 </div>
 
 <button class="save-btn d7" id="saveBtn" onclick="saveSettings()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Save Settings</button>
 
-<button class="save-btn" style="margin:0;width:100%" onclick="restartOnboardingFlow()">Run onboarding again</button>
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><div class="s-card-title">Your Achievements</div></div></div>
+  <div class="achievements-grid">
+    <div class="ach-item" id="ach-first-step"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ach-name">First Step</div><div class="ach-desc">Logged your first weight</div></div>
+    <div class="ach-item" id="ach-week-warrior"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="ach-name">Week Warrior</div><div class="ach-desc">7-day streak</div></div>
+    <div class="ach-item" id="ach-student"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="ach-name">Student</div><div class="ach-desc">Completed first lesson</div></div>
+    <div class="ach-item" id="ach-scholar"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="ach-name">Scholar</div><div class="ach-desc">All lessons done</div></div>
+    <div class="ach-item" id="ach-5kg"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="ach-name">5kg Down</div><div class="ach-desc">Lost 5kg</div></div>
+    <div class="ach-item" id="ach-champion"><div class="ach-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div><div class="ach-name">Champion</div><div class="ach-desc">Lost 10kg</div></div>
+  </div>
+</div>
+
+
+<div class="s-card d7">
+  <div class="s-card-head"><div class="s-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M12 4h9"/><path d="M4 9h16"/><path d="M4 15h16"/></svg></div><div><div class="s-card-title">Onboarding</div><div class="s-card-sub">Re-run the welcome setup for a fresh handoff.</div></div></div>
+  <button class="save-btn" style="margin:0;width:100%" onclick="restartOnboardingFlow()">Run onboarding again</button>
+</div>
+</div></div>
+  <div class="field" style="margin-bottom:10px"><div class="field-hint" id="usageSummaryText">No usage data yet.</div></div>
+  <div class="toggle-pair"><button class="toggle-opt sel" onclick="exportUsageJson()">Export JSON</button><button class="toggle-opt" onclick="exportUsageCsv()">Export CSV</button></div>
 </div>
 
 <button class="logout-btn d8" onclick="logout()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout</button>
@@ -352,82 +368,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 
 <script src="glp-common.js"></script>
 <script>
-if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('settings'); }catch(e){} }
-
+try{ if(window.GLPApp && typeof GLPApp.boot==='function') GLPApp.boot('settings'); }catch(e){ console.warn('GLPApp.boot failed on settings', e); }
 const SKINS=['theme-rose','theme-sage','theme-sand','theme-midnight'];
-
-let deferredInstallPrompt = null;
-
-function isStandaloneMode(){
-  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
-function isIOSDevice(){
-  return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
-}
-function registerInstallSupport(){
-  if('serviceWorker' in navigator){
-    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
-  }
-}
-function updateInstallUI(){
-  const btn = document.getElementById('settingsInstallBtn');
-  const text = document.getElementById('settingsInstallText');
-  const help = document.getElementById('settingsInstallHelp');
-  const status = document.getElementById('settingsInstallStatus');
-  if(!btn || !text || !help || !status) return;
-
-  if(isStandaloneMode()){
-    btn.style.display = 'none';
-    text.textContent = 'GLP Buddy is already installed on this device.';
-    help.textContent = 'Open it from your home screen whenever you want the full app experience.';
-    status.textContent = 'Already installed';
-    return;
-  }
-
-  btn.style.display = 'flex';
-
-  if(deferredInstallPrompt){
-    btn.textContent = 'Install GLP Buddy';
-    text.textContent = 'Your browser is ready to install GLP Buddy now.';
-    help.textContent = 'Tap install and your browser should handle the rest.';
-    status.textContent = 'Ready to install';
-    return;
-  }
-
-  if(isIOSDevice()){
-    btn.textContent = 'How to install';
-    text.textContent = 'Install from Safari using Add to Home Screen.';
-    help.textContent = 'Open this page in Safari, tap Share, then choose Add to Home Screen.';
-    status.textContent = 'Manual install';
-    return;
-  }
-
-  btn.textContent = 'How to install';
-  text.textContent = 'Install may not be available yet in this browser.';
-  help.textContent = 'Open the browser menu and look for Install App or Add to Home Screen.';
-  status.textContent = 'Browser menu';
-}
-
-async function handleInstallClick(){
-  if(deferredInstallPrompt){
-    try{
-      await deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
-    }catch(e){}
-    deferredInstallPrompt = null;
-    updateInstallUI();
-    return;
-  }
-
-  if(isIOSDevice()){
-    alert('Open this page in Safari, tap Share, then choose Add to Home Screen.');
-  }else{
-    alert('Open your browser menu and look for Install App or Add to Home Screen.');
-  }
-}
-window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredInstallPrompt = e; updateInstallUI(); });
-window.addEventListener('appinstalled', function(){ deferredInstallPrompt = null; updateInstallUI(); });
-
 function applySkin(skin,persist){
   if(!SKINS.includes(skin))skin='theme-rose';
   SKINS.forEach(s=>document.body.classList.remove(s));document.body.classList.add(skin);
@@ -435,13 +377,11 @@ function applySkin(skin,persist){
   if(persist){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');s.skin=skin;localStorage.setItem('glp_settings',JSON.stringify(s));}catch(e){}}
 }
 (function(){try{const s=JSON.parse(localStorage.getItem('glp_settings')||'{}');if(s.skin)applySkin(s.skin,false);}catch(e){}})();
-registerInstallSupport();
-updateInstallUI();
 
 function selTwo(a,b){document.getElementById(a).classList.add('sel');document.getElementById(b).classList.remove('sel');}
 function selDay(btn){document.querySelectorAll('#injDayGroup .multi-opt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
 function selWater(id){['w200','w250','w300','w500'].forEach(w=>document.getElementById(w).classList.remove('sel'));document.getElementById(id).classList.add('sel');}
-function updWt(){const u=document.getElementById('unitKg').classList.contains('sel')?'kg':'lbs';document.getElementById('wtTitle').textContent=`Weight Goals (${u})`;document.getElementById('startWtLbl').textContent=`Starting Weight (${u})`;document.getElementById('curWtLbl').textContent=`Current Weight (${u})`;document.getElementById('tgtWtLbl').textContent=`Target Weight (${u})`;}
+function updWt(){const u=document.getElementById('unitKg').classList.contains('sel')?'kg':'lbs';document.getElementById('wtTitle').textContent=`Weight Goals (${u})`;document.getElementById('startWtLbl').textContent=`Starting Weight (${u})`;document.getElementById('tgtWtLbl').textContent=`Target Weight (${u})`;}
 document.getElementById('medName').addEventListener('change',function(){document.getElementById('medOtherWrap').style.display=this.value==='Other'?'block':'none';if(this.value==='Saxenda')selTwo('freqDaily','freqWeekly');else if(this.value!=='')selTwo('freqWeekly','freqDaily');});
 
 function saveSettings(){
@@ -452,6 +392,7 @@ function saveSettings(){
     units:document.getElementById('unitLbs').classList.contains('sel')?'lbs':'kg',
     startDate:document.getElementById('startDate').value,
     startWeight:parseFloat(document.getElementById('startWeight').value)||null,
+    curWeight:parseFloat(document.getElementById('curWeight').value)||null,
     goalWeight:parseFloat(document.getElementById('tgtWeight').value)||null,
     medName:document.getElementById('medName').value,
     medOther:document.getElementById('medOther').value,
@@ -472,6 +413,7 @@ function saveSettings(){
   const toast=document.getElementById('saveToast');toast.classList.add('vis');
   setTimeout(()=>{toast.classList.remove('vis');btn.classList.remove('saved');btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Save Settings';},2500);
   checkAchievements();
+refreshUsageSummary();
 }
 
 function loadSettings(){
@@ -484,6 +426,7 @@ function loadSettings(){
     if(s.units==='lbs'){selTwo('unitLbs','unitKg');updWt();}
     if(s.startDate)document.getElementById('startDate').value=s.startDate;
     if(s.startWeight)document.getElementById('startWeight').value=s.startWeight;
+    if(s.curWeight)document.getElementById('curWeight').value=s.curWeight;
     if(s.goalWeight)document.getElementById('tgtWeight').value=s.goalWeight;
     if(s.medName){document.getElementById('medName').value=s.medName;if(s.medName==='Other')document.getElementById('medOtherWrap').style.display='block';}
     if(s.medOther)document.getElementById('medOther').value=s.medOther;
@@ -500,11 +443,10 @@ function loadSettings(){
 
 function checkAchievements(){
   const start=parseFloat(document.getElementById('startWeight').value);
-  const cur=null;
+  const cur=parseFloat(document.getElementById('curWeight').value);
   if(start&&cur){const lost=start-cur;document.getElementById('ach-first-step').classList.add('earned');if(lost>=5)document.getElementById('ach-5kg').classList.add('earned');if(lost>=10)document.getElementById('ach-champion').classList.add('earned');}
 }
 
-function toggleCard(id){ const card=document.getElementById(id); if(card) card.classList.toggle('collapsed-card'); }
 function viewTour(){location.href='index.html';}
 function logout(){if(confirm('Are you sure you want to log out?'))location.href='index.html';}
 function restartOnboardingFlow(){ if(window.GLPApp) GLPApp.restartOnboarding(); }
@@ -517,3 +459,35 @@ checkAchievements();
 </script>
 </body>
 </html>
+<script>
+function toggleSettingsSection(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+}
+let deferredInstallPromptSettings = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPromptSettings = e;
+  const copy = document.getElementById('installCopySettings');
+  if(copy) copy.textContent = 'Your browser can install GLP Buddy as an app.';
+});
+window.addEventListener('appinstalled', () => {
+  const copy = document.getElementById('installCopySettings');
+  const btn = document.getElementById('installBtnSettings');
+  if(copy) copy.textContent = 'GLP Buddy is installed. You can open it from your home screen.';
+  if(btn) btn.style.display = 'none';
+});
+document.addEventListener('click', async (e) => {
+  if(e.target && e.target.id === 'installBtnSettings'){
+    if(deferredInstallPromptSettings){
+      deferredInstallPromptSettings.prompt();
+      try{ await deferredInstallPromptSettings.userChoice; }catch(err){}
+      deferredInstallPromptSettings = null;
+    } else {
+      const copy = document.getElementById('installCopySettings');
+      if(copy) copy.textContent = 'If your browser does not show an install prompt, open the browser menu and choose Install app. On iPhone use Share → Add to Home Screen.';
+    }
+  }
+});
+</script>

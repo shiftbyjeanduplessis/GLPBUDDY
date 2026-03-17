@@ -3,22 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
 <title>GLP Buddy</title>
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="apple-touch-icon" href="/icons/icon-192.png">
-<meta name="theme-color" content="#1a1028">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GLP Buddy">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -48,7 +39,7 @@ body,body.theme-rose{
   --inject-icon-gradient:linear-gradient(135deg,#b8a8e8,#6b82cc);
   --avatar-gradient:linear-gradient(135deg,#f2c0d4,#c8d2f0);
   --med-icon-gradient:linear-gradient(135deg,rgba(184,168,232,0.16),rgba(107,130,204,0.12));
-  --chrome-bg:rgba(18,10,28,0.93);--nav-bg:rgba(18,10,28,0.93);
+  --nav-bg:rgba(18,10,28,0.93);
   --nav-active-gradient:linear-gradient(135deg,#c85c87,#6b82cc);--nav-active-shadow:0 4px 16px rgba(180,80,140,0.38);
   --nav-active-label:linear-gradient(90deg,#df85a8,#97a9dc);
   --chart-line-start:#d4638a;--chart-line-end:#7b8fd4;--chart-fill-color:#c85c87;--chart-fill-opacity:.14;--chart-goal-stroke:#a0aee0;
@@ -58,7 +49,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);--surface-accent:linear-gradient(150deg,rgba(80,140,100,0.05),rgba(60,120,120,0.03));
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.80);--text-tertiary:rgba(22,32,24,0.62);--text-faint:rgba(22,32,24,0.26);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-pale:#b4d0cc;--support-tint:rgba(74,138,128,0.08);
@@ -73,7 +64,7 @@ body.theme-sage{
   --inject-icon-gradient:linear-gradient(135deg,#8ab4a8,#4a8a80);
   --avatar-gradient:linear-gradient(135deg,#c4e0cc,#b4d0cc);
   --med-icon-gradient:linear-gradient(135deg,rgba(138,180,168,0.18),rgba(74,138,128,0.12));
-  --chrome-bg:rgba(10,22,14,0.93);--nav-bg:rgba(10,22,14,0.93);
+  --nav-bg:rgba(10,22,14,0.93);
   --nav-active-gradient:linear-gradient(135deg,#5a9a72,#4a8a80);--nav-active-shadow:0 4px 16px rgba(60,140,90,0.36);
   --nav-active-label:linear-gradient(90deg,#84ba96,#72aaa2);
   --chart-line-start:#5a9a72;--chart-line-end:#4a8a80;--chart-fill-color:#5a9a72;--chart-fill-opacity:.14;--chart-goal-stroke:#72aaa2;
@@ -83,7 +74,7 @@ body.theme-sage{
 body.theme-sand{
   --bg-app:#f9f6f1;--bg-shell:linear-gradient(135deg,#ede6da,#e8e0d4);--bg-modal:#fdfaf6;
   --surface-1:#fdfaf6;--surface-2:rgba(249,246,241,0.9);--surface-accent:linear-gradient(150deg,rgba(180,130,80,0.05),rgba(160,110,70,0.03));
-  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.62);--text-tertiary:rgba(37,28,16,0.44);--text-faint:rgba(37,28,16,0.28);
+  --text-primary:#251c10;--text-secondary:rgba(37,28,16,0.82);--text-tertiary:rgba(37,28,16,0.64);--text-faint:rgba(37,28,16,0.28);
   --accent-primary:#8a5e3a;--accent-mid:#b07848;--accent-light:#cc9a6e;--accent-pale:#e8cdb0;
   --accent-tint:rgba(170,110,60,0.08);--accent-tint2:rgba(170,110,60,0.14);
   --support-primary:#7a6050;--support-light:#9a8070;--support-pale:#ccc0b4;--support-tint:rgba(122,96,80,0.08);
@@ -98,7 +89,7 @@ body.theme-sand{
   --inject-icon-gradient:linear-gradient(135deg,#b8a898,#7a6050);
   --avatar-gradient:linear-gradient(135deg,#e8cdb0,#ccc0b4);
   --med-icon-gradient:linear-gradient(135deg,rgba(184,168,152,0.18),rgba(122,96,80,0.12));
-  --chrome-bg:rgba(22,14,8,0.94);--nav-bg:rgba(22,14,8,0.94);
+  --nav-bg:rgba(22,14,8,0.94);
   --nav-active-gradient:linear-gradient(135deg,#b07848,#7a6050);--nav-active-shadow:0 4px 16px rgba(140,90,40,0.34);
   --nav-active-label:linear-gradient(90deg,#cc9a6e,#9a8070);
   --chart-line-start:#b07848;--chart-line-end:#7a6050;--chart-fill-color:#b07848;--chart-fill-opacity:.13;--chart-goal-stroke:#9a8070;
@@ -123,7 +114,7 @@ body.theme-midnight{
   --inject-icon-gradient:linear-gradient(135deg,#9088c0,#8899cc);
   --avatar-gradient:linear-gradient(135deg,rgba(200,160,240,0.22),rgba(136,153,204,0.18));
   --med-icon-gradient:linear-gradient(135deg,rgba(144,136,192,0.22),rgba(136,153,204,0.14));
-  --chrome-bg:rgba(10,8,20,0.96);--nav-bg:rgba(10,8,20,0.96);
+  --nav-bg:rgba(10,8,20,0.96);
   --nav-active-gradient:linear-gradient(135deg,#b888d8,#8899cc);--nav-active-shadow:0 4px 16px rgba(140,100,200,0.38);
   --nav-active-label:linear-gradient(90deg,#d0aaee,#a0b0d8);
   --chart-line-start:#c09ae0;--chart-line-end:#8899cc;--chart-fill-color:#b888d8;--chart-fill-opacity:.12;--chart-goal-stroke:#8899cc;
@@ -131,15 +122,14 @@ body.theme-midnight{
   --prog-fill:linear-gradient(90deg,#9060c0,#8899cc);--page-ring:rgba(180,140,220,0.14);
 }
 body{background:var(--bg-app);}
-.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,0px);}
-.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h) + 70px + env(safe-area-inset-bottom,0px));}
-.scroll-area > *:last-child{margin-bottom:0;}
+.page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
+.scroll-area{padding-bottom:calc(var(--nav-h)+34px);padding-top:var(--nav-h);}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
   .bnav,.glpb-topbar{max-width:none;width:100%;left:0;transform:none}
 }
-.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--chrome-bg,var(--nav-bg));display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);display:flex;align-items:center;padding:0 6px 8px;z-index:100;}
 .bnav::after{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.09) 20%,rgba(255,255,255,0.09) 80%,transparent);}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px 0;color:rgba(255,255,255,0.28);text-decoration:none;min-width:0;}
 .bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);}
@@ -166,16 +156,6 @@ body{background:var(--bg-app);}
 .chip-accent{background:var(--accent-tint);color:var(--accent-primary);}
 .chip-support{background:var(--support-tint);color:var(--support-primary);}
 .chip-warn{background:var(--warn-tint);color:var(--warn);}
-body.theme-midnight .btn-pill{background:rgba(255,255,255,0.12);color:rgba(248,244,255,0.96);border:1px solid rgba(208,170,238,0.24);}
-body.theme-midnight .btn-ghost{color:rgba(240,234,255,0.9);}
-body.theme-midnight .btn-ghost:hover{color:#fff;}
-body.theme-midnight .chip-accent{background:rgba(255,255,255,0.10);color:rgba(248,244,255,0.94);}
-.install-card{margin:0 var(--page-px) 12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:var(--r-xl);background:var(--surface-1);border:1px solid var(--border-accent);box-shadow:var(--shadow-card);}
-.install-copy{min-width:0;flex:1;}
-.install-title{font-size:.84rem;font-weight:800;color:var(--text-primary);}
-.install-sub{margin-top:3px;font-size:.68rem;line-height:1.45;color:var(--text-tertiary);}
-.install-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-@media (max-width:380px){.install-card{flex-direction:column;align-items:flex-start;}.install-actions{width:100%;justify-content:flex-start;}}
 .prog-track{height:5px;background:var(--accent-tint);border-radius:var(--r-pill);overflow:hidden;}
 .prog-fill{height:100%;border-radius:var(--r-pill);background:var(--prog-fill);transition:width 1.2s var(--ease);}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
@@ -226,9 +206,9 @@ body.theme-midnight .chip-accent{background:rgba(255,255,255,0.10);color:rgba(24
 .fx-item.selected{border-color:var(--border-accent);}
 .fx-item[data-sev="3"]{border-color:rgba(200,64,64,0.28);background:rgba(200,64,64,0.04);}
 .header-wrap{padding:20px var(--page-px) 18px;display:flex;justify-content:space-between;align-items:flex-start;}
-.header-greeting{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-mid);margin-bottom:4px;}
+.header-greeting{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-primary);margin-bottom:4px;}
 .header-name{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;color:var(--text-primary);letter-spacing:-1.4px;line-height:1;}
-.header-week{font-size:.74rem;color:var(--text-tertiary);margin-top:5px;font-weight:500;}
+.header-week{font-size:.74rem;color:var(--text-secondary);margin-top:5px;font-weight:600;}
 .header-avatar{width:44px;height:44px;border-radius:14px;background:var(--avatar-gradient);display:flex;align-items:center;justify-content:center;color:var(--accent-primary);flex-shrink:0;cursor:pointer;}
 .streak-chip{display:inline-flex;align-items:center;gap:5px;background:var(--warn-tint);border-radius:var(--r-pill);padding:4px 10px;border:1px solid rgba(196,120,42,.14);}
 .hero-card{margin:0 var(--page-px) 12px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-card);}
@@ -318,7 +298,7 @@ body.theme-midnight .chip-accent{background:rgba(255,255,255,0.10);color:rgba(24
 
 body{visibility:hidden;}body.f-ready{visibility:visible;}
 /* -- GLP BUDDY TOP BAR -- */
-.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--chrome-bg,var(--nav-bg));display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
+.glpb-topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:95;background:var(--nav-bg)!important;display:flex;align-items:center;gap:10px;padding:0 22px;height:var(--nav-h);}
 .glpb-topbar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10) 20%,rgba(255,255,255,0.10) 80%,transparent);
@@ -386,7 +366,6 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 <script>document.fonts.ready.then(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}});setTimeout(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}},400);</script>
 </head>
 <body class="theme-rose">
-<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
 <script>
 (function(){
   var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];
@@ -453,6 +432,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       </div>
     </div>
   </div>
+
   <div id="motivationStrip" class="motivation-strip a1">
     <div class="motivation-dot"></div>
     <div id="motivationText" style="flex:1;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.88);line-height:1.45;letter-spacing:.01em"></div>
@@ -464,7 +444,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="inject-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
     <div>
       <div class="inject-title">Medication day — <span id="bannerMedName">your medication</span></div>
-      <div class="inject-sub">Don't forget your dose today</div>
+      <div class="inject-sub">A gentle reminder for today’s dose</div>
     </div>
   </div>
 
@@ -474,7 +454,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="hero-status" id="heroStatus">Log your weight to get started</div>
       <div class="hero-sub" id="heroSub">Your journey begins with one number</div>
     </div>
-    <div class="task-row" id="dailyWeighInTask" onclick="openWeighIn()">
+    <div class="task-row" onclick="openWeighIn()">
       <div class="task-check" id="taskWeighCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskWeighLabel">Daily Weigh-In</div>
@@ -485,7 +465,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
       <div class="task-check" id="taskCheckinCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
         <div class="task-label" id="taskCheckinLabel">Daily check-in</div>
-        <div class="task-sub">A quick check-in for today</div>
+        <div class="task-sub">Energy · mood · hunger</div>
       </div>
     </div>
     <div class="task-row" id="task3Row" onclick="task3Action()">
@@ -498,8 +478,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="task-row" id="taskPhotoRow" onclick="openWeeklyPhotoTask()" style="display:none">
       <div class="task-check" id="taskPhotoCheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div style="flex:1">
-        <div class="task-label" id="taskPhotoLabel">Take your weekly progress photos</div>
-        <div class="task-sub" id="taskPhotoSub">Front, side and back · weekly reminder</div>
+        <div class="task-label" id="taskPhotoLabel">Take a progress photo</div>
+        <div class="task-sub" id="taskPhotoSub">Weekly reminder · due by Monday evening</div>
       </div>
     </div>
     <div class="hero-actions">
@@ -615,25 +595,25 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     </div>
   </div>
 
-  <div class="card a6">
+  
+<div class="card a6">
     <div class="card-header"><div class="card-title">Medication routine</div></div>
     <div class="med-row">
       <div class="med-icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></div>
       <div style="flex:1">
-        <div class="med-title" id="medNextLabel">Next dose</div>
+        <div class="med-title" id="medNextLabel">Next medication day</div>
         <div class="med-sub" id="medNameDisplay">—</div>
         <div class="med-countdown" id="medCountdown">—</div>
       </div>
-      <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Log dose</button>
+      <button class="btn btn-pill btn-sm" id="logDoseBtn" onclick="logDose()">Mark as taken</button>
     </div>
-    <div style="border-top:1px solid var(--border-mid);padding:8px 20px 4px">
-      <div style="font-size:.70rem;color:var(--text-secondary);padding:4px 0 8px">Anything to note today? Tap any that apply.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-bottom:14px" id="fxGrid">
+    <div style="border-top:1px solid var(--border-mid);padding:8px 20px 10px">
+      <div style="font-size:.60rem;color:var(--text-secondary);padding:4px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anything to note today? Tap any that apply.</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding-bottom:4px" id="fxGrid">
         <div class="fx-item" data-fx="Nausea" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1 1 4 1 4-1 4-1"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="fx-label">Nausea</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Fatigue" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div><div class="fx-label">Fatigue</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Headache" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a10 10 0 0 0-6.88 17.25L6 21h12l.88-1.75A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="fx-label">Headache</div><div class="fx-sev"></div></div>
         <div class="fx-item" data-fx="Bloating" data-sev="0" onclick="tapFx(this)"><div class="fx-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="13" rx="8" ry="6"/><path d="M12 7V5"/></svg></div><div class="fx-label">Bloating</div><div class="fx-sev"></div></div>
-<div class="fx-label">How do you feel?</div><div class="fx-sev"></div></div>
       </div>
     </div>
   </div>
@@ -649,13 +629,13 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
   </div>
 
-  <div id="weeklyPhotoReminderCard" style="margin:0 var(--page-px) 12px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);display:none;align-items:center;gap:12px;cursor:pointer" onclick="openWeeklyPhotoTask()">
+  <div id="weeklyPhotoReminder" style="display:none;margin:0 var(--page-px) 8px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:var(--r-xl);box-shadow:var(--shadow-card);align-items:center;gap:12px;cursor:pointer" onclick="openWeeklyPhotoTask()">
     <div style="width:36px;height:36px;border-radius:11px;background:var(--accent-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-primary)">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     </div>
     <div style="flex:1;min-width:0">
       <div id="weeklyPhotoReminderTitle" style="font-size:.82rem;font-weight:700;color:var(--text-primary)">Take your weekly progress photos</div>
-      <div id="weeklyPhotoReminderSub" style="font-size:.67rem;color:var(--text-tertiary);margin-top:1px">Front, side and back · weekly reminder</div>
+      <div id="weeklyPhotoReminderSub" style="font-size:.67rem;color:var(--text-secondary);margin-top:1px">Your Saturday reminder is ready.</div>
     </div>
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
   </div>
@@ -663,7 +643,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </div>
 </div>
 
-<nav class="bnav" style="padding-bottom:env(safe-area-inset-bottom,0px)">
+<nav class="bnav">
   <a href="index.html" class="bnav-item active"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bnav-label">Home</div></a>
   <a href="exercise.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10.5" width="2.5" height="3" rx="0.8"/><rect x="5" y="8.5" width="2.5" height="7" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/><rect x="16.5" y="8.5" width="2.5" height="7" rx="1"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.8"/></svg></div><div class="bnav-label">Exercise</div></a>
   <a href="progress.html" class="bnav-item"><div class="bnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="bnav-label">Progress</div></a>
@@ -673,7 +653,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </nav>
 
 <script src="glp-common.js"></script>
-<script>window.GLPApp&&typeof GLPApp.boot==='function'&&GLPApp.boot('home');</script>
+<script>GLPApp.boot('home');</script>
 <script>
 'use strict';
 
@@ -1203,7 +1183,7 @@ function setupTask3(s, ts) {
   const label3 = document.getElementById('task3Label');
   const sub3   = document.getElementById('task3Sub');
   if (_isInjectionDay) {
-    label3.textContent = 'Log today\'s dose';
+    label3.textContent = 'Mark today\'s dose';
     sub3.textContent   = getDisplayMedicationName(s) + (s.medDose ? ' · ' + s.medDose : '');
     // task3 done if dose logged
     markTask('task3Check', 'task3Label', !!ts.doseLogged);
@@ -1225,26 +1205,21 @@ function task3Action() {
 // -------------------------------------------------------
 //  WEEKLY PROGRESS PHOTO TASK
 // -------------------------------------------------------
-
-function getWeeklyPhotoWindowInfo(nowDate) {
-  const now = new Date(nowDate || new Date());
-  const start = new Date(now);
-  start.setHours(8, 0, 0, 0);
-  const diffToSaturday = (6 - start.getDay() + 7) % 7;
-  start.setDate(start.getDate() + diffToSaturday);
-  if (now < start) start.setDate(start.getDate() - 7);
-  const end = new Date(start);
-  end.setHours(end.getHours() + 48);
-  return { start, end };
+function getSundayKey(dateObj) {
+  const d = new Date(dateObj);
+  d.setHours(12, 0, 0, 0);
+  d.setDate(d.getDate() - d.getDay());
+  return d.toISOString().slice(0, 10);
 }
 
 function getWeeklyPhotoTaskInfo() {
   const now = new Date();
-  const windowInfo = getWeeklyPhotoWindowInfo(now);
-  const startKey = windowInfo.start.toISOString().slice(0, 10);
-  const inWindow = now >= windowInfo.start && now < windowInfo.end;
-  const done = loadPhotos().some(p => (p.date || '') >= startKey);
-  return { visible: inWindow && !done, done, startKey, end: windowInfo.end };
+  const day = now.getDay();
+  const hour = now.getHours();
+  const visible = day === 0 || (day === 1 && hour < 18);
+  const weekStartKey = getSundayKey(now);
+  const done = loadPhotos().some(p => p.date >= weekStartKey);
+  return { visible, done };
 }
 
 function openWeeklyPhotoTask() {
@@ -1253,16 +1228,16 @@ function openWeeklyPhotoTask() {
 
 function setupWeeklyPhotoTask() {
   const row = document.getElementById('taskPhotoRow');
-  const card = document.getElementById('weeklyPhotoReminderCard');
-  const cardTitle = document.getElementById('weeklyPhotoReminderTitle');
-  const cardSub = document.getElementById('weeklyPhotoReminderSub');
   if (row) row.style.display = 'none';
-  if (!card || !cardTitle || !cardSub) return;
+  const card = document.getElementById('weeklyPhotoReminder');
+  const title = document.getElementById('weeklyPhotoReminderTitle');
+  const sub = document.getElementById('weeklyPhotoReminderSub');
+  if (!card || !title || !sub) return;
   const info = getWeeklyPhotoTaskInfo();
   card.style.display = info.visible ? 'flex' : 'none';
   if (!info.visible) return;
-  cardTitle.textContent = 'Take your weekly progress photos';
-  cardSub.textContent = 'Front, side and back · shown from Saturday morning';
+  title.textContent = 'Take your weekly progress photos';
+  sub.textContent = 'This reminder shows from Saturday morning and clears once your photos are taken.';
 }
 
 // -------------------------------------------------------
@@ -1398,6 +1373,10 @@ function refreshAll() {
   if (sndEl) sndEl.textContent = doseInfo.label;
   if (smnEl) smnEl.textContent = getDisplayMedicationName(S);
 
+  // Weight log button label
+  const lwbl = document.getElementById('logWeightBtnLabel');
+  if (lwbl) lwbl.textContent = loggedToday ? 'Update' : 'Log weight';
+
   // Weight unit in modal — show what the new entry will be saved as
   const wul = document.getElementById('weightUnitLabel');
   if (wul) wul.textContent = settingsUnit === 'lbs' ? 'pounds (lbs)' : 'kilograms (kg)';
@@ -1410,13 +1389,13 @@ function refreshAll() {
     const dispName = getDisplayMedicationName(S);
     if (mnEl) mnEl.textContent = `${dispName}${S.medDose ? ' · ' + S.medDose : ''} · ${S.medFreq === 'daily' ? 'Daily' : 'Weekly'}`;
     if (mcEl) mcEl.textContent = doseInfo.isToday ? 'Today — log your dose' : `${doseInfo.label} until next dose`;
-    if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Dose today' : 'Next dose';
+    if (mnLbl) mnLbl.textContent = doseInfo.isToday ? 'Injection today' : 'Next injection';
   }
 
   // Log dose button state
   const ldb = document.getElementById('logDoseBtn');
   if (ldb) {
-    ldb.textContent = ts.doseLogged ? 'Dose logged' : 'Log dose';
+    ldb.textContent = ts.doseLogged ? 'Marked as taken' : 'Mark as taken';
     ldb.style.opacity = ts.doseLogged ? '.55' : '1';
   }
 
@@ -1528,8 +1507,8 @@ function drawSparkline(log) {
 // -------------------------------------------------------
 //  WEIGHT MODAL
 // -------------------------------------------------------
-function openModal(id)  { const el = document.getElementById(id); if (!el) return; el.classList.add('open'); el.setAttribute('aria-hidden','false'); }
-function closeModal(id) { const el = document.getElementById(id); if (!el) return; el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 document.getElementById('weightModal').addEventListener('click', function(e) {
   if (e.target === this) closeModal('weightModal');
@@ -1564,16 +1543,11 @@ function saveWeight() {
   if (idx >= 0) { log[idx].weight = val; log[idx].units = entryUnits; }
   else log.push({ date: todayKey(), weight: val, units: entryUnits });
   saveWeightLog(log);
+  if (window.GLPApp) GLPApp.track('weight_logged', { value: val, units: entryUnits });
+  // Mark weight as logged in home log
   saveTodayState({ weightLogged: true });
-  inp.blur();
   closeModal('weightModal');
-  requestAnimationFrame(() => closeModal('weightModal'));
   refreshAll();
-  try {
-    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('weight_logged', { value: val, units: entryUnits });
-  } catch (error) {
-    console.warn('weight_logged tracking skipped', error);
-  }
 }
 
 // -------------------------------------------------------
@@ -1635,11 +1609,7 @@ function saveCheckin() {
   };
   saveTodayState({ checkin });
   markCheckinDone();
-  try {
-    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('checkin_saved', { energy: checkin.energy, mood: checkin.mood, hunger: checkin.hunger });
-  } catch (error) {
-    console.warn('checkin_saved tracking skipped', error);
-  }
+  if (window.GLPApp) GLPApp.track('checkin_saved', { energy: checkin.energy, mood: checkin.mood, hunger: checkin.hunger });
   // Update hero
   const ts = getTodayState();
   const status = deriveHomeStatus(ts);
@@ -1648,6 +1618,7 @@ function saveCheckin() {
   if (statusEl) statusEl.textContent = status.msg[0];
   if (subEl)    subEl.textContent    = status.msg[1];
   updateHeroCta(status);
+  if (window.GLPApp) GLPApp.track('dose_logged', {});
 }
 
 
@@ -1698,21 +1669,25 @@ function updateWaterCount(cups) {
 //  SYMPTOMS
 // -------------------------------------------------------
 const FX_LABELS = ['', 'Mild', 'Moderate', 'Severe'];
-const FX_CUSTOM = {
-  'Appetite': ['', 'Not hungry', 'Hungry', 'Very hungry'],
-  'How do you feel?': ['', 'Great', 'OK', 'Not well']
-};
+const FX_CUSTOM = {};
 function fxLabelFor(name, sev){ const labels = FX_CUSTOM[name] || FX_LABELS; return labels[sev] || ''; }
 
+// PATCH: Auto-save timer added
+let symptomTimer; 
+
 function tapFx(el) {
-  const sev = parseInt(el.dataset.sev || '0', 10);
+  const sev = parseInt(el.dataset.sev || '0');
   const next = sev >= 3 ? 0 : sev + 1;
-  el.dataset.sev = String(next);
+  el.dataset.sev = next;
   el.classList.toggle('selected', next > 0);
   const sevEl = el.querySelector('.fx-sev');
   if (sevEl) sevEl.textContent = next > 0 ? fxLabelFor(el.dataset.fx, next) : '';
-  saveSymptoms();
+  
+  // Auto-save logic
+  clearTimeout(symptomTimer);
+  symptomTimer = setTimeout(() => { saveSymptoms(); }, 1500);
 }
+
 
 function clearAllSymptomUI() {
   document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
@@ -1728,8 +1703,8 @@ function restoreSymptoms(symptoms) {
   (symptoms || []).forEach(({ name, level }) => {
     const item = document.querySelector(`#fxGrid .fx-item[data-fx="${name}"]`);
     if (!item) return;
-    const sev = Math.min(3, level || 1);
-    item.dataset.sev = String(sev);
+    const sev = Math.min(3, level||1);
+    item.dataset.sev = sev;
     item.classList.add('selected');
     const sevEl = item.querySelector('.fx-sev');
     if (sevEl) sevEl.textContent = fxLabelFor(item.dataset.fx, sev) || '';
@@ -1739,15 +1714,11 @@ function restoreSymptoms(symptoms) {
 function saveSymptoms() {
   const symptoms = [];
   document.querySelectorAll('#fxGrid .fx-item').forEach(item => {
-    const sev = parseInt(item.dataset.sev || '0', 10);
+    const sev = parseInt(item.dataset.sev||'0');
     if (sev > 0) symptoms.push({ name: item.dataset.fx, level: sev });
   });
   saveTodayState({ symptoms });
-  try {
-    if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('symptoms_saved', { count: symptoms.length });
-  } catch (error) {
-    console.warn('symptoms_saved tracking skipped', error);
-  }
+if (window.GLPApp) GLPApp.track('symptoms_saved', { count: symptoms.length });
 }
 
 // -------------------------------------------------------
@@ -1766,7 +1737,7 @@ function logDose() {
   const mcEl  = document.getElementById('medCountdown');
   const mnLbl = document.getElementById('medNextLabel');
   if (mcEl)  mcEl.textContent  = 'Logged today';
-  if (mnLbl) mnLbl.textContent = 'Dose logged';
+  if (mnLbl) mnLbl.textContent = 'Marked as taken';
   // Update hero
   const updatedTs = getTodayState();
   const status    = deriveHomeStatus(updatedTs);
@@ -1868,124 +1839,9 @@ function renderAchieveNudge() {
 }
 
 // -------------------------------------------------------
-//  PWA INSTALL SUPPORT
-// -------------------------------------------------------
-let deferredInstallPrompt = null;
-
-function isStandaloneMode() {
-  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
-
-function isIosSafari() {
-  const ua = window.navigator.userAgent;
-  const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const webkit = /WebKit/i.test(ua);
-  const otherBrowser = /CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo/i.test(ua);
-  return iOS && webkit && !otherBrowser;
-}
-
-function hideInstallPromo() {
-  const card = document.getElementById('installPromoCard');
-  if (card) card.hidden = true;
-}
-
-function showInstallPromo(mode) {
-  if (isStandaloneMode()) return hideInstallPromo();
-  const dismissed = localStorage.getItem('glp_install_promo_dismissed') === '1';
-  if (dismissed) return hideInstallPromo();
-
-  const card = document.getElementById('installPromoCard');
-  const title = document.getElementById('installPromoTitle');
-  const text = document.getElementById('installPromoText');
-  const btn = document.getElementById('installPromoBtn');
-  const dismiss = document.getElementById('installPromoDismiss');
-  if (!card || !title || !text || !btn || !dismiss) return;
-
-  dismiss.onclick = () => {
-    localStorage.setItem('glp_install_promo_dismissed', '1');
-    hideInstallPromo();
-  };
-
-  if (mode === 'browser') {
-    title.textContent = 'Install GLP Buddy';
-    text.textContent = 'Add GLP Buddy to your home screen so it opens without normal browser controls.';
-    btn.hidden = false;
-    btn.textContent = 'Install';
-    btn.onclick = promptInstall;
-    card.hidden = false;
-    return;
-  }
-
-  if (mode === 'ios') {
-    title.textContent = 'Add GLP Buddy to Home Screen';
-    text.textContent = 'In Safari, tap Share, then Add to Home Screen, then turn on Open as Web App.';
-    btn.hidden = true;
-    btn.onclick = null;
-    card.hidden = false;
-    return;
-  }
-
-  hideInstallPromo();
-}
-
-window.addEventListener('beforeinstallprompt', (event) => {
-  event.preventDefault();
-  deferredInstallPrompt = event;
-  localStorage.removeItem('glp_install_promo_dismissed');
-  showInstallPromo('browser');
-});
-
-window.addEventListener('appinstalled', () => {
-  deferredInstallPrompt = null;
-  hideInstallPromo();
-});
-
-window.GLPInstall = {
-  promptInstall,
-  isStandaloneMode,
-  isIOSSafari,
-  hasBrowserInstallPrompt: function(){ return !!deferredInstallPrompt; }
-};
-
-async function promptInstall() {
-  if (!deferredInstallPrompt) return;
-  deferredInstallPrompt.prompt();
-  try {
-    await deferredInstallPrompt.userChoice;
-  } catch (error) {
-    console.warn('install prompt result unavailable', error);
-  }
-  deferredInstallPrompt = null;
-  hideInstallPromo();
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch((error) => {
-      console.warn('service worker registration failed', error);
-    });
-  });
-}
-// -------------------------------------------------------
 //  INIT
 // -------------------------------------------------------
 refreshAll();
-
-if (isIosSafari() && !isStandaloneMode()) {
-  showInstallPromo('ios');
-}
-
-const dailyWeighInTask = document.getElementById('dailyWeighInTask');
-if (dailyWeighInTask) {
-  dailyWeighInTask.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openWeighIn();
-    }
-  });
-  dailyWeighInTask.setAttribute('role', 'button');
-  dailyWeighInTask.setAttribute('tabindex', '0');
-}
 </script>
 </body>
 </html>

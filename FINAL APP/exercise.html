@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<script>(function(){try{var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';document.documentElement.classList.add('pre-skin',sk);}catch(e){document.documentElement.classList.add('pre-skin','theme-rose');}})();</script>
 <title>GLP Buddy — Exercise</title>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
@@ -11,7 +10,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html.pre-skin body{visibility:hidden}
 body{font-family:'Satoshi',sans-serif;font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -45,7 +43,7 @@ body,body.theme-rose{
 body.theme-sage{
   --bg-app:#f5f8f5;--bg-shell:linear-gradient(135deg,#e4ede4,#dde8e6);--bg-modal:#ffffff;
   --surface-1:#ffffff;--surface-2:rgba(245,248,245,0.9);
-  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.76);--text-tertiary:rgba(22,32,24,0.60);--text-faint:rgba(22,32,24,0.46);
+  --text-primary:#162018;--text-secondary:rgba(22,32,24,0.62);--text-tertiary:rgba(22,32,24,0.42);--text-faint:rgba(22,32,24,0.26);
   --accent-primary:#3d7a5a;--accent-mid:#5a9a72;--accent-light:#84ba96;--accent-pale:#c4e0cc;
   --accent-tint:rgba(80,148,104,0.08);--accent-tint2:rgba(80,148,104,0.14);
   --support-primary:#4a8a80;--support-light:#72aaa2;--support-tint:rgba(74,138,128,0.08);
@@ -97,9 +95,9 @@ body.theme-midnight{
 /* -- LAYOUT ----------------------------------------- */
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+44px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h)+24px);padding-top:var(--nav-h);}
 @media(min-width:431px){
-  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px}
+  body{background:var(--bg-shell);display:flex;align-items:flex-start;justify-content:center;padding:28px 0 56px;visibility:hidden}body.skin-ready{visibility:visible}
   .page-wrap{border-radius:48px;overflow:hidden;box-shadow:0 0 0 1px var(--page-ring);min-height:880px}
 }
 
@@ -173,10 +171,7 @@ body{background:var(--bg-app);}
 
 /* -- MOVEMENT CARDS --------------------------------- */
 .movement-card{padding:16px;}
-.movement-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}
-.fav-btn{width:40px;height:40px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--text-tertiary);flex-shrink:0;transition:all .18s var(--ease);}
-.fav-btn:hover{transform:translateY(-1px);color:var(--accent-primary);border-color:var(--border-accent);}
-.fav-btn.on{background:var(--accent-tint2);color:var(--accent-primary);border-color:var(--border-accent);box-shadow:var(--shadow-card);}
+.movement-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}.movement-actions{display:flex;gap:8px;align-items:center}.icon-btn{width:40px;height:40px;border-radius:13px;border:1px solid var(--border-soft);background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);cursor:pointer}.icon-btn.active{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
 .movement-name{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.1;}
 .movement-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
 .small-copy{font-size:.80rem;color:var(--text-secondary);line-height:1.5;}
@@ -281,14 +276,6 @@ body{background:var(--bg-app);}
 .ws-rest-bar-fill{height:100%;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--support-primary),var(--accent-primary));transition:width 1s linear;}
 .ws-skip-rest{padding:9px 24px;border-radius:var(--r-pill);background:var(--surface-1);border:1.5px solid var(--border-soft);font-size:.78rem;font-weight:700;color:var(--text-secondary);cursor:pointer;}
 
-
-.ws-current-set{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--accent-tint2);color:var(--accent-primary);font-size:.70rem;font-weight:700;margin-bottom:14px}
-.ws-flow-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-mid);font-size:.66rem;font-weight:700;color:var(--text-secondary);margin-bottom:14px}
-.ws-rep-card{padding:16px;border-radius:var(--r-xl);background:var(--surface-1);border:1.5px solid var(--border-soft);box-shadow:var(--shadow-card);margin-bottom:16px}
-.ws-rep-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--text-faint);margin-bottom:8px}.ws-rep-counter{display:flex;align-items:center;gap:12px}.ws-rep-counter input{flex:1;height:56px;border-radius:18px;border:1.5px solid var(--border-soft);padding:0 16px;background:var(--surface-1);color:var(--text-primary);font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;outline:none;text-align:center}.ws-rep-counter input:focus{border-color:var(--accent-mid)}
-.ws-rest-copy{font-size:.80rem;color:var(--text-secondary);line-height:1.55;margin-top:10px}.ws-rest-hint{font-size:.70rem;color:var(--text-tertiary);margin-top:12px}.ws-rest-ready{margin-top:14px;padding:12px 14px;border-radius:18px;background:var(--surface-1);border:1px solid var(--border-soft);font-size:.78rem;font-weight:700;color:var(--text-primary)}
-.ws-next-move{margin-top:12px;padding:12px 14px;border-radius:18px;background:var(--support-tint);color:var(--support-primary);font-size:.76rem;font-weight:700}
-.ws-progress-note{font-size:.72rem;color:var(--text-tertiary);margin-top:10px;line-height:1.45}
 /* Bottom nav inside session */
 .ws-footer{display:flex;gap:10px;padding:12px var(--page-px) 32px;border-top:1px solid var(--border-mid);flex-shrink:0;background:var(--bg-app);}
 .ws-done-all{background:var(--ok-tint);border:1.5px solid rgba(47,158,122,.22);border-radius:var(--r-xl);padding:16px var(--page-px);margin:0 var(--page-px) 16px;display:flex;align-items:center;gap:12px;}
@@ -316,8 +303,19 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
 </head>
-<body class="theme-rose">
-<script>(function(){var S=['theme-rose','theme-sage','theme-sand','theme-midnight'];try{var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');var sk=S.indexOf(s.skin)>=0?s.skin:'theme-rose';for(var i=0;i<S.length;i++){document.body.classList.remove(S[i]);}document.body.classList.add(sk);}catch(e){}document.documentElement.classList.remove('pre-skin');})();</script>
+<body>
+<script>
+(function(){
+  var skins=['theme-rose','theme-sage','theme-sand','theme-midnight'];
+  var skin='theme-rose';
+  try{
+    var s=JSON.parse(localStorage.getItem('glp_settings')||'{}');
+    if(skins.indexOf(s.skin)>=0) skin=s.skin;
+  }catch(e){}
+  document.body.className=skin;
+  document.body.classList.add('skin-ready');
+})();
+</script>
 
 <div class="page-wrap">
 <div class="scroll-area">
@@ -365,8 +363,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
     <div class="badge badge-available" id="todayBadge">Available</div>
   </div>
   <div class="today-actions">
-    <button class="btn btn-primary" id="startBtn">Start workout</button>
-    <button class="btn btn-secondary" id="resumeBtn">Resume session</button>
+    <button class="btn btn-primary" id="startBtn" onclick="startWorkout()">Start workout</button>
+    <button class="btn btn-secondary" id="resumeBtn" onclick="startWorkout()">Resume session</button>
   </div>
   <div class="notice hidden" id="todayNotice"></div>
 </div>
@@ -437,7 +435,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
   </div>
   <div class="ws-progress-bar"><div class="ws-progress-fill" id="wsProgressFill" style="width:0%"></div></div>
   <div class="ws-body" id="wsBody"></div>
-  <div class="ws-footer" id="wsFooter" style="display:none">
+  <div class="ws-footer" id="wsFooter">
     <button class="btn btn-secondary" style="flex:1" onclick="wsPrev()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
       Back
@@ -468,7 +466,7 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 </div>
 
 <script src="glp-common.js"></script>
-<script>if(window.GLPApp && typeof GLPApp.boot==='function'){ try{ GLPApp.boot('exercise'); }catch(e){} }</script>
+<script>try{ if(window.GLPApp && typeof GLPApp.boot==='function') GLPApp.boot('exercise'); }catch(e){ console.warn('GLPApp.boot failed on exercise', e); }</script>
 <script>
 'use strict';
 
@@ -660,45 +658,50 @@ function renderPage(){
 }
 
 
-const EXERCISE_FAV_KEY = 'glp_exercise_favourites';
-function loadFavourites(){ return load(EXERCISE_FAV_KEY, []); }
-function saveFavourites(arr){ save(EXERCISE_FAV_KEY, arr); }
-function isFavourite(id){ return loadFavourites().includes(id); }
-function toggleFavourite(id, ev){ if(ev){ ev.stopPropagation(); ev.preventDefault(); } const current = loadFavourites(); const next = current.includes(id) ? current.filter(x=>x!==id) : current.concat(id); saveFavourites(next); renderAll(); try{ if(window.GLPApp && typeof GLPApp.track==='function') GLPApp.track('exercise_favourite_toggled',{ movement:id, active: next.includes(id) }); }catch(e){} }
-
 function renderMovementLadder(prog){
   const root = document.getElementById('movementList');
-  const favourites = loadFavourites();
-  const ordered = [...PROGRAM].sort((a,b)=> Number(favourites.includes(b.id)) - Number(favourites.includes(a.id)) || a.name.localeCompare(b.name));
+  const favs = loadFavorites();
+  const ordered = [...PROGRAM].sort((a,b)=>Number(favs.includes(b.id)) - Number(favs.includes(a.id)));
   root.innerHTML = ordered.map(m=>{
     const p = prog[m.id];
     const lev = m.levels[Math.min(p.levelIndex, m.levels.length-1)];
     const pct = Math.min(100, (p.sessionsAtLevel/2)*100);
+    const starred = favs.includes(m.id);
     return `<div class="card movement-card fade-up">
       <div class="movement-top">
         <div>
           <div class="movement-name">${m.name}</div>
           <div class="movement-meta">
             <span class="pill pill-accent">Level ${p.levelIndex+1}</span>
-            ${favourites.includes(m.id) ? '<span class="pill pill-support">Saved</span>' : ''}
             ${p.readyToLevelUp ? '<span class="pill pill-ok">Ready to level up</span>' : ''}
           </div>
         </div>
-        <button class="fav-btn ${favourites.includes(m.id) ? 'on' : ''}" onclick="toggleFavourite('${m.id}', event)" aria-label="${favourites.includes(m.id) ? 'Remove favourite' : 'Save favourite'}">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="${favourites.includes(m.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </button>
+        <div class="movement-actions">
+          <button class="icon-btn ${starred?'active':''}" onclick="toggleFavorite('${m.id}');event.stopPropagation();" aria-label="Star movement">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="${starred?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </button>
+        </div>
       </div>
       <div class="small-copy" style="margin-top:8px"><strong>${lev.name}</strong></div>
       <div class="small-copy" style="margin-top:4px">${lev.instruction}</div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="small-copy" style="margin-top:6px;font-size:.68rem">${p.sessionsAtLevel}/2 sessions toward your next unlock</div>
-      ${p.readyToLevelUp ? `<div style="margin-top:12px;display:flex;gap:8px">
-        <button class="btn btn-primary btn-sm" onclick="acceptLevelUp('${m.id}')">Level up</button>
-        <button class="btn btn-outline btn-sm" onclick="dismissLevelUp('${m.id}')">Stay here</button>
-      </div>` : ''}
+      <div class="small-copy" style="margin-top:6px;font-size:.68rem">${p.sessionsAtLevel}/2 qualifying sessions at this level</div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn btn-secondary btn-sm" id="movement-toggle-${m.id}" onclick="toggleMovementDetails('${m.id}')">View exercise</button>
+        ${p.readyToLevelUp ? `<button class="btn btn-primary btn-sm" onclick="acceptLevelUp('${m.id}')">Level up</button>` : `<span class="pill pill-accent">Next unlock: ${Math.max(0,2-p.sessionsAtLevel)} qualifying session${Math.max(0,2-p.sessionsAtLevel)===1?'':'s'}</span>`}
+      </div>
+      <div class="movement-details" id="movement-details-${m.id}">
+        <div class="small-copy" style="margin-top:2px"><strong>How to do it</strong></div>
+        <ol>
+          <li>${lev.instruction}</li>
+          <li>Complete ${m.sets} sets of ${m.targetReps}${m.isTime ? ' seconds' : ' reps'}.</li>
+          <li>Rest 60–90 seconds between sets and keep your form tidy.</li>
+        </ol>
+      </div>
     </div>`;
   }).join('');
 }
+
 
 function renderLevelUps(prog){
   const ready = PROGRAM.filter(m=>prog[m.id].readyToLevelUp);
@@ -737,52 +740,24 @@ function renderHistory(hist){
 }
 
 // -- WORKOUT SESSION ------------------------------------
-let _wsState = null;
-let _restTimer = null;
-const REST_TARGET_MIN = 60;
-const REST_TARGET_MAX = 90;
-
-function currentMovement(){
-  if(!_wsState) return null;
-  return PROGRAM[Math.min(_wsState.stepIndex || 0, PROGRAM.length-1)] || null;
-}
-
-function nextOpenSetIndex(movement){
-  const sets = (_wsState && _wsState.sets && _wsState.sets[movement.id]) || [];
-  const idx = sets.findIndex(s => !s.logged);
-  return idx >= 0 ? idx : sets.length;
-}
-
-function formatSecs(secs){
-  const safe = Math.max(0, parseInt(secs || 0, 10));
-  return String(safe).padStart(2,'0') + 's';
-}
-
-function restElapsed(){
-  if(!_wsState || !_wsState.resting || !_wsState.restStartedAt) return 0;
-  return Math.max(0, Math.floor((Date.now() - _wsState.restStartedAt) / 1000));
-}
-
-function clearRestTicker(){
-  if(_restTimer){ clearInterval(_restTimer); _restTimer = null; }
-}
+let _wsState = null;  // live session object
 
 function startWorkout(){
   if(isRestDay()){ renderPage(); return; }
   const st = loadState();
+  const prog = loadProgress();
 
   if(st.date===todayKey() && !st.complete){
-    _wsState = { resting:false, restStartedAt:null, restAfterSet:null, ...st };
+    // Resume existing session
+    _wsState = st;
   } else {
+    // Fresh session
     _wsState = {
       date: todayKey(),
       stepIndex: 0,
-      sets: {},
+      sets: {},     // { movementId: [{reps,logged},...] }
       complete: false,
       lastWorkoutDate: null,
-      resting: false,
-      restStartedAt: null,
-      restAfterSet: null
     };
     PROGRAM.forEach(m=>{
       _wsState.sets[m.id] = Array.from({length:m.sets},(_,i)=>({set:i+1,reps:0,logged:false}));
@@ -797,130 +772,124 @@ function startWorkout(){
 }
 
 function closeWorkout(){
-  clearRestTicker();
+  // Save progress
   if(_wsState) save('glp_ex_session', _wsState);
   document.getElementById('wsOverlay').classList.remove('open');
   document.body.style.overflow='';
+  renderPage();
 }
 
+let _restTimer = null;
+let _restLeft  = 0;
+const REST_DURATION = 90; // seconds between sets
+
 function renderWorkoutStep(){
-  clearRestTicker();
-  if(!_wsState) return;
+  const idx = _wsState.stepIndex;
+  const total = PROGRAM.length;
 
-  while((_wsState.stepIndex || 0) < PROGRAM.length){
-    const move = PROGRAM[_wsState.stepIndex];
-    if(nextOpenSetIndex(move) >= move.sets){
-      _wsState.stepIndex += 1;
-      _wsState.resting = false;
-      _wsState.restStartedAt = null;
-      _wsState.restAfterSet = null;
-      save('glp_ex_session', _wsState);
-    } else {
-      break;
-    }
-  }
+  // Update top bar
+  document.getElementById('wsTopSub').textContent = `Exercise ${Math.min(idx+1,total)} of ${total}`;
+  document.getElementById('wsProgressFill').style.width = (idx/total*100)+'%';
 
-  if((_wsState.stepIndex || 0) >= PROGRAM.length){
+  // Check if all done
+  const allDone = PROGRAM.every(m=> (_wsState.sets[m.id]||[]).every(s=>s.logged));
+  if(allDone && idx>=total){
     renderWorkoutComplete();
     return;
   }
 
-  const idx = _wsState.stepIndex || 0;
-  const m = PROGRAM[idx];
-  const prog = loadProgress();
-  const lev = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
-  const setIdx = nextOpenSetIndex(m);
-  const total = PROGRAM.length;
-  const pct = Math.min(100, (((idx) + (Math.min(setIdx, m.sets)/m.sets)) / total) * 100);
-
-  document.getElementById('wsProgressFill').style.width = pct + '%';
-  document.getElementById('wsFooter').style.display='none';
-
-  if(_wsState.resting){
-    document.getElementById('wsTopTitle').textContent = m.name;
-    document.getElementById('wsTopSub').textContent = `Exercise ${idx+1} of ${total} · Set ${Math.min(setIdx+1, m.sets)} next`;
-    renderRestStep(m, lev, setIdx);
+  if(idx >= total){
+    renderWorkoutComplete();
     return;
   }
 
-  document.getElementById('wsTopTitle').textContent = m.name;
-  document.getElementById('wsTopSub').textContent = `Exercise ${idx+1} of ${total} · Set ${setIdx+1} of ${m.sets}`;
-  const currentSet = (_wsState.sets[m.id] || [])[setIdx] || { reps: 0 };
-  const targetLabel = m.isTime ? `${m.targetReps} seconds` : `${m.targetReps} reps`;
+  const m    = PROGRAM[idx];
+  const prog = loadProgress();
+  const lev  = m.levels[Math.min(prog[m.id].levelIndex, m.levels.length-1)];
+  const sets = _wsState.sets[m.id] || [];
 
-  document.getElementById('wsBody').innerHTML = `
-    <div class="ws-step">
-      <div class="ws-current-set">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-        Set ${setIdx+1} of ${m.sets}
+  document.getElementById('wsTopTitle').textContent = lev.name;
+
+  // Figure out which set we're on
+  const currentSetIdx = sets.findIndex(s=>!s.logged);
+  const allSetsLogged = currentSetIdx === -1;
+
+  // Determine if in rest
+  const inRest = _restLeft > 0;
+
+  let html = `<div class="ws-step">`;
+
+  // Exercise number + name
+  html += `<div class="ws-ex-num">Exercise ${idx+1} of ${total} · ${m.name}</div>`;
+  html += `<div class="ws-ex-name">${lev.name}</div>`;
+  html += `<div class="ws-ex-instruction">${lev.instruction}</div>`;
+
+  // Image placeholder (SVG silhouette)
+  html += `<div class="ws-img-placeholder">
+    ${getExerciseIllustration(m.id)}
+    <div class="ws-img-placeholder-label">${lev.name}</div>
+  </div>`;
+
+  // Instructions
+  html += `<div class="ws-steps">`;
+  m.steps.forEach((step,i)=>{
+    html += `<div class="ws-step-row"><div class="ws-step-num">${i+1}</div><div class="ws-step-txt">${step}</div></div>`;
+  });
+  html += `</div>`;
+
+  // Sets
+  html += `<div class="ws-sets-area"><div class="ws-sets-label">Log your sets</div>`;
+  sets.forEach((s,i)=>{
+    const isCurrent = i===currentSetIdx && !inRest;
+    html += `<div class="ws-set-card${s.logged?' logged':''}">
+      <div class="ws-set-badge">${s.logged ? '?' : i+1}</div>
+      <div class="ws-set-info">
+        <div class="ws-set-title">Set ${i+1}</div>
+        <div class="ws-set-target">${m.isTime ? `Target: ${m.targetReps} seconds` : `Target: ${m.targetReps} reps`}</div>
       </div>
-      <div class="ws-ex-num">Exercise ${idx+1}</div>
-      <div class="ws-ex-name">${lev.name}</div>
-      <div class="ws-ex-instruction">${lev.instruction}</div>
-      <div class="ws-img-placeholder">
-        ${getExerciseIllustration(m.id)}
-        <div class="ws-img-placeholder-label">How to do the ${m.name.toLowerCase()}</div>
-      </div>
-      <div class="ws-steps">
-        ${m.steps.map((s,i)=>`<div class="ws-step-row"><div class="ws-step-num">${i+1}</div><div class="ws-step-txt">${s}</div></div>`).join('')}
-      </div>
-      <div class="ws-rep-card">
-        <div class="ws-rep-label">Rep counter</div>
-        <div class="ws-rep-counter">
-          <input type="number" inputmode="numeric" min="0" step="1" id="wsCurrentSetInput" value="${currentSet.reps || ''}" placeholder="${m.isTime ? 'sec' : 'reps'}" oninput="wsSetVal(${idx}, ${setIdx}, this.value)">
-        </div>
-        <div class="ws-progress-note">Target for this set: ${targetLabel}. Log your result when you are done.</div>
-      </div>
-      <button class="ws-log-set-btn" id="wsLogBtn" onclick="wsLogSet(${idx})" ${currentSet.reps ? '' : 'disabled'}>Log set ${setIdx+1}</button>
-      <div class="ws-progress-note">Complete two good sessions at this level to unlock the next progression.</div>
+      <input class="ws-set-input" type="number" min="0" max="99" inputmode="numeric"
+        placeholder="${m.isTime?'sec':'reps'}"
+        value="${s.reps||''}"
+        ${s.logged?'readonly':''}
+        onchange="wsSetVal(${idx},${i},this.value)"
+        id="wsInput_${idx}_${i}">
     </div>`;
-}
+  });
+  html += `</div>`;
 
-function renderRestStep(m, lev, setIdx){
-  const elapsed = restElapsed();
-  document.getElementById('wsBody').innerHTML = `
-    <div class="ws-step">
-      <div class="ws-flow-chip">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
-        60–90 seconds of rest
-      </div>
-      <div class="ws-ex-num">Nice work</div>
-      <div class="ws-ex-name">Rest before set ${Math.min(setIdx+1, m.sets)}</div>
-      <div class="ws-rest">
-        <div class="ws-rest-label">Rest timer</div>
-        <div class="ws-rest-time" id="wsRestTime">${formatSecs(elapsed)}</div>
-        <div class="ws-rest-copy" id="wsRestLead">Set ${Math.min(setIdx+1, m.sets)} starts after ${formatSecs(elapsed)} rest.</div>
-        <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${Math.min(100, (elapsed/REST_TARGET_MAX)*100)}%"></div></div>
-        <div class="ws-rest-ready" id="wsRestReady">${elapsed < REST_TARGET_MIN ? 'Aim for at least 60 seconds if you need it.' : elapsed <= REST_TARGET_MAX ? 'You are in the ideal 60–90 second rest window.' : 'You are ready. Start the next set when you want.'}</div>
-        <div class="ws-rest-hint">The timer starts at 0 and counts upward while you recover.</div>
-      </div>
-      <div class="ws-next-move">Next up: ${lev.name}</div>
-      <button class="ws-log-set-btn" onclick="wsStartNextSet()">Let’s go</button>
+  // Rest timer or Log button
+  if(inRest){
+    html += `<div class="ws-rest">
+      <div class="ws-rest-label">60–90 seconds of rest</div>
+      <div class="ws-rest-time" id="wsRestTime">${_restLeft}s</div>
+      <div class="ws-rest-bar"><div class="ws-rest-bar-fill" id="wsRestFill" style="width:${(_restLeft/REST_DURATION)*100}%"></div></div>
+      <div class="small-copy" style="margin:10px 0 12px">Set ${currentSetIdx+2} starts in <strong id="wsRestCopy">${_restLeft}</strong> seconds. Catch your breath, then tap Let’s go when you’re ready.</div><button class="ws-skip-rest" onclick="wsSkipRest()">Let’s go</button>
     </div>`;
+  } else if(!allSetsLogged){
+    html += `<button class="ws-log-set-btn" id="wsLogBtn" onclick="wsLogSet(${idx})"
+      ${!sets[currentSetIdx]||sets[currentSetIdx].reps===0 ? 'disabled' : ''}>
+      Log set ${currentSetIdx+1}
+    </button>`;
+  }
 
-  _restTimer = setInterval(function(){
-    const elapsedNow = restElapsed();
-    const timeEl = document.getElementById('wsRestTime');
-    const leadEl = document.getElementById('wsRestLead');
-    const fillEl = document.getElementById('wsRestFill');
-    const readyEl = document.getElementById('wsRestReady');
-    if(timeEl) timeEl.textContent = formatSecs(elapsedNow);
-    if(leadEl) leadEl.textContent = `Set ${Math.min(setIdx+1, m.sets)} starts after ${formatSecs(elapsedNow)} rest.`;
-    if(fillEl) fillEl.style.width = Math.min(100, (elapsedNow/REST_TARGET_MAX)*100) + '%';
-    if(readyEl){
-      readyEl.textContent = elapsedNow < REST_TARGET_MIN
-        ? 'Aim for at least 60 seconds if you need it.'
-        : elapsedNow <= REST_TARGET_MAX
-          ? 'You are in the ideal 60–90 second rest window.'
-          : 'You are ready. Start the next set when you want.';
-    }
-  }, 1000);
+  html += `</div>`;
+  document.getElementById('wsBody').innerHTML = html;
+  document.getElementById('wsBody').scrollTop = 0;
+
+  // Footer button
+  const nextBtn = document.getElementById('wsNextBtn');
+  if(allSetsLogged){
+    nextBtn.textContent = idx < total-1 ? 'Next exercise' : 'Finish workout';
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.textContent = idx < total-1 ? 'Skip exercise' : 'Finish workout';
+    nextBtn.disabled = false;
+  }
 }
 
 function renderWorkoutComplete(){
-  clearRestTicker();
   document.getElementById('wsTopTitle').textContent='Workout complete!';
-  document.getElementById('wsTopSub').textContent='All movements done';
+  document.getElementById('wsTopSub').textContent='All done — great work.';
   document.getElementById('wsProgressFill').style.width='100%';
 
   const totalSets = PROGRAM.reduce((acc,m)=>{
@@ -930,7 +899,7 @@ function renderWorkoutComplete(){
 
   document.getElementById('wsBody').innerHTML = `
     <div class="ws-step">
-      <div class="ws-done-all" style="flex-direction:column;align-items:flex-start;gap:8px;margin:0 0 16px">
+      <div class="ws-done-all" style="flex-direction:column;align-items:flex-start;gap:8px">
         <div style="display:flex;align-items:center;gap:12px">
           <div class="ws-done-all-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -954,12 +923,15 @@ function renderWorkoutComplete(){
       </div>
       <button class="ws-log-set-btn" onclick="saveWorkout()">Save &amp; close</button>
     </div>`;
+
+  document.getElementById('wsFooter').style.display='none';
 }
 
 function wsSetVal(movIdx, setIdx, val){
   const m = PROGRAM[movIdx];
   _wsState.sets[m.id][setIdx].reps = parseInt(val)||0;
   save('glp_ex_session', _wsState);
+  // Re-enable log button if value entered
   const logBtn = document.getElementById('wsLogBtn');
   if(logBtn) logBtn.disabled = (_wsState.sets[m.id][setIdx].reps===0);
 }
@@ -968,44 +940,73 @@ function wsLogSet(movIdx){
   const m = PROGRAM[movIdx];
   const sets = _wsState.sets[m.id];
   const curIdx = sets.findIndex(s=>!s.logged);
-  if(curIdx < 0 || !sets[curIdx].reps) return;
+  if(curIdx<0) return;
+  if(!sets[curIdx].reps) return;
 
   sets[curIdx].logged = true;
-  if(curIdx < sets.length - 1){
-    _wsState.resting = true;
-    _wsState.restStartedAt = Date.now();
-    _wsState.restAfterSet = curIdx + 1;
+  save('glp_ex_session', _wsState);
+
+  const nextIdx = sets.findIndex(s=>!s.logged);
+  if(nextIdx>=0){
+    // Start rest timer
+    _restLeft = 0;
+    if(_restTimer) clearInterval(_restTimer);
+    _restTimer = setInterval(()=>{
+      _restLeft++;
+      const rt = document.getElementById('wsRestTime');
+      const rf = document.getElementById('wsRestFill');
+      if(rt) rt.textContent = _restLeft+'s';
+      var rc=document.getElementById('wsRestCopy'); if(rc) rc.textContent=_restLeft;
+      if(rf) rf.style.width = (_restLeft/REST_DURATION*100)+'%';
+      if(_restLeft>=REST_DURATION){
+        clearInterval(_restTimer);
+        renderWorkoutStep();
+      }
+    },1000);
+    renderWorkoutStep();
   } else {
-    _wsState.resting = false;
-    _wsState.restStartedAt = null;
-    _wsState.restAfterSet = null;
-    _wsState.stepIndex += 1;
+    // All sets done for this movement
+    renderWorkoutStep();
   }
-  save('glp_ex_session', _wsState);
+}
+
+function wsSkipRest(){
+  if(_restTimer) clearInterval(_restTimer);
+  _restLeft=0;
   renderWorkoutStep();
 }
 
-function wsStartNextSet(){
-  _wsState.resting = false;
-  _wsState.restStartedAt = null;
-  _wsState.restAfterSet = null;
-  save('glp_ex_session', _wsState);
-  renderWorkoutStep();
+function wsNext(){
+  if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
+  const total = PROGRAM.length;
+  if(_wsState.stepIndex < total-1){
+    _wsState.stepIndex++;
+    save('glp_ex_session', _wsState);
+    renderWorkoutStep();
+    document.getElementById('wsBody').scrollTop=0;
+  } else {
+    // Last exercise — finish
+    renderWorkoutComplete();
+  }
 }
 
-function wsSkipRest(){ wsStartNextSet(); }
-function wsNext(){ renderWorkoutStep(); }
-function wsPrev(){ renderWorkoutStep(); }
+function wsPrev(){
+  if(_wsState.stepIndex > 0){
+    if(_restTimer){ clearInterval(_restTimer); _restLeft=0; }
+    _wsState.stepIndex--;
+    save('glp_ex_session', _wsState);
+    renderWorkoutStep();
+    document.getElementById('wsBody').scrollTop=0;
+  }
+}
 
 function saveWorkout(){
-  clearRestTicker();
+  // Mark complete
   _wsState.complete = true;
   _wsState.lastWorkoutDate = todayKey();
-  _wsState.resting = false;
-  _wsState.restStartedAt = null;
-  _wsState.restAfterSet = null;
   save('glp_ex_session', _wsState);
 
+  // Build history entry
   const prog = loadProgress();
   const exercises = PROGRAM.map(m=>{
     const sets = _wsState.sets[m.id]||[];
@@ -1013,6 +1014,7 @@ function saveWorkout(){
     const lev = m.levels[Math.min(prog[m.id].levelIndex,m.levels.length-1)];
     const target = m.targetReps;
     const qualified = loggedSets.length>0 && loggedSets.every(s=>s.reps>=target);
+    // Update progression
     if(qualified){
       prog[m.id].sessionsAtLevel = Math.min(2,(prog[m.id].sessionsAtLevel||0)+1);
       if(prog[m.id].sessionsAtLevel>=2 && prog[m.id].levelIndex<m.levels.length-1){
@@ -1099,8 +1101,7 @@ function getExerciseIllustration(id){
 }
 
 // -- EVENT LISTENERS ------------------------------------
-document.getElementById('startBtn').addEventListener('click', startWorkout);
-document.getElementById('resumeBtn').addEventListener('click', startWorkout);
+var _startBtn=document.getElementById('startBtn'); if(_startBtn) _startBtn.addEventListener('click', startWorkout);
 document.getElementById('infoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.add('open'));
 document.getElementById('closeInfoBtn').addEventListener('click', ()=>document.getElementById('infoOverlay').classList.remove('open'));
 document.getElementById('infoOverlay').addEventListener('click', e=>{if(e.target.id==='infoOverlay')document.getElementById('infoOverlay').classList.remove('open');});
