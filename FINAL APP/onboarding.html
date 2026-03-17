@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>GLP Buddy — Onboarding</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1028">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLP Buddy">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -46,6 +53,7 @@ body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b8
 
 </style>
 <script src="glp-common.js"></script>
+<script>window.isStandaloneGLPBuddy=function(){return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;};window.openGLPBuddyFullscreen=async function(){var el=document.documentElement,fn=el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen;if(fn){try{await fn.call(el);}catch(e){console.warn('Fullscreen failed',e);}}};if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(err){console.warn('SW registration failed',err);});});}</script>
 </head>
 <body>
 <script>
@@ -91,7 +99,7 @@ body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b8
 
   <div class="card step" id="step3" style="display:none">
     <div class="card-title">Final touches</div><div class="card-sub">A few defaults so the app feels helpful immediately.</div>
-    <div class="field"><div class="field-label">Units</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="uKg" onclick="setUnits('kg'); return false;">Metric (kg)</button><button type="button" class="toggle-opt" id="uLbs" onclick="setUnits('lbs'); return false;">Imperial (lbs)</button></div></div>
+    <div class="field"><div class="field-label">Units</div><div class="toggle-pair"><button type="button" class="toggle-opt sel" id="uKg" onclick="setUnits('kg'); return false;">Metric (kg)</button><button type="button" class="toggle-opt" id="uLbs" onclick="setUnits('lbs'); return false;">Imperial (lbs)</button></div></div><div class="field"><div class="field-label">Weekly photo day</div><div class="chip-grid" id="photoDayGroup"><button type="button" class="chip" data-photo-day="Mon" onclick="setPhotoDay('Mon'); return false;">Mon</button><button type="button" class="chip" data-photo-day="Tue" onclick="setPhotoDay('Tue'); return false;">Tue</button><button type="button" class="chip" data-photo-day="Wed" onclick="setPhotoDay('Wed'); return false;">Wed</button><button type="button" class="chip" data-photo-day="Thu" onclick="setPhotoDay('Thu'); return false;">Thu</button><button type="button" class="chip" data-photo-day="Fri" onclick="setPhotoDay('Fri'); return false;">Fri</button><button type="button" class="chip sel" data-photo-day="Sat" onclick="setPhotoDay('Sat'); return false;">Sat</button><button type="button" class="chip" data-photo-day="Sun" onclick="setPhotoDay('Sun'); return false;">Sun</button></div><div style="font-size:.67rem;color:var(--text-tertiary);margin-top:6px">Your photo reminder appears on Home for 48 hours from that morning.</div></div><div class="field"><div class="field-label">Install GLP Buddy</div><div id="installCopyOnb" style="font-size:.72rem;color:var(--text-secondary);margin-bottom:8px">On Android, tap Install app for an app-style launch. On iPhone, use Share → Add to Home Screen.</div><button type="button" class="btn btn-secondary" id="installBtnOnb">Install app</button></div>
   </div>
 
   <div class="actions">
@@ -112,6 +120,7 @@ const state = {
   medFreq: 'weekly',
   units: 'kg',
   medDay: 'Mon',
+  photoDay: 'Sat',
   waterSize: '200'
 };
 
@@ -145,6 +154,11 @@ function setMedDay(day){
   const target = document.querySelector(`#dayGroup .chip[data-day="${day}"]`);
   if(target) selectOne([...document.querySelectorAll('#dayGroup .chip')], target);
 }
+function setPhotoDay(day){
+  state.photoDay = day;
+  const target = document.querySelector(`#photoDayGroup .chip[data-photo-day="${day}"]`);
+  if(target) selectOne([...document.querySelectorAll('#photoDayGroup .chip')], target);
+}
 function renderStep(){
   steps.forEach((el, i) => { el.style.display = i === step ? 'block' : 'none'; });
   [0,1,2,3].forEach(i => byId('dot' + i)?.classList.toggle('active', i <= step));
@@ -176,6 +190,7 @@ async function finish(){
     medDose: byId('onbDose')?.value || '',
     medFreq: state.medFreq,
     medDay: state.medDay,
+    photoDay: state.photoDay,
     units: state.units,
     waterSize: '200',
     notifMeds: true, notifWater: true, notifWorkout: true, notifPhoto: true
@@ -206,8 +221,7 @@ async function finish(){
   renderStep();
 })();
 </script>
-</body>
-</html>
+
 <script>
 let deferredInstallPromptOnb = null;
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -220,7 +234,7 @@ window.addEventListener('appinstalled', () => {
   const copy = document.getElementById('installCopyOnb');
   const btn = document.getElementById('installBtnOnb');
   if(copy) copy.textContent = 'GLP Buddy is installed. You can open it from your home screen.';
-  if(btn) btn.style.display = 'none';
+  if(btn){ btn.textContent='Installed'; btn.disabled=true; }
 });
 document.addEventListener('click', async (e) => {
   if(e.target && e.target.id === 'installBtnOnb'){
@@ -230,8 +244,11 @@ document.addEventListener('click', async (e) => {
       deferredInstallPromptOnb = null;
     } else {
       const copy = document.getElementById('installCopyOnb');
-      if(copy) copy.textContent = 'If your browser does not show an install prompt, use the browser menu and choose Install app. On iPhone use Share → Add to Home Screen.';
+      if(copy) copy.textContent = 'If your browser does not show an install prompt yet, open the browser menu and choose Install app. On iPhone use Share → Add to Home Screen.';
     }
   }
 });
 </script>
+
+</body>
+</html>

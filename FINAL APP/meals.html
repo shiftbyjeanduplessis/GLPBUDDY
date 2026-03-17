@@ -31,6 +31,15 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 .shop-list{display:grid;gap:9px;padding:0 var(--page-px)}.shop-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;background:var(--surface-1);border:1px solid var(--border-soft);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow-card)}.shop-name{font-size:.82rem;font-weight:700;color:var(--text-primary)}.shop-sub{font-size:.68rem;color:var(--text-tertiary);margin-top:4px}.shop-qty{font-size:.76rem;font-weight:700;color:var(--accent-primary);text-align:right}
 .empty-note{margin:0 var(--page-px);font-size:.78rem;color:var(--text-tertiary)}
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(28px);display:flex;align-items:center;padding:0 6px 8px;z-index:100}.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(255,255,255,.28);text-decoration:none;min-width:0}.bnav-icon{width:42px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center}.bnav-label{font-size:.5rem;font-weight:700;letter-spacing:.3px;text-align:center;line-height:1.1}.bnav-item.active .bnav-icon{background:var(--nav-active-gradient);color:#fff}.bnav-item.active .bnav-label{background:var(--nav-active-label);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+button{touch-action:manipulation}
+.scroll-area{padding-top:var(--nav-h);padding-bottom:calc(var(--nav-h)+104px)}
+.toggle-line{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.switch{width:50px;height:30px;border-radius:999px;background:var(--border-soft);position:relative;border:1px solid var(--border-mid)}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:all .22s ease}
+.switch.on{background:var(--accent-mid)}
+.switch.on::after{left:25px}
+
 </style>
 <script src="glp-common.js"></script>
 </head>
@@ -48,14 +57,15 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 })();
 </script>
 <div class="page-wrap"><div class="scroll-area">
-<div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span></div>
+<div class="glpb-topbar"><span class="glpb-topbar-name">GLP Buddy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:rgba(255,255,255,.85);margin-left:8px"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="10" x2="9.01" y2="10" stroke-width="3"/><line x1="15" y1="10" x2="15.01" y2="10" stroke-width="3"/></svg></div>
 <div id="wizardView">
   <div class="header-tight"><div class="page-title">Meal Planner</div><div class="page-sub">Build a simple 7-day plan around what your client will actually eat.</div></div>
-  <div class="wiz-progress"><div class="wiz-dot active" id="wd0"></div><div class="wiz-dot" id="wd1"></div><div class="wiz-dot" id="wd2"></div><div class="wiz-dot" id="wd3"></div></div>
+  <div class="wiz-progress"><div class="wiz-dot active" id="wd0"></div><div class="wiz-dot" id="wd1"></div><div class="wiz-dot" id="wd2"></div><div class="wiz-dot" id="wd3"></div><div class="wiz-dot" id="wd4"></div></div>
   <div class="card" id="ws0"><div class="section-label">Eating style</div><div class="chip-grid" id="cg-diet"><button class="chip sel" data-v="omnivore">Everything</button><button class="chip" data-v="vegetarian">Vegetarian</button><button class="chip" data-v="vegan">Vegan</button></div></div>
   <div class="card" id="ws1" style="display:none"><div class="section-label">Breakfast is always included</div><div class="chip-grid" id="cg-breakfast"><button class="chip sel" data-v="eggs">Eggs</button><button class="chip sel" data-v="oats">Oats</button><button class="chip sel" data-v="yoghurt">Yoghurt bowl</button><button class="chip" data-v="smoothie">Smoothie</button><button class="chip" data-v="toast">Whole wheat toast</button></div></div>
   <div class="card" id="ws2" style="display:none"><div class="section-label">Proteins</div><div class="chip-grid" id="cg-protein"><button class="chip sel" data-v="chicken">Chicken</button><button class="chip sel" data-v="beef">Beef</button><button class="chip" data-v="leanbeefmince">Lean beef mince</button><button class="chip" data-v="gamemeat">Game meat</button><button class="chip" data-v="turkey">Turkey</button><button class="chip" data-v="whitefish">White fish</button><button class="chip" data-v="salmon">Salmon</button><button class="chip" data-v="tuna">Tuna</button><button class="chip" data-v="prawns">Prawns</button><button class="chip" data-v="calamari">Calamari</button><button class="chip sel" data-v="tofu">Tofu</button><button class="chip" data-v="tempeh">Tempeh</button><button class="chip sel" data-v="beans">Beans</button><button class="chip" data-v="lentils">Lentils</button><button class="chip" data-v="chickpeas">Chickpeas</button></div></div>
   <div class="card" id="ws3" style="display:none"><div class="section-label">Vegetables</div><div class="chip-grid" id="cg-veg"><button class="chip sel" data-v="spinach">Spinach</button><button class="chip" data-v="kale">Kale</button><button class="chip" data-v="lettuce">Lettuce</button><button class="chip sel" data-v="cucumber">Cucumber</button><button class="chip sel" data-v="tomato">Tomato</button><button class="chip sel" data-v="onion">Onion</button><button class="chip" data-v="peppers">Peppers</button><button class="chip" data-v="mushrooms">Mushrooms</button><button class="chip sel" data-v="broccoli">Broccoli</button><button class="chip" data-v="cauliflower">Cauliflower</button><button class="chip" data-v="cabbage">Cabbage</button><button class="chip" data-v="greenbeans">Green beans</button><button class="chip" data-v="carrots">Carrots</button><button class="chip" data-v="babymarrow">Baby marrow</button><button class="chip" data-v="butternut">Butternut</button><button class="chip" data-v="peas">Peas</button><button class="chip" data-v="bokchoy">Bok choy</button><button class="chip" data-v="brussels">Brussels sprouts</button></div></div>
+  <div class="card" id="ws4" style="display:none"><div class="section-label">Leftovers</div><div class="toggle-line"><div><div class="page-title" style="font-size:1.15rem">Use double dinner portions</div><div class="page-sub" style="margin-top:6px">Make dinner as a double portion and use the leftovers for the next day’s lunch. The leftover lunch excludes starch.</div></div><button type="button" class="switch" id="leftoverSwitch" aria-label="Toggle leftovers"></button></div></div>
   <div class="actions"><button class="btn btn-secondary" id="backBtn" style="visibility:hidden">Back</button><button class="btn btn-primary" id="nextBtn">Continue</button></div>
 </div>
 <div id="planView" style="display:none">
@@ -79,16 +89,16 @@ body.theme-midnight{--bg-app:#1a1424;--surface-1:#2a2240;--surface-2:rgba(38,30,
 <script>
 try{ if(window.GLPApp && typeof GLPApp.boot==='function') GLPApp.boot('meals'); }catch(e){ console.warn('GLPApp.boot failed on meals', e); }
 (function(){ try{ const s=JSON.parse(localStorage.getItem('glp_settings')||'{}'); if(s.skin) document.body.classList.add(s.skin); }catch(e){} })();
-const STEPS=['ws0','ws1','ws2','ws3']; let stepIndex=0; let activeDay=0; let activeView='daily';
-const prefs={ diet:'omnivore', breakfast:['eggs','oats','yoghurt'], proteins:['chicken','beef','tofu','beans'], veg:['spinach','cucumber','tomato','onion','broccoli'] };
+const STEPS=['ws0','ws1','ws2','ws3','ws4']; let stepIndex=0; let activeDay=0; let activeView='daily';
+const prefs={ diet:'omnivore', breakfast:['eggs','oats','yoghurt'], proteins:['chicken','beef','tofu','beans'], veg:['spinach','cucumber','tomato','onion','broccoli'], starches:['brown rice','quinoa','couscous','whole wheat pasta'], useLeftovers:false };
 let generatedPlan=[]; let shoppingSummary=[];
 const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const shortDays=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const breakfastTemplates={
  eggs:[{title:'Scrambled eggs', desc:'2 eggs cooked in non-stick spray. Optional add-ins: mushrooms, peppers, or spinach. Portion guide: 2 eggs.', starch:false, shopping:{eggs:{qty:2,unit:'eggs'}}},{title:'Scrambled eggs with mushrooms', desc:'2 eggs cooked with mushrooms in non-stick spray. Optional add-ins: peppers or spinach. Portion guide: 2 eggs.', starch:false, shopping:{eggs:{qty:2,unit:'eggs'},mushrooms:{qty:75,unit:'g'}}}],
- oats:[{title:'Warm oats with low-fat yoghurt and berries', desc:'1/2 cup dry oats cooked in water, topped with 1/2 cup low-fat yoghurt and berries. Portion guide: 1/2 cup dry oats + 1/2 cup yoghurt.', starch:true, shopping:{oats:{qty:45,unit:'g'},'low-fat yoghurt':{qty:120,unit:'g'},berries:{qty:60,unit:'g'}}},{title:'Cinnamon oats with banana and low-fat yoghurt', desc:'1/2 cup dry oats cooked in water with cinnamon, topped with 1/2 banana and 1/2 cup low-fat yoghurt. Portion guide: 1/2 cup dry oats + 1/2 cup yoghurt.', starch:true, shopping:{oats:{qty:45,unit:'g'},banana:{qty:0.5,unit:'banana'},'low-fat yoghurt':{qty:120,unit:'g'}}}],
+ oats:[{title:'Warm oats with berries', desc:'1/2 cup dry oats cooked in water, topped with berries and cinnamon. Portion guide: 1/2 cup dry oats.', starch:true, shopping:{oats:{qty:45,unit:'g'},berries:{qty:60,unit:'g'}}},{title:'Cinnamon oats with banana', desc:'1/2 cup dry oats cooked in water with cinnamon and topped with 1/2 banana. Portion guide: 1/2 cup dry oats.', starch:true, shopping:{oats:{qty:45,unit:'g'},banana:{qty:0.5,unit:'banana'},'low-fat yoghurt':{qty:120,unit:'g'}}}],
  yoghurt:[{title:'Low-fat yoghurt bowl with berries and chia', desc:'3/4 cup low-fat yoghurt with berries and 1 tablespoon chia seeds. Portion guide: 3/4 cup low-fat yoghurt + 1 tablespoon chia seeds.', starch:false, shopping:{'low-fat yoghurt':{qty:180,unit:'g'},berries:{qty:60,unit:'g'},'chia seeds':{qty:1,unit:'tbsp'}}},{title:'Low-fat yoghurt bowl with apple and 1 tablespoon peanut butter', desc:'3/4 cup low-fat yoghurt topped with diced apple and 1 tablespoon peanut butter. Portion guide: 3/4 cup low-fat yoghurt + 1 fruit serving.', starch:false, shopping:{'low-fat yoghurt':{qty:180,unit:'g'},apple:{qty:1,unit:'apple'},'peanut butter':{qty:1,unit:'tbsp'}}}],
- smoothie:[{title:'Protein smoothie', desc:'Low-fat yoghurt, berries, spinach, and 1 tablespoon peanut butter blended with water. Portion guide: 1 cup smoothie + 1 tablespoon peanut butter max.', starch:false, shopping:{'low-fat yoghurt':{qty:150,unit:'g'},berries:{qty:60,unit:'g'},spinach:{qty:40,unit:'g'},'peanut butter':{qty:1,unit:'tbsp'}}}],
+ smoothie:[{title:'Protein smoothie', desc:'Water, berries, spinach, and 1 tablespoon peanut butter blended into a breakfast smoothie. Portion guide: 1 tall glass smoothie.', starch:false, shopping:{berries:{qty:60,unit:'g'},spinach:{qty:40,unit:'g'},'peanut butter':{qty:1,unit:'tbsp'}}}],
  toast:[{title:'Low-fat cottage cheese on whole wheat toast', desc:'2 slices whole wheat toast topped with low-fat cottage cheese and tomato. Portion guide: 2 slices toast + 1/2 cup low-fat cottage cheese.', starch:true, shopping:{'whole wheat bread':{qty:2,unit:'slices'},'low-fat cottage cheese':{qty:120,unit:'g'},tomato:{qty:1,unit:'medium'}}},{title:'Half medium avocado on whole wheat toast', desc:'2 slices whole wheat toast topped with 1/2 a medium avocado and tomato. Portion guide: 2 slices toast + 1/2 a medium avocado.', starch:true, shopping:{'whole wheat bread':{qty:2,unit:'slices'},avocado:{qty:0.5,unit:'medium avocado'},tomato:{qty:1,unit:'medium'}}}]
 };
 const lunchTemplates=[
@@ -130,7 +140,7 @@ function selectedValues(id){ return qs(`#${id} .chip.sel`).map(el=>el.dataset.v)
 function selectOneInGroup(id, el){ qs(`#${id} .chip`).forEach(c=>c.classList.toggle('sel', c===el)); }
 qs('.chip').forEach(chip=>{ chip.addEventListener('click', ()=>{ const p=chip.parentElement.id; if(p==='cg-diet'){ selectOneInGroup('cg-diet', chip); } else chip.classList.toggle('sel'); }); });
 function refreshWizard(){ STEPS.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.style.display=i===stepIndex?'block':'none'; const dot=document.getElementById('wd'+i); if(dot) dot.classList.toggle('active', i<=stepIndex); }); document.getElementById('backBtn').style.visibility = stepIndex===0 ? 'hidden':'visible'; document.getElementById('nextBtn').textContent = stepIndex===STEPS.length-1 ? 'Generate plan' : 'Continue'; }
-function applyPrefs(){ prefs.diet = document.querySelector('#cg-diet .chip.sel')?.dataset.v || 'omnivore'; prefs.breakfast = selectedValues('cg-breakfast'); prefs.proteins = selectedValues('cg-protein'); prefs.veg = selectedValues('cg-veg'); if(!prefs.breakfast.length) prefs.breakfast=['eggs','oats','yoghurt']; if(!prefs.proteins.length) prefs.proteins = prefs.diet==='vegan' ? ['tofu','beans','lentils','chickpeas'] : prefs.diet==='vegetarian' ? ['tofu','tempeh','beans','lentils','chickpeas'] : ['chicken','beef','tofu','beans']; if(!prefs.veg.length) prefs.veg=['spinach','cucumber','tomato','broccoli']; }
+function applyPrefs(){ prefs.diet = document.querySelector('#cg-diet .chip.sel')?.dataset.v || 'omnivore'; prefs.breakfast = selectedValues('cg-breakfast'); prefs.proteins = selectedValues('cg-protein'); prefs.veg = selectedValues('cg-veg'); prefs.useLeftovers = document.getElementById('leftoverSwitch')?.classList.contains('on') || false; if(!prefs.breakfast.length) prefs.breakfast=['eggs','oats','yoghurt']; if(!prefs.proteins.length) prefs.proteins = prefs.diet==='vegan' ? ['tofu','beans','lentils','chickpeas'] : prefs.diet==='vegetarian' ? ['tofu','tempeh','beans','lentils','chickpeas'] : ['chicken','beef','tofu','beans']; if(!prefs.veg.length) prefs.veg=['spinach','cucumber','tomato','broccoli']; }
 function allowedProteins(){ let arr=[...prefs.proteins]; if(prefs.diet==='vegetarian') arr=arr.filter(p=>!['chicken','beef','leanbeefmince','gamemeat','turkey','whitefish','salmon','tuna','prawns','calamari'].includes(p)); if(prefs.diet==='vegan') arr=arr.filter(p=>['tofu','tempeh','beans','lentils','chickpeas'].includes(p)); return arr.length?arr:['tofu','beans']; }
 function pick(arr, idx){ return arr[idx % arr.length]; }
 function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
@@ -139,7 +149,7 @@ function removeStarch(meal){ const m=clone(meal); if(!m.starch) return m; m.desc
     m.starch=false; return m; }
 
 function ensureDinnerStarch(dinner, dayIndex){
-  const starchChoices = prefs.starches && prefs.starches.length ? prefs.starches : ['brown rice'];
+  const starchChoices = prefs.starches && prefs.starches.length ? prefs.starches : ['brown rice','quinoa','couscous','whole wheat pasta'];
   const starchName = starchChoices[dayIndex % starchChoices.length] || 'brown rice';
   const shoppingQty = { 'brown rice':{qty:60,unit:'g'}, 'whole wheat pasta':{qty:60,unit:'g'}, 'couscous':{qty:60,unit:'g'}, 'quinoa':{qty:60,unit:'g'}, 'sweet potato':{qty:150,unit:'g'}, 'whole wheat bread':{qty:2,unit:'slices'} };
   let desc = String(dinner.desc || '');
@@ -160,12 +170,11 @@ function buildDaily(dayIndex){
   const bfType = pick(prefs.breakfast, dayIndex);
   const bfOptions = breakfastTemplates[bfType] || breakfastTemplates.eggs;
   const breakfast = clone(pick(bfOptions, dayIndex));
-  let usedStarch = !!breakfast.starch;
+  let usedStarch = false;
   const lunchPool = lunchTemplates.filter(t=>proteinPool.includes(t.protein));
   const dinnerPool = dinnerTemplates.filter(t=>proteinPool.includes(t.protein));
   let lunch = clone(pick(lunchPool, dayIndex));
-  if(usedStarch && lunch.starch) lunch = removeStarch(lunch);
-  usedStarch = usedStarch || lunch.starch;
+  usedStarch = !!lunch.starch;
   let dinner = clone(pick(dinnerPool, dayIndex+2));
   if(dinner.protein===lunch.protein && dinnerPool.length>1){
     const alt = dinnerPool.find(t=>t.protein!==lunch.protein);
@@ -183,18 +192,34 @@ function aggregateShopping(plan){
 }
 function buildPlan(){
   applyPrefs();
-  generatedPlan = Array.from({length:7}, (_,i)=>buildDaily(i));
+  generatedPlan = [];
+  let carryLunch = null;
+  for(let i=0;i<7;i++){
+    const day = buildDaily(i);
+    if(carryLunch){
+      day.lunch = clone(carryLunch);
+      carryLunch = null;
+    }
+    if(prefs.useLeftovers && i < 6){
+      carryLunch = clone(day.dinner);
+      ['brown rice','whole wheat pasta','couscous','quinoa','sweet potato','whole wheat bread'].forEach(k=>{ if(carryLunch.shopping && carryLunch.shopping[k]) delete carryLunch.shopping[k]; });
+      carryLunch.title = `Leftover ${day.dinner.title.toLowerCase()}`;
+      carryLunch.desc = `Leftover ${day.dinner.title.toLowerCase()} from last night, reheated for lunch with extra vegetables only. No starch is included at lunch.`;
+      carryLunch.starch = false;
+    }
+    generatedPlan.push(day);
+  }
   shoppingSummary = aggregateShopping(generatedPlan);
   document.getElementById('wizardView').style.display='none';
   document.getElementById('planView').style.display='block';
   renderDayPills(); renderDaily(); renderWeekly(); renderShopping();
-  if(window.GLPApp) GLPApp.track('meal_plan_generated', { diet:prefs.diet, breakfasts:prefs.breakfast.length, proteins:prefs.proteins.length, veg:prefs.veg.length });
+  if(window.GLPApp && typeof GLPApp.track==='function') GLPApp.track('meal_plan_generated', { diet:prefs.diet, breakfasts:prefs.breakfast.length, proteins:prefs.proteins.length, veg:prefs.veg.length, leftovers:prefs.useLeftovers });
 }
 function renderDayPills(){ document.getElementById('dayPills').innerHTML = shortDays.map((d,i)=>`<button class="pill ${i===activeDay&&activeView==='daily'?'active':''}" onclick="selectDay(${i})">${d}</button>`).join(''); document.getElementById('dayPills').style.display = activeView==='daily'?'flex':'none'; }
-function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1 tablespoon')) out.push('fats capped'); if((meal.desc||'').includes('1/2 a medium avocado')) out.push('½ avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('daily starch'); return out; }
+function tagsFor(meal){ const out=[]; if((meal.desc||'').includes('1/2 a medium avocado')) out.push('½ avocado'); if((meal.desc||'').includes('non-stick spray')) out.push('spray preferred'); if(meal.starch) out.push('starch included'); if((meal.title||'').toLowerCase().startsWith('leftover ')) out.push('leftover lunch'); return out; }
 function mealCard(slot, meal){ const guide = slot==='Dinner' ? 'Protein: palm-sized portion · Starch: one scooped hand · Vegetables: two fist-sized portions' : 'Protein: palm-sized portion · Vegetables: two fist-sized portions · Cooking oil: max 1 tablespoon'; return `<div class="meal-card"><div class="meal-slot">${slot}</div><div class="meal-title">${meal.title}</div><div class="meal-desc">${meal.desc}</div><div class="meal-guide">${guide}</div><div class="meal-tags">${tagsFor(meal).map(t=>`<span class="meal-tag">${t}</span>`).join('')}</div></div>`; }
 function renderDaily(){ const day=generatedPlan[activeDay]; if(!day) return; document.getElementById('dailyView').innerHTML = `<div class="meal-card"><div class="day-summary"><div><div class="day-name">${day.day}</div></div><div class="day-chip-compact">Day ${activeDay+1}</div></div></div>${mealCard('Breakfast',day.breakfast)}${mealCard('Lunch',day.lunch)}${mealCard('Dinner',day.dinner)}`; }
-function renderWeekly(){ document.getElementById('weeklyView').innerHTML = `<div class="week-list">${generatedPlan.map(day=>`<div class="week-day"><div class="week-day-title">${day.day}</div><div class="week-meal"><b>Breakfast:</b> ${day.breakfast.title}</div><div class="week-meal"><b>Lunch:</b> ${day.lunch.title}</div><div class="week-meal"><b>Dinner:</b> ${day.dinner.title}</div></div>`).join('')}</div>`; }
+function renderWeekly(){ document.getElementById('weeklyView').innerHTML = `<div class="week-list">${generatedPlan.map(day=>`<div class="week-day"><div class="week-day-title">${day.day}</div><div class="week-meal"><b>Breakfast:</b> ${day.breakfast.title}</div><div class="week-meal"><b>Lunch:</b> ${day.lunch.title}</div><div class="week-meal"><b>Dinner:</b> ${day.dinner.title}${prefs.useLeftovers ? ' · make a double portion if you want leftovers for tomorrow\'s lunch' : ''}</div></div>`).join('')}</div>`; }
 function fmtQty(row){ const q=row.qty; if(row.unit==='g') return `${Math.round(q)} g`; if(row.unit==='tbsp') return `${Math.round(q*10)/10} tbsp`; if(row.unit==='slices') return `${Math.round(q)} slices`; if(row.unit==='cup') return `${Math.round(q*10)/10} cups`; if(row.unit==='can') return `${Math.round(q)} cans`; if(row.unit==='banana') return `${Math.round(q*10)/10} bananas`; if(row.unit==='apple') return `${Math.round(q*10)/10} apples`; if(row.unit==='medium') return `${Math.round(q*10)/10} medium`; if(row.unit==='medium avocado') return `${Math.round(q*10)/10} medium avocados`; if(row.unit==='pepper') return `${Math.round(q*10)/10} peppers`; if(row.unit==='cucumber') return `${Math.round(q*10)/10} cucumbers`; if(row.unit==='eggs') return `${Math.round(q)} eggs`; if(row.unit==='lemon') return `${Math.round(q*10)/10} lemons`; return `${Math.round(q*10)/10} ${row.unit}`; }
 function renderShopping(){ document.getElementById('shoppingView').innerHTML = `<div class="shop-list">${shoppingSummary.map(row=>`<div class="shop-row"><div><div class="shop-name">${row.name}</div><div class="shop-sub">Weekly total (7 days) · Monthly estimate: ${fmtQty({qty:(row.qty||0)*4, unit:row.unit})}</div></div><div class="shop-qty">${fmtQty(row)}</div></div>`).join('')}</div>`; }
 function setView(view){ activeView=view; qs('.pill[data-view]').forEach(el=>el.classList.toggle('active', el.dataset.view===view)); document.getElementById('dailyView').style.display=view==='daily'?'block':'none'; document.getElementById('weeklyView').style.display=view==='weekly'?'block':'none'; document.getElementById('shoppingView').style.display=view==='shopping'?'block':'none'; renderDayPills(); }
@@ -203,8 +228,34 @@ qs('.pill[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.da
 document.getElementById('backBtn').addEventListener('click',()=>{ if(stepIndex>0){ stepIndex--; refreshWizard(); } });
 document.getElementById('nextBtn').addEventListener('click',()=>{ if(stepIndex<STEPS.length-1){ stepIndex++; refreshWizard(); } else buildPlan(); });
 document.getElementById('resetPlanBtn').addEventListener('click',()=>location.reload());
+const leftoverSwitch = document.getElementById('leftoverSwitch');
+if(leftoverSwitch){
+  leftoverSwitch.addEventListener('click', ()=> leftoverSwitch.classList.toggle('on'));
+}
 refreshWizard();
 window.selectDay=selectDay;
+</script>
+
+<script>
+(function(){
+  const pages=['index.html','exercise.html','progress.html','community.html','meals.html','settings.html'];
+  const cur=((location.pathname.split('/').pop())||'index.html').replace(/#.*/,'');
+  const idx=pages.indexOf(cur); if(idx<0) return;
+  let sx=0, sy=0, ex=0, ey=0, tracking=false;
+  const blocker = el => !!(el && el.closest('input,textarea,select,button,.ws-overlay,.modal,.sheet,.dialog'));
+  document.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1 || blocker(e.target)) return;
+    const t=e.touches[0]; sx=t.clientX; sy=t.clientY; ex=sx; ey=sy; tracking=true;
+  }, {passive:true});
+  document.addEventListener('touchmove', e=>{ if(!tracking) return; const t=e.touches[0]; ex=t.clientX; ey=t.clientY; }, {passive:true});
+  document.addEventListener('touchend', ()=>{
+    if(!tracking) return; tracking=false;
+    const dx=ex-sx, dy=ey-sy;
+    if(Math.abs(dx)<70 || Math.abs(dy)>45) return;
+    if(dx<0 && idx<pages.length-1) location.href=pages[idx+1];
+    if(dx>0 && idx>0) location.href=pages[idx-1];
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>

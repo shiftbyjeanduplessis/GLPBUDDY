@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>GLP Buddy</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1028">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLP Buddy">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
@@ -123,7 +130,7 @@ body.theme-midnight{
 }
 body{background:var(--bg-app);}
 .page-wrap{width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg-app);position:relative;overflow-x:hidden;}
-.scroll-area{padding-bottom:calc(var(--nav-h)+12px);padding-top:var(--nav-h);}
+.scroll-area{padding-bottom:calc(var(--nav-h) + 104px);padding-top:var(--nav-h);} button{touch-action:manipulation}
 @media(min-width:431px){
   body{background:var(--bg-app);padding:0}
   .page-wrap{border-radius:0;overflow-x:hidden;box-shadow:none;min-height:100vh}
@@ -316,6 +323,8 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 
 .motivation-strip{background:var(--nav-bg)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:var(--shadow-elevated)!important;}
 .motivation-dot{background:linear-gradient(135deg,var(--accent-light),#fff)!important;box-shadow:0 0 0 4px rgba(255,255,255,.08)!important;}
+
+.scroll-area > *:last-child{margin-bottom:10px}
 </style>
 <script>
 (function(){
@@ -1215,22 +1224,32 @@ function getSundayKey(dateObj) {
 
 function getWeeklyPhotoTaskInfo() {
   const now = new Date();
+  let settings = {};
+  try { settings = JSON.parse(localStorage.getItem('glp_settings') || '{}'); } catch(e) {}
+  const map = {Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6};
+  const chosen = map[settings.photoDay || settings.medDay || 'Sat'] ?? 6;
   const start = new Date(now);
+  const diff = (now.getDay() - chosen + 7) % 7;
+  start.setDate(now.getDate() - diff);
   start.setHours(8,0,0,0);
-  const day = now.getDay();
-  const diffToSat = (day + 1) % 7;
-  start.setDate(now.getDate() - diffToSat);
   const end = new Date(start);
-  end.setDate(start.getDate() + 2);
-  const weekStartKey = start.toISOString().slice(0, 10);
-  const done = loadPhotos().some(p => p.date >= weekStartKey);
+  end.setHours(end.getHours() + 48);
+  const startKey = start.toISOString().slice(0, 10);
+  const photos = (()=>{
+    try {
+      const a = JSON.parse(localStorage.getItem('glp_photos') || '[]');
+      const b = JSON.parse(localStorage.getItem('glp_progress_photos') || '[]');
+      return [...a, ...b];
+    } catch(e){ return []; }
+  })();
+  const done = photos.some(p => (p.date || '').slice(0,10) >= startKey);
   const visible = now >= start && now < end && !done;
-  return { visible, done, weekStartKey };
+  return { visible, done, startKey, chosen };
 }
 
 
 function openWeeklyPhotoTask() {
-  location.href = 'progress.html?openPhoto=1';
+  location.href = 'progress.html#photoAlbum';
 }
 
 function setupWeeklyPhotoTask() {
@@ -1244,7 +1263,7 @@ function setupWeeklyPhotoTask() {
   card.style.display = info.visible ? 'flex' : 'none';
   if (!info.visible) return;
   title.textContent = 'Take your weekly progress photos';
-  sub.textContent = 'This reminder shows from Saturday morning and clears once your photos are taken.';
+  const dayMap=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; sub.textContent = `Your ${dayMap[info.chosen]} reminder stays up for 48 hours and clears once your photos are taken.`;
 }
 
 // -------------------------------------------------------
@@ -1559,6 +1578,7 @@ function saveWeight() {
     saveTodayState({ weightLogged: true });
     try { if (window.GLPApp && typeof GLPApp.track === 'function') GLPApp.track('weight_logged', { value: val, units: entryUnits }); } catch(e){}
     closeModal('weightModal');
+    setTimeout(function(){ closeModal('weightModal'); }, 50);
     refreshAll();
     inp.blur();
     return false;
@@ -1567,6 +1587,18 @@ function saveWeight() {
   }
 }
 
+
+(function(){
+  var saveBtn = document.getElementById('saveWeightBtn');
+  if(saveBtn){
+    saveBtn.addEventListener('click', function(e){ e.preventDefault(); saveWeight(); });
+    saveBtn.addEventListener('touchend', function(e){ e.preventDefault(); saveWeight(); }, {passive:false});
+  }
+  var weightInput = document.getElementById('weightInput');
+  if(weightInput){
+    weightInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); saveWeight(); }});
+  }
+})();
 
 // -------------------------------------------------------
 //  SLIDERS
@@ -1862,5 +1894,48 @@ function renderAchieveNudge() {
 refreshAll();
 document.querySelectorAll('button').forEach(function(b){ if(!b.getAttribute('type')) b.setAttribute('type','button'); });
 </script>
+
+<script>
+(function(){
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('sw.js').catch(function(err){ console.warn('SW registration failed', err); });
+    });
+  }
+  window.isStandaloneGLPBuddy = function(){
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  };
+  window.openGLPBuddyFullscreen = async function(){
+    const el = document.documentElement;
+    const fn = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if(fn){
+      try{ await fn.call(el); }catch(e){ console.warn('Fullscreen failed', e); }
+    }
+  };
+})();
+</script>
+
+<script>
+(function(){
+  const pages=['index.html','exercise.html','progress.html','community.html','meals.html','settings.html'];
+  const cur=((location.pathname.split('/').pop())||'index.html').replace(/#.*/,'');
+  const idx=pages.indexOf(cur); if(idx<0) return;
+  let sx=0, sy=0, ex=0, ey=0, tracking=false;
+  const blocker = el => !!(el && el.closest('input,textarea,select,button,.ws-overlay,.modal,.sheet,.dialog'));
+  document.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1 || blocker(e.target)) return;
+    const t=e.touches[0]; sx=t.clientX; sy=t.clientY; ex=sx; ey=sy; tracking=true;
+  }, {passive:true});
+  document.addEventListener('touchmove', e=>{ if(!tracking) return; const t=e.touches[0]; ex=t.clientX; ey=t.clientY; }, {passive:true});
+  document.addEventListener('touchend', ()=>{
+    if(!tracking) return; tracking=false;
+    const dx=ex-sx, dy=ey-sy;
+    if(Math.abs(dx)<70 || Math.abs(dy)>45) return;
+    if(dx<0 && idx<pages.length-1) location.href=pages[idx+1];
+    if(dx>0 && idx>0) location.href=pages[idx-1];
+  }, {passive:true});
+})();
+</script>
+
 </body>
 </html>
