@@ -373,6 +373,17 @@ body{visibility:hidden;}body.f-ready{visibility:visible;}
 })();
 </script>
 <script>document.fonts.ready.then(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}});setTimeout(function(){if(window.__glpCanReveal!==false && document.body){document.body.classList.add("f-ready");}},400);</script>
+
+<style id="chatgpt-fix-index-v3">
+.scroll-area{padding-bottom:calc(var(--nav-h) + 136px) !important;}
+#bottomSafeSpacerHome{height:92px;pointer-events:none;}
+.install-card-home{margin:0 var(--page-px,20px) 14px;padding:16px 18px;border-radius:22px;background:var(--surface-1);border:1px solid var(--border-mid);box-shadow:var(--shadow-card);display:grid;gap:10px;}
+.install-card-home .install-title{font-size:.92rem;font-weight:700;color:var(--text-primary);}
+.install-card-home .install-sub{font-size:.74rem;line-height:1.45;color:var(--text-secondary);}
+.install-card-home .install-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.install-card-home .install-dismiss{background:transparent;border:none;color:var(--text-secondary);font-weight:700;padding:10px 4px;}
+</style>
+
 </head>
 <body class="theme-rose">
 <script>
@@ -1934,6 +1945,101 @@ document.querySelectorAll('button').forEach(function(b){ if(!b.getAttribute('typ
     if(dx<0 && idx<pages.length-1) location.href=pages[idx+1];
     if(dx>0 && idx>0) location.href=pages[idx-1];
   }, {passive:true});
+})();
+</script>
+
+
+<script id="chatgpt-fix-index-v3-script">
+(function(){
+  var scroll=document.querySelector('.scroll-area');
+  if(scroll && !document.getElementById('bottomSafeSpacerHome')){
+    var spacer=document.createElement('div');
+    spacer.id='bottomSafeSpacerHome';
+    spacer.setAttribute('aria-hidden','true');
+    scroll.appendChild(spacer);
+  }
+
+  var deferredHomePrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredHomePrompt = e;
+    updateInstallCard();
+  });
+  window.addEventListener('appinstalled', function(){
+    try{ localStorage.setItem('glp_install_home_dismissed','1'); }catch(e){}
+    var card=document.getElementById('homeInstallCard');
+    if(card) card.remove();
+  });
+
+  function isStandalone(){
+    return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  }
+  function isAndroid(){ return /android/i.test(navigator.userAgent || ''); }
+
+  function buildInstallCard(){
+    if(isStandalone()) return;
+    try{ if(localStorage.getItem('glp_install_home_dismissed')==='1') return; }catch(e){}
+    if(document.getElementById('homeInstallCard')) return;
+    var anchor = document.querySelector('.scroll-area');
+    if(!anchor) return;
+    var card=document.createElement('div');
+    card.className='install-card-home fade-up';
+    card.id='homeInstallCard';
+    card.innerHTML=''
+      + '<div class="install-title">Install GLP Buddy</div>'
+      + '<div class="install-sub" id="homeInstallCopy">Add GLP Buddy to your phone for a cleaner app-style launch and faster access.</div>'
+      + '<div class="install-actions">'
+      + '  <button type="button" class="btn btn-primary" id="homeInstallBtn">Install app</button>'
+      + '  <button type="button" class="install-dismiss" id="homeInstallDismiss">Not now</button>'
+      + '</div>';
+    anchor.insertBefore(card, anchor.firstChild);
+    var btn=card.querySelector('#homeInstallBtn');
+    var copy=card.querySelector('#homeInstallCopy');
+    var dismiss=card.querySelector('#homeInstallDismiss');
+    if(btn){
+      btn.onclick=async function(){
+        if(deferredHomePrompt && deferredHomePrompt.prompt){
+          try{ await deferredHomePrompt.prompt(); }catch(e){}
+          return;
+        }
+        if(isAndroid()){
+          copy.textContent='In Chrome, open the browser menu and choose Install app or Add to Home screen.';
+        } else {
+          copy.textContent='On iPhone or incompatible browsers, use Share and choose Add to Home Screen.';
+        }
+      };
+    }
+    if(dismiss){
+      dismiss.onclick=function(){
+        try{ localStorage.setItem('glp_install_home_dismissed','1'); }catch(e){}
+        card.remove();
+      };
+    }
+    updateInstallCard();
+  }
+
+  function updateInstallCard(){
+    var card=document.getElementById('homeInstallCard');
+    if(!card) return;
+    var copy=card.querySelector('#homeInstallCopy');
+    var btn=card.querySelector('#homeInstallBtn');
+    if(copy){
+      if(deferredHomePrompt){
+        copy.textContent='Install GLP Buddy now for an app-style launch and quick access from your phone.';
+      } else if(isAndroid()){
+        copy.textContent='If Chrome does not show the prompt automatically, you can still install GLP Buddy from the browser menu.';
+      } else {
+        copy.textContent='Use Add to Home Screen on Apple or unsupported browsers.';
+      }
+    }
+    if(btn){ btn.textContent = deferredHomePrompt ? 'Install app' : 'How to install'; }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', buildInstallCard);
+  } else {
+    buildInstallCard();
+  }
 })();
 </script>
 

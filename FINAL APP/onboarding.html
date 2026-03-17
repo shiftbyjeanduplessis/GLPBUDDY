@@ -54,6 +54,11 @@ body.theme-midnight{background:#1a1424;--accent-primary:#c09ae0;--accent-mid:#b8
 </style>
 <script src="glp-common.js"></script>
 <script>window.isStandaloneGLPBuddy=function(){return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;};window.openGLPBuddyFullscreen=async function(){var el=document.documentElement,fn=el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen;if(fn){try{await fn.call(el);}catch(e){console.warn('Fullscreen failed',e);}}};if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(err){console.warn('SW registration failed',err);});});}</script>
+
+<style id="chatgpt-fix-onboarding-v3">
+#installBtnOnb{box-shadow:0 12px 24px rgba(120,88,190,.18);}
+</style>
+
 </head>
 <body>
 <script>
@@ -248,6 +253,23 @@ document.addEventListener('click', async (e) => {
     }
   }
 });
+</script>
+
+
+<script id="chatgpt-fix-onboarding-v3-script">
+(function(){
+  function patchInstallText(){
+    var copy=document.getElementById('installCopyOnb');
+    var btn=document.getElementById('installBtnOnb');
+    if(copy && !copy.dataset.patched){
+      copy.dataset.patched='1';
+      copy.textContent='Install GLP Buddy from here for an app-style launch. If Chrome does not show the prompt, you can still install it from the browser menu.';
+    }
+    if(btn) btn.textContent='Install app';
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', patchInstallText); else patchInstallText();
+  setTimeout(patchInstallText, 120);
+})();
 </script>
 
 </body>

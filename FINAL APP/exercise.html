@@ -321,6 +321,17 @@ button{touch-action:manipulation}
 
 </style>
 <script>document.fonts.ready.then(function(){document.body.classList.add("f-ready");});setTimeout(function(){document.body.classList.add("f-ready");},400);</script>
+
+<style id="chatgpt-fix-exercise-v3">
+.scroll-area{padding-bottom:calc(var(--nav-h) + 144px) !important;}
+#exerciseBottomSpacer{height:92px;pointer-events:none;}
+.ws-skip-rest{background:linear-gradient(135deg,var(--accent-mid),var(--support-primary)) !important;color:#fff !important;border:none !important;box-shadow:0 12px 24px rgba(120,88,190,.22);}
+.ws-skip-rest:hover{filter:brightness(1.03)}
+#badgeShowcase .badge-row{align-items:flex-start !important;}
+#badgeShowcase .small-copy{white-space:normal !important;line-height:1.45 !important;display:block !important;}
+#historyList{margin-bottom:12px;}
+</style>
+
 </head>
 <body>
 <script>
@@ -1284,6 +1295,139 @@ renderPage();
     if(dx<0 && idx<pages.length-1) location.href=pages[idx+1];
     if(dx>0 && idx>0) location.href=pages[idx-1];
   }, {passive:true});
+})();
+</script>
+
+
+<script id="chatgpt-fix-exercise-v3-script">
+(function(){
+  var wsScrollTop = 0;
+  function wsBody(){ return document.getElementById('wsBody'); }
+  function rememberScroll(){ var b=wsBody(); if(b) wsScrollTop = b.scrollTop || 0; }
+  function restoreScroll(){ var b=wsBody(); if(b) requestAnimationFrame(function(){ b.scrollTop = wsScrollTop; }); }
+
+  function ensureSpacer(){
+    var scroll=document.querySelector('.scroll-area');
+    if(scroll && !document.getElementById('exerciseBottomSpacer')){
+      var spacer=document.createElement('div');
+      spacer.id='exerciseBottomSpacer';
+      spacer.setAttribute('aria-hidden','true');
+      scroll.appendChild(spacer);
+    }
+  }
+
+  function postPageState(){
+    ensureSpacer();
+    var startBtn=document.getElementById('startBtn');
+    var actions=document.querySelector('.today-actions');
+    var notice=document.getElementById('todayNotice');
+    if(startBtn && /session complete/i.test(startBtn.textContent||'')){
+      if(actions) actions.style.display='none';
+      if(notice){
+        notice.classList.remove('hidden');
+        notice.textContent='Workout saved. Your recent session appears below.';
+      }
+    }
+  }
+
+  function bindWorkoutControls(){
+    var overlay=document.getElementById('wsOverlay');
+    if(!overlay) return;
+
+    var saveBtn=overlay.querySelector('.ws-complete-actions .btn.btn-primary');
+    if(saveBtn){
+      saveBtn.textContent='Done';
+      saveBtn.onclick=function(e){ e.preventDefault(); if(typeof saveWorkout==='function') saveWorkout(); };
+    }
+    var secondary=overlay.querySelector('.ws-complete-actions .btn.btn-secondary');
+    if(secondary && /review later/i.test(secondary.textContent||'')) secondary.remove();
+
+    var restBtn=overlay.querySelector('.ws-skip-rest');
+    if(restBtn){
+      restBtn.textContent='Let’s go';
+      restBtn.onclick=function(e){ e.preventDefault(); rememberScroll(); if(typeof wsSkipRest==='function') wsSkipRest(); };
+    }
+
+    var logBtn=document.getElementById('wsLogBtn');
+    if(logBtn){
+      logBtn.onclick=function(e){ e.preventDefault(); rememberScroll(); if(typeof wsLogSet==='function') wsLogSet(_wsState.stepIndex); };
+    }
+
+    var nextBtn=document.getElementById('wsNextBtn');
+    if(nextBtn){ nextBtn.onclick=function(e){ e.preventDefault(); rememberScroll(); if(typeof wsNext==='function') wsNext(); }; }
+    var prevBtn=document.getElementById('wsPrevBtn');
+    if(prevBtn){ prevBtn.onclick=function(e){ e.preventDefault(); rememberScroll(); if(typeof wsPrev==='function') wsPrev(); }; }
+
+    overlay.querySelectorAll('.ws-set-card').forEach(function(card){
+      var input=card.querySelector('.ws-set-input');
+      if(!input || !input.id) return;
+      var parts=input.id.split('_');
+      var movIdx=parseInt(parts[1],10);
+      var setIdx=parseInt(parts[2],10);
+      var steps=card.querySelectorAll('.ws-set-step');
+      if(steps[0]) steps[0].onclick=function(e){ e.preventDefault(); if(typeof wsAdjust==='function') wsAdjust(movIdx,setIdx,-1); };
+      if(steps[1]) steps[1].onclick=function(e){ e.preventDefault(); if(typeof wsAdjust==='function') wsAdjust(movIdx,setIdx,1); };
+      input.oninput=function(e){ if(typeof wsSetVal==='function') wsSetVal(movIdx,setIdx,e.target.value); };
+      input.onchange=function(e){ if(typeof wsSetVal==='function') wsSetVal(movIdx,setIdx,e.target.value); };
+    });
+  }
+
+  var _origRenderPage = window.renderPage;
+  if(typeof _origRenderPage === 'function'){
+    window.renderPage = function(){
+      _origRenderPage();
+      postPageState();
+    };
+  }
+
+  var _origRenderWorkoutStep = window.renderWorkoutStep;
+  if(typeof _origRenderWorkoutStep === 'function'){
+    window.renderWorkoutStep = function(){
+      _origRenderWorkoutStep();
+      bindWorkoutControls();
+      restoreScroll();
+    };
+  }
+
+  var _origRenderWorkoutComplete = window.renderWorkoutComplete;
+  if(typeof _origRenderWorkoutComplete === 'function'){
+    window.renderWorkoutComplete = function(){
+      _origRenderWorkoutComplete();
+      bindWorkoutControls();
+      restoreScroll();
+    };
+  }
+
+  ['wsLogSet','wsSkipRest','wsNext','wsPrev'].forEach(function(name){
+    var orig = window[name];
+    if(typeof orig === 'function'){
+      window[name] = function(){
+        rememberScroll();
+        var result = orig.apply(this, arguments);
+        setTimeout(function(){ bindWorkoutControls(); restoreScroll(); }, 0);
+        return result;
+      };
+    }
+  });
+
+  var _origSaveWorkout = window.saveWorkout;
+  if(typeof _origSaveWorkout === 'function'){
+    window.saveWorkout = function(){
+      var result = _origSaveWorkout.apply(this, arguments);
+      setTimeout(function(){
+        try{ if(typeof renderPage === 'function') renderPage(); }catch(e){}
+        postPageState();
+      }, 60);
+      return result;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    ensureSpacer();
+    bindWorkoutControls();
+    postPageState();
+  });
+  setTimeout(function(){ ensureSpacer(); bindWorkoutControls(); postPageState(); }, 120);
 })();
 </script>
 
