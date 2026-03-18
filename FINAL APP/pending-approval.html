@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pending Approval - GLP Buddy</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f8f5; color: #162018; margin: 0; padding: 24px; display: grid; place-items: center; min-height: 100vh; }
+    .card { max-width: 420px; background: #fff; border: 1px solid #d8e4dc; border-radius: 20px; padding: 32px; text-align: center; box-shadow: 0 8px 30px rgba(20,40,30,.08); }
+    h1 { margin: 0 0 16px; font-size: 24px; }
+    p { margin: 0 0 24px; line-height: 1.5; color: #476050; }
+    .status-pill { display: inline-block; background: #eef3ed; color: #365344; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: bold; margin-bottom: 16px; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 14px; background: #3d7a5a; color: #fff; font-weight: 700; cursor: pointer; margin-bottom: 10px; font-size: 15px; }
+    .btn-alt { background: #fff; color: #162018; border: 1px solid #cfe0d6; }
+  </style>
+  <script src="glp-supabase-config.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="status-pill">Status: Pending</div>
+    <h1>Access Pending</h1>
+    <p>Your account has been created successfully! Since this is an exclusive pilot, we need to manually approve your access before you can enter the app.</p>
+    <p>We'll activate your account once your setup is confirmed.</p>
+    
+    <button id="refresh-btn" class="btn">I've been approved, let me in</button>
+    <button id="signout-btn" class="btn btn-alt">Sign out</button>
+  </div>
+
+  <script type="module">
+    import { signOut } from './glp-supabase-client.js';
+
+    // If they think they are approved, send them back to the app to check
+    document.getElementById('refresh-btn').onclick = () => {
+      window.location.href = 'index.html'; 
+    };
+
+    // Let them sign out safely
+    document.getElementById('signout-btn').onclick = async () => {
+      await signOut();
+      window.location.href = 'auth.html';
+    };
+  </script>
+</body>
+</html>
