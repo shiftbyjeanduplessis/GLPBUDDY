@@ -162,7 +162,6 @@ body.theme-midnight{
 .chip{padding:9px 15px;border-radius:999px;border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer}
 .chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
 
-/* MOBILE-SAFE FIXED ACTIONS */
 .actions {
   position: fixed;
   bottom: calc(var(--nav-h) + 12px);
@@ -176,13 +175,13 @@ body.theme-midnight{
   padding: 24px var(--page-px) 0;
   background: linear-gradient(to top, var(--bg-app) 80%, rgba(0,0,0,0));
   z-index: 90;
-  pointer-events: none; /* Prevents the invisible box from blocking clicks underneath */
+  pointer-events: none;
 }
 
 .actions .btn{
   flex: 1;
   min-height: 48px;
-  pointer-events: auto; /* Re-enables clicks only on the buttons themselves */
+  pointer-events: auto;
 }
 
 .pill-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px var(--page-px) 12px}
@@ -240,7 +239,7 @@ body.theme-midnight{
 
 button{touch-action:manipulation}
 .toggle-line{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.switch{width:50px;height:30px;border-radius:999px;background:var(--border-soft);position:relative;border:1px solid var(--border-mid)}
+.switch{width:50px;height:30px;border-radius:999px;background:var(--border-soft);position:relative;border:1px solid var(--border-mid);cursor:pointer}
 .switch::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:all .22s ease}
 .switch.on{background:var(--accent-mid)}
 .switch.on::after{left:25px}
@@ -290,65 +289,65 @@ button{touch-action:manipulation}
       <div class="card" id="ws0">
         <div class="section-label">Eating style</div>
         <div class="chip-grid" id="cg-diet">
-          <button class="chip sel" data-v="omnivore">Everything</button>
-          <button class="chip" data-v="vegetarian">Vegetarian</button>
-          <button class="chip" data-v="vegan">Vegan</button>
+          <button type="button" class="chip sel" data-v="omnivore">Everything</button>
+          <button type="button" class="chip" data-v="vegetarian">Vegetarian</button>
+          <button type="button" class="chip" data-v="vegan">Vegan</button>
         </div>
       </div>
 
       <div class="card" id="ws1" style="display:none">
         <div class="section-label">Breakfast is always included</div>
         <div class="chip-grid" id="cg-breakfast">
-          <button class="chip sel" data-v="eggs">Eggs</button>
-          <button class="chip sel" data-v="oats">Oats</button>
-          <button class="chip sel" data-v="yoghurt">Yoghurt bowl</button>
-          <button class="chip" data-v="smoothie">Smoothie</button>
-          <button class="chip" data-v="toast">Whole wheat toast</button>
+          <button type="button" class="chip sel" data-v="eggs">Eggs</button>
+          <button type="button" class="chip sel" data-v="oats">Oats</button>
+          <button type="button" class="chip sel" data-v="yoghurt">Yoghurt bowl</button>
+          <button type="button" class="chip" data-v="smoothie">Smoothie</button>
+          <button type="button" class="chip" data-v="toast">Whole wheat toast</button>
         </div>
       </div>
 
       <div class="card" id="ws2" style="display:none">
         <div class="section-label">Proteins</div>
         <div class="chip-grid" id="cg-protein">
-          <button class="chip sel" data-v="chicken">Chicken</button>
-          <button class="chip sel" data-v="beef">Beef</button>
-          <button class="chip" data-v="leanbeefmince">Lean beef mince</button>
-          <button class="chip" data-v="gamemeat">Game meat</button>
-          <button class="chip" data-v="turkey">Turkey</button>
-          <button class="chip" data-v="whitefish">White fish</button>
-          <button class="chip" data-v="salmon">Salmon</button>
-          <button class="chip" data-v="tuna">Tuna</button>
-          <button class="chip" data-v="prawns">Prawns</button>
-          <button class="chip" data-v="calamari">Calamari</button>
-          <button class="chip sel" data-v="tofu">Tofu</button>
-          <button class="chip" data-v="tempeh">Tempeh</button>
-          <button class="chip sel" data-v="beans">Beans</button>
-          <button class="chip" data-v="lentils">Lentils</button>
-          <button class="chip" data-v="chickpeas">Chickpeas</button>
+          <button type="button" class="chip sel" data-v="chicken">Chicken</button>
+          <button type="button" class="chip sel" data-v="beef">Beef</button>
+          <button type="button" class="chip" data-v="leanbeefmince">Lean beef mince</button>
+          <button type="button" class="chip" data-v="gamemeat">Game meat</button>
+          <button type="button" class="chip" data-v="turkey">Turkey</button>
+          <button type="button" class="chip" data-v="whitefish">White fish</button>
+          <button type="button" class="chip" data-v="salmon">Salmon</button>
+          <button type="button" class="chip" data-v="tuna">Tuna</button>
+          <button type="button" class="chip" data-v="prawns">Prawns</button>
+          <button type="button" class="chip" data-v="calamari">Calamari</button>
+          <button type="button" class="chip sel" data-v="tofu">Tofu</button>
+          <button type="button" class="chip" data-v="tempeh">Tempeh</button>
+          <button type="button" class="chip sel" data-v="beans">Beans</button>
+          <button type="button" class="chip" data-v="lentils">Lentils</button>
+          <button type="button" class="chip" data-v="chickpeas">Chickpeas</button>
         </div>
       </div>
 
       <div class="card" id="ws3" style="display:none">
         <div class="section-label">Vegetables</div>
         <div class="chip-grid" id="cg-veg">
-          <button class="chip sel" data-v="spinach">Spinach</button>
-          <button class="chip" data-v="kale">Kale</button>
-          <button class="chip" data-v="lettuce">Lettuce</button>
-          <button class="chip sel" data-v="cucumber">Cucumber</button>
-          <button class="chip sel" data-v="tomato">Tomato</button>
-          <button class="chip sel" data-v="onion">Onion</button>
-          <button class="chip" data-v="peppers">Peppers</button>
-          <button class="chip" data-v="mushrooms">Mushrooms</button>
-          <button class="chip sel" data-v="broccoli">Broccoli</button>
-          <button class="chip" data-v="cauliflower">Cauliflower</button>
-          <button class="chip" data-v="cabbage">Cabbage</button>
-          <button class="chip" data-v="greenbeans">Green beans</button>
-          <button class="chip" data-v="carrots">Carrots</button>
-          <button class="chip" data-v="babymarrow">Baby marrow</button>
-          <button class="chip" data-v="butternut">Butternut</button>
-          <button class="chip" data-v="peas">Peas</button>
-          <button class="chip" data-v="bokchoy">Bok choy</button>
-          <button class="chip" data-v="brussels">Brussels sprouts</button>
+          <button type="button" class="chip sel" data-v="spinach">Spinach</button>
+          <button type="button" class="chip" data-v="kale">Kale</button>
+          <button type="button" class="chip" data-v="lettuce">Lettuce</button>
+          <button type="button" class="chip sel" data-v="cucumber">Cucumber</button>
+          <button type="button" class="chip sel" data-v="tomato">Tomato</button>
+          <button type="button" class="chip sel" data-v="onion">Onion</button>
+          <button type="button" class="chip" data-v="peppers">Peppers</button>
+          <button type="button" class="chip" data-v="mushrooms">Mushrooms</button>
+          <button type="button" class="chip sel" data-v="broccoli">Broccoli</button>
+          <button type="button" class="chip" data-v="cauliflower">Cauliflower</button>
+          <button type="button" class="chip" data-v="cabbage">Cabbage</button>
+          <button type="button" class="chip" data-v="greenbeans">Green beans</button>
+          <button type="button" class="chip" data-v="carrots">Carrots</button>
+          <button type="button" class="chip" data-v="babymarrow">Baby marrow</button>
+          <button type="button" class="chip" data-v="butternut">Butternut</button>
+          <button type="button" class="chip" data-v="peas">Peas</button>
+          <button type="button" class="chip" data-v="bokchoy">Bok choy</button>
+          <button type="button" class="chip" data-v="brussels">Brussels sprouts</button>
         </div>
       </div>
 
@@ -364,8 +363,8 @@ button{touch-action:manipulation}
       </div>
 
       <div class="actions">
-        <button class="btn btn-secondary" id="backBtn" style="visibility:hidden">Back</button>
-        <button class="btn btn-primary" id="nextBtn">Continue</button>
+        <button type="button" class="btn btn-secondary" id="backBtn" style="visibility:hidden">Back</button>
+        <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
       </div>
     </div>
 
@@ -375,7 +374,7 @@ button{touch-action:manipulation}
           <div class="page-title">Meal Plan</div>
           <div class="page-sub">7-day plan with portion guidance and a practical shopping list.</div>
         </div>
-        <button class="btn btn-secondary" id="resetPlanBtn" style="padding:9px 14px">Reset</button>
+        <button type="button" class="btn btn-secondary" id="resetPlanBtn" style="padding:9px 14px">Reset</button>
       </div>
 
       <div class="info-banner">
@@ -384,9 +383,9 @@ button{touch-action:manipulation}
       </div>
 
       <div class="pill-row">
-        <button class="pill active" data-view="daily">Daily view</button>
-        <button class="pill" data-view="weekly">Weekly view</button>
-        <button class="pill" data-view="shopping">Shopping list</button>
+        <button type="button" class="pill active" data-view="daily">Daily view</button>
+        <button type="button" class="pill" data-view="weekly">Weekly view</button>
+        <button type="button" class="pill" data-view="shopping">Shopping list</button>
       </div>
 
       <div class="pill-row" id="dayPills"></div>
@@ -581,7 +580,6 @@ function scrollCurrentStepIntoView(){
       currentStep.scrollIntoView({behavior:'smooth', block:'start'});
     }
   } catch(e) {
-    // Fallback for older browsers that crash on the behavior object
     window.scrollTo(0, 0);
   }
 }
@@ -680,12 +678,10 @@ function buildDaily(dayIndex){
   const bfOptions = breakfastTemplates[bfType] || breakfastTemplates.eggs;
   const breakfast = clone(pick(bfOptions, dayIndex));
 
-  let usedStarch = false;
   const lunchPool = lunchTemplates.filter(t=>proteinPool.includes(t.protein));
   const dinnerPool = dinnerTemplates.filter(t=>proteinPool.includes(t.protein));
 
   let lunch = clone(pick(lunchPool, dayIndex));
-  usedStarch = !!lunch.starch;
 
   let dinner = clone(pick(dinnerPool, dayIndex+2));
   if(dinner.protein===lunch.protein && dinnerPool.length>1){
@@ -766,7 +762,7 @@ function buildPlan(){
 }
 
 function renderDayPills(){
-  document.getElementById('dayPills').innerHTML = shortDays.map((d,i)=>`<button class="pill ${i===activeDay&&activeView==='daily'?'active':''}" onclick="selectDay(${i})">${d}</button>`).join('');
+  document.getElementById('dayPills').innerHTML = shortDays.map((d,i)=>`<button type="button" class="pill ${i===activeDay&&activeView==='daily'?'active':''}" onclick="selectDay(${i})">${d}</button>`).join('');
   document.getElementById('dayPills').style.display = activeView==='daily'?'flex':'none';
 }
 
@@ -820,7 +816,7 @@ function renderWeekly(){
           <div class="week-day-title">${day.day}</div>
           <div class="week-meal"><b>Breakfast:</b> ${day.breakfast.title}</div>
           <div class="week-meal"><b>Lunch:</b> ${day.lunch.title}</div>
-          <div class="week-meal"><b>Dinner:</b> ${day.dinner.title}${prefs.useLeftovers ? ' · make a double portion if you want leftovers for tomorrow\\'s lunch' : ''}</div>
+          <div class="week-meal"><b>Dinner:</b> ${day.dinner.title}${prefs.useLeftovers ? " · make a double portion if you want leftovers for tomorrow's lunch" : ''}</div>
         </div>
       `).join('')}
     </div>
