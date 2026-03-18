@@ -41,9 +41,9 @@
   </div>
 
   <script type="module">
-    import { signIn, signUp, requestPasswordReset } from './glp-tier1-implementation/frontend/glp-supabase-client.js';
-    import { logEvent } from './glp-tier1-implementation/frontend/glp-tier1-api.js';
-    import { EVENTS } from './glp-tier1-implementation/frontend/event-taxonomy.js';
+  import { signIn, signUp, requestPasswordReset } from './glp-supabase-client.js';
+  import { logEvent } from './glp-tier1-api.js';
+  import { EVENTS } from './event-taxonomy.js';
 
     const panels = { login: document.getElementById('login-panel'), signup: document.getElementById('signup-panel'), reset: document.getElementById('reset-panel') };
     const tabs = { login: document.getElementById('tab-login'), signup: document.getElementById('tab-signup'), reset: document.getElementById('tab-reset') };
