@@ -74,9 +74,9 @@ window.GLPCloudReady = (async () => {
     return cloud;
   }
 
-  const [clientMod, apiMod] = await Promise.all([
-    import('./glp-tier1-implementation/frontend/glp-supabase-client.js'),
-    import('./glp-tier1-implementation/frontend/glp-tier1-api.js')
+const [clientMod, apiMod] = await Promise.all([
+    import('./glp-supabase-client.js'),
+    import('./glp-tier1-api.js')
   ]);
 
   cloud.client = clientMod;
