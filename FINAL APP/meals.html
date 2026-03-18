@@ -162,15 +162,19 @@ body.theme-midnight{
 .chip{padding:9px 15px;border-radius:999px;border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer}
 .chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
 
-.actions{
-  position:sticky;
-  bottom:calc(var(--nav-h) + 12px);
-  display:flex;
-  gap:10px;
-  padding:12px var(--page-px) 0;
-  margin-top:8px;
-  background:linear-gradient(to top, var(--bg-app) 78%, rgba(0,0,0,0));
-  z-index:20
+/* FIXED ACTION BUTTONS FOR MOBILE */
+.actions {
+  position: fixed;
+  bottom: calc(var(--nav-h) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  gap: 10px;
+  padding: 24px var(--page-px) 0;
+  background: linear-gradient(to top, var(--bg-app) 80%, rgba(0,0,0,0));
+  z-index: 90;
 }
 
 .actions .btn{
