@@ -74,7 +74,7 @@ window.GLPCloudReady = (async () => {
     return cloud;
   }
 
-const [clientMod, apiMod] = await Promise.all([
+  const [clientMod, apiMod] = await Promise.all([
     import('./glp-supabase-client.js'),
     import('./glp-tier1-api.js')
   ]);
@@ -162,78 +162,4 @@ const [clientMod, apiMod] = await Promise.all([
       current_theme: stripThemePrefix(payload.theme || 'sage'),
       units: legacyUnitsToProfile(extras.units || 'kg'),
     };
-    await cloud.updateProfile(profilePatch);
-    cloud.compatibility.writeSettingsCache({
-      profile: { ...profilePatch, install_date: todayKey(), display_name: payload.displayName, sex: payload.sex, units: legacyUnitsToProfile(extras.units || 'kg') },
-      settings: { theme: stripThemePrefix(payload.theme || 'sage'), water_glass_ml: 200 },
-      onboarding: { current_weight_kg: payload.currentWeightKg, target_weight_kg: payload.targetWeightKg },
-      extras: {
-        medName: extras.medName || '',
-        medOther: extras.medOther || '',
-        medDose: extras.medDose || '',
-        medFreq: extras.medFreq || 'weekly',
-        medDay: extras.medDay || 'Mon',
-        notifMeds: true,
-        notifWater: true,
-        notifWorkout: true,
-        notifPhoto: true,
-      }
-    });
-    cloud.compatibility.writeOnboardingCache({ complete: true });
-  };
-  cloud.saveWeight = apiMod.saveWeight;
-  cloud.saveDailyCheckin = apiMod.saveDailyCheckin;
-  cloud.replaceSymptoms = apiMod.replaceSymptoms;
-  cloud.saveHydration = apiMod.saveHydration;
-  cloud.saveMealPreferences = apiMod.saveMealPreferences;
-  cloud.getMealPreferences = apiMod.getMealPreferences;
-  cloud.saveGeneratedMealPlan = apiMod.saveGeneratedMealPlan;
-  cloud.getLatestMealPlan = apiMod.getLatestMealPlan;
-  cloud.startWorkoutSession = apiMod.startWorkoutSession;
-  cloud.completeWorkoutSession = apiMod.completeWorkoutSession;
-  cloud.addWorkoutSet = apiMod.addWorkoutSet;
-  cloud.getRestDayStatus = apiMod.getRestDayStatus;
-  cloud.getWorkoutHistory = apiMod.getWorkoutHistory;
-  cloud.submitFeedback = apiMod.submitFeedback;
-
-  cloud.getProgressPhotosWithUrls = async () => {
-    const rows = await apiMod.listProgressPhotos();
-    const mapped = await Promise.all(rows.map(async row => ({
-      ...row,
-      signedUrl: await apiMod.createSignedProgressPhotoUrl(row.storage_path)
-    })));
-    return mapped;
-  };
-
-  cloud.syncSettingsToCompatibility = async (extras = {}) => {
-    const [profile, settings, onboarding] = await Promise.all([
-      cloud.getProfile(),
-      cloud.getUserSettings(),
-      cloud.getOnboarding()
-    ]);
-    const merged = cloud.compatibility.writeSettingsCache({ profile, settings, onboarding, extras });
-    return { profile, settings, onboarding, merged };
-  };
-
-  cloud.bootPrivatePage = async ({ pageName = (location.pathname.split('/').pop() || 'index.html'), requireOnboarding = true, redirectTo = 'auth.html' } = {}) => {
-    const session = await clientMod.requireSession(redirectTo);
-    if (!session) return null;
-    await apiMod.startAppSession({ platform: 'web', appVersion: 'tier1-bridge' });
-    const [profile, settings, onboarding] = await Promise.all([
-      cloud.getProfile(),
-      cloud.getUserSettings(),
-      cloud.getOnboarding()
-    ]);
-    const onboardingComplete = !!(profile?.onboarding_complete || onboarding?.completed_at);
-    if (requireOnboarding && !onboardingComplete && !/onboarding\.html$/i.test(pageName)) {
-      location.href = 'onboarding.html?next=' + encodeURIComponent(pageName);
-      return null;
-    }
-    cloud.applyTheme(settings?.theme || profile?.current_theme || 'sage');
-    try { await apiMod.logEvent('page_view', { page: pageName }, pageName); } catch (err) { console.warn(err); }
-    return { session, profile, settings, onboarding, enabled: true };
-  };
-
-  window.GLPCloud = cloud;
-  return cloud;
-})();
+    await cloud.updateProfile(
