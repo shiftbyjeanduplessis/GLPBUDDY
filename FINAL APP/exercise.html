@@ -183,6 +183,11 @@ body{background:var(--bg-app);}
 .movement-details ol{padding-left:18px;margin-top:10px;}
 .movement-details li{margin:0 0 7px;color:var(--text-secondary);font-size:.80rem;line-height:1.48;}
 
+
+.movement-figure{margin:0 0 12px;border-radius:18px;overflow:hidden;border:1px solid var(--border-soft);background:#f3f3f3;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.movement-figure img{width:100%;height:100%;object-fit:contain;background:#f3f3f3}
+.ws-img-placeholder img{width:100%;height:100%;object-fit:contain;background:#f3f3f3}
+
 /* -- LEVEL-UP CARD ---------------------------------- */
 .levelup-card{padding:16px;border-radius:22px;background:linear-gradient(135deg,var(--ok-tint),var(--support-tint));border:1px solid rgba(47,158,122,.16);margin-bottom:10px;}
 
@@ -526,77 +531,80 @@ button{touch-action:manipulation}
 })();
 
 // -- PROGRAM --------------------------------------------
-// 5 movements, each with levels. sets:2 always.
+const PROGRAM_VERSION = '2026-03-17-progression-refresh';
 const PROGRAM = [
   {
     id:'squat', name:'Squat', sets:2, targetReps:10,
     levels:[
-      {name:'Chair-assisted squat',  instruction:'Lower slowly onto a chair — touch it but don\'t sit. Drive back up through your heels.'},
-      {name:'Bodyweight squat',      instruction:'Feet shoulder-width, toes slightly out. Lower until thighs are parallel, then stand tall.'},
-      {name:'Pause squat',           instruction:'Lower under control, pause 2 seconds at the bottom, then drive back up.'},
+      {name:'Chair squat', image:'exercise_assets/chair-squat.png', target:10, instruction:'Use the chair as a guide. Reach your hips back, tap the seat lightly, then stand tall.'},
+      {name:'Bodyweight squat', image:'exercise_assets/bodyweight-squat.png', target:10, instruction:'Feet about shoulder-width. Lower under control and stand up strong through your heels.'},
+      {name:'Narrow squat', image:'exercise_assets/narrow-squat.png', target:10, instruction:'Bring your stance a little closer. Stay tall through the chest and keep the movement smooth.'},
+      {name:'Bodyweight + narrow combo squat', image:'exercise_assets/bodyweight-narrow-combo.png', target:10, instruction:'Alternate one bodyweight squat with one narrow squat each rep. Stay controlled and keep the rhythm steady.'},
     ],
     steps:[
-      'Stand tall, feet shoulder-width apart.',
-      'Push your hips back and lower with control.',
-      'Keep your chest up and knees tracking over toes.',
-      'Drive through your heels to return to standing.',
+      'Stand tall and brace your tummy gently.',
+      'Sit your hips back and down with control.',
+      'Keep your chest lifted and knees tracking well.',
+      'Drive back up and reset before the next rep.',
     ]
   },
   {
-    id:'push', name:'Push-up', sets:2, targetReps:10,
+    id:'push', name:'Push-up', sets:2, targetReps:8,
     levels:[
-      {name:'Wall push-up',     instruction:'Hands on a wall at shoulder height. Lower your chest in, push back out. Keep your body straight.'},
-      {name:'Incline push-up',  instruction:'Hands on a counter or sturdy surface. Lower with control, push back up with full arm extension.'},
-      {name:'Standard push-up', instruction:'Hands just outside shoulders, body in a straight line. Lower chest to just above the floor.'},
+      {name:'Wall push-up', image:'exercise_assets/wall-push-up.png', target:10, instruction:'Hands on the wall at chest height. Lower your chest in and press away while keeping your body straight.'},
+      {name:'Incline push-up', image:'exercise_assets/incline-push-up.png', target:8, instruction:'Use a bench or sturdy counter. Lower with control, then push back up to full arm extension.'},
+      {name:'Knee push-up', image:'exercise_assets/knee-push-up.png', target:8, instruction:'From knees, keep a straight line from head to knees. Lower your chest with control and press up strong.'},
+      {name:'Incline + knee combo push-up', image:'exercise_assets/incline-knee-combo.png', target:8, instruction:'Alternate one incline push-up with one knee push-up to blend control and strength.'},
     ],
     steps:[
-      'Place hands just wider than shoulder-width.',
-      'Keep your body in a straight line — don\'t let your hips sag.',
-      'Lower your chest with control.',
-      'Push back up to full arm extension.',
+      'Set your hands just wider than shoulder width.',
+      'Brace your core and keep your body long.',
+      'Lower under control — no rushing.',
+      'Push away strongly and finish tall through the arms.',
     ]
   },
   {
-    id:'hinge', name:'Hip Hinge', sets:2, targetReps:10,
+    id:'bridge', name:'Bridge', sets:2, targetReps:12,
     levels:[
-      {name:'Standing hip hinge',       instruction:'Feet hip-width, soft bend in knees. Push hips back until you feel a hamstring stretch, then drive forward.'},
-      {name:'Single-leg hip hinge',     instruction:'Balance on one leg, hinge forward with a flat back, then stand. Use a wall for balance if needed.'},
-      {name:'Romanian deadlift (light)',instruction:'Hold light weights close to your legs. Hinge with a flat back, lower to mid-shin, drive hips forward.'},
+      {name:'Bridge', image:'exercise_assets/bridge.png', target:12, instruction:'Lie on your back, feet planted. Lift your hips with control and lower slowly.'},
+      {name:'Glute bridge', image:'exercise_assets/glute-bridge.png', target:12, instruction:'Press through your heels, lift to a straight line from shoulders to knees, and squeeze your glutes at the top.'},
+      {name:'Single-leg glute bridge', image:'exercise_assets/single-leg-glute-bridge.png', target:8, instruction:'Keep one leg lifted and drive through the planted heel. Keep hips level throughout the set.'},
     ],
     steps:[
-      'Stand with feet hip-width, slight bend in knees.',
-      'Push your hips back — not down.',
-      'Keep your back flat as you hinge forward.',
-      'Drive your hips forward to stand, squeezing your glutes.',
+      'Set your feet flat and close enough to reach with your fingertips.',
+      'Brace lightly and drive through your heels.',
+      'Lift your hips until your body is long and strong.',
+      'Lower with control and repeat smoothly.',
     ]
   },
   {
-    id:'glute_bridge', name:'Glute Bridge', sets:2, targetReps:12,
-    levels:[
-      {name:'Glute bridge',            instruction:'Lie on your back, knees bent, feet flat. Press through heels, lift hips to a straight line, squeeze glutes.'},
-      {name:'Single-leg glute bridge', instruction:'Extend one leg, drive through the other heel to lift hips. Keep hips level throughout.'},
-      {name:'Elevated glute bridge',   instruction:'Feet on a low step or couch edge. Drive hips up to a straight line and hold briefly at the top.'},
-    ],
-    steps:[
-      'Lie on your back, knees bent, feet flat on the floor.',
-      'Press through your heels and squeeze your glutes to lift your hips.',
-      'Your body should form a straight line from shoulders to knees.',
-      'Lower slowly — don\'t let your back arch.',
-    ]
-  },
-  {
-    id:'core', name:'Core Hold', sets:2, targetReps:30,  // seconds
+    id:'plank', name:'Plank', sets:2, targetReps:20,
     isTime:true,
     levels:[
-      {name:'Dead bug hold',   instruction:'Lie on your back, lower back pressed flat. Raise arms up, knees at 90°. Hold the position and breathe steadily.'},
-      {name:'Plank on knees',  instruction:'Forearms on floor, knees down. Keep a straight line from head to knees. Core braced, breathe steadily.'},
-      {name:'Full forearm plank', instruction:'Forearms on floor, toes down. Straight line from head to heels. Don\'t let hips drop or rise.'},
+      {name:'High plank', image:'exercise_assets/high-plank.png', target:20, instruction:'Hands under shoulders, legs long behind you. Keep a straight line from head to heels.'},
+      {name:'Forearm plank', image:'exercise_assets/forearm-plank.png', target:20, instruction:'Forearms on the floor, shoulders away from ears. Stay strong through your middle and breathe steadily.'},
+      {name:'High + forearm plank combo', image:'exercise_assets/plank-combo.png', target:30, instruction:'Hold half the time in high plank, then switch to forearm plank and finish the hold with tidy form.'},
     ],
     steps:[
-      'Set up in your chosen position.',
-      'Brace your core — draw your belly button in gently.',
-      'Keep breathing steadily throughout.',
-      'Stop before your form breaks down.',
+      'Set your shoulders down and away from your ears.',
+      'Brace your tummy and squeeze your glutes lightly.',
+      'Keep your hips level — don’t sag or pike.',
+      'Breathe slowly until the timer is done.',
+    ]
+  },
+  {
+    id:'wall_sit', name:'Wall Sit', sets:2, targetReps:20,
+    isTime:true,
+    levels:[
+      {name:'Wall sit — 20 seconds', image:'exercise_assets/wall-sit.png', target:20, instruction:'Slide down the wall into a comfortable sit. Keep your back supported and your breathing calm.'},
+      {name:'Wall sit — 30 seconds', image:'exercise_assets/wall-sit.png', target:30, instruction:'Hold the wall sit a little longer. Knees stay stacked and chest stays relaxed.'},
+      {name:'Wall sit — 45 seconds', image:'exercise_assets/wall-sit.png', target:45, instruction:'Stay steady and breathe through the burn. Finish strong without losing posture.'},
+    ],
+    steps:[
+      'Stand with your back against a wall.',
+      'Slide down into a seated position that feels solid and safe.',
+      'Keep your feet planted and knees comfortable.',
+      'Hold the position while breathing steadily.',
     ]
   },
 ];
@@ -607,10 +615,14 @@ function load(k,d){ try{ const r=localStorage.getItem(k); return r?JSON.parse(r)
 function save(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
 
 function loadProgress(){
+  const version = load('glp_exercise_program_version', null);
   const saved = load('glp_exercise_progress', null);
   const def = {};
   PROGRAM.forEach(m=>{ def[m.id]={levelIndex:0,sessionsAtLevel:0,readyToLevelUp:false}; });
-  if(!saved) return def;
+  if(!saved || version !== PROGRAM_VERSION){
+    save('glp_exercise_program_version', PROGRAM_VERSION);
+    return def;
+  }
   return Object.fromEntries(PROGRAM.map(m=>[m.id,{...def[m.id],...(saved[m.id]||{})}]));
 }
 function loadHistory(){ return load('glp_exercise_history',[]); }
@@ -731,6 +743,7 @@ function renderMovementLadder(prog){
       </div>
       <div class="small-copy" style="margin-top:8px"><strong>${lev.name}</strong></div>
       <div class="small-copy" style="margin-top:4px">${lev.instruction}</div>
+      <div class="small-copy" style="margin-top:4px">Target: <strong>${lev.target || m.targetReps}${m.isTime ? ' seconds' : ' reps'}</strong></div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
       <div class="small-copy" style="margin-top:6px;font-size:.68rem">${p.sessionsAtLevel}/2 qualifying sessions at this level</div>
       <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
@@ -738,10 +751,11 @@ function renderMovementLadder(prog){
         ${p.readyToLevelUp ? `<button class="btn btn-primary btn-sm" onclick="acceptLevelUp('${m.id}')">Level up</button>` : `<span class="pill pill-accent">Next unlock: ${Math.max(0,2-p.sessionsAtLevel)} qualifying session${Math.max(0,2-p.sessionsAtLevel)===1?'':'s'}</span>`}
       </div>
       <div class="movement-details" id="movement-details-${m.id}">
+        <div class="movement-figure"><img src="${lev.image}" alt="${lev.name}"></div>
         <div class="small-copy" style="margin-top:2px"><strong>How to do it</strong></div>
         <ol>
           <li>${lev.instruction}</li>
-          <li>Complete ${m.sets} sets of ${m.targetReps}${m.isTime ? ' seconds' : ' reps'}.</li>
+          <li>Complete ${m.sets} sets of ${lev.target || m.targetReps}${m.isTime ? ' seconds' : ' reps'}.</li>
           <li>Rest 60–90 seconds between sets and keep your form tidy.</li>
         </ol>
       </div>
@@ -882,7 +896,7 @@ function renderWorkoutStep(){
     html += `<div class="ws-hype">${_hypeMsg}</div>`;
   }
 
-  html += `<div class="ws-img-placeholder">${getExerciseIllustration(m.id)}<div class="ws-img-placeholder-label">${lev.name}</div></div>`;
+  html += `<div class="ws-img-placeholder">${getExerciseIllustration(lev)}<div class="ws-img-placeholder-label">${lev.name}</div></div>`;
 
   html += `<div class="ws-steps">`;
   m.steps.forEach((step,i)=>{
@@ -892,7 +906,8 @@ function renderWorkoutStep(){
 
   html += `<div class="ws-sets-area"><div class="ws-sets-label">Log your sets</div>`;
   sets.forEach((s,i)=>{
-    const targetLabel = m.isTime ? `Target: ${m.targetReps} seconds` : `Target: ${m.targetReps} reps`;
+    const target = lev.target || m.targetReps;
+    const targetLabel = m.isTime ? `Target: ${target} seconds` : `Target: ${target} reps`;
     html += `<div class="ws-set-card${s.logged?' logged':''}">
       <div class="ws-set-badge">${s.logged ? '✓' : i+1}</div>
       <div class="ws-set-info">
@@ -1108,7 +1123,7 @@ function saveWorkout(){
     const sets = _wsState.sets[m.id]||[];
     const loggedSets = sets.filter(s=>s.logged);
     const lev = m.levels[Math.min(prog[m.id].levelIndex,m.levels.length-1)];
-    const target = m.targetReps;
+    const target = lev.target || m.targetReps;
     const qualified = loggedSets.length>0 && loggedSets.every(s=>s.reps>=target);
     if(qualified){
       prog[m.id].sessionsAtLevel = Math.min(2,(prog[m.id].sessionsAtLevel||0)+1);
@@ -1211,47 +1226,11 @@ document.addEventListener('click', function(e){
 
 // -- EXERCISE ILLUSTRATIONS -----------------------------
 // SVG silhouettes — premium placeholder style
-function getExerciseIllustration(id){
-  const icons = {
-    squat: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
-      <circle cx="40" cy="14" r="7" stroke="currentColor" stroke-width="3"/>
-      <path d="M40 21v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M28 26h24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M40 35L28 52h4l8-10 8 10h4L40 35z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M32 52v12M48 52v12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>`,
-    push: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
-      <circle cx="58" cy="22" r="7" stroke="currentColor" stroke-width="3"/>
-      <path d="M58 29L46 38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M46 38H22M46 38L52 54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M22 38L16 54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M12 54h60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>`,
-    hinge: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
-      <circle cx="62" cy="18" r="7" stroke="currentColor" stroke-width="3"/>
-      <path d="M62 25L30 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M30 40v22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M30 40L14 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M30 62h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>`,
-    glute_bridge: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
-      <circle cx="20" cy="28" r="7" stroke="currentColor" stroke-width="3"/>
-      <path d="M14 54h10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M14 54L18 40h8l14-12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M40 28l10 8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M50 36v18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M44 54h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>`,
-    core: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--accent-light)">
-      <circle cx="40" cy="16" r="7" stroke="currentColor" stroke-width="3"/>
-      <path d="M40 23v10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M20 36h40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M20 36L14 52M60 36L66 52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M10 52h60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M26 36L20 56M54 36L60 56" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
-    </svg>`,
-  };
-  return icons[id] || icons.squat;
+function getExerciseIllustration(level){
+  if(level && level.image){
+    return `<img src="${level.image}" alt="${level.name}">`;
+  }
+  return `<div class="ws-img-placeholder-label">Add exercise image</div>`;
 }
 
 // -- EVENT LISTENERS ------------------------------------
