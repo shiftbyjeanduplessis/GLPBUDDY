@@ -1,3 +1,4 @@
-window.GLP_SUPABASE_CONFIG = window.GLP_SUPABASE_CONFIG || {
-  sb_publishable_rnE3YfzWkrneU_BqEyN03A_6MuPXyi7
+window.GLP_SUPABASE_CONFIG = {
+  url: 'https://yscaxrpalvvjdzhxzzsy.supabase.co',
+  anonKey: 'sb_publishable_efOIzV0ktnoqh9vMxBA_9A_99AEUlt8'
 };
