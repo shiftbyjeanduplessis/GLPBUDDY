@@ -162,12 +162,13 @@ body.theme-midnight{
 .chip{padding:9px 15px;border-radius:999px;border:1.5px solid var(--border-soft);background:var(--surface-1);font-size:.82rem;font-weight:700;color:var(--text-secondary);cursor:pointer}
 .chip.sel{background:var(--accent-tint2);border-color:var(--border-accent);color:var(--accent-primary)}
 
-/* FIXED ACTION BUTTONS FOR MOBILE */
+/* MOBILE-SAFE FIXED ACTIONS */
 .actions {
   position: fixed;
   bottom: calc(var(--nav-h) + 12px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 100%;
   max-width: 430px;
   display: flex;
@@ -175,11 +176,13 @@ body.theme-midnight{
   padding: 24px var(--page-px) 0;
   background: linear-gradient(to top, var(--bg-app) 80%, rgba(0,0,0,0));
   z-index: 90;
+  pointer-events: none; /* Prevents the invisible box from blocking clicks underneath */
 }
 
 .actions .btn{
-  flex:1;
-  min-height:48px
+  flex: 1;
+  min-height: 48px;
+  pointer-events: auto; /* Re-enables clicks only on the buttons themselves */
 }
 
 .pill-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px var(--page-px) 12px}
@@ -572,9 +575,14 @@ function refreshWizard(){
 }
 
 function scrollCurrentStepIntoView(){
-  const currentStep = document.getElementById(STEPS[stepIndex]);
-  if(currentStep){
-    currentStep.scrollIntoView({behavior:'smooth', block:'start'});
+  try {
+    const currentStep = document.getElementById(STEPS[stepIndex]);
+    if(currentStep){
+      currentStep.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  } catch(e) {
+    // Fallback for older browsers that crash on the behavior object
+    window.scrollTo(0, 0);
   }
 }
 
